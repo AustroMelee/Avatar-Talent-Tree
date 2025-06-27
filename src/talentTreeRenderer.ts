@@ -118,25 +118,42 @@ export class TalentTreeRenderer {
     ctx.imageSmoothingQuality = 'high';
   }
 
+  // Utility: Check if a point is within the visible canvas (with margin buffer)
+  private isOnScreen(x: number, y: number, margin: number = 120): boolean {
+    const { canvas } = this.config;
+    // In screen space (after pan/zoom)
+    return (
+      x > -margin &&
+      x < canvas.width + margin &&
+      y > -margin &&
+      y < canvas.height + margin
+    );
+  }
+
   render(talentTree: TalentTree, zoom: number, pan: Point, hoveredNodeId?: string | null, visualEffects?: Map<string, { type: string; progress: number }>, highlightedNodes?: Map<string, { type: 'prereq_chain' | 'prereq_met' | 'blocker' }>, glowingNodeIds?: Set<string>): void {
     const { ctx, canvas } = this.config;
-    
     this.allNodes = talentTree.nodes;
     this.animationTime = Date.now();
-    
-    // NEW: Logic to find the path to a hovered node
     const hoveredPath = this.getHoveredPath(hoveredNodeId, talentTree);
-    
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-
     ctx.save();
     ctx.translate(pan.x, pan.y);
     ctx.scale(zoom, zoom);
-    
-    // RENDER ORDER CHANGE: Connections are now drawn FIRST, so they appear behind nodes.
-    this.drawConnections(talentTree, hoveredPath);
-    this.drawNodes(talentTree.nodes.filter(node => node.isVisible), hoveredNodeId, visualEffects, glowingNodeIds, hoveredPath);
-    
+    // Culling: Only draw connections and nodes that are (or connect to) visible nodes
+    const margin = 120;
+    // Precompute which nodes are visible in screen space
+    const visibleNodeIds = new Set<string>();
+    for (const node of talentTree.nodes) {
+      const screenX = node.position.x * zoom + pan.x;
+      const screenY = node.position.y * zoom + pan.y;
+      if (this.isOnScreen(screenX, screenY, margin)) {
+        visibleNodeIds.add(node.id);
+      }
+    }
+    // Draw only visible connections (if either endpoint is visible)
+    this.drawConnections(talentTree, hoveredPath, visibleNodeIds, zoom, pan, margin);
+    // Draw only visible nodes
+    this.drawNodes(talentTree.nodes.filter(node => visibleNodeIds.has(node.id) && node.isVisible), hoveredNodeId, visualEffects, glowingNodeIds, hoveredPath);
     ctx.restore();
   }
 
@@ -170,96 +187,85 @@ export class TalentTreeRenderer {
     return path;
   }
 
-  /**
-   * OVERHAULED: Draws connections with a layered, POE-style aesthetic.
-   */
-  private drawConnections(talentTree: TalentTree, hoveredPath: Set<string>): void {
+  // Patch drawConnections to support culling
+  private drawConnections(talentTree: TalentTree, hoveredPath: Set<string>, visibleNodeIds?: Set<string>, zoom?: number, pan?: Point, margin?: number): void {
     const { ctx } = this.config;
-    const treeCenter = { x: 800, y: 500 }; // A general center for curve direction
-
-    talentTree.connections.forEach(connection => {
-        const fromNode = this.allNodes.find(n => n.id === connection.from);
-        const toNode = this.allNodes.find(n => n.id === connection.to);
-
-        if (!fromNode || !toNode) return;
-        if (fromNode.isPermanentlyLocked || toNode.isPermanentlyLocked) return;
-
-        const fromPos = fromNode.position;
-        const toPos = toNode.position;
-
-        const isHovered = hoveredPath.has(fromNode.id) && hoveredPath.has(toNode.id);
-
-        // --- Calculate Quadratic Curve Control Point ---
-        const midX = (fromPos.x + toPos.x) / 2;
-        const midY = (fromPos.y + toPos.y) / 2;
-        const dx = toPos.x - fromPos.x;
-        const dy = toPos.y - fromPos.y;
-        const perpDx = -dy;
-        const perpDy = dx;
-        const perpLength = Math.sqrt(perpDx * perpDx + perpDy * perpDy);
-        const normPerpX = perpLength ? perpDx / perpLength : 0;
-        const normPerpY = perpLength ? perpDy / perpLength : 0;
-        
-        const midToCenterDx = treeCenter.x - midX;
-        const midToCenterDy = treeCenter.y - midY;
-        const dotProduct = (midToCenterDx * normPerpX) + (midToCenterDy * normPerpY);
-        const curveDirection = Math.sign(dotProduct) || 1;
-        const curveStrength = 25; // Slightly more curve
-        
-        const controlX = midX - normPerpX * curveStrength * curveDirection;
-        const controlY = midY - normPerpY * curveStrength * curveDirection;
-
-        // --- Determine Style Based on State ---
-        let baseStyle: string, highlightStyle: string, shadowColor: string;
-        let baseWidth: number, highlightWidth: number, shadowBlur: number;
-
-        if (connection.isActive) {
-            // Allocated and active connection
-            baseStyle = 'rgba(137, 180, 250, 0.4)'; // Soft blue base
-            highlightStyle = '#cdd6f4'; // Bright white/off-white highlight
-            shadowColor = '#89b4fa';
-            baseWidth = 8;
-            highlightWidth = 3;
-            shadowBlur = isHovered ? 20 : 12;
-        } else if (toNode.isAllocatable || isHovered) {
-            // Unallocated but can be taken, or is being hovered over
-            baseStyle = 'rgba(108, 112, 134, 0.4)'; // Grey base
-            highlightStyle = '#a6adc8'; // Brighter grey highlight
-            shadowColor = '#a6adc8';
-            baseWidth = 6;
-            highlightWidth = 2;
-            shadowBlur = isHovered ? 12 : 6;
-        } else {
-            // Default inactive and unallocatable
-            baseStyle = 'rgba(49, 50, 68, 0.5)'; // Very dark grey base
-            highlightStyle = '#6c7086'; // Muted grey highlight
-            shadowColor = '#313244';
-            baseWidth = 4;
-            highlightWidth = 1.5;
-            shadowBlur = 0;
+    const treeCenter = { x: 800, y: 500 };
+    for (const connection of talentTree.connections) {
+      const fromNode = this.allNodes.find(n => n.id === connection.from);
+      const toNode = this.allNodes.find(n => n.id === connection.to);
+      if (!fromNode || !toNode) continue;
+      if (fromNode.isPermanentlyLocked || toNode.isPermanentlyLocked) continue;
+      // Culling: Only draw if either endpoint is visible
+      if (visibleNodeIds && zoom !== undefined && pan !== undefined && margin !== undefined) {
+        const fromScreenX = fromNode.position.x * zoom + pan.x;
+        const fromScreenY = fromNode.position.y * zoom + pan.y;
+        const toScreenX = toNode.position.x * zoom + pan.x;
+        const toScreenY = toNode.position.y * zoom + pan.y;
+        if (!this.isOnScreen(fromScreenX, fromScreenY, margin) && !this.isOnScreen(toScreenX, toScreenY, margin)) {
+          continue;
         }
-
-        ctx.save();
-        ctx.beginPath();
-        ctx.moveTo(fromPos.x, fromPos.y);
-        ctx.quadraticCurveTo(controlX, controlY, toPos.x, toPos.y);
-
-        // Draw the main line with a shadow for glow effect
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = baseStyle;
-        ctx.lineWidth = baseWidth;
-        ctx.shadowColor = shadowColor;
-        ctx.shadowBlur = shadowBlur;
-        ctx.stroke();
-
-        // Draw the brighter highlight line on top
-        ctx.strokeStyle = highlightStyle;
-        ctx.lineWidth = highlightWidth;
-        ctx.shadowBlur = 0; // No shadow for the highlight
-        ctx.stroke();
-        
-        ctx.restore();
-    });
+      }
+      const fromPos = fromNode.position;
+      const toPos = toNode.position;
+      const isHovered = hoveredPath.has(fromNode.id) && hoveredPath.has(toNode.id);
+      // --- Calculate Quadratic Curve Control Point ---
+      const midX = (fromPos.x + toPos.x) / 2;
+      const midY = (fromPos.y + toPos.y) / 2;
+      const dx = toPos.x - fromPos.x;
+      const dy = toPos.y - fromPos.y;
+      const perpDx = -dy;
+      const perpDy = dx;
+      const perpLength = Math.sqrt(perpDx * perpDx + perpDy * perpDy);
+      const normPerpX = perpLength ? perpDx / perpLength : 0;
+      const normPerpY = perpLength ? perpDy / perpLength : 0;
+      const midToCenterDx = treeCenter.x - midX;
+      const midToCenterDy = treeCenter.y - midY;
+      const dotProduct = (midToCenterDx * normPerpX) + (midToCenterDy * normPerpY);
+      const curveDirection = Math.sign(dotProduct) || 1;
+      const curveStrength = 25;
+      const controlX = midX - normPerpX * curveStrength * curveDirection;
+      const controlY = midY - normPerpY * curveStrength * curveDirection;
+      let baseStyle: string, highlightStyle: string, shadowColor: string;
+      let baseWidth: number, highlightWidth: number, shadowBlur: number;
+      if (connection.isActive) {
+        baseStyle = 'rgba(137, 180, 250, 0.4)';
+        highlightStyle = '#cdd6f4';
+        shadowColor = '#89b4fa';
+        baseWidth = 8;
+        highlightWidth = 3;
+        shadowBlur = isHovered ? 20 : 12;
+      } else if (toNode.isAllocatable || isHovered) {
+        baseStyle = 'rgba(108, 112, 134, 0.4)';
+        highlightStyle = '#a6adc8';
+        shadowColor = '#a6adc8';
+        baseWidth = 6;
+        highlightWidth = 2;
+        shadowBlur = isHovered ? 12 : 6;
+      } else {
+        baseStyle = 'rgba(49, 50, 68, 0.5)';
+        highlightStyle = '#6c7086';
+        shadowColor = '#313244';
+        baseWidth = 4;
+        highlightWidth = 1.5;
+        shadowBlur = 0;
+      }
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(fromPos.x, fromPos.y);
+      ctx.quadraticCurveTo(controlX, controlY, toPos.x, toPos.y);
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = baseStyle;
+      ctx.lineWidth = baseWidth;
+      ctx.shadowColor = shadowColor;
+      ctx.shadowBlur = shadowBlur;
+      ctx.stroke();
+      ctx.strokeStyle = highlightStyle;
+      ctx.lineWidth = highlightWidth;
+      ctx.shadowBlur = 0;
+      ctx.stroke();
+      ctx.restore();
+    }
   }
   
   private drawNodes(nodes: TalentNode[], hoveredNodeId?: string | null, visualEffects?: Map<string, { type: string; progress: number }>, glowingNodeIds?: Set<string>, hoveredPath?: Set<string>): void {
