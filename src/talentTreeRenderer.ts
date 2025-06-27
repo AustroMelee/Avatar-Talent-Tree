@@ -135,7 +135,7 @@ export class TalentTreeRenderer {
     this.allNodes = talentTree.nodes;
     this.animationTime = Date.now();
     const hoveredPath = this.getHoveredPath(hoveredNodeId, talentTree);
-    ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
     ctx.translate(pan.x, pan.y);
     ctx.scale(zoom, zoom);
