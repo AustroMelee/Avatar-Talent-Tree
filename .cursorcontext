@@ -1,30 +1,124 @@
-{
-  "content_generation_policy": {
-    "procedural_only": true,
-    "no_hardcoded_output": true,
-    "modular_grammar_required": true,
-    "fragment_based_generation": true,
-    "template_strings_prohibited": true,
-    "auto_refactor_templates": true
-  },
-  "authoring_instructions": {
-    "prefer_dynamic_composition": true,
-    "externalize_all_phrases": true,
-    "use_json_or_ts_modules_for_grammar": true,
-    "tag_every_sentence_with_source_fragment": true
-  },
-  "testing_policy": {
-    "user_only_testing": true,
-    "note": "Only the USER is able to test the outputs. The AI should not attempt to run or validate outputs itself."
-  }
-}
+# AI-AGENTIC CURSOR CONTEXT
+# This project is maintained and edited primarily by LLMs.
+# All code must be optimized for LLM readability, editability, and refactorability.
 
-I want all narrative logic in this project to move to 100% procedural. That means:
+### GENERAL PRINCIPLES
 
-All strings must be assembled from fragment modules
+- AI assistants must always proactively scan the codebase and relevant files for information before asking the user clarifying questions, unless the user has explicitly restricted scanning or file access.
+- All troubleshooting, suggestions, and clarifications must be based on the actual, current state of the codebase as determined by a scan, not on assumptions or user prompts alone.
+- Treat the LLM as the primary developer, not a human.
+- Code must be immediately parseable without external context.
+- Redundancy is good. Cleverness is bad. Semantic clarity is king.
+- Favor structural explicitness over aesthetic conciseness.
 
-No direct .join or + of hardcoded sentences
+DO NOT RUN THE DEV SERVER UNLESS ASKED BY THE USER!
 
-Refactor all composers to accept GrammarContext + FragmentStore inputs
+---
 
-Ensure ingredients, techniques, and nation rules are passed as tokens, not literals
+### FILE STRUCTURE
+
+- No file should exceed 500 lines or ~6,000 characters.
+- Each file should represent **one clear concept or domain unit**.
+- Do not create monolithic "utils" or "index" hubs unless absolutely necessary.
+- Group related files into domain-based folders, not generic categories.
+
+---
+
+### TYPESCRIPT PRACTICES
+
+- Prefer `type` aliases over `interface` unless extending external libs.
+- **Convert interfaces to types wherever appropriate.**
+- Avoid deeply nested generics, conditional types, or infer statements.
+- Types should reflect **semantic meaning**, not implementation structure.
+- Don't try to outsmart the LLM with complex type gymnastics.
+
+---
+
+### FUNCTION DESIGN
+
+- Functions must be named in `verbNoun` form: `loadUser`, `fetchReport`, `sendEmail`.
+- **Rename all functions to follow verbNoun conventions.**
+- Do not use acronyms, abbreviations, or vague terms in function names.
+- Functions should accept at most 3–4 parameters—prefer object destructuring for clarity.
+- Always declare return shapes explicitly with named types.
+- Default to pure functions. If side effects occur, name should indicate it (`logAndSend()`).
+
+---
+
+### NAMING & SEMANTICS
+
+- Names must be human-readable and semantically rich for AI interpretation.
+- Type names should clearly indicate domain and context: `UserPayload`, `CartItemConfig`.
+- Avoid single-letter variables or generic names like `data`, `item`, `result` unless context is tight.
+- **Extract all "magic values" into named constants.**
+
+---
+
+### COMMENTS & DOCBLOCKS
+
+- **Add comprehensive doc comments to all exports.**
+- Every exported function or type must be preceded by a **purpose-first** doc comment.
+- Comments should emphasize **intent**, not implementation steps.
+- Use comments to **anchor meaning** near complex conditionals or transformations.
+- AI must be able to reconstruct the "why" behind code from surrounding comments.
+
+---
+
+### MODULES & DEPENDENCIES
+
+- Never use circular imports.
+- Avoid star imports (`import * as X`) unless you're re-exporting a well-defined module surface.
+- Side-effect imports are forbidden—everything must be explicit.
+- Code must respect strict dependency layering: higher-level modules must not import from lower layers.
+
+---
+
+### ERROR HANDLING
+
+- **Improve error handling with contextual messages.**
+- Do not use empty `catch` blocks—always log or rethrow with context.
+- Errors must be actionable or explainable. AI must know why the code failed.
+- Use error boundaries where applicable in UI contexts.
+
+---
+
+### LLM EDITABILITY GUARANTEES
+
+- Code must be self-sufficient and semantically chunkable by the LLM.
+- Break complex tasks into small named functions with doc comments.
+- Avoid magic values—declare them with names so LLMs can reason about them.
+- Always tag hacks, shortcuts, or temporary solutions with `// FIXME:` or `// TEMP:` and a reason.
+- Never inline deeply abstract logic—break it into its own function even if it feels verbose.
+
+---
+
+### MCPS INTEGRATION (MENTAL CONTEXT PROMPTING STRATEGIES)
+
+- Limit active context to **no more than 7 distinct files or conceptual domains** (Context7).
+- LLMs should **explicitly state what context they are using** when responding to user prompts.
+- Use inline prompts or tags to narrow AI attention: `// CONTEXT: UserAuth`, `// FOCUS: Token validation`
+- If the task spans more than 7 domains, segment it and ask the user to confirm prioritization.
+
+---
+
+### SEQUENTIAL PROMPT FLOW
+
+- AI operations must follow a **step-by-step chain of thought** when problem-solving.
+- Always start with: "Step 1: Understand intent", "Step 2: Locate mechanism", "Step 3: Rewrite or suggest".
+- Avoid monolithic "do everything" prompts; prefer decomposed guidance and checkpointed revisions.
+- Provide optional user commands like:
+  - `@plan`: Summarize the task as steps.
+  - `@explain`: Describe current behavior before editing.
+  - `@rewrite`: Refactor based on steps above.
+- LLMs should default to **Sequential Thinking Mode** unless instructed otherwise.
+
+---
+
+### GOAL
+
+Every code file should act as a **self-contained, intention-labeled semantic block** that an LLM can:
+1. Understand at a glance,
+2. Modify without context leaks,
+3. Refactor without introducing regressions.
+
+If it's not explainable in a single pass by an AI, rewrite it until it is.

@@ -1,14 +1,16 @@
 {
-  "name": "food-generator",
+  "name": "talent-tree-project",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "A modern talent tree visualization and management system built with TypeScript, Vite, and CSS custom properties",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "verify": "tsx scripts/verify-setup.ts"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.34.1",
@@ -20,33 +22,31 @@
     "postcss": "^8.5.6",
     "postcss-preset-env": "^10.2.3",
     "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.3",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },
   "main": "index.js",
   "dependencies": {
-    "emojibase-data": "^16.0.3",
-    "esbuild": "^0.21.5",
-    "nanoid": "^3.3.11",
-    "node-emoji": "^2.2.0",
-    "openmoji": "^15.1.0",
-    "picocolors": "^1.1.1",
-    "rollup": "^4.44.0",
-    "source-map-js": "^1.2.1",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.20.3",
-    "twemoji": "^14.0.2"
+    "nanoid": "^3.3.11"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AustroMelee/avatar-culinary-generator.git"
+    "url": "git+https://github.com/yourusername/talent-tree-project.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "talent-tree",
+    "visualization",
+    "typescript",
+    "vite",
+    "responsive",
+    "game-development"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AustroMelee/avatar-culinary-generator/issues"
+    "url": "https://github.com/yourusername/talent-tree-project/issues"
   },
-  "homepage": "https://github.com/AustroMelee/avatar-culinary-generator#readme",
-  "description": ""
+  "homepage": "https://github.com/yourusername/talent-tree-project#readme"
 }

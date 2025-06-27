@@ -3,83 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avatar Culinary Dish Generator</title>
-  <script type="module" crossorigin src="/assets/index-Bd5YdDSb.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-B9kRmh2G.css">
+    <title>The Argent Codex: Theorycrafter's Utopia</title>
+    <meta name="description" content="Interactive talent tree visualization inspired by Path of Exile and the Argent Codex">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/assets/site-B-kSQ7vM.webmanifest">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0a0e1a">
+  <script type="module" crossorigin src="/assets/index-tTfI1jD8.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DFLG928W.css">
 </head>
 <body>
-    <div class="app">
-        <header class="app-header">
-            <img src="/assets/food-banner-DsYXXdgY.jpg" alt="Avatar Food Banner" class="food-banner">
-            <h1>Avatar Culinary Dish Generator</h1>
-        </header>
+    <!-- Main Application Container -->
+    <div id="app" style="display: flex; flex-direction: row; height: 100vh; width: 100vw;">
+        <!-- Canvas for Talent Tree -->
+        <canvas id="talent-tree-canvas" class="talent-tree-canvas" width="1600" height="900" style="flex: 1 1 0; min-width: 0; height: 100vh;"></canvas>
         
-        <button id="theme-toggle" class="theme-icon">☀️</button>
-        
-        <main class="app-main">
-            <div class="nation-controls">
+        <!-- UI Panel -->
+        <div id="ui-panel" class="ui-panel">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="title">The Argent Codex</h1>
                 
-                <!-- NEW CHECKLIST UI -->
-                <div id="nation-checklist-container">
-                    <label class="nation-checkbox air-nomads">
-                        <input type="checkbox" name="nation" value="air-nomads" checked>
-                        <img src="/assets/air_nation-B2k_nS_3.png" alt="Air Nomads" class="nation-icon">
-                    </label>
-                    <label class="nation-checkbox water-tribe">
-                        <input type="checkbox" name="nation" value="water-tribe">
-                        <img src="/assets/water_nation-B7rWlJEQ.png" alt="Water Tribe" class="nation-icon">
-                    </label>
-                    <label class="nation-checkbox earth-kingdom">
-                        <input type="checkbox" name="nation" value="earth-kingdom">
-                        <img src="/assets/earth_nation-C3FaE_j9.png" alt="Earth Kingdom" class="nation-icon">
-                    </label>
-                    <label class="nation-checkbox fire-nation">
-                        <input type="checkbox" name="nation" value="fire-nation">
-                        <img src="/assets/fire_nation-BClEM4ky.png" alt="Fire Nation" class="nation-icon">
-                    </label>
+                <!-- Elemental Selector -->
+                <div id="elemental-selector" class="elemental-selector">
+                    <button class="element-btn active" data-element="air" title="Air - The Unburdened Gale">
+                        <span class="element-emoji">🌪️</span>
+                        <span class="element-name">Air</span>
+                    </button>
+                    <button class="element-btn" data-element="fire" title="Fire - The Eternal Forge">
+                        <span class="element-emoji">🔥</span>
+                        <span class="element-name">Fire</span>
+                    </button>
+                    <button class="element-btn" data-element="water" title="Water - The Flowing Mirror">
+                        <span class="element-emoji">🌊</span>
+                        <span class="element-name">Water</span>
+                    </button>
+                    <button class="element-btn" data-element="earth" title="Earth - The Adamant Bastion">
+                        <span class="element-emoji">🏔️</span>
+                        <span class="element-name">Earth</span>
+                    </button>
                 </div>
                 
-                <div class="custom-select-container">
-                    <!-- The Dish Type dropdown remains, but we add the shared class for sizing -->
-                    <div id="dish-type-selector" class="custom-dish-type-selector custom-select" data-value="main-course">
-                        <div class="selected-option">
-                            <div class="selected-option-content">
-                                <span class="dish-type-icon">🥘</span>
-                                <span>MAIN COURSE</span>
-                            </div>
-                            <div class="dropdown-arrow"></div>
-                        </div>
-                        <div class="dropdown-options">
-                            <div class="option" data-value="main-course"><span class="dish-type-icon">🥘</span><span>MAIN COURSE</span></div>
-                            <div class="option" data-value="side-dish"><span class="dish-type-icon">🍚</span><span>SIDE DISH</span></div>
-                            <div class="option" data-value="snack"><span class="dish-type-icon">🍢</span><span>SNACK</span></div>
-                            <div class="option" data-value="dessert"><span class="dish-type-icon">🍰</span><span>DESSERT</span></div>
-                            <div class="option" data-value="soup-stew"><span class="dish-type-icon">🍲</span><span>SOUP/STEW</span></div>
-                            <div class="option" data-value="salad"><span class="dish-type-icon">🥗</span><span>SALAD</span></div>
-                            <div class="option" data-value="beverage"><span class="dish-type-icon">🍵</span><span>BEVERAGE</span></div>
-                        </div>
-                    </div>
+                <div class="controls">
+                    <button class="btn" id="reset-btn">Reset</button>
+                    <button class="btn" id="zoom-in-btn">Zoom In</button>
+                    <button class="btn" id="zoom-out-btn">Zoom Out</button>
                 </div>
-                
+            </header>
+            
+            <!-- Constellation Info -->
+            <div id="constellation-info" class="constellation-info">
+                <h2 id="constellation-name">The Unburdened Gale</h2>
+                <p id="constellation-description">Freedom, movement, and transcendence through 4 distinct philosophical paths.</p>
             </div>
             
-            <button id="generate-button" class="generator-button">Generate</button>
-            <div id="dish-container"></div>
-        </main>
-    </div>
-
-    <!-- NEW, MORE COMPLEX LOADING OVERLAY STRUCTURE -->
-    <div id="loading-overlay">
-        <div class="loading-content">
-            <div id="bowl-container">
-                <div id="falling-ingredients">
-                    <!-- Ingredients will be added here by JavaScript -->
+            <!-- 1. Thematic Points Gauge -->
+            <div id="pk-gauge-container" class="pk-gauge-container">
+                <h2>Points of Knowing</h2>
+                <div id="pk-gauge" class="pk-gauge" style="--pk-progress: 0;">
+                    <div id="pk-gauge-text" class="pk-gauge-text">100</div>
                 </div>
-                <div id="bowl-emoji">🥣</div>
+                <div id="pk-spent-text" class="pk-spent-text">Spent: 0</div>
             </div>
-            <p id="loading-quote" class="loading-quote">The spirits are cooking...</p>
+            
+            <!-- 2. Main Chronicle with Interactive List -->
+            <div id="chronicle" class="chronicle">
+                <h3>Build Chronicle</h3>
+                <div id="build-summary" class="build-summary">
+                    <!-- Content will be generated by main.ts -->
+                </div>
+            </div>
         </div>
     </div>
-
+    
+    <!-- Global Tooltip (positioned outside UI panel) -->
+    <div id="tooltip" class="tooltip">
+        <div id="tooltip-content" class="tooltip-content">
+            <h3>Hover over a Node</h3>
+            <p>Its secrets will be revealed here.</p>
+        </div>
+    </div>
+    
+    <!-- Summary Tooltip for Allocated Nodes List -->
+    <div id="summary-tooltip" class="summary-tooltip"></div>
+    
+    <!-- Main Application Script -->
 </body>
 </html> 
