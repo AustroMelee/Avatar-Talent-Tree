@@ -18,8 +18,10 @@
 <body>
     <!-- Main Application Container -->
     <div id="app" style="display: flex; flex-direction: row; height: 100vh; width: 100vw;">
-        <!-- Canvas for Talent Tree -->
-        <canvas id="talent-tree-canvas" class="talent-tree-canvas" width="1600" height="900" style="flex: 1 1 0; min-width: 0; height: 100vh;"></canvas>
+        <!-- Canvas for Talent Tree (wrapped in a clipping container) -->
+        <div id="talent-tree-container" style="width: 100vw; height: 100vh; overflow: hidden; position: relative; flex: 1 1 0; min-width: 0;">
+            <canvas id="talent-tree-canvas" class="talent-tree-canvas" width="1600" height="900" style="width: 100%; height: 100%; display: block;"></canvas>
+        </div>
         
         <!-- UI Panel -->
         <div id="ui-panel" class="ui-panel">
