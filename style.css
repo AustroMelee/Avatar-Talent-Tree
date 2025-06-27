@@ -78,11 +78,18 @@ html, body {
 }
 
 /* Canvas Container for Talent Tree */
-.talent-tree-canvas {
+#talent-tree-container {
   flex: 1 1 0;
   min-width: 0;
   height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.talent-tree-canvas {
   width: 100%;
+  height: 100%;
+  display: block;
   cursor: grab;
   /* Remove the old radial gradient and use a textured background */
   background-color: var(--bg-primary);
@@ -90,7 +97,6 @@ html, body {
     radial-gradient(circle at 20% 80%, rgba(30, 30, 46, 0.3) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(10, 14, 26, 0.4) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, rgba(24, 24, 37, 0.2) 0%, transparent 50%);
-  display: block;
 }
 
 .talent-tree-canvas:active {
