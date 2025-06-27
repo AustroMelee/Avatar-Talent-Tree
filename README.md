@@ -1,115 +1,129 @@
-# 🍲 Avatar Food Generator
+# The Argent Codex: Theorycrafter's Utopia
 
-An authentic **Air Nomad culinary experience generator** that creates culturally accurate dishes from the Avatar: The Last Airbender universe. Built with LLM-first architecture and optimized for publication-quality content generation.
+An interactive talent tree visualization inspired by Path of Exile and the Argent Codex, featuring a sophisticated point allocation system with philosophical depth.
 
-## ✨ **Features**
+## Features
 
-### **🏔️ Authentic Air Nomad Cuisine**
-- **Traditional ingredients** sourced from mountain monasteries
-- **Sacred cooking techniques** passed down through generations
-- **Spiritual significance** woven into every dish
-- **Vegetarian principles** honoring Air Nomad values
+### 🌪️ Elemental Constellation System
+- **Air - The Unburdened Gale**: Freedom, movement, and transcendence
+- **�� Fire - The Eternal Flame**: Passion, transformation, and unrelenting power  
+- **🌊 Water - The Depths Eternal**: Adaptation through wisdom, learning from every encounter, becoming stronger through understanding
+- **🏔️ Earth - The Four Pillars of Stone**: Stability, endurance, and unshakeable foundation
 
-### **🎨 Advanced Content Generation**
-- **Procedural dish creation** with 1000+ unique combinations
-- **Rich narrative descriptions** with cultural context
-- **Anti-repetition system** ensuring unique experiences
-- **Publication-quality prose** (95-97/100 quality score)
+### 🎯 Interactive Elemental Switching
+- Click the elemental emoji buttons in the header to switch between constellations
+- Each element has its own unique talent tree with placeholder nodes
+- UI updates dynamically to reflect the current elemental theme
+- Constellation information displays the philosophy and paths of each element
 
-### **⚡ Performance Optimized**
-- **Sub-second generation** for instant culinary inspiration
-- **Non-blocking UI** with smooth user experience
-- **O(1) caching system** for optimal performance
-- **Bundle-optimized** for fast loading
+### 📊 Argent Codex Mechanics
+- **51 Points of Knowing (PK)** total allocation across constellation
+- **Genesis Nodes**: Entry points for each path (1 PK)
+- **Minor Nodes**: Small incremental bonuses (1 PK)
+- **Keystone Nodes**: Milestone abilities (2 PK)
+- **Manifestation Nodes**: Active abilities (4 PK)
+- **Axiom Nodes**: Peak passives (5 PK)
+- **Capstone Nodes**: Path finishers (15 PK)
+- **Schism Nodes**: Heretical high-risk nodes (8-12 PK)
+- **Bridge Nodes**: Cross-path connections (10 PK)
+- **Synthesis Nodes**: Hybrid abilities (5 PK)
 
-## 🚀 **Quick Start**
+### 🎮 Interactive Features
+- **Drag to Pan**: Click and drag to move around the talent tree
+- **Mouse Wheel Zoom**: Scroll to zoom in/out
+- **Node Allocation**: Click nodes to allocate/deallocate points
+- **Tooltips**: Hover over nodes for detailed information
+- **Build Summary**: Real-time tracking of allocated points and nodes
+- **Reset Button**: Clear all allocations and start fresh
 
-### **Play Online**
-Simply open `index.html` in your browser and start generating authentic Air Nomad dishes!
+### 🎨 Visual Design
+- Dark theme optimized for long theorycrafting sessions
+- Elemental color coding for each constellation
+- Smooth animations and visual feedback
+- Responsive design that works on different screen sizes
 
-### **Local Development**
-```bash
-# Install dependencies
-npm install
+## Getting Started
 
-# Start development server
-npm run dev
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd talent-tree-project
+   ```
 
-# Build for production
-npm run build
-```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-## 🎯 **Usage**
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
 
-1. **Click "Generate New Dish"** to create an authentic Air Nomad recipe
-2. **Explore the cultural context** with ingredients, techniques, and spiritual benefits
-3. **Generate multiple dishes** to discover the rich variety of Air Nomad cuisine
-4. **Share your favorites** with fellow Avatar fans!
+4. **Build for production**
+   ```bash
+   npm run build
+   ```
 
-## 🏗️ **Architecture**
+## Elemental Switching
 
-### **LLM-First Design**
-- **Semantic clarity** prioritized over cleverness
-- **Single responsibility** modules under 500 lines
-- **verbNoun** function naming convention
-- **Comprehensive documentation** for AI collaboration
+The application now supports switching between four elemental constellations:
 
-### **Framework Ready**
-- **Multi-nation expansion** ready for Water Tribe, Earth Kingdom, Fire Nation
-- **Modular data loading** for scalable content
-- **Type-safe interfaces** for reliable extension
-- **Performance monitoring** hooks for optimization
+### 🌪️ Air - The Unburdened Gale
+- **Evasive Flow**: The Unseen Current - Reflexes, misdirection, perfect combat harmony
+- **Spiritual Harmony**: The Inner Cosmos - Inner peace, cosmic connection, transcending physical limitations
+- **Tempestuous Force**: The Storm's Wrath - Raw destructive power, storm control, devastating force
+- **Soaring Freedom**: The Sky's Dance - Flight, aerial mobility, boundless freedom of movement
 
-## 📚 **Documentation**
+### �� Fire - The Eternal Flame
+- **The Forge of Wrath**: Destruction Incarnate - Unbridled destruction, consuming rage, the cleansing fire that reduces all to ash
+- **The Sacred Hearth**: Life's First Spark - Healing flames, spiritual fire, the life-giving warmth of the sun
+- **The Master's Flame**: Discipline Made Manifest - Perfect technique, shaped fire, defensive mastery
+- **The Lightning's Edge**: The Void Between Thoughts - Lightning generation, mental discipline, cold fire techniques
 
-Comprehensive documentation is available in the [`docs/`](docs/) directory:
+### 🌊 Water - The Depths Eternal
+- **The Endless Mirror**: Reflections of What Was - Adaptation through wisdom, learning from every encounter, becoming stronger through understanding
+- **The Crimson Tide**: Blood Calls to Blood - Life manipulation, healing mastery, forbidden blood arts
+- **The Eternal Prison**: What Ice Remembers - Preservation, patience, unstoppable force through immutable will
+- **The Hungry Deep**: Pressure of the Abyss - Overwhelming force, pressure mastery, the ocean's consuming nature
 
-- **[📚 Complete Documentation Index](docs/README.md)** - Main documentation hub
-- **[🏗️ Project Overview](docs/PROJECT_OVERVIEW.md)** - Technical specifications and architecture
-- **[🚫 Architectural Pitfalls Guide](docs/ARCHITECTURAL_PITFALLS_GUIDE.md)** - Best practices and pitfall prevention
-- **[📝 Changelog](docs/CHANGELOG.md)** - Complete development history
+### 🏔️ Earth - The Four Pillars of Stone
+- **The Pillar of Hun Yuan (Neutral Jing)**: The Waiting Stone - Defensive mastery, seismic awareness, perfect timing, counter-attacks
+- **The Pillar of Bian Hua (Transformation)**: The Changing Earth - Sub-bending mastery, material transformation, elemental fusion
+- **The Pillar of Gang Qiang (Unyielding Strength)**: The Eternal Mountain - Raw power, overwhelming force, immovable defense, brutal offense
+- **The Pillar of Jing Que (Precision Control)**: The Sculptor's Mind - Fine control, enemy manipulation, architectural bending, artistic mastery
 
-### **Module Documentation**
-- **[🔧 Generator System](src/generator/README.md)** - Core generation algorithms
-- **[🔤 Type System](src/types/README.md)** - Framework-agnostic interfaces
-- **[📊 Data Architecture](src/data/README.md)** - Multi-nation data organization  
-- **[🎨 UI Components](src/ui/README.md)** - Display and interaction systems
-- **[⚙️ Constants](src/constants/README.md)** - Configuration and patterns
+## Development Status
 
-### **Development Archives**
-- **[🗂️ Phase Documentation](archived/phase-documentation/)** - Complete development history and phase reports
+### ✅ Completed
+- Elemental switching UI with placeholder emojis
+- Basic talent tree structure for all four elements
+- Dynamic UI updates based on selected element
+- Constellation metadata and path information
+- Responsive design and smooth interactions
 
-## 🛠️ **Technical Stack**
+### 🚧 In Progress
+- Full talent node data for Fire, Water, and Earth constellations
+- Advanced connection logic for all elements
+- Element-specific visual themes and effects
 
-- **TypeScript** for type safety and semantic clarity
-- **Vite** for fast development and optimized builds
-- **Modern ES modules** with relative imports
-- **Framework-agnostic core** for maximum portability
+### 📋 Planned
+- Complete talent trees for all elements
+- Cross-elemental covenants and synergies
+- Advanced build sharing and export features
+- Mobile optimization and touch controls
 
-## 🎭 **Cultural Authenticity**
+## Contributing
 
-This generator respects the rich cultural traditions of the Air Nomads:
+This project follows the AI-Agentic Cursor Context guidelines for LLM-friendly code:
 
-- **Vegetarian cuisine** reflecting Air Nomad spiritual values
-- **Mountain-sourced ingredients** from high-altitude monasteries
-- **Meditative cooking practices** that honor ancient wisdom
-- **Community-centered meals** fostering harmony and connection
+- **File Structure**: No file exceeds 500 lines, each represents one clear concept
+- **TypeScript Practices**: Prefer `type` aliases, avoid complex generics
+- **Function Design**: Use `verbNoun` naming, explicit return types
+- **Naming & Semantics**: Human-readable names, extract magic values
+- **Comments & Documentation**: Comprehensive doc comments for all exports
+- **Error Handling**: Contextual error messages, no empty catch blocks
 
-## 🌟 **Future Expansion**
+## License
 
-The generator is designed for expansion across the Avatar universe:
-
-- **🌊 Water Tribe** - Arctic and coastal cuisine traditions
-- **🗻 Earth Kingdom** - Hearty, earth-based cooking methods
-- **🔥 Fire Nation** - Spicy, dynamic culinary arts
-- **🌸 Kyoshi Island** - Unique regional specialties
-
-## 📄 **License**
-
-This project is created as a tribute to the Avatar: The Last Airbender universe. All content respects the original work and is intended for educational and entertainment purposes.
-
----
-
-### **Created with 🧘‍♂️ in the spirit of Air Nomad wisdom**
-
-*"When we hit our lowest point, we are open to the greatest change... and the most delicious meals."* 
+This project is licensed under the MIT License - see the LICENSE file for details. "# Avatar-Talent-Tree" 
