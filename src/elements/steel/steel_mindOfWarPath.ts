@@ -110,9 +110,8 @@ function getMindOfWarNodeIcon(nodeId: string): string {
     case 'APEX_C': return '👁️'; // The Living Eye - eye
     
     // Sacred Trials
-    case 'rite_innovation': return '💡'; // Trial of Innovation - light bulb
     case 'rite_strategy': return '🧠'; // Trial of Strategy - brain
-    case 'rite_knowledge': return '📚'; // Trial of Knowledge - books
+    case 'rite_knowledge': return '🧘'; // Trial of Knowledge - meditating person
     
     // Avatar States
     case 'capstone_innovation': return '⚡'; // Avatar of Innovation - lightning

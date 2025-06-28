@@ -189,59 +189,59 @@ function getSilentBladeNodeIcon(nodeId: string): string {
     case 'minor_a3_3': return '⏰'; // Perfect Timing - clock
     case 'APEX_A': return '🌑'; // The Final Shadow - new moon
     case 'minor_apex_a_1': return '💀'; // Death Aura - skull
-    case 'minor_apex_a_2': return '🌌'; // Reality Stealth - milky way
-    case 'minor_apex_a_3': return '👤'; // Shadow Mastery - shadow figure
+    case 'minor_apex_a_2': return '🔮'; // Reality Stealth - crystal ball
+    case 'minor_apex_a_3': return '🖤'; // Shadow Mastery - black heart
     
     // Thrown Weapons Branch
-    case 'B1': return '🎯'; // Perfect Aim - target
-    case 'minor_b1_1': return '🔄'; // Boomerang Mastery - recycle
-    case 'minor_b1_2': return '🎯'; // Multi-target - target
-    case 'minor_b1_3': return '🛡️'; // Penetrating Throw - shield
-    case 'B2': return '⚡'; // Weapon Return - lightning
-    case 'minor_b2_1': return '🎯'; // Guided Flight - target
+    case 'B1': return '◎'; // Perfect Aim - target (simplified)
+    case 'minor_b1_1': return '🔄'; // Boomerang Mastery - recycle (instead of boomerang)
+    case 'minor_b1_2': return '🎲'; // Multi-target - dice (multiple)
+    case 'minor_b1_3': return '🛡️'; // Penetrating Throw - shield (piercing)
+    case 'B2': return '🔄'; // Weapon Return - recycle
+    case 'minor_b2_1': return '🧭'; // Guided Flight - compass
     case 'minor_b2_2': return '💥'; // Explosive Impact - explosion
-    case 'minor_b2_3': return '🔗'; // Chain Throws - link
-    case 'B3': return '🌪️'; // Storm of Blades - tornado
-    case 'minor_b3_1': return '🌪️'; // Blade Tornado - tornado
-    case 'minor_b3_2': return '🎯'; // Seeking Weapons - target
-    case 'minor_b3_3': return '🗡️'; // Infinite Arsenal - dagger
-    case 'APEX_B': return '🌍'; // Master of Distance - earth
-    case 'minor_apex_b_1': return '🌌'; // Dimensional Throws - milky way
-    case 'minor_apex_b_2': return '⏰'; // Time-Delayed Strikes - clock
+    case 'minor_b2_3': return '⚡'; // Chain Throws - lightning
+    case 'B3': return '🌀'; // Storm of Blades - cyclone (instead of tornado)
+    case 'minor_b3_1': return '🌀'; // Blade Tornado - cyclone
+    case 'minor_b3_2': return '◎'; // Seeking Weapons - target (simplified)
+    case 'minor_b3_3': return '♾️'; // Infinite Arsenal - infinity
+    case 'APEX_B': return '⭐'; // Master of Distance - star (instead of galaxy)
+    case 'minor_apex_b_1': return '🌐'; // Dimensional Throws - globe
+    case 'minor_apex_b_2': return '⏳'; // Time-Delayed Strikes - hourglass
     case 'minor_apex_b_3': return '💭'; // Conceptual Targeting - thought bubble
     
     // Critical Arts Branch
-    case 'C1': return '🎯'; // Vital Strike - target
-    case 'minor_c1_1': return '👁️'; // Weak Point Vision - eye
-    case 'minor_c1_2': return '🛡️'; // Armor Piercing - shield
-    case 'minor_c1_3': return '🦵'; // Crippling Blows - leg
-    case 'C2': return '🖐️'; // Pressure Point Mastery - hand
-    case 'minor_c2_1': return '🦿'; // Paralysis Touch - leg
-    case 'minor_c2_2': return '😖'; // Pain Control - grimacing face
-    case 'minor_c2_3': return '⚡'; // Chi Disruption - lightning
-    case 'C3': return '💀'; // One Touch Death - skull
+    case 'C1': return '💔'; // Vital Strike - broken heart
+    case 'minor_c1_1': return '🔍'; // Weak Point Vision - magnifying glass
+    case 'minor_c1_2': return '⚔️'; // Armor Piercing - crossed swords
+    case 'minor_c1_3': return '🦴'; // Crippling Blows - bone
+    case 'C2': return '👆'; // Pressure Point Mastery - pointing finger
+    case 'minor_c2_1': return '🧊'; // Paralysis Touch - ice
+    case 'minor_c2_2': return '😵'; // Pain Control - dizzy face
+    case 'minor_c2_3': return '🔌'; // Chi Disruption - plug
+    case 'C3': return '☠️'; // One Touch Death - skull
     case 'minor_c3_1': return '⏰'; // Delayed Death - clock
-    case 'minor_c3_2': return '🎯'; // Selective Lethality - target
-    case 'minor_c3_3': return '😇'; // Merciful Death - angel
+    case 'minor_c3_2': return '✂️'; // Selective Lethality - scissors
+    case 'minor_c3_3': return '🕊️'; // Merciful Death - dove
     case 'APEX_C': return '💀'; // Touch of Ending - skull
     case 'minor_apex_c_1': return '💭'; // Concept Death - thought bubble
-    case 'minor_apex_c_2': return '⚡'; // Power Nullification - lightning
-    case 'minor_apex_c_3': return '🌌'; // Reality Puncture - milky way
+    case 'minor_apex_c_2': return '🚫'; // Power Nullification - prohibited
+    case 'minor_apex_c_3': return '🕳️'; // Reality Puncture - hole
     
     // Sacred Trials
-    case 'rite_silence': return '🤫'; // Trial of Silence - shushing face
-    case 'rite_precision': return '🎯'; // Trial of Precision - target
-    case 'rite_mercy': return '😇'; // Trial of Mercy - angel
+    case 'rite_silence': return '🤫'; // Trial of Silence - shushing
+    case 'rite_precision': return '◎'; // Trial of Precision - target (simplified)
+    case 'rite_mercy': return '🤲'; // Trial of Mercy - praying hands
     
     // Avatar States
     case 'capstone_killer': return '💀'; // The Perfect Killer - skull
     case 'capstone_shadow': return '🌑'; // The Shadow Between Worlds - new moon
-    case 'capstone_reality_blade': return '🗡️'; // The Blade That Cuts Reality - dagger
+    case 'capstone_reality_blade': return '⚔️'; // The Blade That Cuts Reality - crossed swords
     
     // Corruption
     case 'schism_efficiency': return '🤖'; // Emotionless Efficiency - robot
-    case 'schism_weapon': return '⚔️'; // The Living Weapon - crossed swords
+    case 'schism_weapon': return '🗡️'; // The Living Weapon - dagger
     
-    default: return '🗡️';
+    default: return '⭐';
   }
 } 
