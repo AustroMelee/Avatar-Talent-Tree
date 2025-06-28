@@ -44,7 +44,8 @@
 
     "paths": {
       "@/styles/*": ["styles/*"]
-    }
+    },
+    "baseUrl": "./"
   },
   "include": [
     "src/**/*"
