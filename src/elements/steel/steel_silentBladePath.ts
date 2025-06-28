@@ -18,7 +18,7 @@ const BASE_RADIUS = 160;
 const RADIUS_STEP = 120;
 const MIN_DIST = 90;
 
-// --- Node Definitions ---
+// --- Node Definitions (from Guide) ---
 const nodeDataList = [
     // GENESIS
     { id: 'genesis', name: 'The Silent Blade Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your strikes target vital points instinctively, dealing increased damage to unarmored foes and bypassing light armor.", flavor: "A single strike, perfectly placed, ends all conflict." },
@@ -40,10 +40,7 @@ const nodeDataList = [
     { id: 'minor_a3_3', name: 'Perfect Timing', type: 'Minor', cost: 1, branch: 0, depth: 3.5, prerequisite: 'A3', description: "Strike at the exact moment when success is guaranteed." },
     
     { id: 'APEX_A', name: 'The Final Shadow', type: 'Axiom', cost: 5, branch: 0, depth: 4, prerequisite: 'A3', description: "Become a legend of fear, able to kill with your presence alone and move through reality unseen.", flavor: "I am the fear in the dark." },
-    { id: 'minor_apex_a_1', name: 'Death Aura', type: 'Minor', cost: 1, branch: -0.2, depth: 4.5, prerequisite: 'APEX_A', description: "Weak-willed enemies may die of fear in your presence." },
-    { id: 'minor_apex_a_2', name: 'Reality Stealth', type: 'Minor', cost: 1, branch: 0.2, depth: 4.5, prerequisite: 'APEX_A', description: "Hide from fate itself, becoming impossible to predict or track." },
-    { id: 'minor_apex_a_3', name: 'Shadow Mastery', type: 'Minor', cost: 1, branch: 0, depth: 4.5, prerequisite: 'APEX_A', description: "Control shadows as if they were solid, living things." },
-
+    
     // SUB-PATH B: The Thrown Weapons Branch
     { id: 'B1', name: 'Perfect Aim', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "Never miss with thrown weapons, able to ricochet shots around obstacles.", flavor: "The path of the blade is decided before it is thrown." },
     { id: 'minor_b1_1', name: 'Boomerang Mastery', type: 'Minor', cost: 1, branch: 0.8, depth: 1.5, prerequisite: 'B1', description: "Thrown weapons return to your hand automatically." },
@@ -61,9 +58,6 @@ const nodeDataList = [
     { id: 'minor_b3_3', name: 'Infinite Arsenal', type: 'Minor', cost: 1, branch: 1, depth: 3.5, prerequisite: 'B3', description: "Never run out of throwing weapons." },
     
     { id: 'APEX_B', name: 'Master of Distance', type: 'Axiom', cost: 5, branch: 1, depth: 4, prerequisite: 'B3', description: "Your thrown weapons ignore distance, able to strike anywhere you can see or imagine.", flavor: "Distance is a concept for those who walk." },
-    { id: 'minor_apex_b_1', name: 'Dimensional Throws', type: 'Minor', cost: 1, branch: 0.8, depth: 4.5, prerequisite: 'APEX_B', description: "Thrown weapons can travel through other dimensions." },
-    { id: 'minor_apex_b_2', name: 'Time-Delayed Strikes', type: 'Minor', cost: 1, branch: 1.2, depth: 4.5, prerequisite: 'APEX_B', description: "Weapons can strike targets in the past or future." },
-    { id: 'minor_apex_b_3', name: 'Conceptual Targeting', type: 'Minor', cost: 1, branch: 1, depth: 4.5, prerequisite: 'APEX_B', description: "Strike abstract concepts like 'hope' or 'fear'." },
 
     // SUB-PATH C: The Critical Arts Branch
     { id: 'C1', name: 'Vital Strike', type: 'Keystone', cost: 2, branch: 2, depth: 1, prerequisite: 'genesis', description: "All your attacks have a chance to cause devastating critical damage.", flavor: "Not harder, smarter." },
@@ -82,22 +76,19 @@ const nodeDataList = [
     { id: 'minor_c3_3', name: 'Merciful Death', type: 'Minor', cost: 1, branch: 2, depth: 3.5, prerequisite: 'C3', description: "Grant painless death to suffering beings." },
     
     { id: 'APEX_C', name: 'Touch of Ending', type: 'Axiom', cost: 5, branch: 2, depth: 4, prerequisite: 'C3', description: "Your touch can end anything - life, abilities, concepts, or even natural laws.", flavor: "All things have an end. I am simply the one who delivers it." },
-    { id: 'minor_apex_c_1', name: 'Concept Death', type: 'Minor', cost: 1, branch: 1.8, depth: 4.5, prerequisite: 'APEX_C', description: "Kill abstract concepts with a touch." },
-    { id: 'minor_apex_c_2', name: 'Power Nullification', type: 'Minor', cost: 1, branch: 2.2, depth: 4.5, prerequisite: 'APEX_C', description: "Permanently destroy supernatural abilities." },
-    { id: 'minor_apex_c_3', name: 'Reality Puncture', type: 'Minor', cost: 1, branch: 2, depth: 4.5, prerequisite: 'APEX_C', description: "Create holes in reality itself with precise strikes." },
 
     // SACRED TRIALS
     { id: 'rite_silence', name: 'Trial of Silence', type: 'GnosticRite', cost: 1, branch: 0, depth: 5, prerequisite: 'APEX_A', description: "Infiltrate an enemy stronghold and eliminate the target without anyone knowing you were there." },
     { id: 'rite_precision', name: 'Trial of Precision', type: 'GnosticRite', cost: 1, branch: 1, depth: 5, prerequisite: 'APEX_B', description: "Kill a target with a thrown weapon from impossible distance through multiple obstacles." },
     { id: 'rite_mercy', name: 'Trial of Mercy', type: 'GnosticRite', cost: 1, branch: 2, depth: 5, prerequisite: 'APEX_C', description: "Use your lethal skills to save a life instead of taking one." },
-
-    // AVATAR STATES
-    { id: 'capstone_killer', name: 'The Perfect Killer', type: 'Capstone', cost: 15, branch: 0, depth: 6, prerequisite: 'rite_silence', description: "Become death incarnate, able to kill anything that exists with perfect efficiency." },
-    { id: 'capstone_shadow', name: 'The Shadow Between Worlds', type: 'Capstone', cost: 15, branch: 1, depth: 6, prerequisite: 'rite_precision', description: "Exist partially outside reality, moving unseen through the spaces between moments." },
-    { id: 'capstone_reality_blade', name: 'The Blade That Cuts Reality', type: 'Capstone', cost: 15, branch: 2, depth: 6, prerequisite: 'rite_mercy', description: "Your weapons can cut through anything - armor, shields, space, time, or concepts." },
     
-    // CORRUPTION
-    { id: 'schism_efficiency', name: 'Emotionless Efficiency', type: 'Schism', cost: 8, branch: 1.5, depth: 5.5, prerequisite: ['APEX_B', 'APEX_C'], description: "Become perfectly efficient at killing, but lose the ability to feel emotion or form connections." },
+    // AVATAR STATES (CAPSTONES)
+    { id: 'cap_killer', name: 'The Perfect Killer', type: 'Capstone', cost: 15, branch: 0, depth: 6, prerequisite: 'rite_silence', description: "Become death incarnate, able to kill anything that exists with perfect efficiency.", exclusiveWith: ['cap_shadow', 'cap_reality_blade'] },
+    { id: 'cap_shadow', name: 'The Shadow Between Worlds', type: 'Capstone', cost: 15, branch: 1, depth: 6, prerequisite: 'rite_precision', description: "Exist partially outside reality, moving unseen through the spaces between moments.", exclusiveWith: ['cap_killer', 'cap_reality_blade'] },
+    { id: 'cap_reality_blade', name: 'The Blade That Cuts Reality', type: 'Capstone', cost: 15, branch: 2, depth: 6, prerequisite: 'rite_mercy', description: "Your weapons can cut through anything - armor, shields, space, time, or concepts.", exclusiveWith: ['cap_killer', 'cap_shadow'] },
+
+    // CORRUPTION (SCHISMS)
+    { id: 'schism_efficiency', name: 'Emotionless Efficiency', type: 'Schism', cost: 8, branch: 1.5, depth: 5.5, prerequisite: 'APEX_B', description: "Become perfectly efficient at killing, but lose the ability to feel emotion or form connections.", exclusiveWith: ['rite_silence', 'rite_precision', 'rite_mercy'] },
     { id: 'schism_weapon', name: 'The Living Weapon', type: 'Schism', cost: 12, branch: 1.5, depth: 6.5, prerequisite: 'schism_efficiency', description: "Transform into a perfect instrument of death, gaining incredible power but losing your humanity." }
 ];
 
@@ -115,11 +106,7 @@ nodeDataList.forEach(nodeData => {
   const y = type === 'Genesis' ? CENTER_Y : Math.round(CENTER_Y + r * Math.sin(baseAngle));
 
   const node: TalentNode = {
-    id, name: nodeData.name, description: nodeData.description, flavor: nodeData.flavor, type: nodeData.type as NodeType, path: 'silent_blade', constellation: 'steel', position: { x, y }, prerequisites, visual: { 
-      color: '#B0C4DE', 
-      size: 50, 
-      icon: getSilentBladeNodeIcon(id) 
-    }, effects: [], isVisible: true, isAllocatable: prerequisites.length === 0, isAllocated: false, isLocked: prerequisites.length > 0, isPermanentlyLocked: false, pkCost: nodeData.cost
+    id, name: nodeData.name, description: nodeData.description, flavor: nodeData.flavor, type: nodeData.type as NodeType, path: 'silent_blade', constellation: 'steel', position: { x, y }, prerequisites, visual: { color: '#B0C4DE', size: 50, icon: 'default' }, effects: [], isVisible: true, isAllocatable: prerequisites.length === 0, isAllocated: false, isLocked: prerequisites.length > 0, isPermanentlyLocked: false, pkCost: nodeData.cost, exclusiveWith: (nodeData as any).exclusiveWith || []
   };
   
   nodes.push(node);
@@ -129,26 +116,19 @@ nodeDataList.forEach(nodeData => {
   });
 });
 
-// --- Force-Directed Repulsion Algorithm ---
+// --- Force-Directed Repulsion ---
 for (let iter = 0; iter < 100; iter++) {
     for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].type === 'Genesis') continue;
         for (let j = i + 1; j < nodes.length; j++) {
-            const a = nodes[i];
-            const b = nodes[j];
-            const dx = a.position.x - b.position.x;
-            const dy = a.position.y - b.position.y;
+            const a = nodes[i]; const b = nodes[j];
+            const dx = a.position.x - b.position.x; const dy = a.position.y - b.position.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist < MIN_DIST && dist > 0) {
                 const moveFactor = (MIN_DIST - dist) / dist * 0.5;
-                const moveX = dx * moveFactor;
-                const moveY = dy * moveFactor;
-                a.position.x += moveX;
-                a.position.y += moveY;
-                if (b.type !== 'Genesis') {
-                    b.position.x -= moveX;
-                    b.position.y -= moveY;
-                }
+                const moveX = dx * moveFactor; const moveY = dy * moveFactor;
+                a.position.x += moveX; a.position.y += moveY;
+                if (b.type !== 'Genesis') { b.position.x -= moveX; b.position.y -= moveY; }
             }
         }
     }
@@ -156,7 +136,6 @@ for (let iter = 0; iter < 100; iter++) {
 
 // --- Exports ---
 export const SILENT_BLADE_NODES = nodes;
-export const SILENT_BLADE_GENESIS = nodes.find(n => n.type === 'Genesis')!;
 export function generateSilentBladeConnections(): TalentConnection[] { return connections; }
 export const SILENT_BLADE_METADATA = {
   name: 'The Way of the Silent Blade',
@@ -167,81 +146,4 @@ export const SILENT_BLADE_METADATA = {
   emoji: '🗡️',
   color: '#B0C4DE',
   position: { x: 800, y: 400 }
-};
-
-function getSilentBladeNodeIcon(nodeId: string): string {
-  switch (nodeId) {
-    // Genesis
-    case 'genesis': return '🗡️';
-    
-    // Assassin's Art Branch
-    case 'A1': return '🥷'; // Silent Steps - ninja
-    case 'minor_a1_1': return '👤'; // Shadow Meld - shadow figure
-    case 'minor_a1_2': return '🌸'; // Scent Masking - flower (natural scent)
-    case 'minor_a1_3': return '🫁'; // Breath Control - lungs
-    case 'A2': return '⚰️'; // Death Strike - coffin
-    case 'minor_a2_1': return '☠️'; // Poison Knowledge - skull
-    case 'minor_a2_2': return '◎'; // Anatomical Mastery - target (simplified)
-    case 'minor_a2_3': return '🤐'; // Silent Kill - zipper mouth
-    case 'A3': return '👻'; // Master Assassin - ghost
-    case 'minor_a3_1': return '👥'; // Social Invisibility - crowd
-    case 'minor_a3_2': return '🕵️'; // Legendary Stealth - spy
-    case 'minor_a3_3': return '⏰'; // Perfect Timing - clock
-    case 'APEX_A': return '🌑'; // The Final Shadow - new moon
-    case 'minor_apex_a_1': return '💀'; // Death Aura - skull
-    case 'minor_apex_a_2': return '🔮'; // Reality Stealth - crystal ball
-    case 'minor_apex_a_3': return '🖤'; // Shadow Mastery - black heart
-    
-    // Thrown Weapons Branch
-    case 'B1': return '◎'; // Perfect Aim - target (simplified)
-    case 'minor_b1_1': return '🔄'; // Boomerang Mastery - recycle (instead of boomerang)
-    case 'minor_b1_2': return '🎲'; // Multi-target - dice (multiple)
-    case 'minor_b1_3': return '🛡️'; // Penetrating Throw - shield (piercing)
-    case 'B2': return '🔄'; // Weapon Return - recycle
-    case 'minor_b2_1': return '🧭'; // Guided Flight - compass
-    case 'minor_b2_2': return '💥'; // Explosive Impact - explosion
-    case 'minor_b2_3': return '⚡'; // Chain Throws - lightning
-    case 'B3': return '🌀'; // Storm of Blades - cyclone (instead of tornado)
-    case 'minor_b3_1': return '🌀'; // Blade Tornado - cyclone
-    case 'minor_b3_2': return '◎'; // Seeking Weapons - target (simplified)
-    case 'minor_b3_3': return '♾️'; // Infinite Arsenal - infinity
-    case 'APEX_B': return '⭐'; // Master of Distance - star (instead of galaxy)
-    case 'minor_apex_b_1': return '🌐'; // Dimensional Throws - globe
-    case 'minor_apex_b_2': return '⏳'; // Time-Delayed Strikes - hourglass
-    case 'minor_apex_b_3': return '💭'; // Conceptual Targeting - thought bubble
-    
-    // Critical Arts Branch
-    case 'C1': return '💔'; // Vital Strike - broken heart
-    case 'minor_c1_1': return '🔍'; // Weak Point Vision - magnifying glass
-    case 'minor_c1_2': return '⚔️'; // Armor Piercing - crossed swords
-    case 'minor_c1_3': return '🦴'; // Crippling Blows - bone
-    case 'C2': return '👆'; // Pressure Point Mastery - pointing finger
-    case 'minor_c2_1': return '🧊'; // Paralysis Touch - ice
-    case 'minor_c2_2': return '😵'; // Pain Control - dizzy face
-    case 'minor_c2_3': return '🔌'; // Chi Disruption - plug
-    case 'C3': return '☠️'; // One Touch Death - skull
-    case 'minor_c3_1': return '⏰'; // Delayed Death - clock
-    case 'minor_c3_2': return '✂️'; // Selective Lethality - scissors
-    case 'minor_c3_3': return '🕊️'; // Merciful Death - dove
-    case 'APEX_C': return '💀'; // Touch of Ending - skull
-    case 'minor_apex_c_1': return '💭'; // Concept Death - thought bubble
-    case 'minor_apex_c_2': return '🚫'; // Power Nullification - prohibited
-    case 'minor_apex_c_3': return '🕳️'; // Reality Puncture - hole
-    
-    // Sacred Trials
-    case 'rite_silence': return '🤫'; // Trial of Silence - shushing
-    case 'rite_precision': return '◎'; // Trial of Precision - target (simplified)
-    case 'rite_mercy': return '🤲'; // Trial of Mercy - praying hands
-    
-    // Avatar States
-    case 'capstone_killer': return '💀'; // The Perfect Killer - skull
-    case 'capstone_shadow': return '🌑'; // The Shadow Between Worlds - new moon
-    case 'capstone_reality_blade': return '⚔️'; // The Blade That Cuts Reality - crossed swords
-    
-    // Corruption
-    case 'schism_efficiency': return '🤖'; // Emotionless Efficiency - robot
-    case 'schism_weapon': return '🗡️'; // The Living Weapon - dagger
-    
-    default: return '⭐';
-  }
-} 
+}; 

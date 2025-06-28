@@ -18,6 +18,11 @@ const prefixPathData = (nodes: TalentNode[], connections: TalentConnection[], pr
     const idMap = new Map(nodes.map(n => [n.id, `${prefix}_${n.id}`]));
     
     const prefixedNodes = nodes.map(node => {
+        // Handle exclusiveWith arrays, if they exist
+        const newExclusiveWith = (node.exclusiveWith || [])
+            .map(eId => idMap.get(eId))
+            .filter((eId): eId is string => eId !== undefined);
+
         const newPrerequisites = node.prerequisites
             .map(pId => idMap.get(pId))
             .filter((pId): pId is string => pId !== undefined);
@@ -25,7 +30,8 @@ const prefixPathData = (nodes: TalentNode[], connections: TalentConnection[], pr
         return {
             ...node,
             id: idMap.get(node.id)!,
-            prerequisites: newPrerequisites
+            prerequisites: newPrerequisites,
+            exclusiveWith: newExclusiveWith
         };
     });
     
