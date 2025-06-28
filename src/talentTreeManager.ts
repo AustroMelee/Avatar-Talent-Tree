@@ -12,10 +12,17 @@ import type {
 import { ARGENT_CODEX_CONSTANTS } from './types';
 import { 
   AIR_TALENT_NODES, 
+  FIRE_TALENT_NODES, 
+  WATER_TALENT_NODES, 
   generateAirConnections,
+  generateFireConnections,
+  generateWaterConnections,
   generateAllEarthNodes,
   generateAllEarthConnections,
-  EARTH_CONSTELLATION
+  generateAllSteelNodes,
+  generateAllSteelConnections,
+  CONSTELLATIONS,
+  getConstellation
 } from './elements';
 
 /**
@@ -132,9 +139,81 @@ export class TalentTreeManager {
       covenant: null,
       philosophicalWounds: [],
       metadata: {
-        name: EARTH_CONSTELLATION.name,
-        description: EARTH_CONSTELLATION.description,
+        name: CONSTELLATIONS.earth.name,
+        description: CONSTELLATIONS.earth.description,
         background: 'earth'
+      }
+    };
+  }
+
+  /**
+   * Creates the Fire constellation talent tree
+   */
+  private createFireTalentTree(): TalentTree {
+    const nodes = FIRE_TALENT_NODES.map(node => ({...node}));
+    const connections = generateFireConnections();
+
+    return {
+      nodes,
+      connections,
+      totalPK: ARGENT_CODEX_CONSTANTS.TOTAL_PK,
+      spentPK: 0,
+      chosenPaths: new Map(),
+      allocatedNodes: new Set(),
+      covenant: null,
+      philosophicalWounds: [],
+      metadata: {
+        name: CONSTELLATIONS.fire.name,
+        description: CONSTELLATIONS.fire.description,
+        background: 'fire'
+      }
+    };
+  }
+
+  /**
+   * Creates the Water constellation talent tree
+   */
+  private createWaterTalentTree(): TalentTree {
+    const nodes = WATER_TALENT_NODES.map(node => ({...node}));
+    const connections = generateWaterConnections();
+
+    return {
+      nodes,
+      connections,
+      totalPK: ARGENT_CODEX_CONSTANTS.TOTAL_PK,
+      spentPK: 0,
+      chosenPaths: new Map(),
+      allocatedNodes: new Set(),
+      covenant: null,
+      philosophicalWounds: [],
+      metadata: {
+        name: CONSTELLATIONS.water.name,
+        description: CONSTELLATIONS.water.description,
+        background: 'water'
+      }
+    };
+  }
+
+  /**
+   * Creates the Steel constellation talent tree
+   */
+  private createSteelTalentTree(): TalentTree {
+    const nodes = generateAllSteelNodes().map(node => ({...node}));
+    const connections = generateAllSteelConnections();
+
+    return {
+      nodes,
+      connections,
+      totalPK: ARGENT_CODEX_CONSTANTS.TOTAL_PK,
+      spentPK: 0,
+      chosenPaths: new Map(),
+      allocatedNodes: new Set(),
+      covenant: null,
+      philosophicalWounds: [],
+      metadata: {
+        name: 'The Forged Steel',
+        description: 'The triumph of mortal will over supernatural power, achieved through dedication, training, and ingenuity.',
+        background: 'steel'
       }
     };
   }
@@ -198,8 +277,18 @@ export class TalentTreeManager {
   /**
    * Loads a new talent tree with the specified data
    */
-  loadTalentTree(talentTree: TalentTree): void {
-    this.state.talentTree = talentTree;
+  loadTalentTree(nodes: TalentNode[], connections: any[], metadata: any): void {
+    this.state.talentTree = {
+      nodes: nodes.map(node => ({...node})),
+      connections,
+      totalPK: ARGENT_CODEX_CONSTANTS.TOTAL_PK,
+      spentPK: 0,
+      chosenPaths: new Map(),
+      allocatedNodes: new Set(),
+      covenant: null,
+      philosophicalWounds: [],
+      metadata
+    };
     this.updateAllNodeStates();
     this.notify();
   }
@@ -453,5 +542,26 @@ export class TalentTreeManager {
     // Update all node states
     this.updateAllNodeStates();
     this.notify();
+  }
+
+  /**
+   * Creates a talent tree for the specified element
+   */
+  createElementalTalentTree(elementId: string): TalentTree {
+    switch (elementId) {
+      case 'air':
+        return this.createAirTalentTree();
+      case 'fire':
+        return this.createFireTalentTree();
+      case 'water':
+        return this.createWaterTalentTree();
+      case 'earth':
+        return this.createEarthTalentTree();
+      case 'steel':
+        return this.createSteelTalentTree();
+      default:
+        console.error(`Unknown element: ${elementId}`);
+        return this.createAirTalentTree();
+    }
   }
 } 

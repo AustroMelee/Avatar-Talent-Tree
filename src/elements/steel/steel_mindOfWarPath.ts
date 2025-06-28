@@ -2,7 +2,6 @@
  * Path 4: The Mind of War - "Strategy Beyond the Battlefield"
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
-import { addExtraMinorNodes } from '../../talentPathLayoutHelpers';
 
 const CENTER_X = 800; const CENTER_Y = 400; const BRANCHES = 3;
 const PATH_MAIN_ANGLE = Math.PI; const ANGLE_SPREAD = Math.PI / 2.2;
@@ -63,15 +62,6 @@ nodeDataList.forEach(nodeData => {
   prerequisites.forEach(prereqId => { connections.push({ from: prereqId, to: id, isActive: false, isLocked: false }); });
 });
 
-// Auto-generate extra minor nodes for structural consistency
-addExtraMinorNodes(nodes, connections, nodeMap, nodeDataList, { value: 0 }, [
-  { adjectives: ['Strategic', 'Inventive', 'Analytical'], nouns: ['Plan', 'Device', 'Scheme'], verbs: ['calculate', 'devise', 'engineer'], philosophies: ['Strategy wins wars.', 'Innovation is power.', 'Analysis is key.'] },
-  { adjectives: ['Tactical', 'Networked', 'Insightful'], nouns: ['Move', 'Network', 'Insight'], verbs: ['coordinate', 'gather', 'predict'], philosophies: ['Tactics decide battles.', 'Information is victory.', 'Insight is strength.'] },
-  { adjectives: ['Scholarly', 'Wise', 'Curious'], nouns: ['Study', 'Theory', 'Discovery'], verbs: ['research', 'uncover', 'learn'], philosophies: ['Knowledge is power.', 'Wisdom endures.', 'Curiosity drives progress.'] }
-], {
-  CENTER_X, CENTER_Y, ANGLE_START, ANGLE_SPREAD, BRANCHES, BASE_RADIUS, RADIUS_STEP, MIN_DIST
-});
-
 for (let iter = 0; iter < 100; iter++) {
     for (let i = 0; i < nodes.length; i++) {
         if (nodes[i].type === 'Genesis') continue;
@@ -95,6 +85,9 @@ export function generateMindOfWarConnections(): TalentConnection[] { return conn
 export const MIND_OF_WAR_METADATA = {
   name: 'The Mind of War', philosophy: "Wars are won before the first blow is struck.", emoji: '🧠', color: '#2F4F4F', position: { x: 800, y: 400 }
 };
+
+// Export nodeDataList for minor node generation
+export { nodeDataList };
 
 function getMindOfWarNodeIcon(nodeId: string): string {
   switch (nodeId) {

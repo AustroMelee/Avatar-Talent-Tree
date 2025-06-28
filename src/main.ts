@@ -168,66 +168,9 @@ class TalentTreeApp {
    * Load talent data for the specified element
    */
   private loadElementalData(elementId: string): void {
-    let talentNodes: TalentNode[] = [];
-    let connections: any[] = [];
-
-    switch (elementId) {
-      case 'air':
-        talentNodes = AIR_TALENT_NODES;
-        connections = generateAirConnections();
-        break;
-      case 'fire':
-        talentNodes = FIRE_TALENT_NODES;
-        connections = generateFireConnections();
-        break;
-      case 'water':
-        talentNodes = WATER_TALENT_NODES;
-        connections = generateWaterConnections();
-        break;
-      case 'earth':
-        talentNodes = generateAllEarthNodes();
-        connections = generateAllEarthConnections();
-        break;
-      case 'steel':
-        talentNodes = generateAllSteelNodes();
-        connections = generateAllSteelConnections();
-        break;
-      default:
-        console.error(`Unknown element: ${elementId}`);
-        return;
-    }
-
-    // Debug logging for Earth
-    if (elementId === 'earth') {
-      console.log(`Earth nodes generated: ${talentNodes.length}`);
-      console.log(`Earth connections generated: ${connections.length}`);
-      
-      // Log the first few nodes to see their structure
-      talentNodes.slice(0, 10).forEach((node, index) => {
-        console.log(`Node ${index}: ${node.name} (${node.path}) at (${node.position.x}, ${node.position.y})`);
-      });
-      
-      // Check if all paths are represented
-      const paths = new Set(talentNodes.map(n => n.path));
-      console.log(`Earth paths found:`, Array.from(paths));
-    }
-
-    // Update the talent tree manager with new data
-    this.manager.loadTalentTree({
-      nodes: talentNodes,
-      connections: connections,
-      totalPK: ARGENT_CODEX_CONSTANTS.TOTAL_PK,
-      spentPK: 0,
-      chosenPaths: new Map(),
-      allocatedNodes: new Set(),
-      covenant: null,
-      philosophicalWounds: [],
-      metadata: {
-        name: getConstellation(elementId)?.name || 'Unknown Constellation',
-        description: getConstellation(elementId)?.description || '',
-        background: elementId
-      }
-    });
+    // Use the manager's createElementalTalentTree method
+    const talentTree = this.manager.createElementalTalentTree(elementId);
+    this.manager.loadTalentTree(talentTree.nodes, talentTree.connections, talentTree.metadata);
   }
 
   /**

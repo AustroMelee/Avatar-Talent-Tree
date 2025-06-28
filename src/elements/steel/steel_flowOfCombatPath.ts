@@ -2,7 +2,6 @@
  * Path 3: The Flow of Combat - "Adaptation Made Art"
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
-import { addExtraMinorNodes } from '../../talentPathLayoutHelpers';
 
 const CENTER_X = 800; const CENTER_Y = 400; const BRANCHES = 3;
 const PATH_MAIN_ANGLE = Math.PI / 2; const ANGLE_SPREAD = Math.PI / 2.2;
@@ -80,21 +79,15 @@ for (let iter = 0; iter < 100; iter++) {
     }
 }
 
-// Auto-generate extra minor nodes for structural consistency
-addExtraMinorNodes(nodes, connections, nodeMap, nodeDataList, { value: 0 }, [
-  { adjectives: ['Fluid', 'Reactive', 'Balanced'], nouns: ['Move', 'Flow', 'Step'], verbs: ['adapt', 'shift', 'respond'], philosophies: ['Adaptation is survival.', 'Flow with the battle.', 'Balance is power.'] },
-  { adjectives: ['Weaponized', 'Masterful', 'Versatile'], nouns: ['Weapon', 'Form', 'Art'], verbs: ['master', 'wield', 'transform'], philosophies: ['Every tool is a weapon.', 'Mastery is endless.', 'Versatility wins wars.'] },
-  { adjectives: ['Instinctive', 'Harmonious', 'Perfect'], nouns: ['Instinct', 'Harmony', 'State'], verbs: ['sense', 'harmonize', 'perfect'], philosophies: ['Trust your instincts.', 'Harmony brings victory.', 'Perfection is a journey.'] }
-], {
-  CENTER_X, CENTER_Y, ANGLE_START, ANGLE_SPREAD, BRANCHES, BASE_RADIUS, RADIUS_STEP, MIN_DIST
-});
-
 export const FLOW_OF_COMBAT_NODES = nodes;
 export const FLOW_OF_COMBAT_GENESIS = nodes.find(n => n.type === 'Genesis')!;
 export function generateFlowOfCombatConnections(): TalentConnection[] { return connections; }
 export const FLOW_OF_COMBAT_METADATA = {
   name: 'The Flow of Combat', philosophy: "Like water, true skill has no fixed form.", emoji: '🌊', color: '#4682B4', position: { x: 800, y: 400 }
 };
+
+// Export nodeDataList for minor node generation
+export { nodeDataList };
 
 function getFlowOfCombatNodeIcon(nodeId: string): string {
   switch (nodeId) {

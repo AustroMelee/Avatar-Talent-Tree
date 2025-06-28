@@ -6,7 +6,6 @@
  * Sacred Animal: The Shadow - unseen, deadly, inevitable.
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
-import { addExtraMinorNodes } from '../../talentPathLayoutHelpers';
 
 // --- Layout Configuration ---
 const CENTER_X = 800;
@@ -130,15 +129,6 @@ nodeDataList.forEach(nodeData => {
   });
 });
 
-// Auto-generate extra minor nodes for structural consistency
-addExtraMinorNodes(nodes, connections, nodeMap, nodeDataList, { value: 0 }, [
-  { adjectives: ['Silent', 'Deadly', 'Shadowy'], nouns: ['Step', 'Blade', 'Strike'], verbs: ['improve', 'sharpen', 'quicken'], philosophies: ['Precision is everything.', 'A true assassin leaves no trace.', 'The shadow is your ally.'] },
-  { adjectives: ['Perfect', 'Swift', 'Unerring'], nouns: ['Throw', 'Aim', 'Arc'], verbs: ['enhance', 'focus', 'accelerate'], philosophies: ['The blade finds its mark.', 'Distance is an illusion.', 'Every throw is a promise.'] },
-  { adjectives: ['Critical', 'Lethal', 'Subtle'], nouns: ['Hit', 'Point', 'Touch'], verbs: ['refine', 'target', 'amplify'], philosophies: ['Every weakness is a weapon.', 'Strike where it matters.', 'Death is a whisper.'] }
-], {
-  CENTER_X, CENTER_Y, ANGLE_START, ANGLE_SPREAD, BRANCHES, BASE_RADIUS, RADIUS_STEP, MIN_DIST
-});
-
 // --- Force-Directed Repulsion Algorithm ---
 for (let iter = 0; iter < 100; iter++) {
     for (let i = 0; i < nodes.length; i++) {
@@ -178,6 +168,9 @@ export const SILENT_BLADE_METADATA = {
   color: '#B0C4DE',
   position: { x: 800, y: 400 }
 };
+
+// Export nodeDataList for minor node generation
+export { nodeDataList };
 
 function getSilentBladeNodeIcon(nodeId: string): string {
   switch (nodeId) {
