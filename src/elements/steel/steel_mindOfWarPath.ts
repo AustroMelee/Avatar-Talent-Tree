@@ -86,9 +86,6 @@ export const MIND_OF_WAR_METADATA = {
   name: 'The Mind of War', philosophy: "Wars are won before the first blow is struck.", emoji: '🧠', color: '#2F4F4F', position: { x: 800, y: 400 }
 };
 
-// Export nodeDataList for minor node generation
-export { nodeDataList };
-
 function getMindOfWarNodeIcon(nodeId: string): string {
   switch (nodeId) {
     // Genesis
@@ -113,8 +110,9 @@ function getMindOfWarNodeIcon(nodeId: string): string {
     case 'APEX_C': return '👁️'; // The Living Eye - eye
     
     // Sacred Trials
+    case 'rite_innovation': return '💡'; // Trial of Innovation - light bulb
     case 'rite_strategy': return '🧠'; // Trial of Strategy - brain
-    case 'rite_knowledge': return '🧘'; // Trial of Knowledge - meditating person
+    case 'rite_knowledge': return '📚'; // Trial of Knowledge - books
     
     // Avatar States
     case 'capstone_innovation': return '⚡'; // Avatar of Innovation - lightning

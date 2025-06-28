@@ -120,9 +120,6 @@ export const SHIELD_OF_PEOPLE_METADATA = {
   position: { x: 800, y: 400 }
 };
 
-// Export nodeDataList for minor node generation
-export { nodeDataList };
-
 function getShieldOfPeopleNodeIcon(nodeId: string): string {
   switch (nodeId) {
     // Genesis
@@ -130,71 +127,35 @@ function getShieldOfPeopleNodeIcon(nodeId: string): string {
     
     // Guardian's Heart Branch
     case 'A1': return '💙'; // Protector's Heart - blue heart
-    case 'minor_a1_1': return '🤗'; // Embrace of Safety - hugging
-    case 'minor_a1_2': return '🫂'; // Shared Strength - people hugging
-    case 'minor_a1_3': return '💪'; // Unbreakable Will - flexed biceps
     case 'A2': return '🏰'; // Living Fortress - castle
-    case 'minor_a2_1': return '🧱'; // Wall of Flesh - brick
-    case 'minor_a2_2': return '🔄'; // Regenerating Defense - recycle
-    case 'minor_a2_3': return '🛡️'; // Adaptive Shielding - shield
     case 'A3': return '👑'; // Guardian Lord - crown
-    case 'minor_a3_1': return '🎖️'; // Inspiring Presence - medal
-    case 'minor_a3_2': return '⚡'; // Aura of Protection - lightning
-    case 'minor_a3_3': return '🛡️'; // Commanding Defense - shield
     case 'APEX_A': return '🌟'; // The People's Shield - star
-    case 'minor_apex_a_1': return '🌍'; // Continental Protection - earth
-    case 'minor_apex_a_2': return '🛡️'; // Reality Shield - shield
-    case 'minor_apex_a_3': return '💎'; // Unbreakable Spirit - diamond
     
     // Defensive Arts Branch
     case 'B1': return '🛡️'; // Shield Mastery - shield
-    case 'minor_b1_1': return '🔄'; // Deflection Arts - recycle
-    case 'minor_b1_2': return '🛡️'; // Barrier Creation - shield
-    case 'minor_b1_3': return '🛡️'; // Reactive Defense - shield
     case 'B2': return '🛡️'; // Shield Wall - shield
-    case 'minor_b2_1': return '🛡️'; // Coordinated Defense - shield
-    case 'minor_b2_2': return '🛡️'; // Mobile Fortress - shield
-    case 'minor_b2_3': return '🛡️'; // Impenetrable Formation - shield
     case 'B3': return '🛡️'; // Living Shield - shield
-    case 'minor_b3_1': return '🛡️'; // Sentient Defense - shield
-    case 'minor_b3_2': return '🛡️'; // Adaptive Shielding - shield
-    case 'minor_b3_3': return '🛡️'; // Perfect Protection - shield
     case 'APEX_B': return '🛡️'; // Master of Defense - shield
-    case 'minor_apex_b_1': return '🛡️'; // Conceptual Shielding - shield
-    case 'minor_apex_b_2': return '🛡️'; // Reality Barrier - shield
-    case 'minor_apex_b_3': return '🛡️'; // Absolute Defense - shield
     
     // Healing Arts Branch
     case 'C1': return '💚'; // Life Touch - green heart
-    case 'minor_c1_1': return '🩹'; // Wound Binding - bandage
-    case 'minor_c1_2': return '💊'; // Pain Relief - pill
-    case 'minor_c1_3': return '🔄'; // Rapid Recovery - recycle
     case 'C2': return '💚'; // Mass Healing - green heart
-    case 'minor_c2_1': return '💚'; // Healing Aura - green heart
-    case 'minor_c2_2': return '💚'; // Regenerative Field - green heart
-    case 'minor_c2_3': return '💚'; // Life Restoration - green heart
     case 'C3': return '💚'; // Resurrection Arts - green heart
-    case 'minor_c3_1': return '💚'; // Death Reversal - green heart
-    case 'minor_c3_2': return '💚'; // Soul Restoration - green heart
-    case 'minor_c3_3': return '💚'; // Eternal Life - green heart
     case 'APEX_C': return '💚'; // Master of Life - green heart
-    case 'minor_apex_c_1': return '💚'; // Conceptual Healing - green heart
-    case 'minor_apex_c_2': return '💚'; // Reality Restoration - green heart
-    case 'minor_apex_c_3': return '💚'; // Life Mastery - green heart
     
     // Sacred Trials
     case 'rite_sacrifice': return '🤲'; // Trial of Sacrifice - praying hands
-    case 'rite_endurance': return '💪'; // Trial of Endurance - flexed biceps
-    case 'rite_compassion': return '💙'; // Trial of Compassion - blue heart
+    case 'rite_leadership': return '👑'; // Trial of Leadership - crown
+    case 'rite_duty': return '💪'; // Trial of Duty - flexed biceps
     
     // Avatar States
-    case 'capstone_protector': return '🛡️'; // The Eternal Protector - shield
-    case 'capstone_guardian': return '👑'; // The Guardian of All - crown
-    case 'capstone_life_giver': return '💚'; // The Giver of Life - green heart
+    case 'capstone_eternal_shield': return '🛡️'; // The Eternal Protector - shield
+    case 'capstone_heroic_legend': return '👑'; // The Guardian of All - crown
+    case 'capstone_noble_sacrifice': return '💚'; // The Giver of Life - green heart
     
     // Corruption
-    case 'schism_control': return '👁️'; // Benevolent Control - eye
-    case 'schism_dependency': return '🔗'; // The People's Dependency - link
+    case 'schism_endless_vigil': return '👁️'; // The Endless Vigil - eye
+    case 'schism_ultimate_sacrifice': return '💀'; // The Ultimate Sacrifice - skull
     
     default: return '🛡️';
   }

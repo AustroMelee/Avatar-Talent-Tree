@@ -86,9 +86,6 @@ export const FLOW_OF_COMBAT_METADATA = {
   name: 'The Flow of Combat', philosophy: "Like water, true skill has no fixed form.", emoji: '🌊', color: '#4682B4', position: { x: 800, y: 400 }
 };
 
-// Export nodeDataList for minor node generation
-export { nodeDataList };
-
 function getFlowOfCombatNodeIcon(nodeId: string): string {
   switch (nodeId) {
     // Genesis
@@ -96,78 +93,35 @@ function getFlowOfCombatNodeIcon(nodeId: string): string {
     
     // Chi-Blocker's Art Branch
     case 'A1': return '🌊'; // Combat Flow - wave
-    case 'minor_a1_1': return '🔄'; // Fluid Movement - recycle
-    case 'minor_a1_2': return '💨'; // Wind Step - wind
-    case 'minor_a1_3': return '🦋'; // Butterfly Dance - butterfly
     case 'A2': return '🌀'; // Combat Rhythm - cyclone
-    case 'minor_a2_1': return '🎵'; // Battle Song - musical note
-    case 'minor_a2_2': return '⏱️'; // Perfect Timing - stopwatch
-    case 'minor_a2_3': return '🔄'; // Momentum Mastery - recycle
     case 'A3': return '🌊'; // Master of Flow - wave
-    case 'minor_a3_1': return '🌊'; // Flow State - wave
-    case 'minor_a3_2': return '🌊'; // Combat Harmony - wave
-    case 'minor_a3_3': return '🌊'; // Perfect Flow - wave
     case 'APEX_A': return '🌊'; // The Living Flow - wave
-    case 'minor_apex_a_1': return '🌊'; // Reality Flow - wave
-    case 'minor_apex_a_2': return '🌊'; // Conceptual Flow - wave
-    case 'minor_apex_a_3': return '🌊'; // Flow Mastery - wave
     
     // Weapon Master Branch
     case 'B1': return '⚔️'; // Weapon Harmony - crossed swords
-    case 'minor_b1_1': return '🗡️'; // Blade Flow - dagger
-    case 'minor_b1_2': return '🛡️'; // Shield Flow - shield
-    case 'minor_b1_3': return '🏹'; // Bow Flow - bow
     case 'B2': return '⚔️'; // Weapon Fusion - crossed swords
-    case 'minor_b2_1': return '⚔️'; // Dual Wielding - crossed swords
-    case 'minor_b2_2': return '⚔️'; // Weapon Switching - crossed swords
-    case 'minor_b2_3': return '⚔️'; // Weapon Mastery - crossed swords
     case 'B3': return '⚔️'; // Living Weapons - crossed swords
-    case 'minor_b3_1': return '⚔️'; // Sentient Arms - crossed swords
-    case 'minor_b3_2': return '⚔️'; // Weapon Bond - crossed swords
-    case 'minor_b3_3': return '⚔️'; // Perfect Harmony - crossed swords
     case 'APEX_B': return '⚔️'; // Master of Arms - crossed swords
-    case 'minor_apex_b_1': return '⚔️'; // Conceptual Weapons - crossed swords
-    case 'minor_apex_b_2': return '⚔️'; // Reality Blades - crossed swords
-    case 'minor_apex_b_3': return '⚔️'; // Weapon Mastery - crossed swords
     
     // Flow State Branch
     case 'C1': return '🧠'; // Combat Intelligence - brain
-    case 'minor_c1_1': return '👁️'; // Battle Vision - eye
-    case 'minor_c1_2': return '🧮'; // Tactical Analysis - abacus
-    case 'minor_c1_3': return '🎯'; // Strategic Planning - target
     case 'C2': return '🎖️'; // Battlefield Control - medal
-    case 'minor_c2_1': return '🗺️'; // Terrain Mastery - map
-    case 'minor_c2_2': return '👥'; // Formation Tactics - people
-    case 'minor_c2_3': return '⚡'; // Lightning Strategy - lightning
     case 'C3': return '👑'; // War Master - crown
-    case 'minor_c3_1': return '🌍'; // Global Tactics - earth
-    case 'minor_c3_2': return '⏰'; // Time Warfare - clock
-    case 'minor_c3_3': return '💭'; // Conceptual War - thought bubble
     case 'APEX_C': return '👑'; // Master of War - crown
-    case 'minor_apex_c_1': return '💭'; // Reality Warfare - thought bubble
-    case 'minor_apex_c_2': return '💭'; // Conceptual Strategy - thought bubble
-    case 'minor_apex_c_3': return '💭'; // War Mastery - thought bubble
     
     // Sacred Trials
     case 'rite_adaptation': return '🔄'; // Trial of Adaptation - recycle
     case 'rite_flow': return '🌊'; // Trial of Flow - wave
     case 'rite_innovation': return '💡'; // Trial of Innovation - light bulb
-    case 'rite_weapons': return '⚔️'; // Trial of Weapons - crossed swords
-    case 'rite_strategy': return '🧠'; // Trial of Strategy - brain
     
     // Avatar States
     case 'capstone_perfect_technique': return '🎭'; // Avatar of Perfect Technique - performing arts
     case 'capstone_adaptive_mastery': return '🧠'; // Avatar of Adaptive Mastery - brain
     case 'capstone_eternal_flow': return '🌊'; // Avatar of the Eternal Flow - wave
-    case 'capstone_flow_master': return '🌊'; // The Master of Flow - wave
-    case 'capstone_weapon_lord': return '⚔️'; // The Weapon Lord - crossed swords
-    case 'capstone_war_god': return '👑'; // The God of War - crown
     
     // Corruption
     case 'schism_empty_fighter': return '🤖'; // The Empty Fighter - robot
     case 'schism_mirror_combat': return '🪞'; // The Mirror of Combat - mirror
-    case 'schism_bloodlust': return '🩸'; // Bloodlust - blood drop
-    case 'schism_war_machine': return '🤖'; // The Living War Machine - robot
     
     default: return '⚔️';
   }
