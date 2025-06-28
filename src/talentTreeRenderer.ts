@@ -264,6 +264,27 @@ export class TalentTreeRenderer {
       ctx.lineWidth = highlightWidth;
       ctx.shadowBlur = 0;
       ctx.stroke();
+      // --- Flowing Stream Effect for Active Connections ---
+      if (connection.isActive) {
+        // Animate a moving dashed highlight along the path
+        const dashLength = 32;
+        const gapLength = 24;
+        const totalLength = dashLength + gapLength;
+        const t = (this.animationTime / 40) % totalLength;
+        ctx.save();
+        ctx.setLineDash([dashLength, gapLength]);
+        ctx.lineDashOffset = -t;
+        ctx.strokeStyle = 'rgba(249, 226, 175, 0.85)'; // Gold highlight
+        ctx.lineWidth = highlightWidth + 2;
+        ctx.shadowColor = '#f9e2af';
+        ctx.shadowBlur = 12;
+        ctx.beginPath();
+        ctx.moveTo(fromPos.x, fromPos.y);
+        ctx.quadraticCurveTo(controlX, controlY, toPos.x, toPos.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.restore();
+      }
       ctx.restore();
     }
   }
@@ -274,38 +295,33 @@ export class TalentTreeRenderer {
     });
   }
 
-  private drawNode(node: TalentNode, hoveredNodeId?: string | null, visualEffects?: Map<string, { type: string; progress: number }>, glowingNodeIds?: Set<string>, hoveredPath?: Set<string>): void {
+  private drawNode(node: TalentNode, hoveredNodeId?: string | null, visualEffects?: Map<string, { type: string; progress: number }>, glowingNodeIds?: Set<string>, hoveredPath?: Set<string>, selectedNodeId?: string | null): void {
     const isHovered = hoveredNodeId === node.id || (hoveredPath?.has(node.id) ?? false);
-    
+    const isSelected = selectedNodeId === node.id;
     // Determine node state
-    let state: 'allocated' | 'unallocated' | 'allocatable' | 'locked' = 'unallocated';
-    if(node.isPermanentlyLocked) state = 'locked';
+    let state: 'allocated' | 'unallocated' | 'allocatable' | 'locked' | 'unlocked' | 'selected' = 'unallocated';
+    if (isSelected) state = 'selected';
+    else if(node.isPermanentlyLocked) state = 'locked';
     else if (node.isAllocated) state = 'allocated';
-    else if (node.isAllocatable) state = 'allocatable';
+    else if (node.isAllocatable) state = 'unlocked';
     else if (node.isLocked) state = 'locked';
-
     this.drawNodeState(node, state, isHovered, visualEffects);
   }
 
   /**
    * NEW: Refactored node drawing into a state-based function for clarity and style.
    */
-  private drawNodeState(node: TalentNode, state: 'allocated' | 'unallocated' | 'allocatable' | 'locked', isHovered: boolean, visualEffects?: Map<string, { type: string; progress: number }>): void {
+  private drawNodeState(node: TalentNode, state: 'allocated' | 'unallocated' | 'allocatable' | 'locked' | 'unlocked' | 'selected', isHovered: boolean, visualEffects?: Map<string, { type: string; progress: number }>): void {
     const { ctx } = this.config;
     const position = node.position;
     const size = this.getNodeSize(node);
     const halfSize = size / 2;
-    
     // Use the path-specific emoji from the map, but prefer node.visual.icon if present
     const emoji = node.visual?.icon || EMOJI_MAP[`${node.path}_${node.type.toLowerCase()}`] || EMOJI_MAP[`${node.path}_minor`] || EMOJI_MAP.default;
-
     const emojiSize = size * (node.type === 'Minor' ? 0.7 : 0.6);
-
     ctx.save();
-    
     // --- 1. Determine Style based on State ---
     let fillStyle: string, outlineStyle: string, iconOpacity: number, shadowColor: string, shadowBlur: number, outlineWidth: number;
-
     switch(state) {
         case 'allocated':
             fillStyle = '#1e1e2e'; // Dark blue-grey
@@ -315,13 +331,30 @@ export class TalentTreeRenderer {
             shadowBlur = isHovered ? 25 : 15;
             outlineWidth = 3;
             break;
+        case 'selected':
+            fillStyle = '#1e1e2e';
+            outlineStyle = '#a6e3a1'; // Green for selected
+            iconOpacity = 1.0;
+            shadowColor = outlineStyle;
+            shadowBlur = 30;
+            outlineWidth = 4;
+            break;
+        case 'unlocked':
+            // Unlocked but not allocated: yellow
+            fillStyle = '#181825';
+            outlineStyle = isHovered ? `rgba(249, 226, 175, ${0.7 + (Math.sin(this.animationTime * 0.01) * 0.3)})` : '#f9e2af';
+            iconOpacity = isHovered ? 1.0 : 0.9;
+            shadowColor = '#f9e2af';
+            shadowBlur = isHovered ? 30 : 15;
+            outlineWidth = 3;
+            break;
         case 'allocatable':
-            const pulse = 0.7 + (Math.sin(this.animationTime * 0.005) * 0.3);
-            fillStyle = 'rgba(166, 227, 161, 0.1)'; // Faint green fill
-            outlineStyle = `rgba(166, 227, 161, ${pulse})`; // Pulsing green outline
+            // fallback, treat as unlocked
+            fillStyle = '#181825';
+            outlineStyle = '#f9e2af';
             iconOpacity = 0.9;
-            shadowColor = '#a6e3a1';
-            shadowBlur = isHovered ? 30 : 20;
+            shadowColor = '#f9e2af';
+            shadowBlur = 15;
             outlineWidth = 3;
             break;
         case 'locked':
@@ -335,32 +368,27 @@ export class TalentTreeRenderer {
         case 'unallocated':
         default:
             fillStyle = '#181825'; // Dark, almost black fill
-            outlineStyle = isHovered ? '#a6adc8' : '#6c7086'; // Grey, brighter on hover
+            outlineStyle = isHovered ? `rgba(249, 226, 175, ${0.7 + (Math.sin(this.animationTime * 0.01) * 0.3)})` : '#6c7086'; // Pulsing yellow on hover
             iconOpacity = isHovered ? 0.8 : 0.5;
-            shadowColor = isHovered ? '#a6adc8' : 'black';
+            shadowColor = isHovered ? '#f9e2af' : 'black';
             shadowBlur = isHovered ? 15 : 0;
             outlineWidth = 2;
             break;
     }
-    
     // --- 2. Draw Node Layers ---
-
     // Base Fill
     ctx.beginPath();
     ctx.arc(position.x, position.y, halfSize, 0, 2 * Math.PI);
     ctx.fillStyle = fillStyle;
     ctx.fill();
-
     // Outer Glow (via shadow) and Outline
     ctx.shadowColor = shadowColor;
     ctx.shadowBlur = shadowBlur;
     ctx.strokeStyle = outlineStyle;
     ctx.lineWidth = outlineWidth;
     ctx.stroke();
-    
     // Reset shadow for subsequent drawings
     ctx.shadowBlur = 0;
-
     // Major Node Decoration (Inner Ring for important nodes)
     const isMajorNode = ['Genesis', 'Capstone', 'Axiom', 'Schism', 'Manifestation'].includes(node.type);
     if (isMajorNode) {
@@ -370,7 +398,6 @@ export class TalentTreeRenderer {
         ctx.arc(position.x, position.y, halfSize * 0.85, 0, 2 * Math.PI);
         ctx.stroke();
     }
-    
     // --- 3. Draw Icon ---
     ctx.globalAlpha = iconOpacity;
     ctx.font = `${emojiSize}px sans-serif`;
@@ -378,13 +405,11 @@ export class TalentTreeRenderer {
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#cdd6f4';
     ctx.fillText(emoji, position.x, position.y);
-    
     // --- 4. Allocation Flash Animation ---
     const flashEffect = visualEffects?.get(node.id);
     if (flashEffect && flashEffect.type === 'allocate_flash') {
         const progress = flashEffect.progress;
         const easedProgress = 1 - Math.pow(progress, 3); // Ease-out-cubic
-        
         ctx.globalAlpha = easedProgress;
         ctx.strokeStyle = `rgba(249, 226, 175, ${easedProgress})`; // Fading Gold
         ctx.lineWidth = 4;
@@ -392,7 +417,6 @@ export class TalentTreeRenderer {
         ctx.arc(position.x, position.y, halfSize + (progress * 25), 0, Math.PI * 2);
         ctx.stroke();
     }
-
     ctx.restore();
   }
 
