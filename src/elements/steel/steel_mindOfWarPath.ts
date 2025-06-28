@@ -8,7 +8,7 @@ import type { TalentNode, TalentConnection, NodeType } from '../../types';
 
 // --- Layout Configuration ---
 const CENTER_X = 800;
-const CENTER_Y = 600;
+const CENTER_Y = 550;
 const BRANCHES = 3;
 const PATH_MAIN_ANGLE = Math.PI / 2; // Downwards
 const ANGLE_SPREAD = Math.PI / 2.2;
@@ -178,5 +178,5 @@ export const MIND_OF_WAR_METADATA = {
   sacredAnimal: 'The Owl',
   emoji: '🧠',
   color: '#B0C4DE',
-  position: { x: 800, y: 600 }
+  position: { x: 800, y: 550 }
 }; 

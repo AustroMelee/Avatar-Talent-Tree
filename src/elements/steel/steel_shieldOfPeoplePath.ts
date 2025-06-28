@@ -8,7 +8,7 @@
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
 
 // --- Layout Configuration ---
-const CENTER_X = 1000;
+const CENTER_X = 850;
 const CENTER_Y = 500;
 const BRANCHES = 3;
 const PATH_MAIN_ANGLE = 0; // Rightwards
@@ -179,5 +179,5 @@ export const SHIELD_OF_PEOPLE_METADATA = {
   sacredAnimal: 'The Bear',
   emoji: '🛡️',
   color: '#B0C4DE',
-  position: { x: 1000, y: 500 }
+  position: { x: 850, y: 500 }
 }; 

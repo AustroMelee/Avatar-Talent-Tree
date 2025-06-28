@@ -7,7 +7,7 @@
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
 
 // --- Layout Configuration ---
-const CENTER_X = 600;
+const CENTER_X = 750;
 const CENTER_Y = 500;
 const BRANCHES = 3;
 const PATH_MAIN_ANGLE = Math.PI; // To the left
@@ -178,5 +178,5 @@ export const FLOW_OF_COMBAT_METADATA = {
   sacredAnimal: 'The Water Strider',
   emoji: '🌊',
   color: '#B0C4DE',
-  position: { x: 600, y: 500 }
+  position: { x: 750, y: 500 }
 }; 
