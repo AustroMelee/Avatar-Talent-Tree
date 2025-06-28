@@ -8,7 +8,7 @@
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
 
 // --- Layout Configuration ---
-const CENTER_X = 700;
+const CENTER_X = 800;
 const CENTER_Y = 400;
 const BRANCHES = 3;
 const PATH_MAIN_ANGLE = -Math.PI / 2; // Upwards
@@ -166,7 +166,7 @@ export const SILENT_BLADE_METADATA = {
   sacredAnimal: 'The Shadow',
   emoji: '🗡️',
   color: '#B0C4DE',
-  position: { x: 700, y: 400 }
+  position: { x: 800, y: 400 }
 };
 
 function getSilentBladeNodeIcon(nodeId: string): string {

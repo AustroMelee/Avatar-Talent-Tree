@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { fileURLToPath, URL } from 'url'
 
 export default defineConfig({
   server: {
@@ -13,5 +14,10 @@ export default defineConfig({
   optimizeDeps: {
     include: [],
     exclude: []
+  },
+  resolve: {
+    alias: {
+      '@/styles': fileURLToPath(new URL('./styles', import.meta.url)),
+    },
   }
 }) 

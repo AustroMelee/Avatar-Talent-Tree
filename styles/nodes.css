@@ -1,30 +1,5 @@
-/* =========================
-   NODE ICONS & STATUS
-   ========================= */
-.node-type-icon {
-  flex-shrink: 0;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 2px solid;
-  box-shadow: 0 0 5px 1px rgba(0,0,0,0.5);
-}
-.node-type-icon[data-node-type="Genesis"] { border-color: var(--capstone-color); }
-.node-type-icon[data-node-type="Capstone"] { border-color: var(--capstone-color); background-color: rgba(249, 226, 175, 0.3); }
-.node-type-icon[data-node-type="Schism"] { border-color: var(--schism-color); background-color: rgba(230, 69, 83, 0.3); }
-.node-type-icon[data-node-type="Axiom"] { border-color: #f38ba8; }
-.node-type-icon[data-node-type="Keystone"] { border-color: #f38ba8; }
-.node-type-icon[data-node-type="Manifestation"] { border-color: #cba6f7; }
-.node-type-icon[data-node-type="Minor"] { border-color: var(--text-muted); background-color: rgba(166, 173, 200, 0.2); }
-.node-type-icon[data-node-type="GnosticRite"] { border-color: #f38ba8; background-color: rgba(243, 139, 168, 0.3); }
-.node-type-icon[data-node-type="Bridge"] { border-color: #ff66ff; background-color: rgba(255,102,255,0.3); }
-.node-type-icon[data-node-type="Synthesis"] { border-color: #66ffff; background-color: rgba(102,255,255,0.3); }
-
-/* Node state outlines (for canvas, not DOM) can be handled in JS, but for DOM icons, use these: */
-.node-type-icon.allocated { box-shadow: 0 0 0 2px var(--covenant-color); }
-.node-type-icon.allocatable { box-shadow: 0 0 0 2px var(--capstone-color); }
-.node-type-icon.locked { box-shadow: 0 0 0 2px var(--schism-color); }
-.node-type-icon.unallocated { box-shadow: 0 0 0 2px var(--border-secondary); }
+/* /styles/nodes.css */
+/* The Argent Codex: Theorycrafter's Utopia - Node Type & State Styles */
 
 /* --- Node Status Indicators (in tooltip) --- */
 .node-status-container {
@@ -63,6 +38,27 @@
   color: var(--text-muted);
   border-color: var(--border-secondary);
 }
+
+/* --- Node Type Icons (in panel list) --- */
+.node-type-icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid;
+  box-shadow: 0 0 5px 1px rgba(0,0,0,0.5);
+}
+.node-type-icon[data-node-type="Genesis"] { border-color: var(--capstone-color); }
+.node-type-icon[data-node-type="Capstone"] { border-color: var(--capstone-color); background-color: rgba(249, 226, 175, 0.3); }
+.node-type-icon[data-node-type="Schism"] { border-color: var(--schism-color); background-color: rgba(230, 69, 83, 0.3); }
+.node-type-icon[data-node-type="Axiom"] { border-color: #f38ba8; }
+.node-type-icon[data-node-type="Keystone"] { border-color: #f38ba8; }
+.node-type-icon[data-node-type="Manifestation"] { border-color: #cba6f7; }
+.node-type-icon[data-node-type="Minor"] { border-color: var(--text-muted); background-color: rgba(166, 173, 200, 0.2); }
+.node-type-icon[data-node-type="GnosticRite"] { border-color: #f38ba8; background-color: rgba(243, 139, 168, 0.3); }
+.node-type-icon[data-node-type="Bridge"] { border-color: #ff66ff; background-color: rgba(255,102,255,0.3); }
+.node-type-icon[data-node-type="Synthesis"] { border-color: #66ffff; background-color: rgba(102,255,255,0.3); }
+
 
 /* --- Special Node Info/Warning Boxes (in tooltip) --- */
 .node-warning, .node-requirement {

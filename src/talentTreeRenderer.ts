@@ -130,16 +130,7 @@ export class TalentTreeRenderer {
     );
   }
 
-  render(
-    talentTree: TalentTree,
-    zoom: number,
-    pan: Point,
-    hoveredNodeId?: string | null,
-    visualEffects?: Map<string, { type: string; progress: number }>,
-    highlightedNodes?: Map<string, { type: 'prereq_chain' | 'prereq_met' | 'blocker' }>,
-    glowingNodeIds?: Set<string>,
-    highlightedConnections?: Set<string>
-  ): void {
+  render(talentTree: TalentTree, zoom: number, pan: Point, hoveredNodeId?: string | null, visualEffects?: Map<string, { type: string; progress: number }>, highlightedNodes?: Map<string, { type: 'prereq_chain' | 'prereq_met' | 'blocker' }>, glowingNodeIds?: Set<string>): void {
     const { ctx, canvas } = this.config;
     this.allNodes = talentTree.nodes;
     this.animationTime = Date.now();
@@ -148,7 +139,9 @@ export class TalentTreeRenderer {
     ctx.save();
     ctx.translate(pan.x, pan.y);
     ctx.scale(zoom, zoom);
+    // Culling: Only draw connections and nodes that are (or connect to) visible nodes
     const margin = 120;
+    // Precompute which nodes are visible in screen space
     const visibleNodeIds = new Set<string>();
     for (const node of talentTree.nodes) {
       const screenX = node.position.x * zoom + pan.x;
@@ -157,7 +150,9 @@ export class TalentTreeRenderer {
         visibleNodeIds.add(node.id);
       }
     }
-    this.drawConnections(talentTree, hoveredPath, visibleNodeIds, zoom, pan, margin, highlightedConnections);
+    // Draw only visible connections (if either endpoint is visible)
+    this.drawConnections(talentTree, hoveredPath, visibleNodeIds, zoom, pan, margin);
+    // Draw only visible nodes
     this.drawNodes(talentTree.nodes.filter(node => visibleNodeIds.has(node.id) && node.isVisible), hoveredNodeId, visualEffects, glowingNodeIds, hoveredPath);
     ctx.restore();
   }
@@ -193,15 +188,7 @@ export class TalentTreeRenderer {
   }
 
   // Patch drawConnections to support culling
-  private drawConnections(
-    talentTree: TalentTree,
-    hoveredPath: Set<string>,
-    visibleNodeIds?: Set<string>,
-    zoom?: number,
-    pan?: Point,
-    margin?: number,
-    highlightedConnections?: Set<string>
-  ): void {
+  private drawConnections(talentTree: TalentTree, hoveredPath: Set<string>, visibleNodeIds?: Set<string>, zoom?: number, pan?: Point, margin?: number): void {
     const { ctx } = this.config;
     const treeCenter = { x: 800, y: 500 };
     for (const connection of talentTree.connections) {
@@ -209,6 +196,7 @@ export class TalentTreeRenderer {
       const toNode = this.allNodes.find(n => n.id === connection.to);
       if (!fromNode || !toNode) continue;
       if (fromNode.isPermanentlyLocked || toNode.isPermanentlyLocked) continue;
+      // Culling: Only draw if either endpoint is visible
       if (visibleNodeIds && zoom !== undefined && pan !== undefined && margin !== undefined) {
         const fromScreenX = fromNode.position.x * zoom + pan.x;
         const fromScreenY = fromNode.position.y * zoom + pan.y;
@@ -276,29 +264,6 @@ export class TalentTreeRenderer {
       ctx.lineWidth = highlightWidth;
       ctx.shadowBlur = 0;
       ctx.stroke();
-      if (highlightedConnections?.has(`${connection.from}-${connection.to}`)) {
-        ctx.strokeStyle = `rgba(255, 255, 0, 0.7)`;
-        ctx.lineWidth = 6;
-        ctx.shadowColor = 'yellow';
-        ctx.shadowBlur = 15;
-        ctx.stroke();
-      }
-      if (connection.isActive) {
-        const duration = 3000;
-        const t = (this.animationTime % duration) / duration;
-        const p0 = fromPos;
-        const p1 = { x: controlX, y: controlY };
-        const p2 = toPos;
-        const x = Math.pow(1 - t, 2) * p0.x + 2 * (1 - t) * t * p1.x + Math.pow(t, 2) * p2.x;
-        const y = Math.pow(1 - t, 2) * p0.y + 2 * (1 - t) * t * p1.y + Math.pow(t, 2) * p2.y;
-        ctx.beginPath();
-        ctx.arc(x, y, 4, 0, 2 * Math.PI);
-        ctx.fillStyle = '#f9e2af';
-        ctx.shadowColor = '#f9e2af';
-        ctx.shadowBlur = 10;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
       ctx.restore();
     }
   }
@@ -344,33 +309,28 @@ export class TalentTreeRenderer {
     switch(state) {
         case 'allocated':
             fillStyle = '#1e1e2e'; // Dark blue-grey
-            outlineStyle = '#a6e3a1'; // Static green outline for allocated
+            outlineStyle = '#f9e2af'; // Gold outline for allocated
             iconOpacity = 1.0;
             shadowColor = outlineStyle;
             shadowBlur = isHovered ? 25 : 15;
             outlineWidth = 3;
             break;
         case 'allocatable':
-            fillStyle = 'rgba(249, 226, 175, 0.1)'; // Faint yellow fill
-            if (isHovered) {
-                const pulse = 0.7 + (Math.sin(this.animationTime * 0.005) * 0.3);
-                outlineStyle = `rgba(249, 226, 175, ${pulse})`; // Pulsing yellow on hover
-            } else {
-                outlineStyle = '#f9e2af'; // Static yellow when not hovered
-            }
+            const pulse = 0.7 + (Math.sin(this.animationTime * 0.005) * 0.3);
+            fillStyle = 'rgba(166, 227, 161, 0.1)'; // Faint green fill
+            outlineStyle = `rgba(166, 227, 161, ${pulse})`; // Pulsing green outline
             iconOpacity = 0.9;
-            shadowColor = '#f9e2af';
+            shadowColor = '#a6e3a1';
             shadowBlur = isHovered ? 30 : 20;
             outlineWidth = 3;
             break;
         case 'locked':
-            fillStyle = 'rgba(49, 50, 68, 0.7)';
-            outlineStyle = '#f38ba8'; // Static red outline for locked
-            iconOpacity = 0.3;
-            shadowColor = '#f38ba8';
-            shadowBlur = isHovered ? 10 : 0;
-            outlineWidth = 2.5;
-            ctx.globalAlpha = isHovered ? 0.8 : 0.6;
+            fillStyle = '#181825';
+            outlineStyle = '#45475a';
+            iconOpacity = 0.2;
+            shadowColor = 'black';
+            shadowBlur = 0;
+            outlineWidth = 2;
             break;
         case 'unallocated':
         default:
@@ -424,23 +384,13 @@ export class TalentTreeRenderer {
     if (flashEffect && flashEffect.type === 'allocate_flash') {
         const progress = flashEffect.progress;
         const easedProgress = 1 - Math.pow(progress, 3); // Ease-out-cubic
+        
         ctx.globalAlpha = easedProgress;
         ctx.strokeStyle = `rgba(249, 226, 175, ${easedProgress})`; // Fading Gold
         ctx.lineWidth = 4;
         ctx.beginPath();
         ctx.arc(position.x, position.y, halfSize + (progress * 25), 0, Math.PI * 2);
         ctx.stroke();
-    }
-    // --- Red Blink for Prereq Blocked ---
-    if (flashEffect && flashEffect.type === 'prereq_blocked_blink') {
-        const blink = Math.abs(Math.sin(flashEffect.progress * Math.PI * 4)); // 2 full blinks
-        ctx.globalAlpha = 0.7 * blink;
-        ctx.strokeStyle = '#f38ba8'; // Red
-        ctx.lineWidth = 7;
-        ctx.beginPath();
-        ctx.arc(position.x, position.y, halfSize + 7, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.globalAlpha = 1.0;
     }
 
     ctx.restore();

@@ -3,7 +3,7 @@
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
 
-const CENTER_X = 900; const CENTER_Y = 600; const BRANCHES = 3;
+const CENTER_X = 800; const CENTER_Y = 400; const BRANCHES = 3;
 const PATH_MAIN_ANGLE = Math.PI; const ANGLE_SPREAD = Math.PI / 2.2;
 const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
 const BASE_RADIUS = 160; const RADIUS_STEP = 120; const MIN_DIST = 90;
@@ -83,7 +83,7 @@ export const MIND_OF_WAR_NODES = nodes;
 export const MIND_OF_WAR_GENESIS = nodes.find(n => n.type === 'Genesis')!;
 export function generateMindOfWarConnections(): TalentConnection[] { return connections; }
 export const MIND_OF_WAR_METADATA = {
-  name: 'The Mind of War', philosophy: "Wars are won before the first blow is struck.", emoji: '🧠', color: '#2F4F4F', position: { x: 900, y: 600 }
+  name: 'The Mind of War', philosophy: "Wars are won before the first blow is struck.", emoji: '🧠', color: '#2F4F4F', position: { x: 800, y: 400 }
 };
 
 function getMindOfWarNodeIcon(nodeId: string): string {
