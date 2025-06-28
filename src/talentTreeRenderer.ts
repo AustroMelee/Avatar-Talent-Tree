@@ -344,28 +344,33 @@ export class TalentTreeRenderer {
     switch(state) {
         case 'allocated':
             fillStyle = '#1e1e2e'; // Dark blue-grey
-            outlineStyle = '#f9e2af'; // Gold outline for allocated
+            outlineStyle = '#a6e3a1'; // Static green outline for allocated
             iconOpacity = 1.0;
             shadowColor = outlineStyle;
             shadowBlur = isHovered ? 25 : 15;
             outlineWidth = 3;
             break;
         case 'allocatable':
-            const pulse = 0.7 + (Math.sin(this.animationTime * 0.005) * 0.3);
-            fillStyle = 'rgba(166, 227, 161, 0.1)'; // Faint green fill
-            outlineStyle = `rgba(166, 227, 161, ${pulse})`; // Pulsing green outline
+            fillStyle = 'rgba(249, 226, 175, 0.1)'; // Faint yellow fill
+            if (isHovered) {
+                const pulse = 0.7 + (Math.sin(this.animationTime * 0.005) * 0.3);
+                outlineStyle = `rgba(249, 226, 175, ${pulse})`; // Pulsing yellow on hover
+            } else {
+                outlineStyle = '#f9e2af'; // Static yellow when not hovered
+            }
             iconOpacity = 0.9;
-            shadowColor = '#a6e3a1';
+            shadowColor = '#f9e2af';
             shadowBlur = isHovered ? 30 : 20;
             outlineWidth = 3;
             break;
         case 'locked':
-            fillStyle = '#181825';
-            outlineStyle = '#45475a';
-            iconOpacity = 0.2;
-            shadowColor = 'black';
-            shadowBlur = 0;
-            outlineWidth = 2;
+            fillStyle = 'rgba(49, 50, 68, 0.7)';
+            outlineStyle = '#f38ba8'; // Static red outline for locked
+            iconOpacity = 0.3;
+            shadowColor = '#f38ba8';
+            shadowBlur = isHovered ? 10 : 0;
+            outlineWidth = 2.5;
+            ctx.globalAlpha = isHovered ? 0.8 : 0.6;
             break;
         case 'unallocated':
         default:
@@ -419,13 +424,23 @@ export class TalentTreeRenderer {
     if (flashEffect && flashEffect.type === 'allocate_flash') {
         const progress = flashEffect.progress;
         const easedProgress = 1 - Math.pow(progress, 3); // Ease-out-cubic
-        
         ctx.globalAlpha = easedProgress;
         ctx.strokeStyle = `rgba(249, 226, 175, ${easedProgress})`; // Fading Gold
         ctx.lineWidth = 4;
         ctx.beginPath();
         ctx.arc(position.x, position.y, halfSize + (progress * 25), 0, Math.PI * 2);
         ctx.stroke();
+    }
+    // --- Red Blink for Prereq Blocked ---
+    if (flashEffect && flashEffect.type === 'prereq_blocked_blink') {
+        const blink = Math.abs(Math.sin(flashEffect.progress * Math.PI * 4)); // 2 full blinks
+        ctx.globalAlpha = 0.7 * blink;
+        ctx.strokeStyle = '#f38ba8'; // Red
+        ctx.lineWidth = 7;
+        ctx.beginPath();
+        ctx.arc(position.x, position.y, halfSize + 7, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.globalAlpha = 1.0;
     }
 
     ctx.restore();

@@ -491,25 +491,29 @@ class TalentTreeApp {
     
     events.forEach(event => {
       if (event.type === 'bridge_allocated') {
-        // Create flash effect for allocated Bridge
         this.visualEffects.set(event.nodeId, {
           type: 'bridge_flash',
           startTime: now,
-          duration: 1000 // 1 second flash
+          duration: 1000
         });
       } else if (event.type === 'bridge_locked') {
-        // Create fade effect for locked Bridge
         this.visualEffects.set(event.nodeId, {
           type: 'bridge_locked',
           startTime: now,
-          duration: 2000 // 2 second fade
+          duration: 2000
         });
       } else if (event.type === 'synthesis_revealed') {
-        // Create reveal animation for Synthesis node
         this.visualEffects.set(event.nodeId, {
           type: 'synthesis_reveal',
           startTime: now,
-          duration: 1500 // 1.5 second reveal
+          duration: 1500
+        });
+      } else if (event.type === 'prereq_blocked_blink') {
+        // Blink the node red for 1 second
+        this.visualEffects.set(event.nodeId, {
+          type: 'prereq_blocked_blink',
+          startTime: now,
+          duration: 1000
         });
       }
     });

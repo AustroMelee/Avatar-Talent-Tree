@@ -22,7 +22,7 @@ import {
  * Visual events for enhanced UI feedback
  */
 export type VisualEvent = {
-  type: 'bridge_allocated' | 'synthesis_revealed' | 'bridge_locked';
+  type: 'bridge_allocated' | 'synthesis_revealed' | 'bridge_locked' | 'prereq_blocked_blink';
   nodeId: string;
   timestamp: number;
   data?: any;
@@ -443,13 +443,29 @@ export class TalentTreeManager {
   removePoint(nodeId: string): void {
     const node = this.state.talentTree.nodes.find(n => n.id === nodeId);
     if (!node || !node.isAllocated) return;
-    
+
+    // Check for allocated child nodes
+    const allocatedChildren = this.state.talentTree.nodes.filter(
+      n => n.prerequisites.includes(nodeId) && n.isAllocated
+    );
+    if (allocatedChildren.length > 0) {
+      // Trigger blink visual event for each allocated child
+      const now = Date.now();
+      allocatedChildren.forEach(child => {
+        this.visualEvents.push({
+          type: 'prereq_blocked_blink',
+          nodeId: child.id,
+          timestamp: now
+        });
+      });
+      this.notify();
+      return; // Block de-allocation
+    }
+
     const cost = this.calculatePKCost(node);
-    
     // Remove the point
     this.state.talentTree.allocatedNodes.delete(nodeId);
     this.state.talentTree.spentPK -= cost;
-    
     // Update all node states
     this.updateAllNodeStates();
     this.notify();
