@@ -17,7 +17,7 @@ const BASE_RADIUS = 160; const RADIUS_STEP = 120; const MIN_DIST = 90;
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Touch of Eternal Stillness', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your touch carries the patience of glaciers, chilling and slowing your targets.", flavor: "In ice, water finds its most honest form: unchanging, patient, eternal." },
+    { id: 'genesis', name: 'The Eternal Prison Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your touch carries the patience of glaciers, chilling and slowing your targets.", flavor: "In ice, water finds its most honest form - unchanging, patient, eternal." },
     
     // SUB-PATH A
     { id: 'A1', name: 'Warden of Eternal Frost', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Create walls and barriers of ice with impossible strength and durability.", flavor: "A glacier does not yield." },

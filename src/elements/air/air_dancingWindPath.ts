@@ -24,7 +24,7 @@ const MIN_DIST = 90;
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
     // Genesis
-    { id: 'genesis', name: 'Essence of Freedom', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Enhanced jumping, immunity to fall damage, ability to change direction in mid-air.", flavor: "True freedom is not the absence of restraint, but perfect harmony with movement." },
+    { id: 'genesis', name: 'The Dancing Wind Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Enhanced jumping, immunity to fall damage, ability to change direction in mid-air.", flavor: "True freedom is not the absence of restraint, but perfect harmony with movement." },
     
     // Minors after Genesis
     { id: 'minor_genesis_1', name: 'Uplifting Spirit', type: 'Minor', cost: 1, branch: 0.8, depth: 0.5, prerequisite: 'genesis', description: "Your air-jumps carry you higher.", flavor: "Let the wind lift your spirit." },

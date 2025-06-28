@@ -17,7 +17,7 @@ const BASE_RADIUS = 160; const RADIUS_STEP = 120; const MIN_DIST = 90;
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Whisper of the Hungry Deep', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your water attacks carry immense weight, slowing and staggering enemies.", flavor: "The ocean's deepest truth is hunger. It swallows islands, drowns civilizations." },
+    { id: 'genesis', name: 'The Hungry Deep Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your water attacks carry immense weight, slowing and staggering enemies.", flavor: "The ocean's deepest truth is hunger." },
 
     // SUB-PATH A
     { id: 'A1', name: 'Herald of Consuming Tides', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Launch a powerful wave that knocks enemies down and drags them back towards you.", flavor: "The tide comes in, and the tide goes out. It always takes something with it." },

@@ -24,7 +24,7 @@ const MIN_DIST = 90;
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
     // Genesis
-    { id: 'genesis', name: 'Essence of Storm', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "All attacks carry concussive force, staggering smaller opponents.", flavor: "Sometimes the mountain must be moved, and only the hurricane has such strength." },
+    { id: 'genesis', name: 'The Wild Gale Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "All attacks carry concussive force, staggering smaller opponents.", flavor: "Sometimes the mountain must be moved, and only the hurricane has such strength." },
 
     // Minors after Genesis
     { id: 'minor_genesis_1', name: 'Stronger Gale', type: 'Minor', cost: 1, branch: 0.8, depth: 0.5, prerequisite: 'genesis', description: "Your natural pushback affects heavier opponents.", flavor: "The wind does not discriminate." },

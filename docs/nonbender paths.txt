@@ -1,0 +1,449 @@
+# The Forged Steel - Non-Bender Constellation Guide ⚔️
+
+## System Overview
+
+The Steel constellation represents the triumph of mortal will over supernatural power, the mastery achieved through dedication, training, and ingenuity. You have **51 Points of Knowing (PK)** to allocate across four fundamental philosophies that define the nature of human excellence without bending.
+
+**Constellation:** The Forged Steel  
+**Total Points:** 51 PK  
+**Theme:** The Power of Human Determination  
+
+---
+
+## The Four Martial Paths
+
+### 1. The Way of the Silent Blade - Precision Incarnate
+**Philosophy:** *"A single strike, perfectly placed, ends all conflict. True warriors need no second chance."*  
+**Core Tenet:** Lethal precision, silent movement, the art of ending fights before they begin  
+**Sub-Disciplines:** Assassination Arts, Thrown Weapons, Critical Strikes  
+**Corruption Path:** The Perfect Kill - efficiency that strips away all humanity  
+
+### 2. The Shield of the People - Protection Through Sacrifice  
+**Philosophy:** *"Strength means nothing if you cannot protect what matters. A true warrior stands between harm and the innocent."*  
+**Core Tenet:** Defensive mastery, group tactics, inspiring leadership  
+**Sub-Disciplines:** Shield Arts, Formation Fighting, Battlefield Command  
+**Corruption Path:** The Martyr's Burden - protection that becomes self-destruction  
+
+### 3. The Flow of Combat - Adaptation Made Art
+**Philosophy:** *"Like water, true skill has no fixed form. Read your opponent, become what they cannot counter, and victory follows."*  
+**Core Tenet:** Adaptability, counter-fighting, chi-blocking techniques  
+**Sub-Disciplines:** Pressure Point Arts, Combat Acrobatics, Weapon Improvisation  
+**Corruption Path:** The Flowing Void - adaptation that loses all identity  
+
+### 4. The Mind of War - Strategy Beyond the Battlefield
+**Philosophy:** *"Wars are won before the first blow is struck. The greatest weapon is a mind that sees ten moves ahead."*  
+**Core Tenet:** Tactical supremacy, technological innovation, psychological warfare  
+**Sub-Disciplines:** Engineering Arts, Strategic Command, Intelligence Networks  
+**Corruption Path:** The Calculator's Heart - logic that abandons all emotion  
+
+---
+
+## Sacred Terminologies
+
+### Node Classifications
+- **Genesis:** The Silent Blade Path (1 PK) - The first step toward mastery
+- **Keystone:** Basic technique (2 PK) - Fundamental abilities that define your path
+- **Minor:** Enhancement (1 PK) - Small improvements and connections  
+- **Manifestation:** Advanced technique (4 PK) - Complex applications of your philosophy
+- **Axiom:** Peak mastery (5 PK) - Reality-defying expressions of skill
+- **GnosticRite:** Test of worthiness (1 PK) - Unlock ultimate power through ordeal
+- **Capstone:** Ultimate expression (15 PK) - Become the living embodiment of your path
+- **Schism:** Forbidden knowledge (8-12 PK) - Power that corrupts the wielder
+
+---
+
+## The Four Martial Paths - Complete Training
+
+### The Way of the Silent Blade - Precision Incarnate
+
+**Genesis:** The Silent Blade Path (1 PK)
+- Your strikes target vital points instinctively, dealing increased damage to unarmored foes and bypassing light armor
+
+**Primary Manifestations:**
+
+**The Assassin's Art Branch:**
+- **Keystone: Silent Steps (2 PK)** - Move without making any sound, becoming effectively invisible while motionless
+  - **Minor: Shadow Meld (1 PK)** - Blend perfectly with shadows and darkness
+  - **Minor: Scent Masking (1 PK)** - Eliminate your scent and other traces
+  - **Minor: Breath Control (1 PK)** - Hold your breath for extended periods and control your heartbeat
+
+- **Keystone: Death Strike (2 PK)** - Target vital organs and pressure points for massive damage or instant kills
+  - **Minor: Poison Knowledge (1 PK)** - Expertly apply and resist various toxins
+  - **Minor: Anatomical Mastery (1 PK)** - Know exactly where to strike any creature for maximum effect
+  - **Minor: Silent Kill (1 PK)** - Kill without your target making any sound
+
+- **Manifestation: Master Assassin (4 PK)** - Become capable of infiltrating any location and eliminating any target
+  - **Minor: Social Invisibility (1 PK)** - Blend into crowds and social situations perfectly
+  - **Minor: Legendary Stealth (1 PK)** - Remain hidden even from supernatural senses
+  - **Minor: Perfect Timing (1 PK)** - Strike at the exact moment when success is guaranteed
+
+- **Axiom: The Final Shadow (5 PK)** - Become a legend of fear, able to kill with your presence alone and move through reality unseen
+  - **Minor: Death Aura (1 PK)** - Weak-willed enemies may die of fear in your presence
+  - **Minor: Reality Stealth (1 PK)** - Hide from fate itself, becoming impossible to predict or track
+  - **Minor: Shadow Mastery (1 PK)** - Control shadows as if they were solid, living things
+
+**The Thrown Weapons Branch:**
+- **Keystone: Perfect Aim (2 PK)** - Never miss with thrown weapons, able to ricochet shots around obstacles
+  - **Minor: Boomerang Mastery (1 PK)** - Thrown weapons return to your hand automatically
+  - **Minor: Multi-target (1 PK)** - Hit multiple enemies with a single thrown weapon
+  - **Minor: Penetrating Throw (1 PK)** - Thrown weapons punch through armor and shields
+
+- **Keystone: Weapon Return (2 PK)** - Thrown weapons teleport back to your hand after striking
+  - **Minor: Guided Flight (1 PK)** - Control the path of thrown weapons in mid-air
+  - **Minor: Explosive Impact (1 PK)** - Thrown weapons create small explosions on impact
+  - **Minor: Chain Throws (1 PK)** - Weapons bounce between multiple targets
+
+- **Manifestation: Storm of Blades (4 PK)** - Fill the air with dozens of thrown weapons that seek out enemies
+  - **Minor: Blade Tornado (1 PK)** - Create whirling barriers of thrown weapons around yourself
+  - **Minor: Seeking Weapons (1 PK)** - Thrown weapons actively hunt down targets
+  - **Minor: Infinite Arsenal (1 PK)** - Never run out of throwing weapons
+
+- **Axiom: Master of Distance (5 PK)** - Your thrown weapons ignore distance, able to strike anywhere you can see or imagine
+  - **Minor: Dimensional Throws (1 PK)** - Thrown weapons can travel through other dimensions
+  - **Minor: Time-Delayed Strikes (1 PK)** - Weapons can strike targets in the past or future
+  - **Minor: Conceptual Targeting (1 PK)** - Strike abstract concepts like "hope" or "fear"
+
+**The Critical Arts Branch:**
+- **Keystone: Vital Strike (2 PK)** - All your attacks have a chance to cause devastating critical damage
+  - **Minor: Weak Point Vision (1 PK)** - See the structural weaknesses in any object or opponent
+  - **Minor: Armor Piercing (1 PK)** - Your attacks ignore armor and defensive abilities
+  - **Minor: Crippling Blows (1 PK)** - Strikes that disable limbs or senses without permanent damage
+
+- **Keystone: Pressure Point Mastery (2 PK)** - Disable opponents with precise strikes to nerve clusters
+  - **Minor: Paralysis Touch (1 PK)** - Temporarily paralyze opponents with a touch
+  - **Minor: Pain Control (1 PK)** - Cause excruciating pain or complete numbness
+  - **Minor: Chi Disruption (1 PK)** - Disrupt bending abilities temporarily
+
+- **Manifestation: One Touch Death (4 PK)** - Kill any living being with a single precise touch
+  - **Minor: Delayed Death (1 PK)** - Set death to occur at a specific time
+  - **Minor: Selective Lethality (1 PK)** - Choose exactly what dies - organs, limbs, or whole body
+  - **Minor: Merciful Death (1 PK)** - Grant painless death to suffering beings
+
+- **Axiom: Touch of Ending (5 PK)** - Your touch can end anything - life, abilities, concepts, or even natural laws
+  - **Minor: Concept Death (1 PK)** - Kill abstract concepts with a touch
+  - **Minor: Power Nullification (1 PK)** - Permanently destroy supernatural abilities
+  - **Minor: Reality Puncture (1 PK)** - Create holes in reality itself with precise strikes
+
+**Sacred Trials:**
+- **Trial of Silence (1 PK)** - Infiltrate an enemy stronghold and eliminate the target without anyone knowing you were there
+- **Trial of Precision (1 PK)** - Kill a target with a thrown weapon from impossible distance through multiple obstacles
+- **Trial of Mercy (1 PK)** - Use your lethal skills to save a life instead of taking one
+
+**Avatar States:**
+- **The Perfect Killer (15 PK)** - Become death incarnate, able to kill anything that exists with perfect efficiency
+- **The Shadow Between Worlds (15 PK)** - Exist partially outside reality, moving unseen through the spaces between moments
+- **The Blade That Cuts Reality (15 PK)** - Your weapons can cut through anything - armor, shields, space, time, or concepts
+
+**Heresy - The Perfect Kill:**
+- **Emotionless Efficiency (8 PK)** - Become perfectly efficient at killing, but lose the ability to feel emotion or form connections
+- **The Living Weapon (12 PK)** - Transform into a perfect instrument of death, gaining incredible power but losing your humanity
+
+### The Shield of the People - Protection Through Sacrifice
+
+**Genesis:** The Shield of the People Path (1 PK)
+- You can instinctively position yourself to protect others, reducing damage to allies near you
+
+**The Guardian's Way Branch:**
+- **Keystone: Shield Wall (2 PK)** - Create impenetrable defensive formations with shields and teamwork
+  - **Minor: Shield Mastery (1 PK)** - Use shields as weapons as effectively as defensive tools
+  - **Minor: Formation Tactics (1 PK)** - Coordinate group movements with perfect precision
+  - **Minor: Defensive Stance (1 PK)** - Become nearly immovable when defending a position
+
+- **Keystone: Protective Instinct (2 PK)** - Automatically intercept attacks aimed at allies
+  - **Minor: Danger Sense (1 PK)** - Detect threats to yourself and others before they strike
+  - **Minor: Shield Throw (1 PK)** - Use shields as ranged weapons that return to your hand
+  - **Minor: Bodyguard Training (1 PK)** - Perfectly predict and counter assassination attempts
+
+- **Manifestation: Human Fortress (4 PK)** - Become an unmovable defensive position that can protect large groups
+  - **Minor: Rallying Presence (1 PK)** - Allies fight better and feel braver near you
+  - **Minor: Damage Absorption (1 PK)** - Take damage meant for others onto yourself
+  - **Minor: Shield Aura (1 PK)** - Extend your defensive abilities to cover nearby allies
+
+- **Axiom: The Unbreakable Wall (5 PK)** - Become absolutely immovable when protecting others, able to withstand any force
+  - **Minor: Infinite Endurance (1 PK)** - Never tire while protecting others
+  - **Minor: Damage Negation (1 PK)** - Reduce or eliminate damage through perfect defensive technique
+  - **Minor: Protective Aura (1 PK)** - Your presence makes it difficult for enemies to harm anyone
+
+**The Leader's Command Branch:**
+- **Keystone: Inspiring Presence (2 PK)** - Rally allies and boost their combat effectiveness through leadership
+  - **Minor: Battle Cry (1 PK)** - Your shouts can inspire allies or demoralize enemies
+  - **Minor: Tactical Coordination (1 PK)** - Direct multiple allies to act as one unit
+  - **Minor: Morale Boost (1 PK)** - Allies fight without fear while you lead them
+
+- **Keystone: Combat Coordination (2 PK)** - Direct allied attacks for maximum effectiveness
+  - **Minor: Perfect Timing (1 PK)** - Coordinate attacks so they all land simultaneously
+  - **Minor: Formation Master (1 PK)** - Create and maintain complex battle formations
+  - **Minor: Chain Commands (1 PK)** - Give orders that spread through your entire force instantly
+
+- **Manifestation: Battlefield General (4 PK)** - Command entire armies with supernatural effectiveness
+  - **Minor: Strategic Genius (1 PK)** - See the optimal strategy for any battle instantly
+  - **Minor: Omnipresent Command (1 PK)** - Your commands reach any ally no matter the distance
+  - **Minor: Victory Aura (1 PK)** - Battles tend to turn in your favor through pure leadership
+
+- **Axiom: The Hero King (5 PK)** - Inspire others to greatness, temporarily granting them heroic abilities
+  - **Minor: Heroic Inspiration (1 PK)** - Temporarily grant allies superhuman abilities
+  - **Minor: Legendary Presence (1 PK)** - Your mere presence turns ordinary people into heroes
+  - **Minor: Destiny Shaper (1 PK)** - Influence fate itself through force of will and leadership
+
+**The Sacrifice's Honor Branch:**
+- **Keystone: Selfless Defense (2 PK)** - Redirect all damage from allies to yourself
+  - **Minor: Pain Tolerance (1 PK)** - Continue fighting effectively despite severe injuries
+  - **Minor: Damage Conversion (1 PK)** - Convert some damage you take into healing for allies
+  - **Minor: Martyr's Strength (1 PK)** - Grow stronger as you take more damage protecting others
+
+- **Keystone: Last Stand (2 PK)** - Fight beyond your limits when protecting others
+  - **Minor: Beyond Death (1 PK)** - Continue fighting for a short time even after receiving fatal wounds
+  - **Minor: Desperate Power (1 PK)** - Gain superhuman strength when allies are in mortal danger
+  - **Minor: Final Strike (1 PK)** - Your last attack before falling deals massive damage
+
+- **Manifestation: Guardian Angel (4 PK)** - Protect allies from any harm through supernatural intervention
+  - **Minor: Divine Protection (1 PK)** - Sometimes attacks against allies simply miss or fail
+  - **Minor: Healing Sacrifice (1 PK)** - Transfer your life force to heal critically wounded allies
+  - **Minor: Protective Miracle (1 PK)** - Once per battle, completely negate a killing blow to an ally
+
+- **Axiom: The Eternal Guardian (5 PK)** - Your protective spirit watches over others even after death
+  - **Minor: Ghostly Protection (1 PK)** - Continue protecting allies as a spirit after death
+  - **Minor: Legacy Shield (1 PK)** - Those you protected gain permanent defensive bonuses
+  - **Minor: Undying Vigil (1 PK)** - Your protection can extend across generations
+
+**Sacred Trials:**
+- **Trial of Sacrifice (1 PK)** - Protect someone by willingly taking a wound that would have killed them
+- **Trial of Leadership (1 PK)** - Lead a group of civilians to safety through overwhelming danger
+- **Trial of Duty (1 PK)** - Maintain your post and protect your charges despite personal cost
+
+**Avatar States:**
+- **Avatar of the Eternal Shield (15 PK)** - Become protection incarnate, able to shield entire nations from harm
+- **Avatar of Heroic Legend (15 PK)** - Become a living legend that inspires heroism in all who know your story
+- **Avatar of Noble Sacrifice (15 PK)** - Embody the concept of sacrifice, able to take on any burden to protect others
+
+**Heresy - The Martyr's Burden:**
+- **The Endless Vigil (8 PK)** - You can never rest or stop protecting others, gaining incredible power but losing the ability to live for yourself
+- **The Ultimate Sacrifice (12 PK)** - Permanently sacrifice aspects of yourself to grant others power, becoming less human with each use
+
+### The Flow of Combat - Adaptation Made Art
+
+**Genesis:** The Flow of Combat Path (1 PK)
+- You can adapt your fighting style mid-combat, gaining small bonuses against opponents you've fought before
+
+**The Chi-Blocker's Art Branch:**
+- **Keystone: Pressure Point Strikes (2 PK)** - Disable bending abilities and chi flow with precise strikes
+  - **Minor: Nerve Clusters (1 PK)** - Target specific nerve clusters to cause paralysis or numbness
+  - **Minor: Chi Sight (1 PK)** - See the flow of chi through living beings
+  - **Minor: Temporary Blocks (1 PK)** - Create precise, temporary disabilities that wear off safely
+
+- **Keystone: Perfect Balance (2 PK)** - Maintain perfect physical and mental equilibrium in any situation
+  - **Minor: Acrobatic Flow (1 PK)** - Move with supernatural grace and flexibility
+  - **Minor: Counter Mastery (1 PK)** - Turn any attack into an opportunity for a counter-attack
+  - **Minor: Adaptive Stance (1 PK)** - Automatically shift to the optimal stance for any situation
+
+- **Manifestation: Chi Master (4 PK)** - Control the flow of chi in yourself and others with surgical precision
+  - **Minor: Chi Redirection (1 PK)** - Redirect enemy attacks by manipulating their chi flow
+  - **Minor: Enhanced Reflexes (1 PK)** - React to attacks before they're even fully committed
+  - **Minor: Chi Healing (1 PK)** - Heal by redirecting chi flow, even without being a bender
+
+- **Axiom: The Void Hand (5 PK)** - Become able to completely negate bending and other supernatural abilities through touch
+  - **Minor: Power Nullification (1 PK)** - Permanently disable supernatural abilities with a touch
+  - **Minor: Chi Mastery (1 PK)** - Control chi so perfectly you can grant bending abilities to others
+  - **Minor: Perfect Flow (1 PK)** - Your chi flows so perfectly that you become immune to all interference
+
+**The Weapon Master Branch:**
+- **Keystone: Improvised Weapons (2 PK)** - Use any object as an effective weapon with supernatural skill
+  - **Minor: Environmental Mastery (1 PK)** - Turn any environment to your advantage in combat
+  - **Minor: Quick Draw (1 PK)** - Draw and attack with any weapon faster than thought
+  - **Minor: Dual Wielding (1 PK)** - Fight with multiple weapons simultaneously with perfect coordination
+
+- **Keystone: Weapon Adaptation (2 PK)** - Instantly master any weapon you pick up
+  - **Minor: Weapon Bonding (1 PK)** - Form supernatural connections with favored weapons
+  - **Minor: Technique Theft (1 PK)** - Learn enemy techniques by observing them once
+  - **Minor: Style Fusion (1 PK)** - Combine different weapon styles into new hybrid techniques
+
+- **Manifestation: Grandmaster of Arms (4 PK)** - Achieve perfect mastery of all weapons and fighting styles
+  - **Minor: Thousand Techniques (1 PK)** - Know every fighting technique that has ever existed
+  - **Minor: Weapon Creation (1 PK)** - Improvise weapons from impossible materials and situations
+  - **Minor: Style Mastery (1 PK)** - Master entire fighting traditions instantly
+
+- **Axiom: The Weapon That Is Not (5 PK)** - Become a weapon yourself, able to fight barehanded against any armed opponent
+  - **Minor: Body Weapon (1 PK)** - Your body is as effective as any forged weapon
+  - **Minor: Technique Transcendence (1 PK)** - Your techniques become laws of reality that others must follow
+  - **Minor: Master of Nothing (1 PK)** - Fight most effectively when completely unarmed and unarmored
+
+**The Flow State Branch:**
+- **Keystone: Combat Instinct (2 PK)** - React to danger without conscious thought, moving perfectly in battle
+  - **Minor: Prediction (1 PK)** - Sense what enemies will do moments before they do it
+  - **Minor: Perfect Timing (1 PK)** - Always act at exactly the right moment for maximum effect
+  - **Minor: Flow State (1 PK)** - Enter a trance where conscious thought doesn't interfere with action
+
+- **Keystone: Adaptive Fighting (2 PK)** - Change your fighting style to counter any opponent
+  - **Minor: Style Reading (1 PK)** - Instantly understand any fighting style by observing it
+  - **Minor: Counter Development (1 PK)** - Develop counters to enemy techniques in real-time
+  - **Minor: Pattern Breaking (1 PK)** - Become immune to any technique used against you repeatedly
+
+- **Manifestation: The Perfect Fighter (4 PK)** - Achieve a level of martial skill that transcends normal human limitations
+  - **Minor: Superhuman Reflexes (1 PK)** - React faster than physically possible
+  - **Minor: Combat Omniscience (1 PK)** - Know everything that happens in a battle instantly
+  - **Minor: Technique Evolution (1 PK)** - Your techniques improve and adapt during battle
+
+- **Axiom: Master of All Conflict (5 PK)** - Become the living embodiment of martial arts, able to win any fight
+  - **Minor: Victory Assured (1 PK)** - Reality bends to ensure your victory in honorable combat
+  - **Minor: Conflict Mastery (1 PK)** - Control the nature and outcome of any conflict
+  - **Minor: Art Incarnate (1 PK)** - Become the living expression of martial perfection
+
+**Sacred Trials:**
+- **Trial of Adaptation (1 PK)** - Defeat a master of every major fighting style using only their own techniques
+- **Trial of Flow (1 PK)** - Fight blindfolded against multiple opponents using only instinct and chi sense
+- **Trial of Innovation (1 PK)** - Create an entirely new fighting style that others will study for generations
+
+**Avatar States:**
+- **Avatar of Perfect Technique (15 PK)** - Become the embodiment of martial perfection, able to teach or defeat anyone
+- **Avatar of Adaptive Mastery (15 PK)** - Become capable of instantly mastering any skill or ability you encounter
+- **Avatar of the Eternal Flow (15 PK)** - Exist in permanent flow state, moving in perfect harmony with the universe
+
+**Heresy - The Flowing Void:**
+- **The Empty Fighter (8 PK)** - Become so adaptive you lose all personal fighting style, gaining power but losing identity
+- **The Mirror of Combat (10 PK)** - Become unable to act except as a reflection of your opponents, gaining their abilities but losing your own
+
+### The Mind of War - Strategy Beyond the Battlefield
+
+**Genesis:** The Mind of War Path (1 PK)
+- You can analyze battle situations instantly, seeing tactical opportunities others miss
+
+**The Engineer's Art Branch:**
+- **Keystone: Mechanical Genius (2 PK)** - Design and build complex mechanical devices and weapons
+  - **Minor: Rapid Construction (1 PK)** - Build devices much faster than should be possible
+  - **Minor: Improvised Engineering (1 PK)** - Create complex devices from scrap materials
+  - **Minor: Maintenance Mastery (1 PK)** - Keep devices running far beyond their normal lifespan
+
+- **Keystone: War Machines (2 PK)** - Design and operate advanced siege engines and mechanical weapons
+  - **Minor: Ballistic Mastery (1 PK)** - Calculate perfect trajectories for any projectile weapon
+  - **Minor: Explosive Expertise (1 PK)** - Create and safely handle explosive devices
+  - **Minor: Automation (1 PK)** - Build devices that operate themselves
+
+- **Manifestation: Master Engineer (4 PK)** - Create mechanical marvels that seem almost magical in their complexity
+  - **Minor: Impossible Machines (1 PK)** - Build devices that violate normal physical laws
+  - **Minor: Living Machines (1 PK)** - Create mechanical beings with artificial intelligence
+  - **Minor: Reality Engineering (1 PK)** - Build devices that alter the fundamental nature of reality
+
+- **Axiom: The Great Inventor (5 PK)** - Understand the mechanical principles underlying all of reality
+  - **Minor: Universal Construction (1 PK)** - Build anything you can imagine given sufficient materials
+  - **Minor: Physics Mastery (1 PK)** - Understand and manipulate the laws of physics
+  - **Minor: Creation Engine (1 PK)** - Build a device that can create anything, including living beings
+
+**The Strategist's Mind Branch:**
+- **Keystone: Tactical Genius (2 PK)** - See the optimal strategy in any conflict, from personal duels to massive wars
+  - **Minor: Battle Prediction (1 PK)** - Predict the outcome of battles before they begin
+  - **Minor: Resource Management (1 PK)** - Maximize the effectiveness of any army or organization
+  - **Minor: Logistics Mastery (1 PK)** - Ensure your forces are always properly supplied and positioned
+
+- **Keystone: Information Networks (2 PK)** - Gather and process intelligence with supernatural efficiency
+  - **Minor: Spy Networks (1 PK)** - Maintain vast networks of informants and agents
+  - **Minor: Code Breaking (1 PK)** - Crack any code or cipher instantly
+  - **Minor: Pattern Recognition (1 PK)** - See hidden patterns in seemingly random information
+
+- **Manifestation: Master Strategist (4 PK)** - Plan and execute strategies that span years or decades
+  - **Minor: Long-term Planning (1 PK)** - Create plans that account for every possible variable
+  - **Minor: Psychological Warfare (1 PK)** - Defeat enemies through manipulation and mind games
+  - **Minor: Victory Inevitable (1 PK)** - Your strategies are so perfect they become self-fulfilling prophecies
+
+- **Axiom: The Mind That Sees All (5 PK)** - Understand all possible outcomes of any situation and choose the optimal path
+  - **Minor: Omniscient Strategy (1 PK)** - Know everything relevant to your strategic goals
+  - **Minor: Fate Manipulation (1 PK)** - Influence probability through superior planning
+  - **Minor: Reality Strategy (1 PK)** - Plan strategies that reshape reality itself
+
+**The Scholar's Path Branch:**
+- **Keystone: Analytical Mind (2 PK)** - Process information and solve problems with superhuman speed and accuracy
+  - **Minor: Speed Reading (1 PK)** - Absorb written information almost instantaneously
+  - **Minor: Perfect Memory (1 PK)** - Remember everything you've ever learned with perfect clarity
+  - **Minor: Logical Deduction (1 PK)** - Solve any mystery or puzzle through pure logic
+
+- **Keystone: Research Mastery (2 PK)** - Discover hidden knowledge and uncover ancient secrets
+  - **Minor: Archive Access (1 PK)** - Find any information that exists somewhere in the world
+  - **Minor: Ancient Languages (1 PK)** - Read and understand any written language
+  - **Minor: Secret Knowledge (1 PK)** - Learn secrets that others have tried to hide
+
+- **Manifestation: Living Library (4 PK)** - Become a repository of all human knowledge and wisdom
+  - **Minor: Knowledge Synthesis (1 PK)** - Combine different fields of knowledge to create new understanding
+  - **Minor: Instant Expertise (1 PK)** - Become an expert in any field through rapid study
+  - **Minor: Teaching Mastery (1 PK)** - Transfer your knowledge to others with perfect efficiency
+
+- **Axiom: The Universal Mind (5 PK)** - Understand the fundamental principles that govern all existence
+  - **Minor: Cosmic Understanding (1 PK)** - Comprehend the deepest mysteries of the universe
+  - **Minor: Knowledge Creation (1 PK)** - Discover entirely new fields of knowledge
+  - **Minor: Truth Mastery (1 PK)** - Always know what is true and what is false
+
+**Sacred Trials:**
+- **Trial of Innovation (1 PK)** - Invent something that changes the world forever
+- **Trial of Strategy (1 PK)** - Win an impossible war through pure strategic genius
+- **Trial of Knowledge (1 PK)** - Solve a mystery that has baffled scholars for generations
+
+**Avatar States:**
+- **Avatar of Innovation (15 PK)** - Become the source of all technological and strategic advancement
+- **Avatar of Perfect Strategy (15 PK)** - Embody the concept of strategy itself, making victory inevitable
+- **Avatar of Universal Knowledge (15 PK)** - Become the living repository of all knowledge that exists or could exist
+
+**Heresy - The Calculator's Heart:**
+- **The Cold Logic (8 PK)** - Become perfectly logical and rational, but lose all emotion and empathy
+- **The All-Knowing Mind (12 PK)** - Gain knowledge of everything, but become paralyzed by the weight of infinite understanding
+
+---
+
+## Advanced Mechanics
+
+### Confluence Nodes (10 PK)
+These bridge different philosophies, creating unique hybrid approaches:
+
+- **Blade-Shield Confluence: The Protector's Edge** - Perfect defense through precise offense
+- **Flow-Mind Confluence: The Adaptive Strategist** - Combat adaptation guided by tactical genius
+- **Shield-Flow Confluence: The Guardian's Dance** - Protective techniques that adapt to any threat
+- **Blade-Mind Confluence: The Calculating Killer** - Assassination through perfect planning
+
+### Synthesis Techniques (5 PK)
+Unique abilities born from understanding multiple philosophies:
+
+- **Tactical Assassination** - Killing through superior planning rather than stealth
+- **Adaptive Protection** - Defense that changes to counter any threat
+- **Strategic Flow** - Combat adaptation guided by long-term planning
+- **Protective Precision** - Defending others through perfect offensive technique
+
+---
+
+## Example Builds
+
+### The Perfect Bodyguard (45 PK)
+- **Shield of People:** Full Guardian's Way + Leader's Command (15 PK)
+- **Flow of Combat:** Chi-Blocker's Art for protection (10 PK)
+- **Confluence:** Shield-Flow for Adaptive Protection (10 PK)
+- **Sacred Trials:** Trial of Sacrifice + Trial of Duty (2 PK)
+- **Avatar State:** Avatar of the Eternal Shield (15 PK)
+- **Minor enhancements:** (8 PK)
+
+*Result: Ultimate protector who adapts to defend against any threat*
+
+### The Shadow General (51 PK)
+- **Mind of War:** Full Strategist's Mind + Scholar's Path (20 PK)
+- **Silent Blade:** Assassin's Art branch (15 PK)
+- **Confluence:** Blade-Mind for Calculating Killer (10 PK)
+- **Heresy:** The Cold Logic (8 PK)
+- **Minor enhancements:** (6 PK)
+
+*Result: Brilliant strategist who eliminates problems with surgical precision*
+
+### The Innovation Master (40 PK)
+- **Mind of War:** Full Engineer's Art + Research Mastery (25 PK)
+- **Flow of Combat:** Weapon Master branch (8 PK)
+- **Sacred Trials:** All Mind of War trials (3 PK)
+- **Avatar State:** Avatar of Innovation (15 PK)
+
+*Result: Technological genius who can build anything imaginable*
+
+### The Flowing Void (47 PK)
+- **Flow of Combat:** All branches except Flow State (20 PK)
+- **Silent Blade:** Critical Arts branch (15 PK)
+- **Synthesis:** Multiple adaptation techniques (10 PK)
+- **Heresy:** The Empty Fighter (8 PK)
+- **Minor enhancements:** (2 PK)
+
+*Result: Perfect fighter who has no style but can counter anything*
+
+---
+
+This guide represents the mastery of human potential without supernatural powers, showing that through dedication, intelligence, and skill, mortals can

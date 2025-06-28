@@ -7,6 +7,7 @@
 import type { ConstellationMetadata } from '../types';
 import { EARTH_TALENT_NODES } from './earth/earthTalentData';
 import { FIRE_CONSTELLATION } from './fire/fireTalentData';
+import { STEEL_TALENT_NODES } from './steel/steelTalentData';
 
 /**
  * Elemental Constellation Data - The Four Elements of the Argent Codex
@@ -60,6 +61,22 @@ export {
 // Export a function that returns the Earth nodes array
 export function generateAllEarthNodes() {
   return EARTH_TALENT_NODES;
+}
+
+/**
+ * Steel Constellation - The Forged Steel
+ * Philosophy: The Power of Human Determination
+ */
+export {
+  STEEL_TALENT_NODES,
+  STEEL_CONSTELLATION,
+  generateSteelConnections,
+  generateSteelConnections as generateAllSteelConnections
+} from './steel/steelTalentData';
+
+// Export a function that returns the Steel nodes array
+export function generateAllSteelNodes() {
+  return STEEL_TALENT_NODES;
 }
 
 /**
@@ -180,13 +197,51 @@ export const EARTH_CONSTELLATION_METADATA: ConstellationMetadata = {
 };
 
 /**
+ * Steel Constellation - The Forged Steel
+ * Philosophy: The Power of Human Determination
+ */
+export const STEEL_CONSTELLATION_METADATA: ConstellationMetadata = {
+  id: 'steel',
+  name: 'The Forged Steel',
+  description: 'The triumph of mortal will over supernatural power, achieved through dedication, training, and ingenuity.',
+  color: '#B0C4DE',
+  paths: [
+    {
+      id: 'silent_blade',
+      name: 'The Way of the Silent Blade',
+      description: 'Lethal precision, silent movement, the art of ending fights before they begin',
+      flavor: '🗡️ Precision, Assassination, Critical Strikes'
+    },
+    {
+      id: 'shield_of_people',
+      name: 'The Shield of the People',
+      description: 'Defensive mastery, group tactics, inspiring leadership',
+      flavor: '🛡️ Protection, Leadership, Sacrifice'
+    },
+    {
+      id: 'flow_of_combat',
+      name: 'The Flow of Combat',
+      description: 'Adaptability, counter-fighting, chi-blocking techniques',
+      flavor: '🌊 Adaptation, Chi-Blocking, Improvisation'
+    },
+    {
+      id: 'mind_of_war',
+      name: 'The Mind of War',
+      description: 'Tactical supremacy, technological innovation, psychological warfare',
+      flavor: '🧠 Strategy, Engineering, Psy-ops'
+    }
+  ]
+};
+
+/**
  * All available constellations
  */
 export const CONSTELLATIONS = {
   air: AIR_CONSTELLATION_METADATA,
   fire: FIRE_CONSTELLATION_METADATA,
   water: WATER_CONSTELLATION_METADATA,
-  earth: EARTH_CONSTELLATION_METADATA
+  earth: EARTH_CONSTELLATION_METADATA,
+  steel: STEEL_CONSTELLATION_METADATA
 } as const;
 
 /**
@@ -217,7 +272,8 @@ export const ALL_CONSTELLATIONS = {
   air: 'AIR_CONSTELLATION',
   water: 'WATER_CONSTELLATION', 
   earth: 'EARTH_CONSTELLATION',
-  fire: 'FIRE_CONSTELLATION'
+  fire: 'FIRE_CONSTELLATION',
+  steel: 'STEEL_CONSTELLATION'
 } as const;
 
 /**

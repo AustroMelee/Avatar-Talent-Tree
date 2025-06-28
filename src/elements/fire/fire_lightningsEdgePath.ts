@@ -14,7 +14,7 @@ const BASE_RADIUS = 160; const RADIUS_STEP = 120; const MIN_DIST = 90;
 // --- Node Definitions ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Ember of the Void', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Begin to separate the positive and negative energy within yourself, generating small static charges and a feeling of inner cold.", flavor: "True power is not heat, but the potential between two points." },
+    { id: 'genesis', name: "The Lightning's Edge Path", type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Begin to separate the positive and negative energy within yourself, generating small static charges and a feeling of inner cold.", flavor: "True power is not heat, but the potential between two points." },
 
     // SUB-PATH A
     { id: 'A1', name: 'Static Charge', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Your movements build up a static charge, which you can discharge on your next physical attack for bonus lightning damage.", flavor: "The air crackles with anticipation." },

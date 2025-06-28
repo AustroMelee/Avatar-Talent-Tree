@@ -19,7 +19,7 @@ const MIN_DIST = 90;
 // --- Node Definitions ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Foundation of Subtlety', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your earthbending becomes an extension of your will, allowing for fine, precise movements.", flavor: "The greatest sculptor sees the statue within the stone." },
+    { id: 'genesis', name: 'The Pillar of Jing Que Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your earthbending becomes an extension of your will, allowing for fine, precise movements.", flavor: "The greatest power is in the smallest motion." },
 
     // SUB-PATH A
     { id: 'A1', name: 'Earthen Puppetry', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Create small, animated constructs of rock to distract or harry your foes.", flavor: "Even a pebble can be a soldier in the right hands." },

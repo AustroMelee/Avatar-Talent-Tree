@@ -19,7 +19,7 @@ const MIN_DIST = 90;
 // --- Node Definitions ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Foundation of Mountain', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your earthbending embodies the mountain's eternal strength. Your attacks are slower but hit with immense force.", flavor: "Be the mountain." },
+    { id: 'genesis', name: 'The Pillar of Gang Qiang Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your earthbending embodies the mountain's eternal strength. Your attacks are slower but hit with immense force.", flavor: "Be the mountain." },
 
     // SUB-PATH A
     { id: 'A1', name: 'Boulder Hurl', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Rip a massive boulder from the earth and hurl it, crushing a single target.", flavor: "Simple. Direct. Effective." },

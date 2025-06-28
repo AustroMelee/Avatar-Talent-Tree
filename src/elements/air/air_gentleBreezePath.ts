@@ -24,7 +24,7 @@ const MIN_DIST = 90;
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
   // Genesis
-  { id: 'genesis', name: 'Essence of Yielding', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Passive chance to completely avoid attacks through perfect timing.", flavor: "The softest thing in the universe overcomes the hardest thing in the universe." },
+  { id: 'genesis', name: 'The Gentle Breeze Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Passive chance to completely avoid attacks through perfect timing.", flavor: "The softest thing in the universe overcomes the hardest thing in the universe." },
 
   // Minors after Genesis
   { id: 'minor_genesis_1', name: 'Leaf on Wind', type: 'Minor', cost: 1, branch: 0.8, depth: 0.5, prerequisite: 'genesis', description: "Your natural evasion flows more smoothly.", flavor: "Be like the leaf; the wind cannot break what it can carry." },

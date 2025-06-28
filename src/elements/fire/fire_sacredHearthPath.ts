@@ -15,7 +15,7 @@ const BASE_RADIUS = 160; const RADIUS_STEP = 120; const MIN_DIST = 90;
 // --- Node Definitions ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Ember of Life', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your flames carry the essence of life, able to soothe pain and provide a gentle, healing warmth.", flavor: "Fire is not destruction. It is the first spark of life." },
+    { id: 'genesis', name: 'The Sacred Hearth Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your flames carry the essence of life, able to soothe pain and provide a gentle, healing warmth.", flavor: "Fire is not destruction. It is the first spark of life." },
 
     // SUB-PATH A
     { id: 'A1', name: 'Cauterize Wounds', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Use a precise flame to seal a wound, stopping bleeding and preventing infection.", flavor: "The same fire that burns can also cleanse." },

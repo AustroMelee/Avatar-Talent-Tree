@@ -24,7 +24,7 @@ const MIN_DIST = 90;
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
     // Genesis
-    { id: 'genesis', name: 'Essence of Unity', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Immune to mental effects, perceive spiritual energy and life force.", flavor: "Air connects all life; to master breath is to understand the unity of existence." },
+    { id: 'genesis', name: 'The Sacred Breath Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Immune to mental effects, perceive spiritual energy and life force.", flavor: "Air connects all life; to master breath is to understand the unity of existence." },
 
     // Minors after Genesis
     { id: 'minor_genesis_1', name: 'Deeper Calm', type: 'Minor', cost: 1, branch: 0.8, depth: 0.5, prerequisite: 'genesis', description: "Minor ailments and curses cannot take hold.", flavor: "A tranquil mind is a strong fortress." },

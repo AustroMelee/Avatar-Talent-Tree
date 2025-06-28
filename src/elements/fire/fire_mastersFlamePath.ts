@@ -14,7 +14,7 @@ const BASE_RADIUS = 160; const RADIUS_STEP = 120; const MIN_DIST = 90;
 // --- Node Definitions ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Ember of Control', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your fire responds to precise mental commands, allowing you to sustain and shape your flames with greater ease.", flavor: "The mind is the hand that shapes the flame." },
+    { id: 'genesis', name: "The Master's Flame Path", type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your fire responds to precise mental commands, allowing you to sustain and shape your flames with greater ease.", flavor: "The mind is the hand that shapes the flame." },
 
     // SUB-PATH A
     { id: 'A1', name: 'Flame Shield', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Create a small, solid shield of fire that can block physical attacks.", flavor: "The best offense is a good, flammable defense." },

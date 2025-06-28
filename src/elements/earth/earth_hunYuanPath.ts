@@ -19,7 +19,7 @@ const MIN_DIST = 90;
 // --- Node Definitions ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Foundation of Listening', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Gain Seismic Sense, allowing you to 'see' and feel vibrations through the earth.", flavor: "The earth speaks to those who are patient enough to listen." },
+    { id: 'genesis', name: 'The Pillar of Hun Yuan Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Gain Seismic Sense, allowing you to 'see' and feel vibrations through the earth.", flavor: "The earth speaks to those who listen." },
 
     // SUB-PATH A
     { id: 'A1', name: 'Rooted Stance', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Anchor yourself to the ground, becoming immune to knockback and staggers.", flavor: "Be as the mountain: unmoved, unyielding." },

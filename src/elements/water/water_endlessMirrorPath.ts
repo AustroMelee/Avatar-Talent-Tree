@@ -17,7 +17,7 @@ const BASE_RADIUS = 160; const RADIUS_STEP = 120; const MIN_DIST = 90;
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Mirror\'s First Glimpse', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Water shows you echoes of every technique used against you.", flavor: "Memory is the first step to understanding." },
+    { id: 'genesis', name: 'The Endless Mirror Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Water shows you echoes of every technique used against you.", flavor: "Memory is the first step to understanding." },
 
     // SUB-PATH A
     { id: 'A1', name: 'Sage of Reflected Wisdom', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Create water shields that learn from attacks, gaining resistance to damage types that hit them.", flavor: "A still pool reflects the sky, but a wise pool reflects the storm." },

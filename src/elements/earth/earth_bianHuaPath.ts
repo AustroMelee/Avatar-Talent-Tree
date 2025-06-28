@@ -19,7 +19,7 @@ const MIN_DIST = 90;
 // --- Node Definitions ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Foundation of Change', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Unlock the ability to sense and manipulate the base impurities within earth: sand, metal, and superheated rock.", flavor: "Earth is not one thing, but many. To master it, you must see the potential within the stone." },
+    { id: 'genesis', name: 'The Pillar of Bian Hua Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Unlock the ability to sense and manipulate the base impurities within earth: sand, metal, and superheated rock.", flavor: "Earth is not just rock - it is metal waiting to be freed, lava waiting to flow." },
 
     // SUB-PATH A
     { id: 'A1', name: 'Metal Sheath', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Pull trace metals from the earth to coat your arms in sharp, metallic armor, enhancing unarmed strikes.", flavor: "The metal was always there. It just needed to be asked to come out." },

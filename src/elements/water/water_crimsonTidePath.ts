@@ -17,7 +17,7 @@ const BASE_RADIUS = 160; const RADIUS_STEP = 120; const MIN_DIST = 90;
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Pulse of the Sacred River', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Feel the life-flow in all living things, allowing you to sense their vitality and injuries.", flavor: "Life is water given purpose. Blood is the sacred river that connects all living things." },
+    { id: 'genesis', name: 'The Crimson Tide Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Feel the life-flow in all living things, allowing you to sense their vitality and injuries.", flavor: "Life is water given purpose. Blood is the sacred river that connects all living things." },
 
     // SUB-PATH A
     { id: 'A1', name: 'Keeper of Sacred Flows', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Use water to mend wounds, accelerating natural healing.", flavor: "To guide the river is to restore life." },

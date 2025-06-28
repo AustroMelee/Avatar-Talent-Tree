@@ -14,7 +14,7 @@ const BASE_RADIUS = 160; const RADIUS_STEP = 120; const MIN_DIST = 90;
 // --- Node Definitions ---
 const nodeDataList = [
     // GENESIS
-    { id: 'genesis', name: 'Ember of Wrath', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your fire burns with destructive intent, dealing increased damage to structures and armored foes.", flavor: "Let it all burn." },
+    { id: 'genesis', name: 'The Forge of Wrath Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your fire burns with destructive intent, dealing increased damage to structures and armored foes.", flavor: "Let it all burn." },
 
     // SUB-PATH A
     { id: 'A1', name: 'Fireball', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Hurl a classic projectile of fire that explodes on impact.", flavor: "The simplest answer is often the most effective." },

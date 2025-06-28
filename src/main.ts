@@ -15,6 +15,8 @@ import {
   generateWaterConnections,
   generateAllEarthNodes,
   generateAllEarthConnections,
+  generateAllSteelNodes,
+  generateAllSteelConnections,
   CONSTELLATIONS,
   getConstellation
 } from './elements';
@@ -185,6 +187,10 @@ class TalentTreeApp {
       case 'earth':
         talentNodes = generateAllEarthNodes();
         connections = generateAllEarthConnections();
+        break;
+      case 'steel':
+        talentNodes = generateAllSteelNodes();
+        connections = generateAllSteelConnections();
         break;
       default:
         console.error(`Unknown element: ${elementId}`);

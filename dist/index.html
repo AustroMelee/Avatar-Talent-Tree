@@ -14,14 +14,16 @@
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#0a0e1a">
-  <script type="module" crossorigin src="/assets/index-tTfI1jD8.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-DFLG928W.css">
+  <script type="module" crossorigin src="/assets/index-DgEBq9xf.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-HxT1LD0p.css">
 </head>
 <body>
     <!-- Main Application Container -->
     <div id="app" style="display: flex; flex-direction: row; height: 100vh; width: 100vw;">
-        <!-- Canvas for Talent Tree -->
-        <canvas id="talent-tree-canvas" class="talent-tree-canvas" width="1600" height="900" style="flex: 1 1 0; min-width: 0; height: 100vh;"></canvas>
+        <!-- Canvas for Talent Tree (wrapped in a clipping container) -->
+        <div id="talent-tree-container" class="talent-tree-container">
+            <canvas id="talent-tree-canvas" class="talent-tree-canvas"></canvas>
+        </div>
         
         <!-- UI Panel -->
         <div id="ui-panel" class="ui-panel">
@@ -46,6 +48,10 @@
                     <button class="element-btn" data-element="earth" title="Earth - The Adamant Bastion">
                         <span class="element-emoji">🏔️</span>
                         <span class="element-name">Earth</span>
+                    </button>
+                    <button class="element-btn" data-element="steel" title="Steel - The Forged Will">
+                        <span class="element-emoji">⚔️</span>
+                        <span class="element-name">Steel</span>
                     </button>
                 </div>
                 
