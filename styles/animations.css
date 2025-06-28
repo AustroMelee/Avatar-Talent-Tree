@@ -1,0 +1,60 @@
+/* =========================
+   ANIMATIONS & KEYFRAMES
+   ========================= */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0% {
+    border-color: var(--accent-primary);
+    background-color: rgba(137, 180, 250, 0.15);
+  }
+  50% {
+    border-color: var(--text-primary);
+    background-color: rgba(137, 180, 250, 0.3);
+  }
+  100% {
+    border-color: var(--accent-primary);
+    background-color: rgba(137, 180, 250, 0.15);
+  }
+}
+
+@keyframes bridgeShimmer {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@keyframes synthesisPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes pulse-glow-red {
+  0% { box-shadow: 0 0 4px rgba(230, 69, 83, 0.2), inset 0 0 5px rgba(230, 69, 83, 0.1); }
+  50% { box-shadow: 0 0 12px rgba(230, 69, 83, 0.5), inset 0 0 10px rgba(230, 69, 83, 0.2); }
+  100% { box-shadow: 0 0 4px rgba(230, 69, 83, 0.2), inset 0 0 5px rgba(230, 69, 83, 0.1); }
+}
+
+@keyframes pulse-glow-green {
+  0% { box-shadow: 0 0 4px rgba(166, 227, 161, 0.2), inset 0 0 5px rgba(166, 227, 161, 0.1); }
+  50% { box-shadow: 0 0 12px rgba(166, 227, 161, 0.5), inset 0 0 10px rgba(166, 227, 161, 0.2); }
+  100% { box-shadow: 0 0 4px rgba(166, 227, 161, 0.2), inset 0 0 5px rgba(166, 227, 161, 0.1); }
+}
+
+@keyframes pulse-glow-yellow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(249, 226, 175, 0.7); }
+  50% { box-shadow: 0 0 16px 8px rgba(249, 226, 175, 0.7); }
+}
+
+@keyframes pulse-glow-blue {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(137, 180, 250, 0.7); }
+  50% { box-shadow: 0 0 16px 8px rgba(137, 180, 250, 0.7); }
+}

@@ -1,0 +1,66 @@
+/* /styles/variables.css */
+/* The Argent Codex: Theorycrafter's Utopia - Theming & Variables */
+
+/* Import a more thematic font */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* CSS Custom Properties for theming */
+:root {
+  /* Color Palette - Dark theme inspired by Path of Exile and the Argent Codex */
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #1e1e2e;
+  --bg-tertiary: #181825;
+  
+  --text-primary: #cdd6f4;
+  --text-secondary: #a6adc8;
+  --text-muted: #6c7086;
+  
+  --accent-primary: #89b4fa;
+  --accent-secondary: #f38ba8;
+  --accent-tertiary: #a6e3a1;
+  
+  --border-primary: #313244;
+  --border-secondary: #45475a;
+  
+  --schism-color: #e64553;
+  --capstone-color: #f9e2af;
+  --covenant-color: #a6e3a1;
+  
+  /* Elemental Colors */
+  --air-color: #89b4fa;
+  --fire-color: #f38ba8;
+  --water-color: #74c7ec;
+  --earth-color: #a6e3a1;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Typography */
+  --font-family-primary: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-family-display: 'Cinzel', serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  /* Glows */
+  --air-glow: rgba(137, 180, 250, 0.15);
+  --fire-glow: rgba(243, 139, 168, 0.15);
+  --water-glow: rgba(116, 199, 236, 0.15);
+  --earth-glow: rgba(166, 227, 161, 0.15);
+  --steel-glow: rgba(176, 196, 222, 0.15);
+
+  /* Gauge Progress */
+  --pk-progress: 0;
+}
