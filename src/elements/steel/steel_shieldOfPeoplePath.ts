@@ -6,6 +6,7 @@
  * Sacred Animal: The Bear - protective, strong, willing to sacrifice for family.
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
+import { addExtraMinorNodes } from '../../talentPathLayoutHelpers';
 
 // --- Layout Configuration ---
 const CENTER_X = 800;
@@ -78,6 +79,15 @@ nodeDataList.forEach(nodeData => {
   prerequisites.forEach(prereqId => {
     connections.push({ from: prereqId, to: id, isActive: false, isLocked: false });
   });
+});
+
+// Auto-generate extra minor nodes for structural consistency
+addExtraMinorNodes(nodes, connections, nodeMap, nodeDataList, { value: 0 }, [
+  { adjectives: ['Stalwart', 'Protective', 'Unyielding'], nouns: ['Wall', 'Guard', 'Bastion'], verbs: ['fortify', 'shield', 'reinforce'], philosophies: ['Protection is strength.', 'The shield never falters.', 'Sacrifice is the highest honor.'] },
+  { adjectives: ['Inspiring', 'Commanding', 'Heroic'], nouns: ['Presence', 'Order', 'Banner'], verbs: ['lead', 'rally', 'unite'], philosophies: ['Leadership is service.', 'Unity is power.', 'A true leader stands last.'] },
+  { adjectives: ['Selfless', 'Resolute', 'Enduring'], nouns: ['Sacrifice', 'Duty', 'Oath'], verbs: ['endure', 'sustain', 'preserve'], philosophies: ['To protect is to serve.', 'Endurance is victory.', 'The greatest strength is selflessness.'] }
+], {
+  CENTER_X, CENTER_Y, ANGLE_START, ANGLE_SPREAD, BRANCHES, BASE_RADIUS, RADIUS_STEP, MIN_DIST
 });
 
 // --- Force-Directed Repulsion Algorithm ---

@@ -2,6 +2,7 @@
  * Path 4: The Mind of War - "Strategy Beyond the Battlefield"
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
+import { addExtraMinorNodes } from '../../talentPathLayoutHelpers';
 
 const CENTER_X = 800; const CENTER_Y = 400; const BRANCHES = 3;
 const PATH_MAIN_ANGLE = Math.PI; const ANGLE_SPREAD = Math.PI / 2.2;
@@ -60,6 +61,15 @@ nodeDataList.forEach(nodeData => {
   
   nodes.push(node); nodeMap[id] = node;
   prerequisites.forEach(prereqId => { connections.push({ from: prereqId, to: id, isActive: false, isLocked: false }); });
+});
+
+// Auto-generate extra minor nodes for structural consistency
+addExtraMinorNodes(nodes, connections, nodeMap, nodeDataList, { value: 0 }, [
+  { adjectives: ['Strategic', 'Inventive', 'Analytical'], nouns: ['Plan', 'Device', 'Scheme'], verbs: ['calculate', 'devise', 'engineer'], philosophies: ['Strategy wins wars.', 'Innovation is power.', 'Analysis is key.'] },
+  { adjectives: ['Tactical', 'Networked', 'Insightful'], nouns: ['Move', 'Network', 'Insight'], verbs: ['coordinate', 'gather', 'predict'], philosophies: ['Tactics decide battles.', 'Information is victory.', 'Insight is strength.'] },
+  { adjectives: ['Scholarly', 'Wise', 'Curious'], nouns: ['Study', 'Theory', 'Discovery'], verbs: ['research', 'uncover', 'learn'], philosophies: ['Knowledge is power.', 'Wisdom endures.', 'Curiosity drives progress.'] }
+], {
+  CENTER_X, CENTER_Y, ANGLE_START, ANGLE_SPREAD, BRANCHES, BASE_RADIUS, RADIUS_STEP, MIN_DIST
 });
 
 for (let iter = 0; iter < 100; iter++) {
