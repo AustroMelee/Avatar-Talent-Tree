@@ -3,7 +3,7 @@
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
 
-const CENTER_X = 800; const CENTER_Y = 400; const BRANCHES = 3;
+const CENTER_X = 900; const CENTER_Y = 400; const BRANCHES = 3;
 const PATH_MAIN_ANGLE = Math.PI / 2; const ANGLE_SPREAD = Math.PI / 2.2;
 const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
 const BASE_RADIUS = 160; const RADIUS_STEP = 120; const MIN_DIST = 90;
@@ -83,7 +83,7 @@ export const FLOW_OF_COMBAT_NODES = nodes;
 export const FLOW_OF_COMBAT_GENESIS = nodes.find(n => n.type === 'Genesis')!;
 export function generateFlowOfCombatConnections(): TalentConnection[] { return connections; }
 export const FLOW_OF_COMBAT_METADATA = {
-  name: 'The Flow of Combat', philosophy: "Like water, true skill has no fixed form.", emoji: '🌊', color: '#4682B4', position: { x: 800, y: 400 }
+  name: 'The Flow of Combat', philosophy: "Like water, true skill has no fixed form.", emoji: '🌊', color: '#4682B4', position: { x: 900, y: 400 }
 };
 
 function getFlowOfCombatNodeIcon(nodeId: string): string {

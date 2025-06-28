@@ -8,8 +8,8 @@
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
 
 // --- Layout Configuration ---
-const CENTER_X = 800;
-const CENTER_Y = 400;
+const CENTER_X = 700;
+const CENTER_Y = 600;
 const BRANCHES = 3;
 const PATH_MAIN_ANGLE = 0; // Rightwards
 const ANGLE_SPREAD = Math.PI / 2.2;
@@ -117,7 +117,7 @@ export const SHIELD_OF_PEOPLE_METADATA = {
   sacredAnimal: 'The Bear',
   emoji: '🛡️',
   color: '#8B4513',
-  position: { x: 800, y: 400 }
+  position: { x: 700, y: 600 }
 };
 
 function getShieldOfPeopleNodeIcon(nodeId: string): string {

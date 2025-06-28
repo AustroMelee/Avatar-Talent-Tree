@@ -52,6 +52,12 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  --air-glow: rgba(137, 180, 250, 0.15);
+  --fire-glow: rgba(243, 139, 168, 0.15);
+  --water-glow: rgba(116, 199, 236, 0.15);
+  --earth-glow: rgba(166, 227, 161, 0.15);
+  --steel-glow: rgba(176, 196, 222, 0.15);
 }
 
 /* Reset and Base Styles */
@@ -84,6 +90,11 @@ html, body {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(30, 30, 46, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(10, 14, 26, 0.4) 0%, transparent 50%);
+  transition: background-color 0.8s ease-in-out;
 }
 
 .talent-tree-canvas {
@@ -91,12 +102,12 @@ html, body {
   height: 100%;
   display: block;
   cursor: grab;
-  /* Remove the old radial gradient and use a textured background */
   background-color: var(--bg-primary);
   background-image: 
     radial-gradient(circle at 20% 80%, rgba(30, 30, 46, 0.3) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(10, 14, 26, 0.4) 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, rgba(24, 24, 37, 0.2) 0%, transparent 50%);
+  transition: background-color 0.8s ease-in-out;
 }
 
 .talent-tree-canvas:active {
@@ -105,27 +116,47 @@ html, body {
 
 /* UI Panel */
 .ui-panel {
-  width: 370px;
-  min-width: 270px;
-  max-width: 440px;
+  width: 380px;
+  min-width: 300px;
+  max-width: 450px;
   height: 100vh;
   background: linear-gradient(135deg, #181825 0%, #23243a 100%);
   box-shadow: -6px 0 32px rgba(0,0,0,0.7);
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
   overflow: hidden;
   border-right: 2px solid var(--border-primary);
   position: relative;
 }
 
-.ui-panel-content {
-  flex: 1 1 0;
-  overflow-y: auto;
-  padding: var(--spacing-lg) var(--spacing-md);
+.header, .constellation-info, .pk-gauge-container, .chronicle {
+    padding: 0;
+    border: none;
+    margin-bottom: 0;
+    background: none;
+}
+
+.header, .constellation-info, .pk-gauge-container {
+    flex-shrink: 0;
+}
+
+.chronicle {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  min-height: 0;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-primary);
+  padding: var(--spacing-md);
+}
+
+.build-summary {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: var(--spacing-sm);
 }
 
 .header {
@@ -162,40 +193,6 @@ html, body {
   min-width: 60px;
   max-width: 90px;
   margin-bottom: var(--spacing-xs);
-}
-
-/* Make build chronicle always visible and scrollable */
-.chronicle {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 180px;
-  max-height: 320px;
-  background: var(--bg-secondary);
-  border-radius: 8px;
-  border: 1px solid var(--border-primary);
-  padding: var(--spacing-md);
-  overflow-y: auto;
-  margin-bottom: var(--spacing-md);
-}
-
-.chronicle h3 {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-lg);
-  color: var(--accent-primary);
-  margin-bottom: var(--spacing-sm);
-  border-bottom: 1px solid var(--border-primary);
-  padding-bottom: var(--spacing-xs);
-}
-
-.build-summary {
-  flex: 1 1 0;
-  overflow-y: auto;
-  font-size: var(--font-size-sm);
-  color: var(--text-primary);
-  background: none;
-  border: none;
-  padding: 0;
 }
 
 /* Section headings */
@@ -1350,3 +1347,9 @@ html, body {
   line-height: 1.4;
   margin: 0;
 }
+
+.air-bg { background-color: var(--air-glow); }
+.fire-bg { background-color: var(--fire-glow); }
+.water-bg { background-color: var(--water-glow); }
+.earth-bg { background-color: var(--earth-glow); }
+.steel-bg { background-color: var(--steel-glow); }

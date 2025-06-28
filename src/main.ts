@@ -154,6 +154,13 @@ class TalentTreeApp {
 
     this.currentElement = elementId;
     
+    // Update canvas background class
+    const canvasContainer = document.getElementById('talent-tree-container') as HTMLElement;
+    if (canvasContainer) {
+      canvasContainer.className = 'talent-tree-container'; // Reset previous classes
+      canvasContainer.classList.add(`${elementId}-bg`);
+    }
+    
     // Update UI to reflect the new element
     this.updateElementalUI();
     
@@ -427,50 +434,26 @@ class TalentTreeApp {
       
       const highlightedNodes = new Map<string, { type: 'prereq_chain' | 'prereq_met' | 'blocker' }>();
       const glowingNodeIds = new Set<string>();
-      const glowingConnectionEndpoints = new Set<string>();
+      const highlightedConnections = new Set<string>();
 
       if (state.hoveredNode) {
         const hoveredNode = state.talentTree.nodes.find(n => n.id === state.hoveredNode);
-        if (hoveredNode) {
-          
-          // Case 1: Highlight path for an unallocated node.
-          if (!hoveredNode.isAllocated) {
-            let currentNode = hoveredNode;
-            while (currentNode && !currentNode.isAllocated) {
-              highlightedNodes.set(currentNode.id, { type: 'prereq_chain' });
-
-              if (currentNode.prerequisites.length > 0) {
-                const prereqId = currentNode.prerequisites[0];
-                const prereqNode = state.talentTree.nodes.find(n => n.id === prereqId);
-
-                if (prereqNode) {
-                  // If the next prerequisite is allocated, it's the end of the chain.
-                  if (prereqNode.isAllocated) {
-                    highlightedNodes.set(prereqNode.id, { type: 'prereq_met' });
-                    break; // Stop tracing
-                  } else {
-                    // If the next prerequisite is NOT allocated, continue tracing from it.
-                    currentNode = prereqNode;
-                  }
-                } else { break; } // Safety break
-              } else { break; } // Reached the start of a path
-            }
-          }
-
-          // Case 2: Highlight next available nodes for an allocated node.
-          if (hoveredNode.isAllocated) {
-              state.talentTree.nodes.forEach(childNode => {
-                  if (childNode.prerequisites.includes(hoveredNode.id) && childNode.isAllocatable) {
-                      glowingNodeIds.add(childNode.id);
-                      glowingConnectionEndpoints.add(`${hoveredNode.id}-${childNode.id}`);
-                  }
-              });
-          }
-
-          // Case 3: Highlight the blocker for a permanently locked node.
-          if (hoveredNode.isPermanentlyLocked) {
-            // For now, we'll skip blocker highlighting until we implement visible corruption connections
-            // This will be handled by the new corruption connection system
+        if (hoveredNode && (hoveredNode.isLocked || hoveredNode.isPermanentlyLocked)) {
+          let currentNode = hoveredNode;
+          while (currentNode && !currentNode.isAllocated) {
+            highlightedNodes.set(currentNode.id, { type: 'prereq_chain' });
+            if (currentNode.prerequisites.length > 0) {
+              const prereqId = currentNode.prerequisites[0];
+              const prereqNode = state.talentTree.nodes.find(n => n.id === prereqId);
+              if (prereqNode) {
+                highlightedConnections.add(`${prereqId}-${currentNode.id}`);
+                if (prereqNode.isAllocated) {
+                  highlightedNodes.set(prereqNode.id, { type: 'prereq_met' });
+                  break;
+                }
+                currentNode = prereqNode;
+              } else { break; }
+            } else { break; }
           }
         }
       }
@@ -489,7 +472,7 @@ class TalentTreeApp {
           }
       });
 
-      this.renderer.render(state.talentTree, state.zoom, state.pan, state.hoveredNode, visualEffectsMap, highlightedNodes, glowingNodeIds);
+      this.renderer.render(state.talentTree, state.zoom, state.pan, state.hoveredNode, visualEffectsMap, highlightedNodes, glowingNodeIds, highlightedConnections);
       
       this.updateUI(state);
       
