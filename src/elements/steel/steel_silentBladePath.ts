@@ -97,6 +97,40 @@ const nodes: TalentNode[] = [];
 const connections: TalentConnection[] = [];
 const nodeMap: Record<string, TalentNode> = {};
 
+function getSilentBladeNodeIcon(nodeId: string): string {
+    const type = nodeDataList.find(n => n.id === nodeId)?.type;
+    switch (type) {
+        case 'Genesis': return '🗡️';
+        case 'Keystone':
+            if (nodeId.startsWith('A')) return '🤫'; // Stealth
+            if (nodeId.startsWith('B')) return '🎯'; // Thrown
+            if (nodeId.startsWith('C')) return '📍'; // Critical
+            return '⭐';
+        case 'Manifestation':
+            if (nodeId.startsWith('A')) return '👻'; // Master Assassin
+            if (nodeId.startsWith('B')) return '🌪️'; // Storm of Blades
+            if (nodeId.startsWith('C')) return '☠️'; // One Touch Death
+            return '🌟';
+        case 'Axiom':
+            if (nodeId.startsWith('A')) return '🌑'; // Final Shadow
+            if (nodeId.startsWith('B')) return '🌌'; // Master of Distance
+            if (nodeId.startsWith('C')) return '💥'; // Touch of Ending
+            return '✨';
+        case 'GnosticRite': return '🙏';
+        case 'Capstone':
+            if (nodeId === 'cap_killer') return '💀';
+            if (nodeId === 'cap_shadow') return '🕳️';
+            if (nodeId === 'cap_reality_blade') return '💫';
+            return '👑';
+        case 'Schism':
+            if (nodeId === 'schism_efficiency') return '🤖';
+            if (nodeId === 'schism_weapon') return '⚔️';
+            return '💔';
+        case 'Minor': return '○';
+        default: return '●';
+    }
+}
+
 nodeDataList.forEach(nodeData => {
   const { id, branch, depth, prerequisite, type } = nodeData;
   const prerequisites = Array.isArray(prerequisite) ? prerequisite : (prerequisite ? [prerequisite] : []);
@@ -106,7 +140,7 @@ nodeDataList.forEach(nodeData => {
   const y = type === 'Genesis' ? CENTER_Y : Math.round(CENTER_Y + r * Math.sin(baseAngle));
 
   const node: TalentNode = {
-    id, name: nodeData.name, description: nodeData.description, flavor: nodeData.flavor, type: nodeData.type as NodeType, path: 'silent_blade', constellation: 'steel', position: { x, y }, prerequisites, visual: { color: '#B0C4DE', size: 50, icon: 'default' }, effects: [], isVisible: true, isAllocatable: prerequisites.length === 0, isAllocated: false, isLocked: prerequisites.length > 0, isPermanentlyLocked: false, pkCost: nodeData.cost, exclusiveWith: (nodeData as any).exclusiveWith || []
+    id, name: nodeData.name, description: nodeData.description, flavor: nodeData.flavor, type: nodeData.type as NodeType, path: 'silent_blade', constellation: 'steel', position: { x, y }, prerequisites, visual: { color: '#B0C4DE', size: 50, icon: getSilentBladeNodeIcon(id) }, effects: [], isVisible: true, isAllocatable: prerequisites.length === 0, isAllocated: false, isLocked: prerequisites.length > 0, isPermanentlyLocked: false, pkCost: nodeData.cost, exclusiveWith: (nodeData as any).exclusiveWith || []
   };
   
   nodes.push(node);

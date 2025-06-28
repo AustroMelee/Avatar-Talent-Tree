@@ -97,6 +97,40 @@ const nodes: TalentNode[] = [];
 const connections: TalentConnection[] = [];
 const nodeMap: Record<string, TalentNode> = {};
 
+function getShieldOfPeopleNodeIcon(nodeId: string): string {
+    const type = nodeDataList.find(n => n.id === nodeId)?.type;
+    switch (type) {
+        case 'Genesis': return '🛡️';
+        case 'Keystone':
+            if (nodeId.startsWith('A')) return '🤝'; // Guardian/Teamwork
+            if (nodeId.startsWith('B')) return '🗣️'; // Leadership
+            if (nodeId.startsWith('C')) return '❤️‍🩹'; // Sacrifice
+            return '⭐';
+        case 'Manifestation':
+            if (nodeId.startsWith('A')) return '🏰'; // Fortress
+            if (nodeId.startsWith('B')) return '👑'; // General
+            if (nodeId.startsWith('C')) return '👼'; // Guardian Angel
+            return '🌟';
+        case 'Axiom':
+            if (nodeId.startsWith('A')) return '⛰️'; // Unbreakable Wall
+            if (nodeId.startsWith('B')) return '🤴'; // Hero King
+            if (nodeId.startsWith('C')) return '✨'; // Eternal Guardian
+            return '✨';
+        case 'GnosticRite': return '🙏';
+        case 'Capstone':
+            if (nodeId === 'cap_shield') return '🌐'; // Eternal Shield
+            if (nodeId === 'cap_legend') return '🌟'; // Hero Legend
+            if (nodeId === 'cap_sacrifice') return '💖'; // Noble Sacrifice
+            return '👑';
+        case 'Schism':
+            if (nodeId === 'schism_vigil') return '⛓️';
+            if (nodeId === 'schism_sacrifice') return '💔';
+            return '💔';
+        case 'Minor': return '○';
+        default: return '●';
+    }
+}
+
 nodeDataList.forEach(nodeData => {
   const { id, branch, depth, prerequisite, type } = nodeData;
   const prerequisites = Array.isArray(prerequisite) ? prerequisite : (prerequisite ? [prerequisite] : []);
@@ -106,7 +140,7 @@ nodeDataList.forEach(nodeData => {
   const y = type === 'Genesis' ? CENTER_Y : Math.round(CENTER_Y + r * Math.sin(baseAngle));
 
   const node: TalentNode = {
-    id, name: nodeData.name, description: nodeData.description, flavor: nodeData.flavor, type: nodeData.type as NodeType, path: 'shield_of_people', constellation: 'steel', position: { x, y }, prerequisites, visual: { color: '#B0C4DE', size: 50, icon: 'default' }, effects: [], isVisible: true, isAllocatable: prerequisites.length === 0, isAllocated: false, isLocked: prerequisites.length > 0, isPermanentlyLocked: false, pkCost: nodeData.cost, exclusiveWith: (nodeData as any).exclusiveWith || []
+    id, name: nodeData.name, description: nodeData.description, flavor: nodeData.flavor, type: nodeData.type as NodeType, path: 'shield_of_people', constellation: 'steel', position: { x, y }, prerequisites, visual: { color: '#B0C4DE', size: 50, icon: getShieldOfPeopleNodeIcon(id) }, effects: [], isVisible: true, isAllocatable: prerequisites.length === 0, isAllocated: false, isLocked: prerequisites.length > 0, isPermanentlyLocked: false, pkCost: nodeData.cost, exclusiveWith: (nodeData as any).exclusiveWith || []
   };
   
   nodes.push(node);

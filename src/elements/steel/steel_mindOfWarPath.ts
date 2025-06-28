@@ -96,6 +96,40 @@ const nodes: TalentNode[] = [];
 const connections: TalentConnection[] = [];
 const nodeMap: Record<string, TalentNode> = {};
 
+function getMindOfWarNodeIcon(nodeId: string): string {
+    const type = nodeDataList.find(n => n.id === nodeId)?.type;
+    switch (type) {
+        case 'Genesis': return '🧠';
+        case 'Keystone':
+            if (nodeId.startsWith('A')) return '⚙️'; // Engineering
+            if (nodeId.startsWith('B')) return '♟️'; // Strategy
+            if (nodeId.startsWith('C')) return '🔬'; // Scholarship
+            return '⭐';
+        case 'Manifestation':
+            if (nodeId.startsWith('A')) return '🤖'; // Master Engineer
+            if (nodeId.startsWith('B')) return '🗺️'; // Master Strategist
+            if (nodeId.startsWith('C')) return '📚'; // Living Library
+            return '🌟';
+        case 'Axiom':
+            if (nodeId.startsWith('A')) return '🏗️'; // Great Inventor
+            if (nodeId.startsWith('B')) return '👁️'; // Mind that Sees All
+            if (nodeId.startsWith('C')) return '🌍'; // Universal Mind
+            return '✨';
+        case 'GnosticRite': return '🙏';
+        case 'Capstone':
+            if (nodeId === 'cap_innovation') return '🚀';
+            if (nodeId === 'cap_strategy') return '👑';
+            if (nodeId === 'cap_knowledge') return '🌌';
+            return '👑';
+        case 'Schism':
+            if (nodeId === 'schism_logic') return '🧊';
+            if (nodeId === 'schism_knowing') return '🤯';
+            return '💔';
+        case 'Minor': return '○';
+        default: return '●';
+    }
+}
+
 nodeDataList.forEach(nodeData => {
   const { id, branch, depth, prerequisite, type } = nodeData;
   const prerequisites = Array.isArray(prerequisite) ? prerequisite : (prerequisite ? [prerequisite] : []);
@@ -105,7 +139,7 @@ nodeDataList.forEach(nodeData => {
   const y = type === 'Genesis' ? CENTER_Y : Math.round(CENTER_Y + r * Math.sin(baseAngle));
 
   const node: TalentNode = {
-    id, name: nodeData.name, description: nodeData.description, flavor: nodeData.flavor, type: nodeData.type as NodeType, path: 'mind_of_war', constellation: 'steel', position: { x, y }, prerequisites, visual: { color: '#B0C4DE', size: 50, icon: 'default' }, effects: [], isVisible: true, isAllocatable: prerequisites.length === 0, isAllocated: false, isLocked: prerequisites.length > 0, isPermanentlyLocked: false, pkCost: nodeData.cost, exclusiveWith: (nodeData as any).exclusiveWith || []
+    id, name: nodeData.name, description: nodeData.description, flavor: nodeData.flavor, type: nodeData.type as NodeType, path: 'mind_of_war', constellation: 'steel', position: { x, y }, prerequisites, visual: { color: '#B0C4DE', size: 50, icon: getMindOfWarNodeIcon(id) }, effects: [], isVisible: true, isAllocatable: prerequisites.length === 0, isAllocated: false, isLocked: prerequisites.length > 0, isPermanentlyLocked: false, pkCost: nodeData.cost, exclusiveWith: (nodeData as any).exclusiveWith || []
   };
   
   nodes.push(node);
