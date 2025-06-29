@@ -8,7 +8,8 @@ import type { TalentNode, TalentConnection, NodeType } from '../../types';
 import { getAirNodeIcon } from './airNodeIcons';
 
 const CENTER_X = 0, CENTER_Y = 0, BRANCHES = 2;
-const PATH_MAIN_ANGLE = -Math.PI / 2, ANGLE_SPREAD = Math.PI / 2.2; // Pointing UP
+const PATH_MAIN_ANGLE = Math.PI / 2; // Pointing DOWN (Previously -Math.PI / 2)
+const ANGLE_SPREAD = Math.PI / 2.2;
 const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
 const BASE_RADIUS = 250, RADIUS_STEP = 180, MIN_DIST = 120;
 
