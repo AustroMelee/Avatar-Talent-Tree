@@ -10,6 +10,7 @@
   --bg-primary: #0a0e1a;
   --bg-secondary: #1e1e2e;
   --bg-tertiary: #181825;
+  --bg-hover: rgba(205, 214, 244, 0.08);
   
   --text-primary: #cdd6f4;
   --text-secondary: #a6adc8;
@@ -25,6 +26,12 @@
   --schism-color: #e64553;
   --capstone-color: #f9e2af;
   --covenant-color: #a6e3a1;
+  
+  /* --- NEW: Translucent & Panel Colors --- */
+  --accent-primary-glow: rgba(137, 180, 250, 0.2);
+  --accent-primary-translucent: rgba(137, 180, 250, 0.1);
+  --panel-bg: rgba(30, 30, 46, 0.75);
+  --bg-secondary-translucent: rgba(24, 24, 37, 0.5);
   
   /* Elemental Colors */
   --air-color: #89b4fa;

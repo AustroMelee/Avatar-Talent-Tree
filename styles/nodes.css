@@ -1,45 +1,103 @@
 /* /styles/nodes.css */
-/* The Argent Codex: Theorycrafter's Utopia - Node Type & State Styles */
+/* The Argent Codex: Theorycrafter's Utopia - Tooltip & Node State Styles */
 
-/* --- Node Status Indicators (in tooltip) --- */
-.node-status-container {
-    text-align: center;
-    margin-bottom: var(--spacing-sm);
+/* ============================================= */
+/* === MAIN NODE TOOLTIP (PURE CSS REDESIGN) === */
+/* ============================================= */
+.tooltip {
+  position: fixed;
+  z-index: 1000;
+  display: none;
+  width: 360px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(5px) scale(0.98);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  font-family: var(--font-family-primary);
+
+  /* --- Themed Frame for Tooltip --- */
+  background-color: var(--panel-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-secondary);
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  padding: var(--spacing-md);
 }
-.node-status {
-  display: inline-block;
-  font-size: var(--font-size-base);
+
+.tooltip.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --- Tooltip Sections --- */
+.tooltip-header {
+  padding-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-primary);
+}
+.node-name {
+  font-family: var(--font-family-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+.node-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-sm);
+}
+.node-type { color: var(--accent-secondary); font-weight: 600; text-transform: uppercase; }
+.node-path { color: var(--text-secondary); font-style: italic; }
+
+.tooltip-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+.tooltip-body h4 {
+  font-size: 0.8rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: var(--spacing-xs) var(--spacing-lg);
-  border-radius: 4px;
-  border: 1px solid;
-  width: auto;
-}
-.node-status.node-allocated {
-  background-color: rgba(166, 227, 161, 0.15);
-  color: var(--accent-tertiary);
-  border-color: var(--accent-tertiary);
-}
-.node-status.node-allocatable {
-  background-color: rgba(137, 180, 250, 0.15);
   color: var(--accent-primary);
-  border-color: var(--accent-primary);
-  animation: pulse 2s infinite;
+  margin-bottom: var(--spacing-xs);
+  text-transform: uppercase;
 }
-.node-status.node-locked {
-  background-color: rgba(230, 69, 83, 0.15);
-  color: var(--accent-secondary);
-  border-color: var(--accent-secondary);
+.tooltip-body p {
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  color: var(--text-secondary);
 }
-.node-status.node-unallocated {
-  background-color: rgba(108, 112, 134, 0.15);
-  color: var(--text-muted);
-  border-color: var(--border-secondary);
+.flavor-text {
+  font-style: italic;
+  padding: var(--spacing-sm);
+  background-color: var(--bg-secondary-translucent);
+  border-left: 3px solid var(--accent-primary);
+  border-radius: 0 4px 4px 0;
 }
 
-/* --- Node Type Icons (in panel list) --- */
+.tooltip-footer {
+  padding-top: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  border-top: 1px solid var(--border-primary);
+}
+
+/* ============================================= */
+/* === NODE LISTS & INDICATORS               === */
+/* ============================================= */
+.allocated-nodes-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.allocated-nodes-list li:hover { background-color: var(--bg-hover); }
+
 .node-type-icon {
   flex-shrink: 0;
   width: 14px;
@@ -55,120 +113,11 @@
 .node-type-icon[data-node-type="Keystone"] { border-color: #f38ba8; }
 .node-type-icon[data-node-type="Manifestation"] { border-color: #cba6f7; }
 .node-type-icon[data-node-type="Minor"] { border-color: var(--text-muted); background-color: rgba(166, 173, 200, 0.2); }
-.node-type-icon[data-node-type="GnosticRite"] { border-color: #f38ba8; background-color: rgba(243, 139, 168, 0.3); }
-.node-type-icon[data-node-type="Bridge"] { border-color: #ff66ff; background-color: rgba(255,102,255,0.3); }
-.node-type-icon[data-node-type="Synthesis"] { border-color: #66ffff; background-color: rgba(102,255,255,0.3); }
 
-
-/* --- Special Node Info/Warning Boxes (in tooltip) --- */
 .node-warning, .node-requirement {
   padding: var(--spacing-sm);
   border-radius: 6px;
   border-left: 4px solid;
 }
-.node-warning h4, .node-requirement h4 {
-    margin-bottom: 4px;
-}
-.node-warning p, .node-requirement p {
-    font-size: 0.85rem !important;
-    color: var(--text-secondary) !important;
-}
-.node-warning {
-  background-color: rgba(230, 69, 83, 0.1);
-  border-color: var(--accent-secondary);
-}
-.node-warning h4 { color: var(--accent-secondary) !important; }
-.node-requirement {
-  background-color: rgba(249, 226, 175, 0.1);
-  border-color: var(--capstone-color);
-}
-.node-requirement h4 { color: var(--capstone-color) !important; }
-
-/* Enhanced Bridge Warning Styling */
-.bridge-warning {
-  background: linear-gradient(135deg, rgba(255, 0, 255, 0.1) 0%, rgba(255, 102, 255, 0.05) 100%);
-  border: 2px solid rgba(255, 0, 255, 0.3);
-  border-radius: 8px;
-  padding: var(--spacing-md);
-  margin: var(--spacing-sm) 0;
-  position: relative;
-  overflow: hidden;
-}
-.bridge-warning::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 0, 255, 0.1) 50%, transparent 100%);
-  animation: bridgeShimmer 3s infinite;
-}
-.bridge-warning h4 {
-  color: #ff00ff;
-  text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
-  font-weight: bold;
-  margin-bottom: var(--spacing-sm);
-}
-.bridge-warning p { color: var(--text-primary); margin-bottom: var(--spacing-sm); }
-.bridge-warning p strong { color: #ff66ff; text-shadow: 0 0 5px rgba(255, 102, 255, 0.3); }
-
-/* Enhanced Synthesis Info Styling */
-.synthesis-info {
-  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(102, 255, 255, 0.05) 100%);
-  border: 2px solid rgba(0, 255, 255, 0.3);
-  border-radius: 8px;
-  padding: var(--spacing-md);
-  margin: var(--spacing-sm) 0;
-  position: relative;
-  overflow: hidden;
-}
-.synthesis-info::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.05) 0%, transparent 70%);
-  animation: synthesisPulse 4s ease-in-out infinite;
-}
-.synthesis-info h4 {
-  color: #00ffff;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-  font-weight: bold;
-  margin-bottom: var(--spacing-sm);
-}
-.synthesis-info p { color: var(--text-primary); margin-bottom: var(--spacing-sm); }
-.synthesis-info p strong { color: #66ffff; text-shadow: 0 0 5px rgba(102, 255, 255, 0.3); }
-
-/* --- Canvas Node State Styling --- */
-/* Note: These styles are applied programmatically in TalentTreeRenderer */
-
-/* Selected Node State (Green Outline) */
-.node-selected {
-  /* Applied when node.isSelected === true */
-  /* Green outline with enhanced glow effect */
-}
-
-/* Unselectable Node State (Red Outline) */
-.node-unselectable {
-  /* Applied when node cannot be selected (locked, missing prerequisites, etc.) */
-  /* Red outline to indicate the node is not available */
-}
-
-/* Node State Transitions */
-.node-state-transition {
-  transition: all 0.3s ease-in-out;
-}
-
-/* Enhanced Node State Indicators */
-.node-selected-indicator {
-  /* Visual indicator for selected nodes */
-  box-shadow: 0 0 20px rgba(166, 227, 161, 0.8);
-  border: 3px solid #a6e3a1;
-}
-
-.node-unselectable-indicator {
-  /* Visual indicator for unselectable nodes */
-  box-shadow: 0 0 15px rgba(230, 69, 83, 0.6);
-  border: 2px solid #e64553;
-  opacity: 0.7;
-}
+.node-warning { background-color: rgba(230, 69, 83, 0.1); border-color: var(--accent-secondary); }
+.node-requirement { background-color: rgba(249, 226, 175, 0.1); border-color: var(--capstone-color); }
