@@ -7,26 +7,23 @@
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
 import { getAirNodeIcon } from './airNodeIcons';
 
-// --- Layout Configuration (Branches point DOWN from origin) ---
 const CENTER_X = 0, CENTER_Y = 0, BRANCHES = 2;
 const PATH_MAIN_ANGLE = Math.PI / 2; // Pointing DOWN
-const ANGLE_SPREAD = Math.PI / 2.5;
-const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
-const BASE_RADIUS = 250, RADIUS_STEP = 180, MIN_DIST = 110;
+const ANGLE_SPREAD = Math.PI / 2.2, BASE_RADIUS = 250, RADIUS_STEP = 180, MIN_DIST = 120;
 
 const nodeDataList = [
-  { id: 'genesis', name: 'The Gentle Breeze Path', type: 'Genesis', cost: 1, branch: 0, depth: 0, description: "You learn to find and follow the path of least resistance. Your movements are fluid and evasive, making you a difficult target.", flavor: "Air is the element of freedom." },
-  { id: 'air_shield', name: 'Air Shield', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Throw up a gust of air close to your body as a shield, deflecting attacks by pushing them aside rather than stopping them directly.", flavor: "A wall can be broken, but how does one break the air?" },
-  { id: 'air_swipe', name: 'Air Swipe', type: 'Manifestation', cost: 4, branch: 0, depth: 2, prerequisite: 'air_shield', description: "Conjure a crescent-shaped wave of compressed air capable of deflecting colossal projectiles, like catapulted flaming rocks.", flavor: "Use the opponent's strength against them." },
-  { id: 'enhanced_agility', name: 'Enhanced Agility', type: 'Axiom', cost: 5, branch: 0, depth: 3, prerequisite: 'air_swipe', description: "You appear to flow around your opponents without expending any energy at all, letting them tire themselves out and creating exploitable openings.", flavor: "The constant movement required by this art makes masters difficult to hit." },
-  { id: 'air_cushion', name: 'Air Cushion', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "Instinctively create a cushion of air to break anyone's fall, including your own, from great heights.", flavor: "To fall with grace is to fly." },
-  { id: 'air_vortex', name: 'Air Vortex', type: 'Manifestation', cost: 4, branch: 1, depth: 2, prerequisite: 'air_cushion', description: "Create a spinning funnel of air that can trap and disorient opponents, deflecting any objects thrown at it.", flavor: "In the center of the storm, there is only calm." },
+  { id: 'genesis', name: 'The Gentle Breeze', type: 'Genesis', cost: 1, branch: 0, depth: 0, description: "Path of evasion and redirection.", flavor: "Flow like the wind." },
+  { id: 'air_shield', name: 'Air Shield', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Deflect attacks with a shield of air.", flavor: "A wall can be broken, but not the air." },
+  { id: 'air_swipe', name: 'Air Swipe', type: 'Manifestation', cost: 4, branch: 0, depth: 2, prerequisite: 'air_shield', description: "Deflect even colossal projectiles.", flavor: "Use their strength against them." },
+  { id: 'enhanced_agility', name: 'Enhanced Agility', type: 'Axiom', cost: 5, branch: 0, depth: 3, prerequisite: 'air_swipe', description: "Flow around opponents effortlessly.", flavor: "Stillness in motion." },
+  { id: 'air_cushion', name: 'Air Cushion', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "Create a cushion of air to break any fall.", flavor: "To fall with grace is to fly." },
+  { id: 'air_vortex', name: 'Air Vortex', type: 'Manifestation', cost: 4, branch: 1, depth: 2, prerequisite: 'air_cushion', description: "Trap and disorient opponents in a funnel of air.", flavor: "The center of the storm is calm." },
 ];
 const nodes: TalentNode[] = [], connections: TalentConnection[] = [], nodeMap: Record<string, TalentNode> = {};
 nodeDataList.forEach(d => {
   const p = Array.isArray(d.prerequisite) ? d.prerequisite : (d.prerequisite ? [d.prerequisite] : []);
-  const a = ANGLE_START + (d.branch * ANGLE_SPREAD) / BRANCHES, r = BASE_RADIUS + RADIUS_STEP * d.depth;
-  const x = d.type === 'Genesis' ? CENTER_X : Math.round(CENTER_X + r*Math.cos(a)), y = d.type==='Genesis' ? CENTER_Y : Math.round(CENTER_Y + r*Math.sin(a));
+  const a = PATH_MAIN_ANGLE - (ANGLE_SPREAD/2) + (d.branch * ANGLE_SPREAD) / BRANCHES, r = BASE_RADIUS + RADIUS_STEP * d.depth;
+  const x = d.type==='Genesis'?CENTER_X:Math.round(CENTER_X+r*Math.cos(a)), y = d.type==='Genesis'?CENTER_Y:Math.round(CENTER_Y+r*Math.sin(a));
   const n:TalentNode={...d,id:d.id,path:'gentle_breeze',constellation:'air',position:{x,y},prerequisites:p,visual:{color:'#B0E0E6',size:50,icon:getAirNodeIcon(d.id)},effects:[],isVisible:true,isAllocatable:!p.length,isAllocated:false,isLocked:!!p.length,isPermanentlyLocked:false,pkCost:d.cost,type:d.type as NodeType};
   nodes.push(n); nodeMap[n.id]=n; p.forEach(prereqId=>connections.push({from:prereqId,to:n.id,isActive:false,isLocked:false}));
 });

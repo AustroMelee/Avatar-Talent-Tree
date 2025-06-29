@@ -13,44 +13,44 @@ import type {
 // A map to associate node icon types with emojis.
 const EMOJI_MAP: Record<string, string> = {
     // Gentle Breeze
-    'gentle_breeze_genesis': '🍃',
+    'gentle_breeze_genesis': '🦋',
     'gentle_breeze_keystone': '🛡️',
     'gentle_breeze_manifestation': '💨',
-    'gentle_breeze_axiom': '👁️',
-    'gentle_breeze_capstone': '🌀',
-    'gentle_breeze_gnosticrite': '🙏',
+    'gentle_breeze_axiom': '✨',
+    'gentle_breeze_capstone': '🌟',
+    'gentle_breeze_gnosticrite': '☯️',
     'gentle_breeze_schism': '💥',
-    'gentle_breeze_minor': '🕊️',
+    'gentle_breeze_minor': '🦋',
 
     // Sacred Breath
-    'sacred_breath_genesis': '🕉️',
-    'sacred_breath_keystone': '✨',
-    'sacred_breath_manifestation': '👻',
-    'sacred_breath_axiom': '🌌',
-    'sacred_breath_capstone': '❤️‍🩹',
-    'sacred_breath_gnosticrite': '🙏',
+    'sacred_breath_genesis': '🦬',
+    'sacred_breath_keystone': '⚜️',
+    'sacred_breath_manifestation': '🕯️',
+    'sacred_breath_axiom': '🕊️',
+    'sacred_breath_capstone': '💙💫',
+    'sacred_breath_gnosticrite': '☯️',
     'sacred_breath_schism': '💔',
-    'sacred_breath_minor': '🕊️',
+    'sacred_breath_minor': '🦋',
 
     // Wild Gale
-    'wild_gale_genesis': '🌪️',
+    'wild_gale_genesis': '🐉',
     'wild_gale_keystone': '💥',
-    'wild_gale_manifestation': '⛈️',
-    'wild_gale_axiom': '⚡',
-    'wild_gale_capstone': '🐉',
-    'wild_gale_gnosticrite': '🙏',
-    'wild_gale_schism': '🌋',
+    'wild_gale_manifestation': '⚡',
+    'wild_gale_axiom': '⚔️',
+    'wild_gale_capstone': '💀',
+    'wild_gale_gnosticrite': '☯️',
+    'wild_gale_schism': '🌪️',
     'wild_gale_minor': '💨',
 
     // Dancing Wind
-    'dancing_wind_genesis': '🕊️',
-    'dancing_wind_keystone': '🤸',
-    'dancing_wind_manifestation': '🪁',
-    'dancing_wind_axiom': '💫',
+    'dancing_wind_genesis': '🦋',
+    'dancing_wind_keystone': '🏃',
+    'dancing_wind_manifestation': '🛴',
+    'dancing_wind_axiom': '🦅',
     'dancing_wind_capstone': '🦅',
-    'dancing_wind_gnosticrite': '🙏',
-    'dancing_wind_schism': '☄️',
-    'dancing_wind_minor': '🪶',
+    'dancing_wind_gnosticrite': '☯️',
+    'dancing_wind_schism': '☁️',
+    'dancing_wind_minor': '🦋',
 
     // Hun Yuan (Neutral Jing)
     'hun_yuan_genesis': '👂',
@@ -175,7 +175,7 @@ const EMOJI_MAP: Record<string, string> = {
     // Generic Fallbacks
     'bridge': '🌉',
     'synthesis': '⚛️',
-    'default': '⭐'
+    'default': '●'
 };
 
 /**
@@ -214,7 +214,7 @@ export class TalentTreeRenderer {
   }
 
   render(talentTree: TalentTree, zoom: number, pan: Point, hoveredNodeId?: string | null, visualEffects?: Map<string, { type: string; progress: number }>, highlightedNodes?: Map<string, { type: 'prereq_chain' | 'prereq_met' | 'blocker' }>, glowingNodeIds?: Set<string>): void {
-    const { ctx, canvas } = this.config;
+    const { ctx } = this.config;
     
     // Clear the canvas with the raw dimensions
     ctx.save();
