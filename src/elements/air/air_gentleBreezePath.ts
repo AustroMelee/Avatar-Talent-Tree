@@ -7,20 +7,20 @@
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
 import { getAirNodeIcon } from './airNodeIcons';
 
-// --- Layout Configuration (Branches point DOWN from center) ---
-const CENTER_X = 0, CENTER_Y = 0, BRANCHES = 3; // Use 3 main branches
-const PATH_MAIN_ANGLE = Math.PI / 2; // Downwards
-const ANGLE_SPREAD = Math.PI * 1.8; // Spread very wide
+// --- Layout Configuration (Branches point DOWN from origin) ---
+const CENTER_X = 0, CENTER_Y = 0, BRANCHES = 2;
+const PATH_MAIN_ANGLE = Math.PI / 2; // Pointing DOWN
+const ANGLE_SPREAD = Math.PI / 2.5;
 const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
-const BASE_RADIUS = 200, RADIUS_STEP = 150, MIN_DIST = 100;
+const BASE_RADIUS = 250, RADIUS_STEP = 180, MIN_DIST = 110;
 
 const nodeDataList = [
-  { id: 'genesis', name: 'The Gentle Breeze Path', type: 'Genesis', cost: 1, branch: 1.5, depth: 0, description: "You learn to find and follow the path of least resistance. Your movements are fluid and evasive, making you a difficult target.", flavor: "Air is the element of freedom." },
+  { id: 'genesis', name: 'The Gentle Breeze Path', type: 'Genesis', cost: 1, branch: 0, depth: 0, description: "You learn to find and follow the path of least resistance. Your movements are fluid and evasive, making you a difficult target.", flavor: "Air is the element of freedom." },
   { id: 'air_shield', name: 'Air Shield', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Throw up a gust of air close to your body as a shield, deflecting attacks by pushing them aside rather than stopping them directly.", flavor: "A wall can be broken, but how does one break the air?" },
-  { id: 'air_swipe', name: 'Air Swipe', type: 'Manifestation', cost: 4, branch: 0.5, depth: 2, prerequisite: 'air_shield', description: "Conjure a crescent-shaped wave of compressed air capable of deflecting colossal projectiles, like catapulted flaming rocks.", flavor: "Use the opponent's strength against them." },
-  { id: 'enhanced_agility', name: 'Enhanced Agility', type: 'Axiom', cost: 5, branch: 0.2, depth: 3, prerequisite: 'air_swipe', description: "You appear to flow around your opponents without expending any energy at all, letting them tire themselves out and creating exploitable openings.", flavor: "The constant movement required by this art makes masters difficult to hit." },
-  { id: 'air_cushion', name: 'Air Cushion', type: 'Keystone', cost: 2, branch: 2, depth: 1, prerequisite: 'genesis', description: "Instinctively create a cushion of air to break anyone's fall, including your own, from great heights.", flavor: "To fall with grace is to fly." },
-  { id: 'air_vortex', name: 'Air Vortex', type: 'Manifestation', cost: 4, branch: 2.5, depth: 2, prerequisite: 'air_cushion', description: "Create a spinning funnel of air that can trap and disorient opponents, deflecting any objects thrown at it.", flavor: "In the center of the storm, there is only calm." },
+  { id: 'air_swipe', name: 'Air Swipe', type: 'Manifestation', cost: 4, branch: 0, depth: 2, prerequisite: 'air_shield', description: "Conjure a crescent-shaped wave of compressed air capable of deflecting colossal projectiles, like catapulted flaming rocks.", flavor: "Use the opponent's strength against them." },
+  { id: 'enhanced_agility', name: 'Enhanced Agility', type: 'Axiom', cost: 5, branch: 0, depth: 3, prerequisite: 'air_swipe', description: "You appear to flow around your opponents without expending any energy at all, letting them tire themselves out and creating exploitable openings.", flavor: "The constant movement required by this art makes masters difficult to hit." },
+  { id: 'air_cushion', name: 'Air Cushion', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "Instinctively create a cushion of air to break anyone's fall, including your own, from great heights.", flavor: "To fall with grace is to fly." },
+  { id: 'air_vortex', name: 'Air Vortex', type: 'Manifestation', cost: 4, branch: 1, depth: 2, prerequisite: 'air_cushion', description: "Create a spinning funnel of air that can trap and disorient opponents, deflecting any objects thrown at it.", flavor: "In the center of the storm, there is only calm." },
 ];
 const nodes: TalentNode[] = [], connections: TalentConnection[] = [], nodeMap: Record<string, TalentNode> = {};
 nodeDataList.forEach(d => {

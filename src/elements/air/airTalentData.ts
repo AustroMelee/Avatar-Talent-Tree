@@ -12,10 +12,10 @@ import { DANCING_WIND_NODES, generateDancingWindConnections, DANCING_WIND_METADA
 
 // --- Central Layout Configuration ---
 const CONSTELLATION_CENTER: Point = { x: 1200, y: 1200 };
-const DIAMOND_RADIUS = 900; // The distance of the outer Genesis nodes from the center
+const DIAMOND_RADIUS = 950; // The distance of the outer Genesis nodes from the center
 
 /**
- * Translates a pre-shaped path to its final position on the canvas.
+ * Translates a pre-shaped, inward-facing path to its final position on the canvas.
  */
 const processPathData = (
     nodes: TalentNode[], 
@@ -48,29 +48,28 @@ const processPathData = (
 
 // --- Position Each Path ---
 
-// Gentle Breeze (Top) will be our central anchor.
+// Top Path (Gentle Breeze), positioned at the top of the diamond.
+const gbOffset: Point = { x: CONSTELLATION_CENTER.x, y: CONSTELLATION_CENTER.y - DIAMOND_RADIUS };
 const { processedNodes: gbNodes, processedConnections: gbConnections } = 
-    processPathData(GENTLE_BREEZE_NODES, generateGentleBreezeConnections(), 'gb', CONSTELLATION_CENTER);
+    processPathData(GENTLE_BREEZE_NODES, generateGentleBreezeConnections(), 'gb', gbOffset);
 
-// Sacred Breath (Right)
+// Right Path (Sacred Breath)
 const sbOffset: Point = { x: CONSTELLATION_CENTER.x + DIAMOND_RADIUS, y: CONSTELLATION_CENTER.y };
 const { processedNodes: sbNodes, processedConnections: sbConnections } = 
     processPathData(SACRED_BREATH_NODES, generateSacredBreathConnections(), 'sb', sbOffset);
 
-// Dancing Wind (Bottom)
+// Bottom Path (Dancing Wind)
 const dwOffset: Point = { x: CONSTELLATION_CENTER.x, y: CONSTELLATION_CENTER.y + DIAMOND_RADIUS };
 const { processedNodes: dwNodes, processedConnections: dwConnections } = 
     processPathData(DANCING_WIND_NODES, generateDancingWindConnections(), 'dw', dwOffset);
 
-// Wild Gale (Left)
+// Left Path (Wild Gale)
 const wgOffset: Point = { x: CONSTELLATION_CENTER.x - DIAMOND_RADIUS, y: CONSTELLATION_CENTER.y };
 const { processedNodes: wgNodes, processedConnections: wgConnections } = 
     processPathData(WILD_GALE_NODES, generateWildGaleConnections(), 'wg', wgOffset);
 
 
-/**
- * All Air talent nodes from all integrated paths.
- */
+/** All Air talent nodes from all integrated paths. */
 export const AIR_TALENT_NODES: TalentNode[] = [
   ...gbNodes,
   ...sbNodes,
@@ -78,9 +77,7 @@ export const AIR_TALENT_NODES: TalentNode[] = [
   ...dwNodes,
 ];
 
-/**
- * Air constellation metadata.
- */
+/** Air constellation metadata. */
 export const AIR_CONSTELLATION = {
   name: 'The Four Winds',
   description: 'The constellation of balance, freedom, adaptation, and transcendence',
@@ -90,9 +87,7 @@ export const AIR_CONSTELLATION = {
 
 export const ROOT_NODE: TalentNode = gbNodes.find(n => n.type === 'Genesis')!;
 
-/**
- * Generate all connections for the Air constellation.
- */
+/** Generate all connections for the Air constellation. */
 export function generateAirConnections(): TalentConnection[] {
   // --- Define connections between the four paths to form the central web ---
   const interPathConnections: TalentConnection[] = [
@@ -102,7 +97,7 @@ export function generateAirConnections(): TalentConnection[] {
     { from: 'dw_genesis', to: 'wg_genesis', isActive: false, isLocked: false },
     { from: 'wg_genesis', to: 'gb_genesis', isActive: false, isLocked: false },
 
-    // Connect major skills from outer paths to the central path (Gentle Breeze)
+    // Connect major skills from outer paths to the central nodes
     { from: 'wg_air_cannon', to: 'gb_air_shield', isActive: false, isLocked: false },
     { from: 'sb_breath_of_wind', to: 'gb_air_vortex', isActive: false, isLocked: false },
     { from: 'dw_air_scooter', to: 'gb_air_swipe', isActive: false, isLocked: false },
@@ -112,6 +107,10 @@ export function generateAirConnections(): TalentConnection[] {
     { from: 'dw_air_spout', to: 'sb_B3', isActive: false, isLocked: false },
     { from: 'sb_spiritual_projection', to: 'gb_enhanced_agility', isActive: false, isLocked: false },
     { from: 'wg_sound_bending', to: 'gb_air_cushion', isActive: false, isLocked: false },
+    
+    // Create a denser web in the middle
+    { from: 'wg_air_blades', to: 'sb_hypersensitivity', isActive: false, isLocked: false },
+    { from: 'dw_enhanced_speed', to: 'gb_air_vortex', isActive: false, isLocked: false },
   ];
 
   return [

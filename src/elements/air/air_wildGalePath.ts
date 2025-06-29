@@ -10,7 +10,7 @@ import { getAirNodeIcon } from './airNodeIcons';
 const CENTER_X = 0, CENTER_Y = 0, BRANCHES = 2;
 const PATH_MAIN_ANGLE = 0, ANGLE_SPREAD = Math.PI / 2.5; // Pointing RIGHT
 const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
-const BASE_RADIUS = 220, RADIUS_STEP = 160, MIN_DIST = 100;
+const BASE_RADIUS = 250, RADIUS_STEP = 180, MIN_DIST = 110;
 
 const nodeDataList = [
     { id: 'genesis', name: 'The Wild Gale Path', type: 'Genesis', cost: 1, branch: 0, depth: 0, description: "You understand that non-violence is not indispensable. You can overwhelm many opponents at once with large and powerful attacks that could prove fatal.", flavor: "Powerful airbenders can kill and even enjoy it, as long as they maintain detachment." },

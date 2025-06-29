@@ -10,7 +10,7 @@ import { getAirNodeIcon } from './airNodeIcons';
 const CENTER_X = 0, CENTER_Y = 0, BRANCHES = 2;
 const PATH_MAIN_ANGLE = -Math.PI / 2, ANGLE_SPREAD = Math.PI / 2.5; // Pointing UP
 const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
-const BASE_RADIUS = 220, RADIUS_STEP = 160, MIN_DIST = 100;
+const BASE_RADIUS = 250, RADIUS_STEP = 180, MIN_DIST = 110;
 
 const nodeDataList = [
     { id: 'genesis', name: 'The Dancing Wind Path', type: 'Genesis', cost: 1, branch: 0, depth: 0, description: "You learn that the key to airbending is flexibility and finding and following the path of least resistance. You embrace dynamic, constant movement.", flavor: "Let the wind lift your spirit." },
