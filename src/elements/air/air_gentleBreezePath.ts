@@ -9,14 +9,14 @@ import { getAirNodeIcon } from './airNodeIcons';
 
 // --- Layout Configuration ---
 const CENTER_X = 1200;
-const CENTER_Y = 900;
+const CENTER_Y = 800;
 const BRANCHES = 2;
 const PATH_MAIN_ANGLE = -Math.PI / 2; // Upwards
-const ANGLE_SPREAD = Math.PI / 2.2;
+const ANGLE_SPREAD = Math.PI / 1.5; // WIDENED SPREAD
 const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
-const BASE_RADIUS = 200;
-const RADIUS_STEP = 150;
-const MIN_DIST = 110;
+const BASE_RADIUS = 220;
+const RADIUS_STEP = 160;
+const MIN_DIST = 120;
 
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
@@ -120,5 +120,5 @@ export const GENTLE_BREEZE_METADATA = {
   sacredAnimal: 'The Flying Lemur',
   emoji: '🍃',
   color: '#b3e6ff',
-  position: { x: 1200, y: 900 }
+  position: { x: 1200, y: 800 }
 }; 

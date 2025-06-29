@@ -8,15 +8,15 @@ import type { TalentNode, TalentConnection, NodeType } from '../../types';
 import { getAirNodeIcon } from './airNodeIcons';
 
 // --- Layout Configuration ---
-const CENTER_X = 1500;
+const CENTER_X = 1600;
 const CENTER_Y = 1200;
 const BRANCHES = 2;
 const PATH_MAIN_ANGLE = 0; // Rightwards
-const ANGLE_SPREAD = Math.PI / 2.2;
+const ANGLE_SPREAD = Math.PI / 1.5; // WIDENED SPREAD
 const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
-const BASE_RADIUS = 200;
-const RADIUS_STEP = 150;
-const MIN_DIST = 110;
+const BASE_RADIUS = 220;
+const RADIUS_STEP = 160;
+const MIN_DIST = 120;
 
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
