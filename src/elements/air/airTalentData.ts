@@ -114,10 +114,30 @@ export const ROOT_NODE: TalentNode = gbNodes.find(n => n.type === 'Genesis') || 
  * Generate all connections for the Air constellation by combining prefixed connections.
  */
 export function generateAirConnections(): TalentConnection[] {
-  return [
+  const allConnections: TalentConnection[] = [
     ...gbConnections,
     ...sbConnections,
     ...wgConnections,
     ...dwConnections
   ];
+
+  // --- NEW: Define connections between the four paths to form the central web ---
+  const interPathConnections: TalentConnection[] = [
+    // Top-Left connection
+    { from: 'gb_air_shield', to: 'wg_air_blast', isActive: false, isLocked: false },
+    // Top-Right connection
+    { from: 'gb_air_cushion', to: 'sb_hypersensitivity', isActive: false, isLocked: false },
+    // Bottom-Left connection
+    { from: 'dw_enhanced_speed', to: 'wg_air_blades', isActive: false, isLocked: false },
+    // Bottom-Right connection
+    { from: 'dw_air_spout', to: 'sb_sound_amplification', isActive: false, isLocked: false },
+    // Add cross-connections for a more web-like structure
+    { from: 'wg_air_blast', to: 'dw_enhanced_speed', isActive: false, isLocked: false },
+    { from: 'sb_hypersensitivity', to: 'dw_air_spout', isActive: false, isLocked: false },
+  ];
+
+  // Add the new connections to the main list
+  allConnections.push(...interPathConnections);
+
+  return allConnections;
 }
