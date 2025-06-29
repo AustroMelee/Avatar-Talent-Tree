@@ -12,17 +12,11 @@ import { DANCING_WIND_NODES, generateDancingWindConnections, DANCING_WIND_METADA
 
 // --- Central Layout Configuration ---
 const CONSTELLATION_CENTER: Point = { x: 1200, y: 1200 };
-const QUADRANT_RADIUS = 750; // The distance of each path's center from the main center
+const QUADRANT_RADIUS = 850; // Increased radius for more space
 
 /**
  * Processes a path's nodes and connections to place them in a specific quadrant.
  * It rotates the path to face outwards and translates it to its quadrant center.
- * @param nodes - The array of nodes for a path, generated around (0,0).
- * @param connections - The array of connections for a path.
- * @param prefix - The string prefix to use (e.g., 'gb').
- * @param quadrantCenter - The {x, y} coordinate for the center of this path's quadrant.
- * @param rotationAngle - The angle in radians to rotate the entire path.
- * @returns An object containing the processed and correctly placed nodes and connections.
  */
 const processPathData = (
     nodes: TalentNode[], 
@@ -85,6 +79,7 @@ const { processedNodes: dwNodes, processedConnections: dwConnections } = process
 const wgCenter: Point = { x: CONSTELLATION_CENTER.x - QUADRANT_RADIUS, y: CONSTELLATION_CENTER.y };
 const { processedNodes: wgNodes, processedConnections: wgConnections } = processPathData(WILD_GALE_NODES, generateWildGaleConnections(), 'wg', wgCenter, -Math.PI / 2);
 
+
 /**
  * All Air talent nodes from all integrated paths.
  */
@@ -121,22 +116,24 @@ export function generateAirConnections(): TalentConnection[] {
     ...dwConnections
   ];
 
-  // --- NEW: Define connections between the four paths to form the central web ---
+  // --- Define connections between the four paths to form the central web ---
   const interPathConnections: TalentConnection[] = [
-    // Top-Left connection
+    // Gentle Breeze (Top) to its neighbors
     { from: 'gb_air_shield', to: 'wg_air_blast', isActive: false, isLocked: false },
-    // Top-Right connection
     { from: 'gb_air_cushion', to: 'sb_hypersensitivity', isActive: false, isLocked: false },
-    // Bottom-Left connection
+
+    // Sacred Breath (Right) to its neighbors
+    { from: 'sb_sound_amplification', to: 'dw_air_spout', isActive: false, isLocked: false },
+    
+    // Dancing Wind (Bottom) to its neighbors
     { from: 'dw_enhanced_speed', to: 'wg_air_blades', isActive: false, isLocked: false },
-    // Bottom-Right connection
-    { from: 'dw_air_spout', to: 'sb_sound_amplification', isActive: false, isLocked: false },
-    // Add cross-connections for a more web-like structure
-    { from: 'wg_air_blast', to: 'dw_enhanced_speed', isActive: false, isLocked: false },
-    { from: 'sb_hypersensitivity', to: 'dw_air_spout', isActive: false, isLocked: false },
+
+    // Add some cross-connections for a more web-like structure
+    { from: 'wg_air_blast', to: 'sb_hypersensitivity', isActive: false, isLocked: false },
+    { from: 'wg_sound_bending', to: 'dw_flight', isActive: false, isLocked: false },
+    { from: 'sb_spiritual_projection', to: 'gb_enhanced_agility', isActive: false, isLocked: false },
   ];
 
-  // Add the new connections to the main list
   allConnections.push(...interPathConnections);
 
   return allConnections;

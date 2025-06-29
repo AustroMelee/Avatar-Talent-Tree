@@ -12,6 +12,7 @@ export default defineConfig({
   },
   // Add file change debouncing to prevent rapid refreshes
   optimizeDeps: {
+    force: true,
     include: [],
     exclude: []
   },
