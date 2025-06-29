@@ -8,7 +8,7 @@ import type { TalentNode, TalentConnection, NodeType } from '../../types';
 import { getAirNodeIcon } from './airNodeIcons';
 
 // --- Layout Configuration ---
-const CENTER_X = 1100;
+const CENTER_X = 900;
 const CENTER_Y = 1200;
 const BRANCHES = 2;
 const PATH_MAIN_ANGLE = Math.PI; // Leftwards

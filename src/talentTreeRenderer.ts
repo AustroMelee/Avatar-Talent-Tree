@@ -341,7 +341,7 @@ export class TalentTreeRenderer {
       const midToCenterDy = treeCenter.y - midY;
       const dotProduct = (midToCenterDx * normPerpX) + (midToCenterDy * normPerpY);
       const curveDirection = Math.sign(dotProduct) || 1;
-      const curveStrength = 25;
+      const curveStrength = 45;
       const controlX = midX - normPerpX * curveStrength * curveDirection;
       const controlY = midY - normPerpY * curveStrength * curveDirection;
       let baseStyle: string, highlightStyle: string, shadowColor: string;

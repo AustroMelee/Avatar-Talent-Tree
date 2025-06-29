@@ -9,7 +9,7 @@ import { getAirNodeIcon } from './airNodeIcons';
 
 // --- Layout Configuration ---
 const CENTER_X = 1200;
-const CENTER_Y = 1100;
+const CENTER_Y = 900;
 const BRANCHES = 2;
 const PATH_MAIN_ANGLE = -Math.PI / 2; // Upwards
 const ANGLE_SPREAD = Math.PI / 2.2;
@@ -120,5 +120,5 @@ export const GENTLE_BREEZE_METADATA = {
   sacredAnimal: 'The Flying Lemur',
   emoji: '🍃',
   color: '#b3e6ff',
-  position: { x: 1200, y: 1100 }
+  position: { x: 1200, y: 900 }
 }; 
