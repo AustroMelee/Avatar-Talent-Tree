@@ -138,3 +138,37 @@
 }
 .synthesis-info p { color: var(--text-primary); margin-bottom: var(--spacing-sm); }
 .synthesis-info p strong { color: #66ffff; text-shadow: 0 0 5px rgba(102, 255, 255, 0.3); }
+
+/* --- Canvas Node State Styling --- */
+/* Note: These styles are applied programmatically in TalentTreeRenderer */
+
+/* Selected Node State (Green Outline) */
+.node-selected {
+  /* Applied when node.isSelected === true */
+  /* Green outline with enhanced glow effect */
+}
+
+/* Unselectable Node State (Red Outline) */
+.node-unselectable {
+  /* Applied when node cannot be selected (locked, missing prerequisites, etc.) */
+  /* Red outline to indicate the node is not available */
+}
+
+/* Node State Transitions */
+.node-state-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Enhanced Node State Indicators */
+.node-selected-indicator {
+  /* Visual indicator for selected nodes */
+  box-shadow: 0 0 20px rgba(166, 227, 161, 0.8);
+  border: 3px solid #a6e3a1;
+}
+
+.node-unselectable-indicator {
+  /* Visual indicator for unselectable nodes */
+  box-shadow: 0 0 15px rgba(230, 69, 83, 0.6);
+  border: 2px solid #e64553;
+  opacity: 0.7;
+}

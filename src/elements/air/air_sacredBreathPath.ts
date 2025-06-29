@@ -1,113 +1,66 @@
 /**
- * Path 2: The Sacred Breath - 聖息 (Shèng Xī) (Deterministically Generated)
+ * Path 2: The Sacred Breath - 聖息 (Shèng Xī) (Canonically Refactored)
  * 
- * Path Philosophy: "Air connects all life; to master breath is to understand the unity of existence."
- * Essence: Spiritual connection, life force, the breath that binds all living things.
- * Focus: Meditation, spiritual sight, healing, communion with spirits.
- * Sacred Animal: The Sky Bison - wise, spiritual, bridge between worlds.
- *
- * REFACTOR: Updated to match the "Four Winds Constellation" design document.
+ * Path Philosophy: "Air connects all life. To master the breath is to feel the chi of the world and to see the unseen."
+ * Essence: Spiritual connection, sensing chi, meditation, non-combat support.
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
+import { getAirNodeIcon } from './airNodeIcons';
 
 // --- Layout Configuration ---
-const CENTER_X = 900;
-const CENTER_Y = 550;
-const BRANCHES = 3;
+const CENTER_X = 1300;
+const CENTER_Y = 1200;
+const BRANCHES = 2;
 const PATH_MAIN_ANGLE = 0; // Rightwards
 const ANGLE_SPREAD = Math.PI / 2.2;
 const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
-const BASE_RADIUS = 160;
-const RADIUS_STEP = 120;
-const MIN_DIST = 90;
+const BASE_RADIUS = 200;
+const RADIUS_STEP = 150;
+const MIN_DIST = 110;
 
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
     // Genesis
-    { id: 'genesis', name: 'The Sacred Breath Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Immune to mental effects, perceive spiritual energy and life force.", flavor: "Air connects all life; to master breath is to understand the unity of existence." },
+    { id: 'genesis', name: 'The Sacred Breath Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "You gain a deeper spiritual awareness. You are taught that all Air Nomads are born airbenders due to this strong spiritual connection.", flavor: "To master the breath is to understand the unity of existence." },
 
     // Minors after Genesis
-    { id: 'minor_genesis_1', name: 'Deeper Calm', type: 'Minor', cost: 1, branch: 0.8, depth: 0.5, prerequisite: 'genesis', description: "Minor ailments and curses cannot take hold.", flavor: "A tranquil mind is a strong fortress." },
-    { id: 'minor_genesis_2', name: 'Expanded Sight', type: 'Minor', cost: 1, branch: 1.2, depth: 0.5, prerequisite: 'genesis', description: "Perceive spiritual energy at greater distances.", flavor: "The spirit sees what the eyes cannot." },
+    { id: 'minor_genesis_1', name: 'Heat Regulation', type: 'Minor', cost: 1, branch: 0.8, depth: 0.5, prerequisite: 'genesis', description: "You are able to warm yourself using proper breathing techniques, allowing you to thrive in frigid environments with ease.", flavor: "The breath is the body's hearth." },
+    { id: 'minor_genesis_2', name: 'Sound Manipulation', type: 'Minor', cost: 1, branch: 1.2, depth: 0.5, prerequisite: 'genesis', description: "You can manipulate sound to throw your voice as a distraction or to trick someone.", flavor: "The wind carries whispers." },
+    { id: 'sb_minor_1', name: 'Deeper Calm', type: 'Minor', cost: 1, branch: 1.2, depth: 0.7, prerequisite: 'genesis', description: "Your meditative breathing strengthens your inner chi, granting a natural resistance to negative emotional influences.", flavor: "A tranquil mind is a strong fortress." },
+    { id: 'sb_minor_2', name: 'Focused Hearing', type: 'Minor', cost: 1, branch: 1, depth: 1.5, prerequisite: 'sound_amplification', description: "You can focus your hearing with the wind, picking up distant conversations.", flavor: "The wind carries all secrets." },
+    { id: 'sb_minor_3', name: 'Spiritual Resonance', type: 'Minor', cost: 1, branch: 0, depth: 1.5, prerequisite: 'hypersensitivity', description: "You are more easily able to sense the presence of spirits nearby.", flavor: "The veil between worlds grows thin." },
+    { id: 'sb_minor_4', name: 'Echoes of the Past', type: 'Minor', cost: 1, branch: 0, depth: 2.5, prerequisite: 'breath_of_wind', description: "When using Breath of Wind on an old object, you gain a faint impression of its previous owner.", flavor: "The air remembers all it has touched." },
+    { id: 'sb_minor_5', name: 'Harmonious Aura', type: 'Minor', cost: 1, branch: 0.2, depth: 3.5, prerequisite: 'spiritual_projection', description: "Friendly spirits are more receptive to your presence.", flavor: "Peace is a language all spirits understand." },
+    // --- Added from documentation ---
+    { id: 'sb_minor_6', name: 'Resonant Echoes', type: 'Minor', cost: 1, branch: -0.2, depth: 1.5, prerequisite: 'clarity_meditation', description: "You not only sense location, but also gain a vague impression of numbers and size.", flavor: "The air vibrates with the presence of many." },
+    { id: 'sb_minor_7', name: 'Lingering Imprint', type: 'Minor', cost: 1, branch: 0.2, depth: 1.5, prerequisite: 'clarity_meditation', description: "The sense of where things were remains in your mind for a few moments after you stop meditating.", flavor: "The wind remembers every movement." },
+    { id: 'sb_minor_8', name: 'Emotional Echo', type: 'Minor', cost: 1, branch: -0.2, depth: 2.5, prerequisite: 'memory_of_air', description: "You gain a much clearer sense of the emotions tied to the memory.", flavor: "The air carries feelings as well as sound." },
+    { id: 'sb_minor_9', name: 'Hallowed Ground', type: 'Minor', cost: 1, branch: 0.2, depth: 2.5, prerequisite: 'memory_of_air', description: "When used in a place of strong spiritual power, your visions become clearer and can show events from much further in the past.", flavor: "Sacred places hold the deepest echoes." },
+    { id: 'sb_minor_10', name: 'Shared Sight', type: 'Minor', cost: 1, branch: 0.8, depth: 3.5, prerequisite: 'B3', description: "For a brief moment, you can share what one bonded member sees with the others.", flavor: "The spirit sees through all barriers." },
 
     // --- Sub-Path A: Aspect of Inner Peace ---
-    { id: 'A1', name: 'Clarity Meditation', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Meditative stance reveals invisible enemies, traps, and secrets.", flavor: "Still the water to see the reflection." },
-    { id: 'minor_a1_1', name: 'Swift Clarity', type: 'Minor', cost: 1, branch: 0, depth: 1.5, prerequisite: 'A1', description: "Achieve the meditative state more quickly.", flavor: "The spirit answers when called." },
-    { id: 'minor_a1_2', name: 'Lingering Vision', type: 'Minor', cost: 1, branch: -0.2, depth: 1.5, prerequisite: 'A1', description: "Revealed secrets remain visible briefly after meditation ends.", flavor: "The spirit's sight lingers like morning mist." },
-    { id: 'minor_a1_3', name: 'Deeper Insight', type: 'Minor', cost: 1, branch: 0.2, depth: 1.5, prerequisite: 'A1', description: "Your meditative vision reveals more detailed information about hidden things.", flavor: "The spirit sees what the eyes cannot." },
+    { id: 'hypersensitivity', name: 'Hypersensitivity', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "By shaving your head, you free yourself to perceive subtle shifts in the surrounding air currents, giving you a split-second increase in reaction time.", flavor: "We airbenders learn to feel the energy behind the wind, not just the breeze on our skin." },
+    { id: 'minor_hs_1', name: 'Sense the Blow\'s Wake', type: 'Minor', cost: 1, branch: -0.2, depth: 1.5, prerequisite: 'hypersensitivity', description: "You can attune yourself to the ebb and flow of the wind around you, becoming aware of incoming attacks to respond instantly.", flavor: "The air speaks before the strike." },
     
-    { id: 'A2', name: 'Spirit Barrier', type: 'Keystone', cost: 2, branch: 0, depth: 2, prerequisite: 'A1', description: "Create a barrier of life energy that absorbs damage to your physical form.", flavor: "The spirit is the ultimate shield." },
-    { id: 'minor_a2_1', name: 'Stronger Barrier', type: 'Minor', cost: 1, branch: 0, depth: 2.5, prerequisite: 'A2', description: "The spiritual protection is more resilient.", flavor: "The spirit's shield grows stronger." },
-    { id: 'minor_a2_2', name: 'Swift Recovery', type: 'Minor', cost: 1, branch: -0.2, depth: 2.5, prerequisite: 'A2', description: "Your barrier begins regenerating sooner.", flavor: "The spirit heals swiftly." },
-    { id: 'minor_a2_3', name: 'Larger Barrier', type: 'Minor', cost: 1, branch: 0.2, depth: 2.5, prerequisite: 'A2', description: "Your spirit barrier covers a larger area and can protect allies.", flavor: "The spirit's protection spreads wide." },
+    { id: 'breath_of_wind', name: 'Breath of Wind', type: 'Manifestation', cost: 4, branch: 0, depth: 2, prerequisite: 'hypersensitivity', description: "You create an air jet directly from your mouth and lungs, requiring excellent breath control. Its size and focus are easily controlled.", flavor: "The breath is the first and final tool." },
+    { id: 'minor_bow_1', name: 'Cooling Gust', type: 'Minor', cost: 1, branch: -0.2, depth: 2.5, prerequisite: 'breath_of_wind', description: "Your Breath of Wind is powerful enough to cool magma into solidified rock.", flavor: "As demonstrated by Avatar Roku." },
     
-    { id: 'A3', name: 'Trance of Renewal', type: 'Manifestation', cost: 4, branch: 0, depth: 3, prerequisite: 'A2', description: "Enter a trance where your spirit barrier rapidly regenerates.", flavor: "In stillness, find restoration." },
-    { id: 'minor_a3_1', name: 'Deeper Trance', type: 'Minor', cost: 1, branch: 0, depth: 3.5, prerequisite: 'A3', description: "Regeneration occurs even faster.", flavor: "The spirit's rest grows deeper." },
-    { id: 'minor_a3_2', name: 'Protected Mind', type: 'Minor', cost: 1, branch: -0.2, depth: 3.5, prerequisite: 'A3', description: "Complete immunity to mental effects while in trance.", flavor: "The mind is safe within the spirit." },
-    { id: 'minor_a3_3', name: 'Longer Trance', type: 'Minor', cost: 1, branch: 0.2, depth: 3.5, prerequisite: 'A3', description: "You can maintain the trance state longer.", flavor: "The spirit's rest endures." },
+    { id: 'spiritual_projection', name: 'Spiritual Projection', type: 'Axiom', cost: 5, branch: 0, depth: 3, prerequisite: 'breath_of_wind', description: "Through deep meditation, you project your spirit out of your physical body. Your spirit is invisible and can travel freely to scout, observe, and pass through solid matter.", flavor: "A technique mastered by Jinora through her strong spiritual connection." },
+    { id: 'minor_a3_1', name: 'Ethereal Cloak', type: 'Minor', cost: 1, branch: 0, depth: 3.5, prerequisite: 'spiritual_projection', description: "You learn to mask your spiritual presence, making you harder to detect by hostile or wary spirits.", flavor: "The spirit's journey knows no bounds." },
+    { id: 'minor_a3_2', name: 'Spirit Anchor', type: 'Minor', cost: 1, branch: -0.2, depth: 3.5, prerequisite: 'spiritual_projection', description: "You can create a spiritual 'beacon' on your physical body, making it easier to find your way back from distant or disorienting spiritual locations.", flavor: "The spirit sees through all barriers." },
     
-    { id: 'APEX_A', name: 'Transcendent Sight', type: 'Axiom', cost: 5, branch: 0, depth: 4, prerequisite: 'A3', description: "Perceive and manipulate the connections between all living things.", flavor: "The web of life is visible to those who look." },
-    { id: 'minor_apex_a_1', name: 'Wider Sight', type: 'Minor', cost: 1, branch: -0.2, depth: 4.5, prerequisite: 'APEX_A', description: "Your transcendent sight covers a larger area.", flavor: "The web of life spreads far." },
-    { id: 'minor_apex_a_2', name: 'Deeper Understanding', type: 'Minor', cost: 1, branch: 0.2, depth: 4.5, prerequisite: 'APEX_A', description: "You can understand and manipulate more complex life connections.", flavor: "The spirit's understanding grows deeper." },
-    { id: 'minor_apex_a_3', name: 'Shared Sight', type: 'Minor', cost: 1, branch: 0, depth: 4.5, prerequisite: 'APEX_A', description: "You can share your transcendent sight with nearby allies.", flavor: "The spirit's vision is for all." },
-
     // --- Sub-Path B: Aspect of Spirit Communion ---
-    { id: 'B1', name: 'Peaceful Presence', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "Pacify hostile animals and minor spirits through your spiritual presence.", flavor: "Peace is a language all creatures understand." },
-    { id: 'minor_b1_1', name: 'Wider Peace', type: 'Minor', cost: 1, branch: 1, depth: 1.5, prerequisite: 'B1', description: "Your calming presence extends further.", flavor: "Peace spreads like ripples on water." },
-    { id: 'minor_b1_2', name: 'Deeper Connection', type: 'Minor', cost: 1, branch: 0.8, depth: 1.5, prerequisite: 'B1', description: "Affect more powerful creatures.", flavor: "The spirit's touch reaches deep." },
-    { id: 'minor_b1_3', name: 'Longer Calm', type: 'Minor', cost: 1, branch: 1.2, depth: 1.5, prerequisite: 'B1', description: "The pacifying effect lasts longer on affected creatures.", flavor: "Peace endures in the heart." },
+    { id: 'sound_amplification', name: 'Sound Amplification', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "By using Breath of Wind, you can magnify the sound waves generated by a whistle or another instrument to a massive degree.", flavor: "As used by Aang to call all the animals in Ba Sing Se." },
+    { id: 'minor_sa_1', name: 'Deafening Shout', type: 'Minor', cost: 1, branch: 0.8, depth: 1.5, prerequisite: 'sound_amplification', description: "You can enhance your own voice to create airbending-powered screams that can deafen opponents.", flavor: "A technique used by Avatar Yangchen." },
+    { id: 'minor_b1_2', name: 'Nature\'s Bond', type: 'Minor', cost: 1, branch: 0.8, depth: 1.5, prerequisite: 'sound_amplification', description: "This calming influence is particularly effective on creatures naturally attuned to the air, like Sky Bison or Flying Lemurs, allowing for a deeper connection.", flavor: "The spirit's touch reaches deep." },
     
-    { id: 'B2', name: 'Memory of Air', type: 'Keystone', cost: 2, branch: 1, depth: 2, prerequisite: 'B1', description: "Touch objects to see spectral replays of their recent history.", flavor: "The air remembers all it has touched." },
-    { id: 'minor_b2_1', name: 'Clearer Visions', type: 'Minor', cost: 1, branch: 1, depth: 2.5, prerequisite: 'B2', description: "The replays are more detailed and last longer.", flavor: "The past speaks clearly to those who listen." },
-    { id: 'minor_b2_2', name: 'Emotional Echo', type: 'Minor', cost: 1, branch: 0.8, depth: 2.5, prerequisite: 'B2', description: "Sense the emotions of those who handled the object.", flavor: "Feel what the object has felt." },
-    { id: 'minor_b2_3', name: 'Deeper Memory', type: 'Minor', cost: 1, branch: 1.2, depth: 2.5, prerequisite: 'B2', description: "You can see further back in the object's history.", flavor: "The air's memory is long." },
+    { id: 'B2', name: 'Guiding Light', type: 'Manifestation', cost: 4, branch: 1, depth: 2, prerequisite: 'sound_amplification', description: "You can manifest your own spiritual energy as a visible, gentle light. This light can guide others through darkness, pacify angry minor spirits, and reveal 'dark' or corrupting spiritual influences as shadowy stains on the world.", flavor: "The air remembers all it has touched." },
+    { id: 'minor_b2_1', name: 'Purifying Breath', type: 'Minor', cost: 1, branch: 1, depth: 2.5, prerequisite: 'B2', description: "By gently blowing your guiding light onto a person or small area, you can help cleanse them of negative spiritual energy (e.g., after contact with a dark spirit).", flavor: "The past speaks clearly to those who listen." },
+    { id: 'minor_b2_2', name: 'Spirit Bridge', type: 'Minor', cost: 1, branch: 0.8, depth: 2.5, prerequisite: 'B2', description: "Spirits are more willing and able to communicate with you when you manifest your light, making you a clearer conduit for their messages.", flavor: "Feel what the object has felt." },
     
-    { id: 'B3', name: 'Spirit Projection', type: 'Manifestation', cost: 4, branch: 1, depth: 3, prerequisite: 'B2', description: "Project your spirit to scout ahead while your body remains in meditation.", flavor: "The mind is not bound by the body." },
-    { id: 'minor_b3_1', name: 'Extended Range', type: 'Minor', cost: 1, branch: 1, depth: 3.5, prerequisite: 'B3', description: "Your spirit can travel much further.", flavor: "The spirit's journey knows no bounds." },
-    { id: 'minor_b3_2', name: 'Spirit Sight', type: 'Minor', cost: 1, branch: 0.8, depth: 3.5, prerequisite: 'B3', description: "See through solid barriers while projecting.", flavor: "The spirit sees through all barriers." },
-    { id: 'minor_b3_3', name: 'Longer Projection', type: 'Minor', cost: 1, branch: 1.2, depth: 3.5, prerequisite: 'B3', description: "You can maintain your spirit projection longer.", flavor: "The spirit's journey is long." },
-    
-    { id: 'APEX_B', name: 'Speaker with Spirits', type: 'Axiom', cost: 5, branch: 1, depth: 4, prerequisite: 'B3', description: "Communicate with and gain aid from deceased spirits.", flavor: "Death is not an end, but a transition to a different kind of life." },
-    { id: 'minor_apex_b_1', name: 'Stronger Communication', type: 'Minor', cost: 1, branch: 0.8, depth: 4.5, prerequisite: 'APEX_B', description: "Your communication with spirits is clearer and more effective.", flavor: "The spirit's voice is clear." },
-    { id: 'minor_apex_b_2', name: 'More Spirits', type: 'Minor', cost: 1, branch: 1.2, depth: 4.5, prerequisite: 'APEX_B', description: "You can communicate with multiple spirits simultaneously.", flavor: "Many voices speak as one." },
-    { id: 'minor_apex_b_3', name: 'Spirit Aid', type: 'Minor', cost: 1, branch: 1, depth: 4.5, prerequisite: 'APEX_B', description: "Spirits are more willing to aid you and provide stronger assistance.", flavor: "The spirits favor the kind." },
-
-    // --- Sub-Path C: Aspect of Universal Harmony ---
-    { id: 'C1', name: 'Bonds of Breath', type: 'Keystone', cost: 2, branch: 2, depth: 1, prerequisite: 'genesis', description: "Create spiritual links with allies, sharing damage among the group.", flavor: "We all breathe the same air. We are all connected." },
-    { id: 'minor_c1_1', name: 'Stronger Bonds', type: 'Minor', cost: 1, branch: 2, depth: 1.5, prerequisite: 'C1', description: "Redirect more damage from allies to yourself.", flavor: "The bond grows stronger with sacrifice." },
-    { id: 'minor_c1_2', name: 'Extended Bonds', type: 'Minor', cost: 1, branch: 2.2, depth: 1.5, prerequisite: 'C1', description: "Link with allies at greater distances.", flavor: "The breath connects across great distances." },
-    { id: 'minor_c1_3', name: 'More Bonds', type: 'Minor', cost: 1, branch: 1.8, depth: 1.5, prerequisite: 'C1', description: "You can create bonds with more allies simultaneously.", flavor: "The breath connects all." },
-    
-    { id: 'C2', name: 'Cosmic Awareness', type: 'Keystone', cost: 2, branch: 2, depth: 2, prerequisite: 'C1', description: "Meditation reveals the layout and energy flows of large areas.", flavor: "The universe is a symphony, and every being is a note." },
-    { id: 'minor_c2_1', name: 'Swift Attunement', type: 'Minor', cost: 1, branch: 2, depth: 2.5, prerequisite: 'C2', description: "Map areas more quickly through meditation.", flavor: "The universe reveals itself to the prepared mind." },
-    { id: 'minor_c2_2', name: 'Energy Sight', type: 'Minor', cost: 1, branch: 2.2, depth: 2.5, prerequisite: 'C2', description: "Detect sources of spiritual or elemental power.", flavor: "See the currents of power that flow through all things." },
-    { id: 'minor_c2_3', name: 'Larger Awareness', type: 'Minor', cost: 1, branch: 1.8, depth: 2.5, prerequisite: 'C2', description: "Your cosmic awareness covers larger areas.", flavor: "The universe's song is vast." },
-    
-    { id: 'C3', name: 'Universal Calm', type: 'Manifestation', cost: 4, branch: 2, depth: 3, prerequisite: 'C2', description: "Release a wave of tranquility that pacifies all hostile creatures in a wide area.", flavor: "One deep breath can calm a thousand raging hearts." },
-    { id: 'minor_c3_1', name: 'Greater Calm', type: 'Minor', cost: 1, branch: 2, depth: 3.5, prerequisite: 'C3', description: "Affect a much larger area with your peace.", flavor: "The peace spreads like morning light." },
-    { id: 'minor_c3_2', name: 'Lasting Serenity', type: 'Minor', cost: 1, branch: 2.2, depth: 3.5, prerequisite: 'C3', description: "The calming effect endures much longer.", flavor: "The peace lingers like evening mist." },
-    { id: 'minor_c3_3', name: 'Deeper Peace', type: 'Minor', cost: 1, branch: 1.8, depth: 3.5, prerequisite: 'C3', description: "The pacifying effect is stronger and affects more powerful creatures.", flavor: "The peace touches the soul." },
-    
-    { id: 'APEX_C', name: 'One With All Life', type: 'Axiom', cost: 5, branch: 2, depth: 4, prerequisite: 'C3', description: "Achieve perfect empathy and understanding of all creatures.", flavor: "To know a creature is to love it." },
-    { id: 'minor_apex_c_1', name: 'Wider Empathy', type: 'Minor', cost: 1, branch: 1.8, depth: 4.5, prerequisite: 'APEX_C', description: "Your empathy extends to creatures at greater distances.", flavor: "The heart reaches far." },
-    { id: 'minor_apex_c_2', name: 'Deeper Understanding', type: 'Minor', cost: 1, branch: 2.2, depth: 4.5, prerequisite: 'APEX_C', description: "Your understanding of creatures is even more profound.", flavor: "The spirit's wisdom grows." },
-    { id: 'minor_apex_c_3', name: 'Shared Understanding', type: 'Minor', cost: 1, branch: 2, depth: 4.5, prerequisite: 'APEX_C', description: "You can share your understanding with nearby allies.", flavor: "The wisdom is for all." },
-
-    // --- Synthesis & Bridge ---
-    { id: 'SYNTHESIS_A_B', name: 'Spiritual Unity', type: 'Synthesis', cost: 5, branch: 0.5, depth: 4, prerequisite: ['APEX_A', 'APEX_B'], description: "Combine inner peace with spirit communion for ultimate spiritual mastery." },
-    { id: 'BRIDGE_B', name: 'Cross-Path Bridge', type: 'Bridge', cost: 10, branch: 1.5, depth: 4.5, prerequisite: ['APEX_B', 'APEX_C'], description: "Gain access to Synthesis Opportunity." },
-
-    // --- Endgame Choices ---
-    { id: 'rite_peace', name: 'Trial of Inner Peace', type: 'GnosticRite', cost: 1, branch: 0, depth: 5, prerequisite: 'APEX_A', description: "Maintain perfect calm while under spiritual attack.", flavor: "The storm rages without, but the spirit is still within." },
-    { id: 'rite_commune', name: 'Trial of Communion', type: 'GnosticRite', cost: 1, branch: 1, depth: 5, prerequisite: 'APEX_B', description: "Successfully mediate between hostile spirits.", flavor: "A bridge must be strong enough to bear the weight of two worlds." },
-    { id: 'rite_unity', name: 'Trial of Unity', type: 'GnosticRite', cost: 1, branch: 2, depth: 5, prerequisite: 'APEX_C', description: "Achieve perfect empathy with a natural enemy.", flavor: "See yourself in the eyes of your enemy, and they are no longer an enemy." },
-
-    { id: 'cap_heart', name: 'Heart of the World', type: 'Capstone', cost: 15, branch: 0, depth: 6, prerequisite: 'rite_peace', description: "Anchor your spirit to create a massive sanctuary where all allies are protected, healed, and empowered.", flavor: "My spirit is an anchor in the storm of the world." },
-    { id: 'cap_worlds', name: 'Master of Both Worlds', type: 'Capstone', cost: 15, branch: 1, depth: 6, prerequisite: 'rite_commune', description: "Command spirits of all kinds, summoning them to aid in both spiritual and physical matters.", flavor: "I walk in two worlds, and am master of both." },
-    { id: 'cap_unity', name: 'Unity Incarnate', type: 'Capstone', cost: 15, branch: 2, depth: 6, prerequisite: 'rite_unity', description: "Become a living embodiment of harmony, sharing your abilities freely and drawing strength from all living things.", flavor: "I am a part of all, and all is a part of me." },
-
-    { id: 'schism_rend', name: 'Spirit Rending', type: 'Schism', cost: 8, branch: 1.5, depth: 5, prerequisite: 'APEX_B', description: "Forcibly separate a foe's spirit from their body, but suffer spiritual damage in return.", flavor: "To understand unity, one must first understand separation." },
-    { id: 'schism_shatter', name: 'Soul Shatter', type: 'Schism', cost: 12, branch: 1.5, depth: 6, prerequisite: 'schism_rend', description: "Master the art of spiritual destruction, but fragment your own soul in the process.", flavor: "To break another's soul is to shatter one's own." },
+    { id: 'B3', name: 'Breath of Kinship', type: 'Axiom', cost: 5, branch: 1, depth: 3, prerequisite: 'B2', description: "You learn to synchronize your breathing and chi with willing allies. This creates a tangible bond, allowing you to feel their emotional state, share stamina, and take a portion of their physical burden onto yourself, revitalizing them at a cost to your own energy.", flavor: "The mind is not bound by the body." },
+    { id: 'minor_b3_1', name: 'Unity of Purpose', type: 'Minor', cost: 1, branch: 1, depth: 3.5, prerequisite: 'B3', description: "When bonded, you and your allies move with greater coordination, as if anticipating each other's actions.", flavor: "The spirit's journey knows no bounds." },
+    { id: 'minor_b3_2', name: 'Shared Sight', type: 'Minor', cost: 1, branch: 0.8, depth: 3.5, prerequisite: 'B3', description: "For a brief moment, you can share what one bonded member sees with the others.", flavor: "The spirit sees through all barriers." },
 ];
 
 // --- Generation Code (Identical to Gentle Breeze, just feeding it new data) ---
@@ -126,9 +79,9 @@ nodeDataList.forEach(nodeData => {
 
   const node: TalentNode = {
     id, name: nodeData.name, description: nodeData.description, flavor: nodeData.flavor, type: nodeData.type as NodeType, path: 'sacred_breath', constellation: 'air', position: { x, y }, prerequisites: prerequisites, visual: { 
-      color: '#e0f7fa', 
+      color: '#E6E6FA', 
       size: 50,
-      icon: getSacredBreathNodeIcon(type) 
+      icon: getAirNodeIcon(id) 
     }, effects: [], isVisible: true, isAllocatable: prerequisites.length === 0, isAllocated: false, isLocked: prerequisites.length > 0, isPermanentlyLocked: false, pkCost: nodeData.cost,
   };
   nodes.push(node);
@@ -169,25 +122,11 @@ export const SACRED_BREATH_GENESIS = nodes.find(n => n.type === 'Genesis')!;
 export function generateSacredBreathConnections(): TalentConnection[] { return connections; }
 export const SACRED_BREATH_METADATA = {
   name: 'The Sacred Breath',
-  philosophy: 'Air connects all life; to master breath is to understand the unity of existence.',
-  essence: 'Spiritual connection, life force, the breath that binds all living things.',
-  focus: 'Meditation, spiritual sight, healing, communion with spirits.',
+  philosophy: 'Air connects all life. To master the breath is to feel the chi of the world and to see the unseen.',
+  essence: 'Spiritual connection, sensing chi, meditation, non-combat support.',
+  focus: 'Spiritual awareness and connection to the spirit world, inspired by Jinora and Yangchen.',
   sacredAnimal: 'The Sky Bison',
-  emoji: '🧘',
-  color: '#e0f7fa',
-  position: { x: 900, y: 550 }
-};
-
-function getSacredBreathNodeIcon(type: string): string {
-  switch (type) {
-    case 'Genesis': return '🕉️';
-    case 'Keystone': return '✨';
-    case 'Manifestation': return '👻';
-    case 'Axiom': return '🌌';
-    case 'Capstone': return '❤️‍🩹';
-    case 'GnosticRite': return '🙏';
-    case 'Schism': return '💔';
-    case 'Minor': return '🕊️';
-    default: return '🌬️';
-  }
-} 
+  emoji: '🕉️',
+  color: '#e6e6fa',
+  position: { x: 1300, y: 1200 }
+}; 

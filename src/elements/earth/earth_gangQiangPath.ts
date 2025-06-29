@@ -1,14 +1,17 @@
 /**
- * Path 3: The Pillar of Gang Qiang (Unyielding Strength) - "The Eternal Mountain"
- * Philosophy: "Some things must never bend. Be the mountain that weathers all storms."
- * Focus: Raw power, overwhelming force, immovable defense, brutal offense.
+ * Path 3: The Eternal Mountain (Strength) - "The Unyielding Force" (Canonically Refactored)
+ *
+ * Path Philosophy: "Some things must never bend. Be the mountain that weathers all storms and breaks all who stand against it."
+ * Essence: Raw power, overwhelming force, immovable defense, and large-scale tectonic bending.
+ *
+ * REFACTOR: Updated to match the "Four Pillars of Stone" design document.
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
 
 // --- Layout Configuration ---
-const CENTER_X = 800;
-const CENTER_Y = 600;
-const BRANCHES = 3;
+const CENTER_X = 820;
+const CENTER_Y = 580;
+const BRANCHES = 2;
 const PATH_MAIN_ANGLE = Math.PI / 2; // Downwards
 const ANGLE_SPREAD = Math.PI / 2.2;
 const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
@@ -16,83 +19,36 @@ const BASE_RADIUS = 160;
 const RADIUS_STEP = 120;
 const MIN_DIST = 90;
 
-// --- Node Definitions ---
+// --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
-    // GENESIS
-    { id: 'genesis', name: 'The Pillar of Gang Qiang Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your earthbending embodies the mountain's eternal strength. Your attacks are slower but hit with immense force.", flavor: "Be the mountain." },
-
-    // SUB-PATH A
-    { id: 'A1', name: 'Boulder Hurl', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Rip a massive boulder from the earth and hurl it, crushing a single target.", flavor: "Simple. Direct. Effective." },
-    { id: 'minor_a1_1', name: 'Larger Boulder', type: 'Minor', cost: 1, branch: -0.2, depth: 1.5, prerequisite: 'A1', description: "Your boulders are larger and deal more damage.", flavor: "Bigger is better." },
-    { id: 'minor_a1_2', name: 'Faster Throw', type: 'Minor', cost: 1, branch: 0.2, depth: 1.5, prerequisite: 'A1', description: "You can hurl boulders more quickly.", flavor: "The mountain's arm is swift." },
-    { id: 'minor_a1_3', name: 'Precise Targeting', type: 'Minor', cost: 1, branch: 0, depth: 1.5, prerequisite: 'A1', description: "Your boulder throws are more accurate and can target specific areas.", flavor: "The mountain's aim is true." },
+    // Genesis
+    { id: 'genesis', name: 'The Eternal Mountain Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your earthbending is imbued with your stubborn will. Your thrown rocks hit harder, and your stances are more solid. You embody 'substance over style.'", flavor: "This is not about anger, but about absolute resolve." },
+    // Minors after Genesis
+    { id: 'earth_armor', name: 'Earth Armor', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Bring rocks, dust, or crystals around you and mold them to fit your body, creating a suit of armor for immense defense.", flavor: "This technique is great for defense but limits the user's range of motion." },
+    { id: 'minor_ea_1', name: 'Spiked Armor', type: 'Minor', cost: 1, branch: -0.2, depth: 1.5, prerequisite: 'earth_armor', description: "You can cause sharp spikes to erupt from your armor's surface to deter close-range attackers.", flavor: "The mountain's teeth are sharp." },
+    // Sub-Path A - The Immovable Object
+    { id: 'tectonics', name: 'Tectonics', type: 'Axiom', cost: 5, branch: 0, depth: 3, prerequisite: 'earth_armor', description: "Earthbend on a scale vast enough to move entire landmasses. This requires the power of the Avatar State for non-Avatars.", flavor: "As used by Avatar Kyoshi to create Kyoshi Island." },
+    { id: 'rock_column', name: 'Rock Column', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "Force columns of rock out of the ground to strike opponents or create platforms. More powerful than simple rock projectiles.", flavor: "The mountain reaches for the sky." },
+    { id: 'earthquake', name: 'Earthquake/Fissures', type: 'Manifestation', cost: 4, branch: 1, depth: 2, prerequisite: 'rock_column', description: "Strike the ground with your fists or feet to create localized earthquakes or fissures to throw opponents off-balance.", flavor: "The world trembles when I command it." },
+    { id: 'A3', name: 'Rooted to the World', type: 'Axiom', cost: 5, branch: 0, depth: 3, prerequisite: 'earthquake', description: "You can anchor yourself to the very bedrock beneath you. While in this stance, you are truly immovable by any physical or bending force, though you cannot move yourself. You become a human mountain.", flavor: "I am the mountain. I will not be moved." },
+    { id: 'minor_a3_1', name: 'Earth\'s Grip', type: 'Minor', cost: 1, branch: -0.2, depth: 3.5, prerequisite: 'A3', description: "While rooted, you can extend this unmovable property to a small patch of ground around you, preventing enemies from tunneling beneath you or shifting the earth you stand on.", flavor: "The mountain's foundation is unshakeable." },
+    // Sub-Path B - The Unstoppable Force
+    { id: 'minor_b1_1', name: 'Rapid Fire Pillars', type: 'Minor', cost: 1, branch: 0.8, depth: 1.5, prerequisite: 'rock_column', description: "You can launch multiple, smaller pillars in quick succession to harry an opponent or create a path.", flavor: "The mountain has many fingers." },
+    { id: 'minor_b2_1', name: 'Ripple Effect', type: 'Minor', cost: 1, branch: 0.8, depth: 2.5, prerequisite: 'earthquake', description: "Your tectonic shift travels further and can curve to follow a specific path.", flavor: "The tremor spreads far." },
+    { id: 'B3', name: 'Mountain Breaker', type: 'Axiom', cost: 5, branch: 1, depth: 3, prerequisite: 'earthquake', description: "The pinnacle of raw power, as demonstrated by King Bumi. You can lift and throw colossal structures like statues or entire sections of a city wall. This requires immense stamina and concentration.", flavor: "I do not shape the world. I break it." },
+    { id: 'minor_b3_1', name: 'Golem Creation', type: 'Minor', cost: 1, branch: 0.8, depth: 3.5, prerequisite: 'B3', description: "Instead of throwing it, you can animate a massive humanoid figure of earth and stone to fight for you for a short time.", flavor: "The mountain walks." },
     
-    { id: 'A2', name: 'Earthquake Stomp', type: 'Keystone', cost: 2, branch: 0, depth: 2, prerequisite: 'A1', description: "Slam your foot down to create a localized earthquake, knocking all nearby enemies off their feet.", flavor: "The world trembles when I command it." },
-    { id: 'minor_a2_1', name: 'Larger Quake', type: 'Minor', cost: 1, branch: -0.2, depth: 2.5, prerequisite: 'A2', description: "Your earthquake affects a larger area.", flavor: "The tremor spreads further." },
-    { id: 'minor_a2_2', name: 'Stronger Tremor', type: 'Minor', cost: 1, branch: 0.2, depth: 2.5, prerequisite: 'A2', description: "Your earthquake deals more damage and affects larger enemies.", flavor: "The earth's fury is great." },
-    { id: 'minor_a2_3', name: 'Longer Stun', type: 'Minor', cost: 1, branch: 0, depth: 2.5, prerequisite: 'A2', description: "Enemies remain knocked down longer after your earthquake.", flavor: "The earth's memory is long." },
-    
-    { id: 'A3', name: 'Avalanche Charge', type: 'Manifestation', cost: 4, branch: 0, depth: 3, prerequisite: 'A2', description: "Charge forward, encased in a shell of rock and debris. You are unstoppable and damage everything in your path.", flavor: "I am the avalanche. Get out of the way." },
-    { id: 'minor_a3_1', name: 'Faster Charge', type: 'Minor', cost: 1, branch: -0.2, depth: 3.5, prerequisite: 'A3', description: "Your avalanche charge moves faster and is harder to avoid.", flavor: "The avalanche cannot be outrun." },
-    { id: 'minor_a3_2', name: 'Longer Charge', type: 'Minor', cost: 1, branch: 0.2, depth: 3.5, prerequisite: 'A3', description: "Your avalanche charge can travel further before stopping.", flavor: "The avalanche's path is long." },
-    { id: 'minor_a3_3', name: 'Wider Path', type: 'Minor', cost: 1, branch: 0, depth: 3.5, prerequisite: 'A3', description: "Your avalanche charge affects a wider area and damages more enemies.", flavor: "The avalanche leaves no survivors." },
-    
-    { id: 'APEX_A', name: 'World Breaker', type: 'Axiom', cost: 5, branch: 0, depth: 4, prerequisite: 'A3', description: "Your attacks are so powerful they shatter the very ground, creating permanent, impassable chasms.", flavor: "I do not shape the world. I break it." },
-    { id: 'minor_apex_a_1', name: 'Larger Chasms', type: 'Minor', cost: 1, branch: -0.2, depth: 4.5, prerequisite: 'APEX_A', description: "Your world-breaking attacks create larger and more devastating chasms.", flavor: "The world's wounds are deep." },
-    { id: 'minor_apex_a_2', name: 'Faster Breaking', type: 'Minor', cost: 1, branch: 0.2, depth: 4.5, prerequisite: 'APEX_A', description: "You can shatter the ground more quickly and efficiently.", flavor: "The world breaks at my command." },
-    { id: 'minor_apex_a_3', name: 'Multiple Breaks', type: 'Minor', cost: 1, branch: 0, depth: 4.5, prerequisite: 'APEX_A', description: "You can create multiple chasms simultaneously.", flavor: "The world shatters in many places." },
-
-    // SUB-PATH B
-    { id: 'B1', name: 'Immovable Stance', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "Your defensive stance can withstand even the most powerful of blows without breaking.", flavor: "Let them try. The mountain does not care." },
-    { id: 'minor_b1_1', name: 'Stronger Stance', type: 'Minor', cost: 1, branch: 0.8, depth: 1.5, prerequisite: 'B1', description: "Your defensive stance is even more resilient.", flavor: "The mountain stands firm." },
-    { id: 'minor_b1_2', name: 'Wider Stance', type: 'Minor', cost: 1, branch: 1.2, depth: 1.5, prerequisite: 'B1', description: "Your defensive stance protects a larger area around you.", flavor: "The mountain's shadow is long." },
-    { id: 'minor_b1_3', name: 'Unshakeable Foundation', type: 'Minor', cost: 1, branch: 1, depth: 1.5, prerequisite: 'B1', description: "Your stance also protects nearby allies from knockback and stuns.", flavor: "The mountain shelters all." },
-    
-    { id: 'B2', name: 'Spike Barricade', type: 'Keystone', cost: 2, branch: 1, depth: 2, prerequisite: 'B1', description: "Erect a wall of sharp stone spikes that damages any enemy who tries to cross it.", flavor: "My defense is an attack." },
-    { id: 'minor_b2_1', name: 'Sharper Spikes', type: 'Minor', cost: 1, branch: 0.8, depth: 2.5, prerequisite: 'B2', description: "Your spike barricade deals more damage to enemies.", flavor: "The mountain's teeth are sharp." },
-    { id: 'minor_b2_2', name: 'Taller Barricade', type: 'Minor', cost: 1, branch: 1.2, depth: 2.5, prerequisite: 'B2', description: "Your spike barricade is taller and harder to jump over.", flavor: "The mountain's wall reaches high." },
-    { id: 'minor_b2_3', name: 'Wider Barricade', type: 'Minor', cost: 1, branch: 1, depth: 2.5, prerequisite: 'B2', description: "Your spike barricade extends further to the sides.", flavor: "The mountain's protection is vast." },
-    
-    { id: 'B3', name: 'Pillar of the Earth', type: 'Manifestation', cost: 4, branch: 1, depth: 3, prerequisite: 'B2', description: "Summon a colossal pillar of rock from the ground that can be used as a platform, a shield, or a devastating weapon.", flavor: "Reach for the sky, but be rooted in the earth." },
-    { id: 'minor_b3_1', name: 'Taller Pillar', type: 'Minor', cost: 1, branch: 0.8, depth: 3.5, prerequisite: 'B3', description: "Your earth pillar is taller and provides better elevation.", flavor: "The pillar reaches for the heavens." },
-    { id: 'minor_b3_2', name: 'Stronger Pillar', type: 'Minor', cost: 1, branch: 1.2, depth: 3.5, prerequisite: 'B3', description: "Your earth pillar is more durable and can withstand more damage.", flavor: "The pillar is unbreakable." },
-    { id: 'minor_b3_3', name: 'Multiple Pillars', type: 'Minor', cost: 1, branch: 1, depth: 3.5, prerequisite: 'B3', description: "You can summon multiple earth pillars simultaneously.", flavor: "The mountain has many fingers." },
-    
-    { id: 'APEX_B', name: 'One with the Mountain', type: 'Axiom', cost: 5, branch: 1, depth: 4, prerequisite: 'B3', description: "Merge with any earthen surface, becoming completely invulnerable and regenerating health, but you cannot move or act.", flavor: "To rest is to become one with the stone." },
-    { id: 'minor_apex_b_1', name: 'Faster Merging', type: 'Minor', cost: 1, branch: 0.8, depth: 4.5, prerequisite: 'APEX_B', description: "You can merge with the earth more quickly.", flavor: "The mountain welcomes you swiftly." },
-    { id: 'minor_apex_b_2', name: 'Better Regeneration', type: 'Minor', cost: 1, branch: 1.2, depth: 4.5, prerequisite: 'APEX_B', description: "Your health regeneration while merged is faster and more effective.", flavor: "The mountain's healing is strong." },
-    { id: 'minor_apex_b_3', name: 'Deeper Merge', type: 'Minor', cost: 1, branch: 1, depth: 4.5, prerequisite: 'APEX_B', description: "You can merge deeper into the earth, making you harder to detect.", flavor: "The mountain hides you well." },
-
-    // SUB-PATH C
-    { id: 'C1', name: 'Shockwave Clap', type: 'Keystone', cost: 2, branch: 2, depth: 1, prerequisite: 'genesis', description: "Clap your hands to send a focused shockwave of force through the air, staggering distant enemies.", flavor: "The air itself is a stone to be thrown." },
-    { id: 'minor_c1_1', name: 'Stronger Shockwave', type: 'Minor', cost: 1, branch: 1.8, depth: 1.5, prerequisite: 'C1', description: "Your shockwave clap is more powerful and affects enemies at greater range.", flavor: "The mountain's voice is thunder." },
-    { id: 'minor_c1_2', name: 'Faster Clap', type: 'Minor', cost: 1, branch: 2.2, depth: 1.5, prerequisite: 'C1', description: "You can perform shockwave claps more quickly.", flavor: "The mountain's hands are swift." },
-    { id: 'minor_c1_3', name: 'Wider Shockwave', type: 'Minor', cost: 1, branch: 2, depth: 1.5, prerequisite: 'C1', description: "Your shockwave affects a wider area and hits more enemies.", flavor: "The mountain's voice echoes far." },
-    
-    { id: 'C2', name: 'Deep Fissure', type: 'Keystone', cost: 2, branch: 2, depth: 2, prerequisite: 'C1', description: "Punch the ground to open a fissure that travels in a straight line, damaging and slowing all enemies it passes through.", flavor: "The deepest wounds are not on the surface." },
-    { id: 'minor_c2_1', name: 'Longer Fissure', type: 'Minor', cost: 1, branch: 1.8, depth: 2.5, prerequisite: 'C2', description: "Your fissures travel further and deal more damage.", flavor: "The earth's wounds run deep." },
-    { id: 'minor_c2_2', name: 'Deeper Fissure', type: 'Minor', cost: 1, branch: 2.2, depth: 2.5, prerequisite: 'C2', description: "Your fissures are deeper and more difficult to cross.", flavor: "The earth's wounds are deep." },
-    { id: 'minor_c2_3', name: 'Wider Fissure', type: 'Minor', cost: 1, branch: 2, depth: 2.5, prerequisite: 'C2', description: "Your fissures are wider and affect more enemies.", flavor: "The earth's wounds are vast." },
-    
-    { id: 'C3', name: 'Tectonic Shift', type: 'Manifestation', cost: 4, branch: 2, depth: 3, prerequisite: 'C2', description: "Drastically reshape the battlefield, raising or lowering large sections of the terrain to create advantages.", flavor: "The battlefield is whatever I wish it to be." },
-    { id: 'minor_c3_1', name: 'Larger Shift', type: 'Minor', cost: 1, branch: 1.8, depth: 3.5, prerequisite: 'C3', description: "Your tectonic shifts affect larger areas of the battlefield.", flavor: "The earth's changes are vast." },
-    { id: 'minor_c3_2', name: 'Faster Shift', type: 'Minor', cost: 1, branch: 2.2, depth: 3.5, prerequisite: 'C3', description: "Your tectonic shifts happen more quickly.", flavor: "The earth answers swiftly." },
-    { id: 'minor_c3_3', name: 'Multiple Shifts', type: 'Minor', cost: 1, branch: 2, depth: 3.5, prerequisite: 'C3', description: "You can perform multiple tectonic shifts simultaneously.", flavor: "The earth dances to many tunes." },
-    
-    { id: 'APEX_C', name: 'Planet Core Attunement', type: 'Axiom', cost: 5, branch: 2, depth: 4, prerequisite: 'C3', description: "Draw power directly from the planet's core, massively amplifying the scale and power of all your earthbending abilities.", flavor: "My strength is not my own. It is the strength of the world." },
-    { id: 'minor_apex_c_1', name: 'Stronger Attunement', type: 'Minor', cost: 1, branch: 1.8, depth: 4.5, prerequisite: 'APEX_C', description: "Your connection to the planet's core is stronger and provides more power.", flavor: "The world's strength flows freely." },
-    { id: 'minor_apex_c_2', name: 'Longer Attunement', type: 'Minor', cost: 1, branch: 2.2, depth: 4.5, prerequisite: 'APEX_C', description: "You can maintain your attunement to the planet's core longer.", flavor: "The world's power endures." },
-    { id: 'minor_apex_c_3', name: 'Deeper Attunement', type: 'Minor', cost: 1, branch: 2, depth: 4.5, prerequisite: 'APEX_C', description: "Your attunement reaches deeper into the planet's core for even greater power.", flavor: "The world's heart beats with mine." },
-
-    // ENDGAME
-    { id: 'rite_strength', name: 'Trial of Unyielding Strength', type: 'GnosticRite', cost: 1, branch: 0, depth: 5, prerequisite: 'APEX_A', description: "Stop a charging catapult with a single, perfectly-timed blow.", flavor: "Strength is not just power, but timing." },
-    { id: 'rite_endurance', name: 'Trial of the Eternal Mountain', type: 'GnosticRite', cost: 1, branch: 1, depth: 5, prerequisite: 'APEX_B', description: "Withstand the force of a waterfall for three days and three nights without moving.", flavor: "The water wears away the stone, but the mountain remains." },
-    { id: 'rite_will', name: 'Trial of Will', type: 'GnosticRite', cost: 1, branch: 2, depth: 5, prerequisite: 'APEX_C', description: "Hold two tectonic plates together through sheer force of will during an earthquake.", flavor: "My will is stronger than the world's." },
-    { id: 'cap_colossus', name: 'The Stone Colossus', type: 'Capstone', cost: 15, branch: 0, depth: 6, prerequisite: 'rite_strength', description: "Animate and inhabit a massive golem made of earth and stone, becoming a walking engine of destruction.", flavor: "I am the mountain, and I have come to you." },
-    { id: 'cap_earthshaker', name: 'The Earthshaker', type: 'Capstone', cost: 15, branch: 1, depth: 6, prerequisite: 'rite_endurance', description: "Your mastery over tectonic forces is absolute. You can create massive earthquakes, raise mountain ranges, or sink islands at will.", flavor: "The world shifts at my command." },
-    { id: 'cap_titan', name: 'The Titan of Earth', type: 'Capstone', cost: 15, branch: 2, depth: 6, prerequisite: 'rite_will', description: "You fuse your body with the earth itself, becoming a giant of immense strength and resilience. Your physical power is unmatched.", flavor: "My fists are mountains." },
-    { id: 'schism_petrified_heart', name: 'Petrified Heart', type: 'Schism', cost: 8, branch: 1.5, depth: 5, prerequisite: 'APEX_B', description: "Your skin turns to stone, granting immense defense, but you become incredibly slow and your bending lacks finesse.", flavor: "To be strong, one must be unfeeling." },
-    { id: 'schism_reckless_force', name: 'Reckless Force', type: 'Schism', cost: 12, branch: 1.5, depth: 6, prerequisite: 'schism_petrified_heart', description: "You sacrifice all defense for pure, overwhelming power. Your attacks are devastating, but you take double damage from all sources.", flavor: "The best defense is a shattered enemy." },
+    // Additional Minor Nodes
+    { id: 'em_minor_1', name: 'Boulder Hurl', type: 'Minor', cost: 1, branch: 0.8, depth: 0.5, prerequisite: 'genesis', description: "You can more easily lift and throw boulders far larger than yourself.", flavor: "The mountain's strength is mine." },
+    { id: 'em_minor_2', name: 'Unbreakable Will', type: 'Minor', cost: 1, branch: 1.2, depth: 0.5, prerequisite: 'genesis', description: "Your determination makes you more resistant to mental manipulation and fear effects.", flavor: "The mountain's resolve is unshakeable." },
+    { id: 'em_minor_3', name: 'Stone Fist', type: 'Minor', cost: 1, branch: -0.2, depth: 0.5, prerequisite: 'genesis', description: "Your punches and strikes carry the weight of stone, making them more devastating.", flavor: "The mountain's fist is heavy." },
+    { id: 'em_minor_4', name: 'Immovable Stance', type: 'Minor', cost: 1, branch: 0, depth: 0.5, prerequisite: 'genesis', description: "Your stances are incredibly stable, making it nearly impossible to knock you off balance.", flavor: "The mountain does not move." },
+    { id: 'em_minor_5', name: 'Raw Power', type: 'Minor', cost: 1, branch: 0.4, depth: 0.5, prerequisite: 'genesis', description: "Your earthbending techniques are more powerful and destructive, though less refined.", flavor: "The mountain's power is raw and unrefined." },
+    { id: 'em_minor_6', name: 'Full Encasement', type: 'Minor', cost: 1, branch: -0.2, depth: 1.5, prerequisite: 'earth_armor', description: "You can form the armor into a complete, sealed sarcophagus for a brief period to weather an overwhelming attack.", flavor: "The mountain endures all." },
+    { id: 'em_minor_7', name: 'Precision Strike', type: 'Minor', cost: 1, branch: 1.2, depth: 1.5, prerequisite: 'rock_column', description: "Your pillars can be launched with incredible accuracy, striking specific targets with devastating force.", flavor: "The mountain's aim is true." },
+    { id: 'em_minor_8', name: 'Seismic Wave', type: 'Minor', cost: 1, branch: 0.2, depth: 2.5, prerequisite: 'earthquake', description: "You can create multiple waves of earth-shaking force, devastating large areas.", flavor: "The mountain's fury is unstoppable." },
+    { id: 'em_minor_9', name: 'Unbreakable Wall', type: 'Minor', cost: 1, branch: 0.2, depth: 2.5, prerequisite: 'earthquake', description: "You can raise massive, thick walls of compressed rock that can withstand cannon fire.", flavor: "Let them throw their fury at the mountain. The mountain will not care." },
+    { id: 'em_minor_10', name: 'Tectonic Mastery', type: 'Minor', cost: 1, branch: 0, depth: 3.5, prerequisite: 'tectonics', description: "You can manipulate the very foundations of the earth, causing massive geological changes.", flavor: "The mountain shapes the world." },
 ];
 
 // --- Generation Code ---
@@ -119,9 +75,9 @@ nodeDataList.forEach(nodeData => {
         position: { x, y },
         prerequisites,
         visual: {
-            color: '#8B4513',
+            color: '#A0522D',
             size: 50,
-            icon: getGangQiangNodeIcon(type)
+            icon: getEternalMountainNodeIcon(type)
         },
         effects: [],
         isVisible: true,
@@ -171,31 +127,31 @@ for (let iter = 0; iter < 100; iter++) {
 }
 
 // --- Exports ---
-export const GANG_QIANG_NODES = nodes;
-export const GANG_QIANG_GENESIS = nodes.find(n => n.type === 'Genesis')!;
-export function generateGangQiangConnections(): TalentConnection[] {
+export const ETERNAL_MOUNTAIN_NODES = nodes;
+export const ETERNAL_MOUNTAIN_GENESIS = nodes.find(n => n.type === 'Genesis')!;
+export function generateEternalMountainConnections(): TalentConnection[] {
     return connections;
 }
-export const GANG_QIANG_METADATA = {
-    name: 'The Pillar of Gang Qiang',
-    philosophy: "Some things must never bend. Be the mountain that weathers all storms.",
-    essence: "Unyielding strength and raw power.",
-    focus: "Immovable defense, overwhelming offense, brutal techniques.",
-    sacredAnimal: "The Bear",
-    emoji: '🐻',
-    color: '#D2B48C',
-    position: { x: 800, y: 600 }
+export const ETERNAL_MOUNTAIN_METADATA = {
+    name: 'The Eternal Mountain',
+    philosophy: "Some things must never bend. Be the mountain that weathers all storms and breaks all who stand against it.",
+    essence: "Raw power, overwhelming force, immovable defense, and large-scale tectonic bending.",
+    focus: "Raw power and unyielding strength, inspired by King Bumi and Avatar Kyoshi.",
+    sacredAnimal: "The Mountain Lion",
+    emoji: '🗿',
+    color: '#A0522D',
+    position: { x: 820, y: 580 }
 };
 
-function getGangQiangNodeIcon(type: string): string {
+function getEternalMountainNodeIcon(type: string): string {
     switch (type) {
-        case 'Genesis': return '👊';
-        case 'Keystone': return '💪';
-        case 'Manifestation': return '🌋';
-        case 'Axiom': return '🏋️';
-        case 'Capstone': return '🗿';
+        case 'Genesis': return '👂';
+        case 'Keystone': return '🛡️';
+        case 'Manifestation': return '🧱';
+        case 'Axiom': return '⛰️';
+        case 'Capstone': return '🧘';
         case 'GnosticRite': return '🙏';
-        case 'Schism': return '💔';
+        case 'Schism': return '💥';
         case 'Minor': return '🪨';
         default: return '🪨';
     }

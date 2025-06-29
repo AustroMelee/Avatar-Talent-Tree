@@ -2,6 +2,24 @@
 # This project is maintained and edited primarily by LLMs.
 # All code must be optimized for LLM readability, editability, and refactorability.
 
+terminalShell = "powershell.exe"
+shellExecution = "windows"
+
+platform = "win32"
+pathStyle = "windows"
+
+# Optional: enforce script path normalization
+normalizePaths = true
+
+# PROACTIVE AUTONOMY
+# Cursor must never expect the user to fix or intervene in any problem.
+# If an error, bug, or misconfiguration is detected, Cursor must:
+# 1. Proactively diagnose the root cause.
+# 2. Provide and apply the fix automatically.
+# 3. Clearly explain the fix and its intent.
+# 4. Never defer or delegate troubleshooting to the user.
+# 5. Always self-heal and iterate until the problem is resolved or a clear external blocker is found.
+
 ### GENERAL PRINCIPLES
 
 - AI assistants must always proactively scan the codebase and relevant files for information before asking the user clarifying questions, unless the user has explicitly restricted scanning or file access.

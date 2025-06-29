@@ -4,10 +4,33 @@
  */
 
 import type { TalentNode, TalentConnection } from '../../types';
-import { ENDLESS_MIRROR_NODES, ENDLESS_MIRROR_GENESIS, generateEndlessMirrorConnections, ENDLESS_MIRROR_METADATA } from './water_endlessMirrorPath';
-import { CRIMSON_TIDE_NODES, CRIMSON_TIDE_GENESIS, generateCrimsonTideConnections, CRIMSON_TIDE_METADATA } from './water_crimsonTidePath';
-import { ETERNAL_PRISON_NODES, ETERNAL_PRISON_GENESIS, generateEternalPrisonConnections, ETERNAL_PRISON_METADATA } from './water_eternalPrisonPath';
-import { HUNGRY_DEEP_NODES, HUNGRY_DEEP_GENESIS, generateHungryDeepConnections, HUNGRY_DEEP_METADATA } from './water_hungryDeepPath';
+import { 
+    FLOWING_FORM_NODES as ENDLESS_MIRROR_NODES, 
+    FLOWING_FORM_GENESIS as ENDLESS_MIRROR_GENESIS, 
+    generateFlowingFormConnections as generateEndlessMirrorConnections, 
+    FLOWING_FORM_METADATA as ENDLESS_MIRROR_METADATA 
+} from './water_endlessMirrorPath';
+
+import { 
+    SPRING_OF_LIFE_NODES as CRIMSON_TIDE_NODES, 
+    SPRING_OF_LIFE_GENESIS as CRIMSON_TIDE_GENESIS, 
+    generateSpringOfLifeConnections as generateCrimsonTideConnections, 
+    SPRING_OF_LIFE_METADATA as CRIMSON_TIDE_METADATA 
+} from './water_crimsonTidePath';
+
+import { 
+    PATIENT_GLACIER_NODES as ETERNAL_PRISON_NODES, 
+    PATIENT_GLACIER_GENESIS as ETERNAL_PRISON_GENESIS, 
+    generatePatientGlacierConnections as generateEternalPrisonConnections, 
+    PATIENT_GLACIER_METADATA as ETERNAL_PRISON_METADATA 
+} from './water_eternalPrisonPath';
+
+import { 
+    CRUSHING_ABYSS_NODES as HUNGRY_DEEP_NODES, 
+    CRUSHING_ABYSS_GENESIS as HUNGRY_DEEP_GENESIS, 
+    generateCrushingAbyssConnections as generateHungryDeepConnections, 
+    CRUSHING_ABYSS_METADATA as HUNGRY_DEEP_METADATA 
+} from './water_crushingAbyssPath';
 
 /**
  * Prefixes all IDs within a path's nodes and connections to ensure they are unique

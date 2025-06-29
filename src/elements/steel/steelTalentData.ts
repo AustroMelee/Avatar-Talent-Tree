@@ -5,10 +5,10 @@
  */
 
 import type { TalentNode, TalentConnection } from '../../types';
-import { SILENT_BLADE_NODES, generateSilentBladeConnections, SILENT_BLADE_METADATA } from './steel_silentBladePath';
-import { SHIELD_OF_PEOPLE_NODES, generateShieldOfPeopleConnections, SHIELD_OF_PEOPLE_METADATA } from './steel_shieldOfPeoplePath';
-import { FLOW_OF_COMBAT_NODES, generateFlowOfCombatConnections, FLOW_OF_COMBAT_METADATA } from './steel_flowOfCombatPath';
-import { MIND_OF_WAR_NODES, generateMindOfWarConnections, MIND_OF_WAR_METADATA } from './steel_mindOfWarPath';
+import { ARSENAL_NODES, generateArsenalConnections, ARSENAL_METADATA } from './steel_arsenalPath';
+import { PARAGON_NODES, generateParagonConnections, PARAGON_METADATA } from './steel_paragonPath';
+import { INNOVATOR_NODES, generateInnovatorConnections, INNOVATOR_METADATA } from './steel_innovatorPath';
+import { MASTERMIND_NODES, generateMastermindConnections, MASTERMIND_METADATA } from './steel_mastermindPath';
 
 /**
  * Prefixes all IDs within a path's nodes and connections to ensure they are unique
@@ -45,44 +45,44 @@ const prefixPathData = (nodes: TalentNode[], connections: TalentConnection[], pr
 };
 
 // Apply the prefixing logic to each path
-const { prefixedNodes: sbNodes, prefixedConnections: sbConnections } = prefixPathData(SILENT_BLADE_NODES, generateSilentBladeConnections(), 'sb');
-const { prefixedNodes: spNodes, prefixedConnections: spConnections } = prefixPathData(SHIELD_OF_PEOPLE_NODES, generateShieldOfPeopleConnections(), 'sp');
-const { prefixedNodes: fcNodes, prefixedConnections: fcConnections } = prefixPathData(FLOW_OF_COMBAT_NODES, generateFlowOfCombatConnections(), 'fc');
-const { prefixedNodes: mwNodes, prefixedConnections: mwConnections } = prefixPathData(MIND_OF_WAR_NODES, generateMindOfWarConnections(), 'mw');
+const { prefixedNodes: arsenalNodes, prefixedConnections: arsenalConnections } = prefixPathData(ARSENAL_NODES, generateArsenalConnections(), 'arsenal');
+const { prefixedNodes: paragonNodes, prefixedConnections: paragonConnections } = prefixPathData(PARAGON_NODES, generateParagonConnections(), 'paragon');
+const { prefixedNodes: innovatorNodes, prefixedConnections: innovatorConnections } = prefixPathData(INNOVATOR_NODES, generateInnovatorConnections(), 'innovator');
+const { prefixedNodes: mastermindNodes, prefixedConnections: mastermindConnections } = prefixPathData(MASTERMIND_NODES, generateMastermindConnections(), 'mastermind');
 
 /**
  * All Steel talent nodes from all integrated paths.
  */
 export const STEEL_TALENT_NODES: TalentNode[] = [
-  ...sbNodes,
-  ...spNodes,
-  ...fcNodes,
-  ...mwNodes
+  ...arsenalNodes,
+  ...paragonNodes,
+  ...innovatorNodes,
+  ...mastermindNodes
 ];
 
 /**
  * Steel constellation metadata, including all available paths.
  */
 export const STEEL_CONSTELLATION = {
-  name: 'The Forged Steel',
-  description: 'The triumph of mortal will over supernatural power, achieved through dedication, training, and ingenuity.',
+  name: 'The Human Spirit',
+  description: 'Ingenuity, discipline, strategy, and innovation—peak human potential as a match for any element.',
   background: 'steel',
-  paths: [SILENT_BLADE_METADATA, SHIELD_OF_PEOPLE_METADATA, FLOW_OF_COMBAT_METADATA, MIND_OF_WAR_METADATA]
+  paths: [ARSENAL_METADATA, PARAGON_METADATA, INNOVATOR_METADATA, MASTERMIND_METADATA]
 };
 
 /**
  * Root node for the Steel constellation (using the first path's prefixed Genesis as a default).
  */
-export const STEEL_ROOT_NODE: TalentNode = sbNodes.find(n => n.type === 'Genesis') || sbNodes[0];
+export const STEEL_ROOT_NODE: TalentNode = arsenalNodes.find(n => n.type === 'Genesis') || arsenalNodes[0];
 
 /**
  * Generate all connections for the Steel constellation by combining prefixed connections.
  */
 export function generateSteelConnections(): TalentConnection[] {
   return [
-    ...sbConnections,
-    ...spConnections,
-    ...fcConnections,
-    ...mwConnections
+    ...arsenalConnections,
+    ...paragonConnections,
+    ...innovatorConnections,
+    ...mastermindConnections
   ];
 } 

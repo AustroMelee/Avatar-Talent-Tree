@@ -1,6 +1,6 @@
 // FILE: C:\Users\rohai\Desktop\WEBSITE PAGES\AVATAR\TALENT TREES\talent tree project\src\main.ts
 
-import '@/styles/index.css';
+import '../styles/index.css';
 import { TalentTreeRenderer } from './talentTreeRenderer';
 import { TalentTreeManager, type VisualEvent } from './talentTreeManager';
 import { assetManager } from './assetManager';
@@ -20,6 +20,11 @@ import {
   CONSTELLATIONS,
   getConstellation
 } from './elements';
+import { AIR_PRESETS, type PresetBuild } from './elements/air/airPresets';
+import { WATER_PRESETS } from './elements/water/waterPresets';
+import { EARTH_PRESETS } from './elements/earth/earthPresets';
+import { FIRE_PRESETS } from './elements/fire/firePresets';
+import { STEEL_PRESETS } from './elements/steel/steelPresets';
 
 class TalentTreeApp {
   private canvas: HTMLCanvasElement;
@@ -31,6 +36,12 @@ class TalentTreeApp {
   private tooltip: HTMLElement;
   private buildSummary: HTMLElement;
   private summaryTooltip: HTMLElement;
+  private presetsList: HTMLElement;
+  private activePresetInfo: HTMLElement;
+  private activePresetName: HTMLElement;
+  private activePresetCost: HTMLElement;
+  private clearPresetBtn: HTMLElement;
+  private currentActivePreset: PresetBuild | null = null;
   private animationFrameId: number | null = null;
   private lastDebugLog: number | null = null;
   private visualEffects: Map<string, { type: string; startTime: number; duration: number }> = new Map();
@@ -38,10 +49,10 @@ class TalentTreeApp {
 
   constructor() {
     this.initializeCanvas();
+    
     this.initializeComponents().then(() => {
       this.setupEventListeners();
       this.startRenderLoop();
-      // Defer centering to ensure all layout calculations are complete
       requestAnimationFrame(() => this.centerViewOnLoad());
     }).catch(console.error);
   }
@@ -49,7 +60,6 @@ class TalentTreeApp {
   private initializeCanvas(): void {
     this.canvas = document.getElementById('talent-tree-canvas') as HTMLCanvasElement;
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
-    this.resizeCanvas();
   }
 
   private async initializeComponents(): Promise<void> {
@@ -57,15 +67,22 @@ class TalentTreeApp {
     const renderConfig: RenderConfig = {
       canvas: this.canvas,
       ctx: this.ctx,
-      viewport: { x: 0, y: 0, width: this.canvas.clientWidth, height: this.canvas.clientHeight },
       debug: false
     };
     this.renderer = new TalentTreeRenderer(renderConfig);
+    
+    this.resizeCanvas();
+
     this.manager = new TalentTreeManager();
     this.manager.subscribe(this.updateUI.bind(this));
     this.tooltip = document.getElementById('tooltip') as HTMLElement;
     this.buildSummary = document.getElementById('build-summary') as HTMLElement;
     this.summaryTooltip = document.getElementById('summary-tooltip') as HTMLElement;
+    this.presetsList = document.getElementById('presets-list') as HTMLElement;
+    this.activePresetInfo = document.getElementById('active-preset-info') as HTMLElement;
+    this.activePresetName = document.getElementById('active-preset-name') as HTMLElement;
+    this.activePresetCost = document.getElementById('active-preset-cost') as HTMLElement;
+    this.clearPresetBtn = document.getElementById('clear-preset-btn') as HTMLElement;
     
     // Initialize with Air constellation
     this.switchToElement('air');
@@ -98,6 +115,8 @@ class TalentTreeApp {
 
     document.getElementById('reset-btn')?.addEventListener('click', () => {
         this.manager.resetPoints();
+        this.currentActivePreset = null;
+        this.updateActivePresetUI();
         this.centerViewOnLoad();
     });
     document.getElementById('zoom-in-btn')?.addEventListener('click', () => {
@@ -107,6 +126,13 @@ class TalentTreeApp {
     document.getElementById('zoom-out-btn')?.addEventListener('click', () => {
       const center = { x: this.canvas.clientWidth / 2, y: this.canvas.clientHeight / 2 };
       this.manager.setZoomAtPosition(this.manager.getState().zoom * 0.8, center);
+    });
+
+    // Add clear preset button listener
+    this.clearPresetBtn.addEventListener('click', () => {
+        this.manager.resetPoints();
+        this.currentActivePreset = null;
+        this.updateActivePresetUI();
     });
 
     // Delegated Event Listeners for the Build Summary Panel
@@ -160,6 +186,31 @@ class TalentTreeApp {
     // Load the appropriate talent data
     this.loadElementalData(elementId);
     
+    // Update presets based on the current element
+    const presetsContainer = document.getElementById('presets-container');
+    if (presetsContainer) {
+      if (elementId === 'air') {
+        this.populatePresets(AIR_PRESETS);
+        presetsContainer.style.display = 'block';
+      } else if (elementId === 'water') {
+        this.populatePresets(WATER_PRESETS);
+        presetsContainer.style.display = 'block';
+      } else if (elementId === 'earth') {
+        this.populatePresets(EARTH_PRESETS);
+        presetsContainer.style.display = 'block';
+      } else if (elementId === 'fire') {
+        this.populatePresets(FIRE_PRESETS);
+        presetsContainer.style.display = 'block';
+      } else if (elementId === 'steel') {
+        this.populatePresets(STEEL_PRESETS);
+        presetsContainer.style.display = 'block';
+      } else {
+        // Hide presets for other elements for now
+        this.populatePresets([]);
+        presetsContainer.style.display = 'none';
+      }
+    }
+
     // Reset view and center on new tree
     this.centerViewOnLoad();
   }
@@ -333,21 +384,17 @@ class TalentTreeApp {
 
   private handleMouseMove(event: MouseEvent): void {
     const state = this.manager.getState();
-    const dpr = window.devicePixelRatio || 1;
 
     if (this.isDragging) {
-      const currentPos = { x: event.clientX, y: event.clientY };
-      const delta = { x: currentPos.x - this.lastMousePos.x, y: currentPos.y - this.lastMousePos.y };
-      this.manager.panBy(delta);
-      this.lastMousePos = currentPos;
+      const deltaX = event.clientX - this.lastMousePos.x;
+      const deltaY = event.clientY - this.lastMousePos.y;
+      this.manager.panBy({ x: deltaX, y: deltaY });
+      this.lastMousePos = { x: event.clientX, y: event.clientY };
     } else {
-      const rect = this.canvas.getBoundingClientRect();
-      const position = { 
-        x: (event.clientX - rect.left) * dpr, 
-        y: (event.clientY - rect.top) * dpr 
-      };
+      const worldPos = this.getMouseWorldPosition(event);
+      // findNodeAtPosition now receives world coordinates directly
+      const hoveredNode = this.renderer.findNodeAtPosition(worldPos, state.talentTree.nodes);
       
-      const hoveredNode = this.renderer.findNodeAtPosition(position, state.talentTree.nodes, state.zoom, state.pan);
       this.manager.setHoveredNode(hoveredNode ? hoveredNode.id : null);
       this.canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
       if (hoveredNode) this.showTooltip(hoveredNode, event);
@@ -371,15 +418,9 @@ class TalentTreeApp {
     if(event.button !== 0) return;
 
     const state = this.manager.getState();
-    const rect = this.canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-
-    const position = { 
-      x: (event.clientX - rect.left) * dpr, 
-      y: (event.clientY - rect.top) * dpr 
-    };
-
-    const clickedNode = this.renderer.findNodeAtPosition(position, state.talentTree.nodes, state.zoom, state.pan);
+    const worldPos = this.getMouseWorldPosition(event);
+    const clickedNode = this.renderer.findNodeAtPosition(worldPos, state.talentTree.nodes);
+    
     if (clickedNode) {
       const wasAllocatable = clickedNode.isAllocatable && !clickedNode.isAllocated;
       this.manager.handleNodeClick(clickedNode.id);
@@ -393,6 +434,8 @@ class TalentTreeApp {
               duration: 600 // 600ms duration for the flash
           });
       }
+      
+      this.updateActivePresetUI(); // Update UI after any node changes
     }
   }
 
@@ -406,16 +449,34 @@ class TalentTreeApp {
 
   private handleResize(): void {
     this.resizeCanvas();
-    this.renderer.updateViewport();
-    this.centerViewOnLoad();
+    // No need to recenter on every resize, let the user keep their view.
+    // The viewport update is now part of resizeCanvas.
   }
 
   private resizeCanvas(): void {
     const dpr = window.devicePixelRatio || 1;
-    const rect = this.canvas.getBoundingClientRect();
-    this.canvas.width = rect.width * dpr;
-    this.canvas.height = rect.height * dpr;
-    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const container = this.canvas.parentElement!;
+    const rect = container.getBoundingClientRect();
+
+    // Set the display size of the canvas
+    this.canvas.style.width = `${rect.width}px`;
+    this.canvas.style.height = `${rect.height}px`;
+
+    // Set the actual backing store size of the canvas
+    const newWidth = Math.round(rect.width * dpr);
+    const newHeight = Math.round(rect.height * dpr);
+
+    // Only resize and update if the size has actually changed
+    if (this.canvas.width !== newWidth || this.canvas.height !== newHeight) {
+      this.canvas.width = newWidth;
+      this.canvas.height = newHeight;
+
+      // Update the renderer's viewport information
+      this.renderer.updateViewport(newWidth, newHeight, dpr);
+
+      // The renderer will handle the context transform, so no need for ctx.setTransform here.
+      console.log(`Canvas resized to: ${newWidth}x${newHeight} (DPR: ${dpr})`);
+    }
   }
   
   private startRenderLoop(): void {
@@ -527,6 +588,13 @@ class TalentTreeApp {
           type: 'synthesis_reveal',
           startTime: now,
           duration: 1500 // 1.5 second reveal
+        });
+      } else if (event.type === 'deallocate_denied') {
+        // Create a red flash effect for a failed deallocation
+        this.visualEffects.set(event.nodeId, {
+            type: 'deallocate_denied_flash',
+            startTime: now,
+            duration: 600 // 600ms red flash
         });
       }
     });
@@ -813,16 +881,97 @@ class TalentTreeApp {
   private handleContextMenu(event: MouseEvent): void {
     event.preventDefault();
     const state = this.manager.getState();
-    const rect = this.canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    const position = {
-      x: (event.clientX - rect.left) * dpr,
-      y: (event.clientY - rect.top) * dpr
-    };
-    const node = this.renderer.findNodeAtPosition(position, state.talentTree.nodes, state.zoom, state.pan);
+    const worldPos = this.getMouseWorldPosition(event);
+    const node = this.renderer.findNodeAtPosition(worldPos, state.talentTree.nodes);
     if (node && node.isAllocated) {
       this.manager.removePoint(node.id);
     }
+  }
+
+  /**
+   * Populates the presets list in the UI.
+   * @param presets An array of preset builds to display.
+   */
+  private populatePresets(presets: PresetBuild[]): void {
+    if (!this.presetsList) return;
+
+    this.presetsList.innerHTML = ''; // Clear existing presets
+
+    if (presets.length === 0) {
+      this.presetsList.innerHTML = '<p class="no-presets">No presets available for this element.</p>';
+      return;
+    }
+
+    presets.forEach(preset => {
+      const button = document.createElement('button');
+      button.className = 'preset-btn';
+      button.dataset.presetId = preset.id;
+      button.innerHTML = `
+        <strong>${preset.name}</strong>
+        <p>${preset.description}</p>
+      `;
+      button.addEventListener('click', () => this.applyPreset(preset));
+      this.presetsList.appendChild(button);
+    });
+  }
+
+  /**
+   * Applies a selected preset build to the talent tree.
+   * @param preset The preset build to apply.
+   */
+  private applyPreset(preset: PresetBuild): void {
+    this.currentActivePreset = preset; // Store the active preset
+    this.manager.applyPresetBuild(preset.nodeIds);
+    this.updateActivePresetUI(); // Update the UI
+    this.centerViewOnLoad();
+  }
+
+  /**
+   * Updates the UI to show information about the currently active preset.
+   */
+  private updateActivePresetUI(): void {
+    if (this.currentActivePreset) {
+      // Calculate the total PK cost of the preset
+      const state = this.manager.getState();
+      const nodeMap = new Map(state.talentTree.nodes.map(n => [n.id, n]));
+      let totalCost = 0;
+      
+      state.talentTree.allocatedNodes.forEach(nodeId => {
+        const node = nodeMap.get(nodeId);
+        if (node) {
+          totalCost += node.pkCost;
+        }
+      });
+
+      // Update the DOM elements
+      this.activePresetName.textContent = this.currentActivePreset.name;
+      this.activePresetCost.innerHTML = `Total Cost: <strong>${totalCost} PK</strong>`;
+      this.activePresetInfo.classList.remove('hidden');
+    } else {
+      // Hide the info box if no preset is active
+      this.activePresetInfo.classList.add('hidden');
+    }
+  }
+
+  /**
+   * Converts a screen-space mouse event position to a world-space position
+   * on the canvas, accounting for pan, zoom, and DPI.
+   * @param event A MouseEvent.
+   * @returns The world-space coordinates {x, y}.
+   */
+  private getMouseWorldPosition(event: MouseEvent): Point {
+    const state = this.manager.getState();
+    const rect = this.canvas.getBoundingClientRect();
+    
+    // Calculate mouse position in CSS pixels relative to the canvas
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    // Convert from CSS pixels to world coordinates
+    const worldX = (mouseX - state.pan.x) / state.zoom;
+    const worldY = (mouseY - state.pan.y) / state.zoom;
+    
+    return { x: worldX, y: worldY };
   }
 }
 

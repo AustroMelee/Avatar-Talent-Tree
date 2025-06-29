@@ -6,10 +6,33 @@
  */
 
 import type { TalentNode, TalentConnection } from '../../types';
-import { HUN_YUAN_NODES, HUN_YUAN_GENESIS, generateHunYuanConnections, HUN_YUAN_METADATA } from './earth_hunYuanPath';
-import { BIAN_HUA_NODES, BIAN_HUA_GENESIS, generateBianHuaConnections, BIAN_HUA_METADATA } from './earth_bianHuaPath';
-import { GANG_QIANG_NODES, GANG_QIANG_GENESIS, generateGangQiangConnections, GANG_QIANG_METADATA } from './earth_gangQiangPath';
-import { JING_QUE_NODES, JING_QUE_GENESIS, generateJingQueConnections, JING_QUE_METADATA } from './earth_jingQuePath';
+import { 
+    PATIENT_MOUNTAIN_NODES as HUN_YUAN_NODES, 
+    PATIENT_MOUNTAIN_GENESIS as HUN_YUAN_GENESIS, 
+    generatePatientMountainConnections as generateHunYuanConnections, 
+    PATIENT_MOUNTAIN_METADATA as HUN_YUAN_METADATA 
+} from './earth_hunYuanPath';
+
+import { 
+    MOLTEN_CORE_NODES as BIAN_HUA_NODES, 
+    MOLTEN_CORE_GENESIS as BIAN_HUA_GENESIS, 
+    generateMoltenCoreConnections as generateBianHuaConnections, 
+    MOLTEN_CORE_METADATA as BIAN_HUA_METADATA 
+} from './earth_bianHuaPath';
+
+import { 
+    ETERNAL_MOUNTAIN_NODES as GANG_QIANG_NODES, 
+    ETERNAL_MOUNTAIN_GENESIS as GANG_QIANG_GENESIS, 
+    generateEternalMountainConnections as generateGangQiangConnections, 
+    ETERNAL_MOUNTAIN_METADATA as GANG_QIANG_METADATA 
+} from './earth_gangQiangPath';
+
+import { 
+    SCULPTORS_HAND_NODES as JING_QUE_NODES, 
+    SCULPTORS_HAND_GENESIS as JING_QUE_GENESIS, 
+    generateSculptorsHandConnections as generateJingQueConnections, 
+    SCULPTORS_HAND_METADATA as JING_QUE_METADATA 
+} from './earth_jingQuePath';
 
 /**
  * Prefixes all IDs within a path's nodes and connections to ensure they are unique

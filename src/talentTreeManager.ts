@@ -22,7 +22,7 @@ import {
  * Visual events for enhanced UI feedback
  */
 export type VisualEvent = {
-  type: 'bridge_allocated' | 'synthesis_revealed' | 'bridge_locked';
+  type: 'bridge_allocated' | 'synthesis_revealed' | 'bridge_locked' | 'deallocate_denied';
   nodeId: string;
   timestamp: number;
   data?: any;
@@ -443,6 +443,24 @@ export class TalentTreeManager {
   removePoint(nodeId: string): void {
     const node = this.state.talentTree.nodes.find(n => n.id === nodeId);
     if (!node || !node.isAllocated) return;
+
+    // Check if any other allocated node requires this one.
+    const isPrerequisiteForAllocatedNode = this.state.talentTree.nodes.some(
+      otherNode =>
+        otherNode.isAllocated && otherNode.prerequisites.includes(nodeId)
+    );
+
+    if (isPrerequisiteForAllocatedNode) {
+      // Don't remove the point. Instead, fire a visual event.
+      this.addVisualEvent({
+        type: 'deallocate_denied',
+        nodeId,
+        timestamp: Date.now()
+      } as VisualEvent); // Cast to VisualEvent to include our new type
+      
+      this.notify(); // Notify to trigger the render loop for the flash effect
+      return; // Stop the function here
+    }
     
     const cost = this.calculatePKCost(node);
     
@@ -451,6 +469,56 @@ export class TalentTreeManager {
     this.state.talentTree.spentPK -= cost;
     
     // Update all node states
+    this.updateAllNodeStates();
+    this.notify();
+  }
+
+  /**
+   * Applies a preset build by allocating the specified endpoint nodes
+   * and all of their prerequisites.
+   * @param endpointNodeIds An array of the final node IDs for the build.
+   */
+  public applyPresetBuild(endpointNodeIds: string[]): void {
+    // 1. Reset the tree's STATE to a clean state, without changing the element.
+    this.state.talentTree.allocatedNodes.clear();
+    this.state.talentTree.spentPK = 0;
+    this.state.talentTree.chosenPaths.clear();
+    this.state.talentTree.philosophicalWounds = [];
+    this.state.talentTree.covenant = null;
+
+    // 2. Create a map for quick node lookups using the CURRENT tree's nodes
+    const allNodesMap = new Map(this.state.talentTree.nodes.map(n => [n.id, n]));
+
+    // 3. Create a set to hold all nodes that need to be allocated
+    const nodesToAllocate = new Set<string>();
+
+    // 4. Recursive helper function to find all prerequisites for a node
+    const findAllPrerequisites = (nodeId: string) => {
+      // If we've already processed this node, stop.
+      if (nodesToAllocate.has(nodeId)) {
+        return;
+      }
+
+      const node = allNodesMap.get(nodeId);
+      if (node) {
+        // Add the current node to the set
+        nodesToAllocate.add(node.id);
+        // Recursively find prerequisites for this node's prerequisites
+        node.prerequisites.forEach(prereqId => {
+          findAllPrerequisites(prereqId);
+        });
+      }
+    };
+
+    // 5. For each endpoint in the preset, trace back and collect all required nodes
+    endpointNodeIds.forEach(nodeId => {
+      findAllPrerequisites(nodeId);
+    });
+
+    // 6. Apply the final set of allocated nodes
+    this.state.talentTree.allocatedNodes = nodesToAllocate;
+
+    // 7. Update all node states and notify the UI to re-render
     this.updateAllNodeStates();
     this.notify();
   }

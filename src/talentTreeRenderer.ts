@@ -92,6 +92,86 @@ const EMOJI_MAP: Record<string, string> = {
     'jing_que_schism': '🥀',
     'jing_que_minor': '🪨',
 
+    // Raging Inferno (Fire)
+    'raging_inferno_genesis': '🔥',
+    'raging_inferno_keystone': '💥',
+    'raging_inferno_manifestation': '☄️',
+    'raging_inferno_axiom': '☢️',
+    'raging_inferno_capstone': '👑',
+    'raging_inferno_gnosticrite': '🙏',
+    'raging_inferno_schism': '☠️',
+    'raging_inferno_minor': '🔥',
+
+    // Inner Sun (Fire)
+    'inner_sun_genesis': '☀️',
+    'inner_sun_keystone': '🔥',
+    'inner_sun_manifestation': '🕉️',
+    'inner_sun_axiom': '✨',
+    'inner_sun_capstone': '👑',
+    'inner_sun_gnosticrite': '🙏',
+    'inner_sun_schism': '☠️',
+    'inner_sun_minor': '🔥',
+
+    // Focused Flame (Fire)
+    'focused_flame_genesis': '🔥',
+    'focused_flame_keystone': '⚔️',
+    'focused_flame_manifestation': '🛡️',
+    'focused_flame_axiom': '💎',
+    'focused_flame_capstone': '👑',
+    'focused_flame_gnosticrite': '🙏',
+    'focused_flame_schism': '☠️',
+    'focused_flame_minor': '🔥',
+
+    // Cold Tempest (Fire)
+    'cold_tempest_genesis': '⚡',
+    'cold_tempest_keystone': '🌩️',
+    'cold_tempest_manifestation': '💫',
+    'cold_tempest_axiom': '🌀',
+    'cold_tempest_capstone': '👑',
+    'cold_tempest_gnosticrite': '🙏',
+    'cold_tempest_schism': '☠️',
+    'cold_tempest_minor': '⚡',
+
+    // Mastermind (Steel)
+    'mastermind_genesis': '🧠',
+    'mastermind_keystone': '⚙️',
+    'mastermind_manifestation': '🤖',
+    'mastermind_axiom': '🏗️',
+    'mastermind_capstone': '👑',
+    'mastermind_gnosticrite': '🙏',
+    'mastermind_schism': '💔',
+    'mastermind_minor': '🧠',
+
+    // Innovator (Steel)
+    'innovator_genesis': '⚙️',
+    'innovator_keystone': '🔧',
+    'innovator_manifestation': '🛠️',
+    'innovator_axiom': '🤖',
+    'innovator_capstone': '👑',
+    'innovator_gnosticrite': '🙏',
+    'innovator_schism': '💔',
+    'innovator_minor': '⚙️',
+
+    // Paragon (Steel)
+    'paragon_genesis': '🏃',
+    'paragon_keystone': '🤸',
+    'paragon_manifestation': '🧘',
+    'paragon_axiom': '⚡',
+    'paragon_capstone': '👑',
+    'paragon_gnosticrite': '🙏',
+    'paragon_schism': '💔',
+    'paragon_minor': '🏃',
+
+    // Arsenal (Steel)
+    'arsenal_genesis': '⚔️',
+    'arsenal_keystone': '🏹',
+    'arsenal_manifestation': '🗡️',
+    'arsenal_axiom': '🎯',
+    'arsenal_capstone': '👑',
+    'arsenal_gnosticrite': '🙏',
+    'arsenal_schism': '💔',
+    'arsenal_minor': '⚔️',
+
     // Generic Fallbacks
     'bridge': '🌉',
     'synthesis': '⚛️',
@@ -105,6 +185,11 @@ export class TalentTreeRenderer {
   private config: RenderConfig;
   private animationTime = 0;
   private allNodes: TalentNode[] = []; 
+  
+  // NEW Properties
+  private viewportWidth = 0;
+  private viewportHeight = 0;
+  private dpr = 1;
 
   constructor(config: RenderConfig) {
     this.config = config;
@@ -120,40 +205,52 @@ export class TalentTreeRenderer {
 
   // Utility: Check if a point is within the visible canvas (with margin buffer)
   private isOnScreen(x: number, y: number, margin: number = 120): boolean {
-    const { canvas } = this.config;
-    // In screen space (after pan/zoom)
     return (
       x > -margin &&
-      x < canvas.width + margin &&
+      x < this.viewportWidth + margin &&
       y > -margin &&
-      y < canvas.height + margin
+      y < this.viewportHeight + margin
     );
   }
 
   render(talentTree: TalentTree, zoom: number, pan: Point, hoveredNodeId?: string | null, visualEffects?: Map<string, { type: string; progress: number }>, highlightedNodes?: Map<string, { type: 'prereq_chain' | 'prereq_met' | 'blocker' }>, glowingNodeIds?: Set<string>): void {
     const { ctx, canvas } = this.config;
+    
+    // Clear the canvas with the raw dimensions
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform to clear correctly
+    ctx.clearRect(0, 0, this.viewportWidth, this.viewportHeight);
+    ctx.restore();
+
     this.allNodes = talentTree.nodes;
     this.animationTime = Date.now();
     const hoveredPath = this.getHoveredPath(hoveredNodeId, talentTree);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
     ctx.save();
-    ctx.translate(pan.x, pan.y);
-    ctx.scale(zoom, zoom);
-    // Culling: Only draw connections and nodes that are (or connect to) visible nodes
-    const margin = 120;
-    // Precompute which nodes are visible in screen space
+
+    // Apply pan and zoom transforms. These are now independent of DPI.
+    // The pan values are in logical CSS pixels, so we multiply by DPR.
+    ctx.translate(pan.x * this.dpr, pan.y * this.dpr);
+    ctx.scale(zoom * this.dpr, zoom * this.dpr);
+    
+    // Culling logic needs to be updated to use the new viewport properties
+    const margin = 120 * zoom; // Margin should scale with zoom
+    
     const visibleNodeIds = new Set<string>();
     for (const node of talentTree.nodes) {
-      const screenX = node.position.x * zoom + pan.x;
-      const screenY = node.position.y * zoom + pan.y;
-      if (this.isOnScreen(screenX, screenY, margin)) {
-        visibleNodeIds.add(node.id);
-      }
+        // Transform node position to screen space for culling check
+        const screenX = node.position.x * zoom * this.dpr + pan.x * this.dpr;
+        const screenY = node.position.y * zoom * this.dpr + pan.y * this.dpr;
+        if (this.isOnScreen(screenX, screenY, margin)) {
+            visibleNodeIds.add(node.id);
+        }
     }
-    // Draw only visible connections (if either endpoint is visible)
-    this.drawConnections(talentTree, hoveredPath, visibleNodeIds, zoom, pan, margin);
-    // Draw only visible nodes
+    
+    // Pass the raw zoom and pan to drawConnections, as it operates in world space
+    this.drawConnections(talentTree, hoveredPath, visibleNodeIds, zoom, pan);
+
     this.drawNodes(talentTree.nodes.filter(node => visibleNodeIds.has(node.id) && node.isVisible), hoveredNodeId, visualEffects, glowingNodeIds, hoveredPath);
+    
     ctx.restore();
   }
 
@@ -190,7 +287,28 @@ export class TalentTreeRenderer {
   // Patch drawConnections to support culling
   private drawConnections(talentTree: TalentTree, hoveredPath: Set<string>, visibleNodeIds?: Set<string>, zoom?: number, pan?: Point, margin?: number): void {
     const { ctx } = this.config;
-    const treeCenter = { x: 800, y: 500 };
+    
+    // --- NEW: Dynamically calculate tree center for connector curves ---
+    let treeCenter: Point;
+    const genesisNodes = talentTree.nodes.filter(n => n.type === 'Genesis');
+
+    if (genesisNodes.length > 0) {
+      const sumX = genesisNodes.reduce((sum, node) => sum + node.position.x, 0);
+      const sumY = genesisNodes.reduce((sum, node) => sum + node.position.y, 0);
+      treeCenter = {
+        x: sumX / genesisNodes.length,
+        y: sumY / genesisNodes.length,
+      };
+    } else if (talentTree.nodes.length > 0) {
+      const minX = Math.min(...talentTree.nodes.map(n => n.position.x));
+      const maxX = Math.max(...talentTree.nodes.map(n => n.position.x));
+      const minY = Math.min(...talentTree.nodes.map(n => n.position.y));
+      const maxY = Math.max(...talentTree.nodes.map(n => n.position.y));
+      treeCenter = { x: (minX + maxX) / 2, y: (minY + maxY) / 2 };
+    } else {
+      treeCenter = { x: 1200, y: 1200 }; // Fallback center
+    }
+
     for (const connection of talentTree.connections) {
       const fromNode = this.allNodes.find(n => n.id === connection.from);
       const toNode = this.allNodes.find(n => n.id === connection.to);
@@ -285,6 +403,38 @@ export class TalentTreeRenderer {
         ctx.setLineDash([]);
         ctx.restore();
       }
+
+      // --- NEW: Flowing Prerequisite Path Effect ---
+      // Check if this connection is part of the hovered prerequisite path
+      // AND that it is not already an active connection (we don't want to over-draw)
+      if (isHovered && !connection.isActive) {
+        const dashLength = 20;
+        const gapLength = 15;
+        const totalLength = dashLength + gapLength;
+        // Animate the flow forwards along the path
+        const t = (this.animationTime / 30) % totalLength;
+
+        ctx.save();
+        ctx.setLineDash([dashLength, gapLength]);
+        ctx.lineDashOffset = -t;
+
+        // Use a vibrant purple for the prerequisite path
+        const purpleColor = '#cba6f7'; // A nice purple from your theme
+        ctx.strokeStyle = `rgba(203, 166, 247, 0.9)`; // The purple color with some transparency
+        ctx.lineWidth = 4; // A bit thicker to stand out
+        ctx.shadowColor = purpleColor;
+        ctx.shadowBlur = 15;
+
+        ctx.beginPath();
+        ctx.moveTo(fromPos.x, fromPos.y);
+        ctx.quadraticCurveTo(controlX, controlY, toPos.x, toPos.y);
+        ctx.stroke();
+        
+        ctx.setLineDash([]);
+        ctx.restore();
+      }
+      // --- END OF NEW LOGIC ---
+
       ctx.restore();
     }
   }
@@ -299,9 +449,9 @@ export class TalentTreeRenderer {
     const isHovered = hoveredNodeId === node.id || (hoveredPath?.has(node.id) ?? false);
     const isSelected = selectedNodeId === node.id;
     // Determine node state
-    let state: 'allocated' | 'unallocated' | 'allocatable' | 'locked' | 'unlocked' | 'selected' = 'unallocated';
+    let state: 'allocated' | 'unallocated' | 'allocatable' | 'locked' | 'unlocked' | 'selected' | 'unselectable' = 'unallocated';
     if (isSelected) state = 'selected';
-    else if(node.isPermanentlyLocked) state = 'locked';
+    else if (node.isPermanentlyLocked || (!node.isAllocatable && node.isLocked)) state = 'unselectable';
     else if (node.isAllocated) state = 'allocated';
     else if (node.isAllocatable) state = 'unlocked';
     else if (node.isLocked) state = 'locked';
@@ -310,34 +460,61 @@ export class TalentTreeRenderer {
 
   /**
    * NEW: Refactored node drawing into a state-based function for clarity and style.
+   * Now supports SVG/PNG icon rendering if node.visual.icon is a file path.
    */
-  private drawNodeState(node: TalentNode, state: 'allocated' | 'unallocated' | 'allocatable' | 'locked' | 'unlocked' | 'selected', isHovered: boolean, visualEffects?: Map<string, { type: string; progress: number }>): void {
+  private static _iconImageCache: Record<string, HTMLImageElement> = {};
+  private drawNodeState(node: TalentNode, state: 'allocated' | 'unallocated' | 'allocatable' | 'locked' | 'unlocked' | 'selected' | 'unselectable', isHovered: boolean, visualEffects?: Map<string, { type: string; progress: number }>): void {
     const { ctx } = this.config;
     const position = node.position;
-    const size = this.getNodeSize(node);
-    const halfSize = size / 2;
+    
+    // Use 'let' to allow modification for the animation
+    let size = this.getNodeSize(node);
+    let halfSize = size / 2;
+    
     // Use the path-specific emoji from the map, but prefer node.visual.icon if present
-    const emoji = node.visual?.icon || EMOJI_MAP[`${node.path}_${node.type.toLowerCase()}`] || EMOJI_MAP[`${node.path}_minor`] || EMOJI_MAP.default;
-    const emojiSize = size * (node.type === 'Minor' ? 0.7 : 0.6);
+    const icon = node.visual && node.visual.icon ? node.visual.icon : (EMOJI_MAP[`${node.path}_${node.type.toLowerCase()}`] || EMOJI_MAP[`${node.path}_minor`] || EMOJI_MAP.default);
+    
     ctx.save();
-    // --- 1. Determine Style based on State ---
+    
+    // --- 1. Determine Style based on State (with new animation logic) ---
     let fillStyle: string, outlineStyle: string, iconOpacity: number, shadowColor: string, shadowBlur: number, outlineWidth: number;
+    
     switch(state) {
         case 'allocated':
+        case 'selected': { // Combine allocated and selected since selected is a super-state
+            // --- NEW BREATHING ANIMATION LOGIC ---
+            // Create a smoothly oscillating value between 0 and 1 using a sine wave.
+            const pulseFactor = (Math.sin(this.animationTime * 0.002) + 1) / 2; // Slow "breathing" speed
+
+            // Determine base values based on selected or just allocated
+            const baseGlow = state === 'selected' ? 35 : 15;
+            const baseOutlineWidth = state === 'selected' ? 5 : 3.5;
+            const pulseIntensity = state === 'selected' ? 1.5 : 1.0;
+
+            // Animate the size
+            const sizeIncrease = (pulseFactor * 4 * pulseIntensity);
+            size += sizeIncrease;
+            halfSize = size / 2;
+
+            // Animate the shadow/glow
+            shadowBlur = baseGlow + (pulseFactor * 10 * pulseIntensity);
+            outlineWidth = baseOutlineWidth;
+            // --- END OF NEW LOGIC ---
+
             fillStyle = '#1e1e2e'; // Dark blue-grey
-            outlineStyle = '#f9e2af'; // Gold outline for allocated
+            outlineStyle = state === 'selected' ? '#4ade80' : '#a6e3a1'; // Brighter green for selected, normal green for allocated
             iconOpacity = 1.0;
             shadowColor = outlineStyle;
-            shadowBlur = isHovered ? 25 : 15;
-            outlineWidth = 3;
             break;
-        case 'selected':
-            fillStyle = '#1e1e2e';
-            outlineStyle = '#a6e3a1'; // Green for selected
-            iconOpacity = 1.0;
+        }
+        
+        case 'unselectable':
+            fillStyle = '#181825';
+            outlineStyle = '#e64553'; // Red for unselectable
+            iconOpacity = 0.4;
             shadowColor = outlineStyle;
-            shadowBlur = 30;
-            outlineWidth = 4;
+            shadowBlur = 10;
+            outlineWidth = 3;
             break;
         case 'unlocked':
             // Unlocked but not allocated: yellow
@@ -375,47 +552,88 @@ export class TalentTreeRenderer {
             outlineWidth = 2;
             break;
     }
+    
+    // The emoji size needs to be calculated AFTER the main size might have been animated
+    const emojiSize = size * (node.type === 'Minor' ? 0.7 : 0.6);
+    
     // --- 2. Draw Node Layers ---
-    // Base Fill
     ctx.beginPath();
     ctx.arc(position.x, position.y, halfSize, 0, 2 * Math.PI);
     ctx.fillStyle = fillStyle;
     ctx.fill();
-    // Outer Glow (via shadow) and Outline
     ctx.shadowColor = shadowColor;
     ctx.shadowBlur = shadowBlur;
     ctx.strokeStyle = outlineStyle;
     ctx.lineWidth = outlineWidth;
     ctx.stroke();
-    // Reset shadow for subsequent drawings
     ctx.shadowBlur = 0;
     // Major Node Decoration (Inner Ring for important nodes)
     const isMajorNode = ['Genesis', 'Capstone', 'Axiom', 'Schism', 'Manifestation'].includes(node.type);
     if (isMajorNode) {
-        ctx.strokeStyle = state === 'allocated' ? 'rgba(249, 226, 175, 0.5)' : 'rgba(108, 112, 134, 0.4)';
+        ctx.strokeStyle = state === 'allocated' || state === 'selected' ? 'rgba(249, 226, 175, 0.5)' : 'rgba(108, 112, 134, 0.4)';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.arc(position.x, position.y, halfSize * 0.85, 0, 2 * Math.PI);
         ctx.stroke();
     }
-    // --- 3. Draw Icon ---
+    // --- 3. Draw Icon (SVG/PNG or Emoji) ---
     ctx.globalAlpha = iconOpacity;
-    ctx.font = `${emojiSize}px sans-serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#cdd6f4';
-    ctx.fillText(emoji, position.x, position.y);
+    const isImage = typeof icon === 'string' && (icon.endsWith('.svg') || icon.endsWith('.png'));
+    if (isImage) {
+      let img = TalentTreeRenderer._iconImageCache[icon];
+      if (!img) {
+        img = new window.Image();
+        img.src = icon;
+        TalentTreeRenderer._iconImageCache[icon] = img;
+      }
+      if (img.complete && img.naturalWidth > 0) {
+        ctx.drawImage(
+          img,
+          position.x - emojiSize / 2,
+          position.y - emojiSize / 2,
+          emojiSize,
+          emojiSize
+        );
+      } else {
+        // If image not loaded yet, fallback to emoji for now
+        ctx.font = `${emojiSize}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#cdd6f4';
+        ctx.fillText('⭐', position.x, position.y);
+        img.onload = () => {
+          // Redraw when loaded (assumes external render loop)
+        };
+      }
+    } else {
+      ctx.font = `${emojiSize}px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#cdd6f4';
+      ctx.fillText(icon, position.x, position.y);
+    }
     // --- 4. Allocation Flash Animation ---
     const flashEffect = visualEffects?.get(node.id);
-    if (flashEffect && flashEffect.type === 'allocate_flash') {
+    if (flashEffect) {
         const progress = flashEffect.progress;
         const easedProgress = 1 - Math.pow(progress, 3); // Ease-out-cubic
         ctx.globalAlpha = easedProgress;
-        ctx.strokeStyle = `rgba(249, 226, 175, ${easedProgress})`; // Fading Gold
-        ctx.lineWidth = 4;
-        ctx.beginPath();
-        ctx.arc(position.x, position.y, halfSize + (progress * 25), 0, Math.PI * 2);
-        ctx.stroke();
+
+        if (flashEffect.type === 'allocate_flash') {
+            ctx.strokeStyle = `rgba(249, 226, 175, ${easedProgress})`; // Fading Gold
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.arc(position.x, position.y, halfSize + (progress * 25), 0, Math.PI * 2);
+            ctx.stroke();
+        } 
+        else if (flashEffect.type === 'deallocate_denied_flash') {
+            // Use the red "schism" color for the denied flash
+            ctx.strokeStyle = `rgba(230, 69, 83, ${easedProgress})`; // Fading Red
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.arc(position.x, position.y, halfSize + (progress * 25), 0, Math.PI * 2);
+            ctx.stroke();
+        }
     }
     ctx.restore();
   }
@@ -437,11 +655,9 @@ export class TalentTreeRenderer {
     }
   }
 
-  findNodeAtPosition(screenPos: Point, nodes: TalentNode[], zoom: number, pan: Point): TalentNode | null {
-    const worldPos = {
-      x: (screenPos.x - pan.x) / zoom,
-      y: (screenPos.y - pan.y) / zoom
-    };
+  findNodeAtPosition(worldPos: Point, nodes: TalentNode[]): TalentNode | null {
+    // No need to convert from screen to world space here anymore.
+    // worldPos is already in the correct coordinate system.
     
     // Iterate backwards to prioritize smaller nodes on top in case of overlap
     for (let i = nodes.length - 1; i >= 0; i--) {
@@ -465,11 +681,10 @@ export class TalentTreeRenderer {
     return null;
   }
 
-  updateViewport(): void {
-    this.config.viewport = {
-      x: 0, y: 0,
-      width: this.config.canvas.clientWidth,
-      height: this.config.canvas.clientHeight
-    };
+  // NEW Method: updateViewport
+  public updateViewport(width: number, height: number, dpr: number): void {
+    this.viewportWidth = width;
+    this.viewportHeight = height;
+    this.dpr = dpr;
   }
 } 

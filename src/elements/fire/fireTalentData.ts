@@ -4,17 +4,40 @@
  */
 
 import type { TalentNode, TalentConnection } from '../../types';
-import { FORGE_OF_WRATH_NODES, FORGE_OF_WRATH_GENESIS, generateForgeOfWrathConnections, FORGE_OF_WRATH_METADATA } from './fire_forgeOfWrathPath';
-import { SACRED_HEARTH_NODES, SACRED_HEARTH_GENESIS, generateSacredHearthConnections, SACRED_HEARTH_METADATA } from './fire_sacredHearthPath';
-import { MASTERS_FLAME_NODES, MASTERS_FLAME_GENESIS, generateMastersFlameConnections, MASTERS_FLAME_METADATA } from './fire_mastersFlamePath';
-import { LIGHTNINGS_EDGE_NODES, LIGHTNINGS_EDGE_GENESIS, generateLightningsEdgeConnections, LIGHTNINGS_EDGE_METADATA } from './fire_lightningsEdgePath';
+import { 
+    RAGING_INFERNO_NODES, 
+    RAGING_INFERNO_GENESIS, 
+    generateRagingInfernoConnections, 
+    RAGING_INFERNO_METADATA 
+} from './fire_forgeOfWrathPath';
+
+import { 
+    INNER_SUN_NODES, 
+    INNER_SUN_GENESIS, 
+    generateInnerSunConnections, 
+    INNER_SUN_METADATA 
+} from './fire_sacredHearthPath';
+
+import { 
+    FOCUSED_FLAME_NODES, 
+    FOCUSED_FLAME_GENESIS, 
+    generateFocusedFlameConnections, 
+    FOCUSED_FLAME_METADATA 
+} from './fire_mastersFlamePath';
+
+import { 
+    COLD_TEMPEST_NODES, 
+    COLD_TEMPEST_GENESIS, 
+    generateColdTempestConnections, 
+    COLD_TEMPEST_METADATA 
+} from './fire_lightningsEdgePath';
 
 /**
  * Prefixes all IDs within a path's nodes and connections to ensure they are unique
  * across the entire constellation.
  * @param nodes - The array of nodes for a path.
  * @param connections - The array of connections for a path.
- * @param prefix - The string prefix to use (e.g., 'fw' for Forge of Wrath).
+ * @param prefix - The string prefix to use (e.g., 'ri' for Raging Inferno).
  * @returns An object containing the prefixed nodes and connections.
  */
 const prefixPathData = (nodes: TalentNode[], connections: TalentConnection[], prefix: string) => {
@@ -37,20 +60,20 @@ const prefixPathData = (nodes: TalentNode[], connections: TalentConnection[], pr
     return { prefixedNodes, prefixedConnections };
 };
 
-const { prefixedNodes: fwNodes, prefixedConnections: fwConnections } = prefixPathData(FORGE_OF_WRATH_NODES, generateForgeOfWrathConnections(), 'fw');
-const { prefixedNodes: shNodes, prefixedConnections: shConnections } = prefixPathData(SACRED_HEARTH_NODES, generateSacredHearthConnections(), 'sh');
-const { prefixedNodes: mfNodes, prefixedConnections: mfConnections } = prefixPathData(MASTERS_FLAME_NODES, generateMastersFlameConnections(), 'mf');
-const { prefixedNodes: leNodes, prefixedConnections: leConnections } = prefixPathData(LIGHTNINGS_EDGE_NODES, generateLightningsEdgeConnections(), 'le');
+const { prefixedNodes: riNodes, prefixedConnections: riConnections } = prefixPathData(RAGING_INFERNO_NODES, generateRagingInfernoConnections(), 'ri');
+const { prefixedNodes: isNodes, prefixedConnections: isConnections } = prefixPathData(INNER_SUN_NODES, generateInnerSunConnections(), 'is');
+const { prefixedNodes: ffNodes, prefixedConnections: ffConnections } = prefixPathData(FOCUSED_FLAME_NODES, generateFocusedFlameConnections(), 'ff');
+const { prefixedNodes: ctNodes, prefixedConnections: ctConnections } = prefixPathData(COLD_TEMPEST_NODES, generateColdTempestConnections(), 'ct');
 
 /**
  * Generate all Fire talent nodes from all paths
  */
 export function generateAllFireNodes(): TalentNode[] {
   return [
-    ...fwNodes,
-    ...shNodes,
-    ...mfNodes,
-    ...leNodes
+    ...riNodes,
+    ...isNodes,
+    ...ffNodes,
+    ...ctNodes
   ];
 }
 
@@ -59,10 +82,10 @@ export function generateAllFireNodes(): TalentNode[] {
  */
 export function generateFireConnections(): TalentConnection[] {
   return [
-    ...fwConnections,
-    ...shConnections,
-    ...mfConnections,
-    ...leConnections
+    ...riConnections,
+    ...isConnections,
+    ...ffConnections,
+    ...ctConnections
   ];
 }
 
@@ -77,36 +100,36 @@ export const FIRE_CONSTELLATION = {
   emoji: '🔥',
   paths: [
     {
-      id: 'forge_of_wrath',
-      name: 'The Forge of Wrath',
-      description: 'Destruction Incarnate - "Fire is the Great Destroyer, the end of all things. To embrace fire is to accept that everything must burn - including yourself."',
-      flavor: 'Unbridled destruction, consuming rage, the cleansing fire that reduces all to ash',
+      id: 'raging_inferno',
+      name: 'The Raging Inferno',
+      description: 'Destruction Incarnate - "Fire is the element of power. It is fueled by rage, hatred, and anger."',
+      flavor: 'Uncontrolled aggression, explosive force, overwhelming AoE attacks, and jet propulsion',
       emoji: '🐉',
-      metadata: FORGE_OF_WRATH_METADATA
+      metadata: RAGING_INFERNO_METADATA
     },
     {
-      id: 'sacred_hearth',
-      name: 'The Sacred Hearth',
-      description: 'Life\'s First Spark - "Fire is the breath of life itself, the warmth that nurtures growth. True fire gives life, it does not take it."',
-      flavor: 'Healing flames, spiritual fire, the life-giving warmth of the sun',
+      id: 'inner_sun',
+      name: 'The Inner Sun',
+      description: 'Life\'s First Spark - "Fire is not just destruction; it is the energy of life itself. Draw warmth from the sun, and power from your own inner spirit."',
+      flavor: 'Stamina, energy redirection, empowering oneself, and resisting the cold',
+      emoji: '☀️',
+      metadata: INNER_SUN_METADATA
+    },
+    {
+      id: 'focused_flame',
+      name: 'The Focused Flame',
+      description: 'Discipline Made Manifest - "A wildfire destroys, but a focused flame forges. Control your fire, and you can shape the world."',
+      flavor: 'Precise attacks, sustained streams, heat control, and defensive maneuvers',
       emoji: '🔥',
-      metadata: SACRED_HEARTH_METADATA
+      metadata: FOCUSED_FLAME_METADATA
     },
     {
-      id: 'masters_flame',
-      name: 'The Master\'s Flame',
-      description: 'Discipline Made Manifest - "Fire without control is mere destruction. The master shapes flame as the smith shapes metal - with precision, patience, and purpose."',
-      flavor: 'Perfect technique, shaped fire, defensive mastery',
-      emoji: '🛠️',
-      metadata: MASTERS_FLAME_METADATA
-    },
-    {
-      id: 'lightnings_edge',
-      name: 'The Lightning\'s Edge',
-      description: 'The Void Between Thoughts - "True power comes from the space between heartbeats... Lightning is not fire - it is the absence of fire, the cold flame of pure will."',
-      flavor: 'Lightning generation, mental discipline, cold fire techniques',
-      emoji: '🦅',
-      metadata: LIGHTNINGS_EDGE_METADATA
+      id: 'cold_tempest',
+      name: 'The Cold Tempest',
+      description: 'The Void Between Thoughts - "To create lightning, you must first let go. Separate yin and yang. Let go of emotion. Only a mind at peace can command the storm."',
+      flavor: 'The generation and mastery of lightning as the ultimate firebending technique',
+      emoji: '⚡',
+      metadata: COLD_TEMPEST_METADATA
     }
   ]
 };
@@ -115,10 +138,10 @@ export const FIRE_CONSTELLATION = {
  * Root nodes for each Fire path (using the prefixed Genesis nodes)
  */
 export const FIRE_ROOT_NODES: TalentNode[] = [
-  fwNodes.find(n => n.type === 'Genesis')!,
-  shNodes.find(n => n.type === 'Genesis')!,
-  mfNodes.find(n => n.type === 'Genesis')!,
-  leNodes.find(n => n.type === 'Genesis')!
+  riNodes.find(n => n.type === 'Genesis')!,
+  isNodes.find(n => n.type === 'Genesis')!,
+  ffNodes.find(n => n.type === 'Genesis')!,
+  ctNodes.find(n => n.type === 'Genesis')!
 ];
 
 // Export all nodes and connections for easy access

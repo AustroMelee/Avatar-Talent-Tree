@@ -8,7 +8,7 @@
  */
 export const ARGENT_CODEX_CONSTANTS = {
   /** Law I: The Soul's Finite Resonance - Total PK available */
-  TOTAL_PK: 51,
+  TOTAL_PK: 17,
   
   /** Law II: Genesis Cost & Apostasy - Costs for unlocking Genesis nodes */
   GENESIS_COSTS: [5, 8, 13], // First, second, third constellation
@@ -360,9 +360,6 @@ export type RenderConfig = {
   
   /** Context for drawing */
   ctx: CanvasRenderingContext2D;
-  
-  /** Current viewport */
-  viewport: Rectangle;
   
   /** Whether to show debug information */
   debug: boolean;

@@ -1,117 +1,63 @@
 /**
- * Path 3: The Wild Gale - 狂風 (Kuáng Fēng) (Deterministically Generated)
+ * Path 3: The Wild Gale - 狂風 (Kuáng Fēng) (Canonically Refactored)
  * 
- * Path Philosophy: "Sometimes the mountain must be moved, and only the hurricane has such strength."
- * Essence: Raw power, decisive action, the fury of nature unleashed.
- * Focus: Offensive techniques, storm mastery, overwhelming force.
- * Sacred Animal: The Dragon - primal power, elemental fury, force of nature.
- *
- * REFACTOR: Updated to match the "Four Winds Constellation" design document.
+ * Path Philosophy: "Sometimes, the mountain must be moved. This is not anger, but decisive, overwhelming action."
+ * Essence: Large-scale, powerful airbending techniques meant to control the battlefield and shatter obstacles.
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
+import { getAirNodeIcon } from './airNodeIcons';
 
 // --- Layout Configuration ---
-const CENTER_X = 700;
-const CENTER_Y = 550;
-const BRANCHES = 3;
+const CENTER_X = 1100;
+const CENTER_Y = 1200;
+const BRANCHES = 2;
 const PATH_MAIN_ANGLE = Math.PI; // Leftwards
 const ANGLE_SPREAD = Math.PI / 2.2;
 const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
-const BASE_RADIUS = 160;
-const RADIUS_STEP = 120;
-const MIN_DIST = 90;
+const BASE_RADIUS = 200;
+const RADIUS_STEP = 150;
+const MIN_DIST = 110;
 
 // --- Node Definitions (from Design Doc) ---
 const nodeDataList = [
     // Genesis
-    { id: 'genesis', name: 'The Wild Gale Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "All attacks carry concussive force, staggering smaller opponents.", flavor: "Sometimes the mountain must be moved, and only the hurricane has such strength." },
-
+    { id: 'genesis', name: 'The Wild Gale Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "You understand that non-violence is not indispensable. You can overwhelm many opponents at once with large and powerful attacks that could prove fatal.", flavor: "Powerful airbenders can kill and even enjoy it, as long as they maintain detachment." },
+    
     // Minors after Genesis
-    { id: 'minor_genesis_1', name: 'Stronger Gale', type: 'Minor', cost: 1, branch: 0.8, depth: 0.5, prerequisite: 'genesis', description: "Your natural pushback affects heavier opponents.", flavor: "The wind does not discriminate." },
-    { id: 'minor_genesis_2', name: 'Wider Storm', type: 'Minor', cost: 1, branch: 1.2, depth: 0.5, prerequisite: 'genesis', description: "Your staggering force affects a larger area.", flavor: "The storm's reach is vast." },
+    { id: 'air_blast', name: 'Air Blast', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "A direct pulse or jet of compressed air shot from the hands, feet, or mouth. The force is generated from your power, not momentum.", flavor: "Aang used this to shatter a Fire Navy rock in mid-air." },
+    { id: 'minor_ab_1', name: 'Air Punch/Kick', type: 'Minor', cost: 1, branch: -0.2, depth: 1.5, prerequisite: 'air_blast', description: "Fire small, compressed formations of air from your fists or feet, similar to a firebender's jabs.", flavor: "As demonstrated by Aang and Korra." },
+    { id: 'minor_ab_2', name: 'Piercing Shot', type: 'Minor', cost: 1, branch: 0.2, depth: 1.5, prerequisite: 'air_blast', description: "You narrow the sphere into a lance-like shape, reducing its area-of-effect but drastically increasing its range.", flavor: "A focused strike can pierce any defense." },
+    { id: 'minor_ab_3', name: 'Vacuum Burst', type: 'Minor', cost: 1, branch: 0.8, depth: 1.5, prerequisite: 'air_blast', description: "Upon impact, the cannon's explosion briefly creates a vacuum, pulling nearby enemies toward the point of impact.", flavor: "The void draws all things inward." },
+    { id: 'minor_ab_4', name: 'Rapid Fire', type: 'Minor', cost: 1, branch: 1.2, depth: 1.5, prerequisite: 'air_blast', description: "You learn to form and fire smaller, less powerful versions of the Air Cannon in quick succession.", flavor: "Speed can be as deadly as power." },
 
     // --- Sub-Path A: Aspect of Raw Power ---
-    { id: 'A1', name: 'Focused Gale', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Launch a concentrated blast of air that damages and pushes distant enemies.", flavor: "A focused mind is a powerful weapon." },
-    { id: 'minor_a1_1', name: 'Extended Reach', type: 'Minor', cost: 1, branch: 0, depth: 1.5, prerequisite: 'A1', description: "Your air blast travels much further.", flavor: "The wind knows no distance." },
-    { id: 'minor_a1_2', name: 'Stunning Impact', type: 'Minor', cost: 1, branch: -0.2, depth: 1.5, prerequisite: 'A1', description: "Direct hits briefly stun the target.", flavor: "The impact echoes in the mind." },
-    { id: 'minor_a1_3', name: 'Stronger Blast', type: 'Minor', cost: 1, branch: 0.2, depth: 1.5, prerequisite: 'A1', description: "Your air blast deals more damage and pushes enemies further.", flavor: "The gale's fury grows." },
+    { id: 'air_cannon', name: 'Air Cannon', type: 'Keystone', cost: 2, branch: 0, depth: 2, prerequisite: 'air_blast', description: "You fire a highly compressed, focused sphere of air that travels at high speed and explodes on impact, creating a powerful shockwave.", flavor: "A true test of raw power." },
+    { id: 'minor_ac_1', name: 'Rending Edge', type: 'Minor', cost: 1, branch: -0.2, depth: 2.5, prerequisite: 'air_cannon', description: "The leading edge of the typhoon is laced with sharp, shearing currents that can shred earth and metal defenses.", flavor: "The wind's edge is sharp." },
+    { id: 'minor_ac_2', name: 'Extended Front', type: 'Minor', cost: 1, branch: 0.2, depth: 2.5, prerequisite: 'air_cannon', description: "You can widen the wall of wind to cover a larger area, sacrificing some of its forward momentum.", flavor: "A wider front, a greater impact." },
     
-    { id: 'A2', name: 'Explosive Burst', type: 'Keystone', cost: 2, branch: 0, depth: 2, prerequisite: 'A1', description: "Create a violent explosion of air that knocks enemies away from you.", flavor: "Sometimes, a whisper is not enough." },
-    { id: 'minor_a2_1', name: 'Greater Blast', type: 'Minor', cost: 1, branch: 0, depth: 2.5, prerequisite: 'A2', description: "The explosion affects a much larger area.", flavor: "The storm's reach expands." },
-    { id: 'minor_a2_2', name: 'Echo Blast', type: 'Minor', cost: 1, branch: -0.2, depth: 2.5, prerequisite: 'A2', description: "Secondary shockwaves extend the effect.", flavor: "The explosion echoes through the air." },
-    { id: 'minor_a2_3', name: 'Faster Burst', type: 'Minor', cost: 1, branch: 0.2, depth: 2.5, prerequisite: 'A2', description: "Your explosive burst charges and releases more quickly.", flavor: "The storm answers swiftly." },
-    
-    { id: 'A3', name: 'Thunder Clap', type: 'Manifestation', cost: 4, branch: 0, depth: 3, prerequisite: 'A2', description: "Generate a sonic boom that deafens and disorients all nearby enemies.", flavor: "The sound of the storm is a weapon in itself." },
-    { id: 'minor_a3_1', name: 'Deafening Roar', type: 'Minor', cost: 1, branch: 0, depth: 3.5, prerequisite: 'A3', description: "Greater area and stronger disorientation.", flavor: "The thunder's voice is overwhelming." },
-    { id: 'minor_a3_2', name: 'Reverberating Thunder', type: 'Minor', cost: 1, branch: -0.2, depth: 3.5, prerequisite: 'A3', description: "Multiple echoes affect enemies at the edges.", flavor: "The sound echoes through the soul." },
-    { id: 'minor_a3_3', name: 'Longer Disorientation', type: 'Minor', cost: 1, branch: 0.2, depth: 3.5, prerequisite: 'A3', description: "The disorientation effect lasts longer on affected enemies.", flavor: "The thunder's memory lingers." },
-    
-    { id: 'APEX_A', name: 'Lightning Lord', type: 'Axiom', cost: 5, branch: 0, depth: 4, prerequisite: 'A3', description: "Transform your air blasts into devastating lightning strikes.", flavor: "The cold fire of the sky." },
-    { id: 'minor_apex_a_1', name: 'Stronger Lightning', type: 'Minor', cost: 1, branch: -0.2, depth: 4.5, prerequisite: 'APEX_A', description: "Your lightning strikes deal more damage.", flavor: "The sky's fury burns brighter." },
-    { id: 'minor_apex_a_2', name: 'Chain Lightning', type: 'Minor', cost: 1, branch: 0.2, depth: 4.5, prerequisite: 'APEX_A', description: "Your lightning can chain between multiple enemies.", flavor: "The lightning seeks all targets." },
-    { id: 'minor_apex_a_3', name: 'Faster Strikes', type: 'Minor', cost: 1, branch: 0, depth: 4.5, prerequisite: 'APEX_A', description: "You can fire lightning strikes more rapidly.", flavor: "The storm's fury is unrelenting." },
+    { id: 'suffocation', name: 'Suffocation', type: 'Axiom', cost: 5, branch: 0, depth: 3, prerequisite: 'air_cannon', description: "A sinister technique. Manipulate the flow of air within a person's respiratory system, extracting it from their lungs and forming a ball of air around their head to prevent new breath.", flavor: "First used lethally by Zaheer to kill the Earth Queen." },
+    { id: 'minor_suff_1', name: 'Vacuum', type: 'Minor', cost: 1, branch: -0.2, depth: 3.5, prerequisite: 'suffocation', description: "A violent version that instantly removes all air from an area, creating a short-lived hard vacuum that causes severe internal injuries.", flavor: "Invented by Yangchen to counter combustionbending." },
 
-    // --- Sub-Path B: Aspect of Controlled Chaos ---
-    { id: 'B1', name: 'Spinning Vortex', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "Generate a stationary tornado that pulls enemies in and damages them.", flavor: "Chaos, contained." },
-    { id: 'minor_b1_1', name: 'Stronger Pull', type: 'Minor', cost: 1, branch: 1, depth: 1.5, prerequisite: 'B1', description: "The vortex is much harder to escape.", flavor: "The whirlwind's grip is iron." },
-    { id: 'minor_b1_2', name: 'Lasting Funnel', type: 'Minor', cost: 1, branch: 0.8, depth: 1.5, prerequisite: 'B1', description: "Your tornado persists much longer.", flavor: "The storm endures." },
-    { id: 'minor_b1_3', name: 'Larger Vortex', type: 'Minor', cost: 1, branch: 1.2, depth: 1.5, prerequisite: 'B1', description: "Your tornado covers a larger area and affects more enemies.", flavor: "The whirlwind grows vast." },
+    // --- Sub-Path B: Aspect of Decisive Action ---
+    { id: 'air_blades', name: 'Wind Blades', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "By sharpening the edge of an air current, you create crescent-shaped blades of air that can cut through wood, rope, and unarmored targets.", flavor: "The wind is a blade in the right hands." },
+    { id: 'minor_ablade_1', name: 'Gale Slice', type: 'Minor', cost: 1, branch: 0.8, depth: 1.5, prerequisite: 'air_blades', description: "Cast forth a thin, cutting edge of wind that can pierce wood or stone.", flavor: "The wind's edge is sharp." },
+    { id: 'minor_ablade_2', name: 'Arcing Blades', type: 'Minor', cost: 1, branch: 1.2, depth: 1.5, prerequisite: 'air_blades', description: "You can launch blades that curve in mid-air, allowing you to strike targets behind cover.", flavor: "The wind bends to your will." },
+    { id: 'minor_ablade_3', name: 'Blade Vortex', type: 'Minor', cost: 1, branch: 0.2, depth: 2.5, prerequisite: 'air_blades', description: "You can create a small, defensive whirlwind of wind blades that orbits your body.", flavor: "A shield of blades, ever moving." },
+    { id: 'minor_ablade_4', name: 'Ricochet Shot', type: 'Minor', cost: 1, branch: -0.2, depth: 2.5, prerequisite: 'air_blades', description: "Your blades are solid enough to bounce off one hard surface to strike a secondary target.", flavor: "The wind finds a way." },
     
-    { id: 'B2', name: 'Earth Shaker', type: 'Keystone', cost: 2, branch: 1, depth: 2, prerequisite: 'B1', description: "Strike the earth to create damaging shockwaves that stun enemies.", flavor: "The earth trembles before the storm." },
-    { id: 'minor_b2_1', name: 'Wider Shockwave', type: 'Minor', cost: 1, branch: 1, depth: 2.5, prerequisite: 'B2', description: "The tremor travels much further.", flavor: "The earth's fear spreads far." },
-    { id: 'minor_b2_2', name: 'Longer Stun', type: 'Minor', cost: 1, branch: 0.8, depth: 2.5, prerequisite: 'B2', description: "Enemies remain stunned longer.", flavor: "The earth's memory is long." },
-    { id: 'minor_b2_3', name: 'Stronger Tremor', type: 'Minor', cost: 1, branch: 1.2, depth: 2.5, prerequisite: 'B2', description: "Your shockwaves deal more damage and affect larger enemies.", flavor: "The earth's fury is great." },
-    
-    { id: 'B3', name: 'Hurricane Force', type: 'Manifestation', cost: 4, branch: 1, depth: 3, prerequisite: 'B2', description: "Create a massive hurricane that lifts and hurls even large enemies.", flavor: "Become the storm." },
-    { id: 'minor_b3_1', name: 'Mightier Storm', type: 'Minor', cost: 1, branch: 1, depth: 3.5, prerequisite: 'B3', description: "Affect even larger and heavier enemies.", flavor: "The storm fears no size." },
-    { id: 'minor_b3_2', name: 'Raging Winds', type: 'Minor', cost: 1, branch: 0.8, depth: 3.5, prerequisite: 'B3', description: "The hurricane moves faster and hits harder.", flavor: "The storm's fury grows." },
-    { id: 'minor_b3_3', name: 'Larger Hurricane', type: 'Minor', cost: 1, branch: 1.2, depth: 3.5, prerequisite: 'B3', description: "Your hurricane covers a much larger area.", flavor: "The storm's reach is vast." },
-    
-    { id: 'APEX_B', name: 'Storm Sovereign', type: 'Axiom', cost: 5, branch: 1, depth: 4, prerequisite: 'B3', description: "Create and control several seeking tornadoes simultaneously.", flavor: "The storm has many voices." },
-    { id: 'minor_apex_b_1', name: 'More Tornadoes', type: 'Minor', cost: 1, branch: 0.8, depth: 4.5, prerequisite: 'APEX_B', description: "You can control more tornadoes at once.", flavor: "The storm speaks in many tongues." },
-    { id: 'minor_apex_b_2', name: 'Smarter Seeking', type: 'Minor', cost: 1, branch: 1.2, depth: 4.5, prerequisite: 'APEX_B', description: "Your tornadoes are more intelligent in seeking targets.", flavor: "The storm knows its prey." },
-    { id: 'minor_apex_b_3', name: 'Longer Control', type: 'Minor', cost: 1, branch: 1, depth: 4.5, prerequisite: 'APEX_B', description: "You can maintain control over your tornadoes longer.", flavor: "The storm's will endures." },
+    // Manifestation
+    { id: 'sound_bending', name: 'Sound Bending', type: 'Manifestation', cost: 4, branch: 1, depth: 2, prerequisite: 'air_blades', description: "By creating a perfect vacuum and then collapsing it, you can create a deafening sonic boom that disorients and temporarily deafens opponents.", flavor: "The silence before the storm is the loudest sound." },
+    { id: 'minor_sb_1', name: 'Amplifying Cone', type: 'Minor', cost: 1, branch: 0.8, depth: 2.5, prerequisite: 'sound_bending', description: "You can focus the sonic boom into a cone, increasing its intensity and range in one direction.", flavor: "The wind's voice is a weapon." },
 
-    // --- Sub-Path C: Aspect of Storm Mastery ---
-    { id: 'C1', name: 'Overcharged Power', type: 'Keystone', cost: 2, branch: 2, depth: 1, prerequisite: 'genesis', description: "Dramatically increase your power at the cost of your own life force.", flavor: "Power at a price." },
-    { id: 'minor_c1_1', name: 'Efficient Channeling', type: 'Minor', cost: 1, branch: 2, depth: 1.5, prerequisite: 'C1', description: "Reduce the life force cost.", flavor: "The price of power grows smaller." },
-    { id: 'minor_c1_2', name: 'Amplified Power', type: 'Minor', cost: 1, branch: 2.2, depth: 1.5, prerequisite: 'C1', description: "Gain even greater power from overcharging.", flavor: "The storm's fury grows greater." },
-    { id: 'minor_c1_3', name: 'Longer Overcharge', type: 'Minor', cost: 1, branch: 1.8, depth: 1.5, prerequisite: 'C1', description: "You can maintain the overcharged state longer.", flavor: "The storm's power endures." },
-    
-    { id: 'C2', name: 'Cutting Gale', type: 'Keystone', cost: 2, branch: 2, depth: 2, prerequisite: 'C1', description: "Create razor-sharp currents of air that slice enemies and cause bleeding.", flavor: "The wind's edge is sharper than any blade." },
-    { id: 'minor_c2_1', name: 'Sharper Edge', type: 'Minor', cost: 1, branch: 2, depth: 2.5, prerequisite: 'C2', description: "Cause more severe bleeding effects.", flavor: "The wind cuts deeper." },
-    { id: 'minor_c2_2', name: 'Extended Blades', type: 'Minor', cost: 1, branch: 2.2, depth: 2.5, prerequisite: 'C2', description: "Your cutting air travels further.", flavor: "The wind's reach grows." },
-    { id: 'minor_c2_3', name: 'Multiple Cuts', type: 'Minor', cost: 1, branch: 1.8, depth: 2.5, prerequisite: 'C2', description: "You can create multiple cutting air streams simultaneously.", flavor: "The wind strikes from many angles." },
-    
-    { id: 'C3', name: 'Perfect Storm', type: 'Manifestation', cost: 4, branch: 2, depth: 3, prerequisite: 'C2', description: "Temporarily enhance all your abilities without any negative effects.", flavor: "The brief, perfect calm in the eye of the hurricane." },
-    { id: 'minor_c3_1', name: 'Extended Storm', type: 'Minor', cost: 1, branch: 2, depth: 3.5, prerequisite: 'C3', description: "The enhancement lasts longer.", flavor: "The perfect storm endures." },
-    { id: 'minor_c3_2', name: 'Greater Power', type: 'Minor', cost: 1, branch: 2.2, depth: 3.5, prerequisite: 'C3', description: "Even more dramatic improvements to your abilities.", flavor: "The storm's power grows greater." },
-    { id: 'minor_c3_3', name: 'Faster Activation', type: 'Minor', cost: 1, branch: 1.8, depth: 3.5, prerequisite: 'C3', description: "You can activate the perfect storm more quickly.", flavor: "The storm answers instantly." },
-    
-    { id: 'APEX_C', name: 'Weather Master', type: 'Axiom', cost: 5, branch: 2, depth: 4, prerequisite: 'C3', description: "Control natural weather patterns across vast areas.", flavor: "The sky is my canvas." },
-    { id: 'minor_apex_c_1', name: 'Larger Control', type: 'Minor', cost: 1, branch: 1.8, depth: 4.5, prerequisite: 'APEX_C', description: "You can control weather over larger areas.", flavor: "The sky's domain grows vast." },
-    { id: 'minor_apex_c_2', name: 'Faster Changes', type: 'Minor', cost: 1, branch: 2.2, depth: 4.5, prerequisite: 'APEX_C', description: "You can change weather patterns more quickly.", flavor: "The sky answers swiftly." },
-    { id: 'minor_apex_c_3', name: 'Complex Weather', type: 'Minor', cost: 1, branch: 2, depth: 4.5, prerequisite: 'APEX_C', description: "You can create more complex and powerful weather patterns.", flavor: "The sky's artistry grows complex." },
-
-    // --- Synthesis & Bridge ---
-    { id: 'SYNTHESIS_A_B', name: 'Storm Mastery', type: 'Synthesis', cost: 5, branch: 0.5, depth: 4, prerequisite: ['APEX_A', 'APEX_B'], description: "Combine raw power with controlled chaos for ultimate storm mastery.", flavor: "The storm is my domain." },
-    { id: 'BRIDGE_B', name: 'Cross-Path Bridge', type: 'Bridge', cost: 10, branch: 1.5, depth: 4.5, prerequisite: ['APEX_B', 'APEX_C'], description: "Gain access to Synthesis Opportunity.", flavor: "The path is open. The choice is yours." },
-
-    // --- Endgame Choices ---
-    { id: 'rite_storm', name: 'Trial of the Storm', type: 'GnosticRite', cost: 1, branch: 0, depth: 5, prerequisite: 'APEX_A', description: "Channel raw destructive power without losing control.", flavor: "To ride the storm, you must become the storm." },
-    { id: 'rite_lightning', name: 'Trial of Lightning', type: 'GnosticRite', cost: 1, branch: 1, depth: 5, prerequisite: 'APEX_B', description: "Strike with perfect precision despite overwhelming force.", flavor: "Precision in chaos is true mastery." },
-    { id: 'rite_eye', name: 'Trial of the Eye', type: 'GnosticRite', cost: 1, branch: 2, depth: 5, prerequisite: 'APEX_C', description: "Maintain perfect awareness within absolute chaos.", flavor: "Clarity in the heart of the maelstrom." },
-
-    { id: 'cap_fury', name: 'Controlled Fury', type: 'Capstone', cost: 15, branch: 0, depth: 6, prerequisite: 'rite_storm', description: "Master the art of overcharging without cost - your abilities are permanently enhanced without requiring life force.", flavor: "The fury of the storm, tempered by the will of the master." },
-    { id: 'cap_avatar', name: 'Lightning Avatar', type: 'Capstone', cost: 15, branch: 1, depth: 6, prerequisite: 'rite_lightning', description: "Become one with lightning itself - strike with perfect accuracy, chain between targets, and even ride your own bolts.", flavor: "I am the flash, the thunder, the storm." },
-    { id: 'cap_eye', name: 'Eye of All Storms', type: 'Capstone', cost: 15, branch: 2, depth: 6, prerequisite: 'rite_eye', description: "Achieve perfect clarity in chaos - predict weather, sense all threats, and maintain absolute calm in any situation.", flavor: "All storms are one storm, and I am its eye." },
-    
-    { id: 'schism_hurricane', name: 'Living Hurricane', type: 'Schism', cost: 8, branch: 1.5, depth: 5, prerequisite: 'APEX_B', description: "Become surrounded by a constant chaotic storm, but lose control over individual techniques.", flavor: "Let the storm rage. I am its heart." },
-    { id: 'schism_destruction', name: 'Avatar of Destruction', type: 'Schism', cost: 12, branch: 1.5, depth: 6, prerequisite: 'schism_hurricane', description: "Transform into a force of pure destruction, reshaping the world but losing all restraint.", flavor: "I am no longer the bender. I am the storm." },
+    // Additional Minor Nodes
+    { id: 'wg_minor_1', name: 'Concussive Force', type: 'Minor', cost: 1, branch: 0.8, depth: 0.5, prerequisite: 'genesis', description: "Your air attacks have a greater chance to stagger opponents.", flavor: "The wind strikes with the force of thunder." },
+    { id: 'wg_minor_2', name: 'Shattering Gust', type: 'Minor', cost: 1, branch: 0.2, depth: 1.5, prerequisite: 'air_blast', description: "Your air blasts are more effective at breaking brittle objects.", flavor: "What cannot bend, breaks." },
+    { id: 'wg_minor_3', name: 'Razor\'s Edge', type: 'Minor', cost: 1, branch: 1.2, depth: 1.5, prerequisite: 'air_blades', description: "Your Air Blades are slightly sharper and can cut deeper.", flavor: "The air itself is a weapon." },
+    { id: 'wg_minor_4', name: 'Storm\'s Heart', type: 'Minor', cost: 1, branch: 0.8, depth: 2.5, prerequisite: 'air_cannon', description: "Your stamina recovers faster in windy or stormy conditions.", flavor: "The storm feeds the storm." },
+    { id: 'wg_minor_5', name: 'Sinister Whisper', type: 'Minor', cost: 1, branch: 0, depth: 3.5, prerequisite: 'suffocation', description: "Your presence becomes unsettling to those you focus on, subtly disrupting their breathing.", flavor: "The first step on a dark path." },
 ];
 
-// --- Generation Code (Identical to Gentle Breeze, just feeding it new data) ---
-
+// --- Generation Code (Identical to other paths, just feeding it new data) ---
 const nodes: TalentNode[] = [];
 const connections: TalentConnection[] = [];
 const nodeMap: Record<string, TalentNode> = {};
@@ -126,9 +72,9 @@ nodeDataList.forEach(nodeData => {
 
   const node: TalentNode = {
     id, name: nodeData.name, description: nodeData.description, flavor: nodeData.flavor, type: nodeData.type as NodeType, path: 'wild_gale', constellation: 'air', position: { x, y }, prerequisites: prerequisites, visual: { 
-      color: '#b2ebf2', 
+      color: '#FFE4E1', 
       size: 50,
-      icon: getWildGaleNodeIcon(type) 
+      icon: getAirNodeIcon(id) 
     }, effects: [], isVisible: true, isAllocatable: prerequisites.length === 0, isAllocated: false, isLocked: prerequisites.length > 0, isPermanentlyLocked: false, pkCost: nodeData.cost,
   };
   nodes.push(node);
@@ -169,25 +115,11 @@ export const WILD_GALE_GENESIS = nodes.find(n => n.type === 'Genesis')!;
 export function generateWildGaleConnections(): TalentConnection[] { return connections; }
 export const WILD_GALE_METADATA = {
   name: 'The Wild Gale',
-  philosophy: 'Sometimes the mountain must be moved, and only the hurricane has such strength.',
-  essence: 'Raw power, decisive action, the fury of nature unleashed.',
-  focus: 'Offensive techniques, storm mastery, overwhelming force.',
+  philosophy: 'Sometimes, the mountain must be moved. This is not anger, but decisive, overwhelming action.',
+  essence: 'Large-scale, powerful airbending techniques meant to control the battlefield and shatter obstacles.',
+  focus: 'Aggressive, overwhelming force and lethal techniques, inspired by Zaheer.',
   sacredAnimal: 'The Dragon',
-  emoji: '🐲',
-  color: '#b2ebf2',
-  position: { x: 700, y: 550 }
-};
-
-function getWildGaleNodeIcon(type: string): string {
-  switch (type) {
-    case 'Genesis': return '🌪️';
-    case 'Keystone': return '💥';
-    case 'Manifestation': return '⛈️';
-    case 'Axiom': return '⚡';
-    case 'Capstone': return '🐉';
-    case 'GnosticRite': return '🙏';
-    case 'Schism': return '🌋';
-    case 'Minor': return '💨';
-    default: return '🌬️';
-  }
-} 
+  emoji: '🌪️',
+  color: '#ffe4e1',
+  position: { x: 1100, y: 1200 }
+}; 
