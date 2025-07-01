@@ -29,7 +29,7 @@ const RADII = {
 // pathIndex: 0=GentleBreeze, 1=WildGale, 2=DancingWind, 3=SacredBreath
 const nodeDefinitions: any[] = [
     // --- Path 0: The Gentle Breeze ---
-    { id: 'gb_genesis', name: 'The Gentle Breeze Path', path: 'gentle_breeze', type: 'Genesis', tier: 'genesis', pathIndex: 0, pkCost: 1, icon: '🍃', size: 80 },
+    { id: 'gb_genesis', name: 'The Gentle Breeze Path', path: 'gentle_breeze', type: 'Genesis', tier: 'genesis', pathIndex: 0, pkCost: 1, icon: '🍃', size: 160 },
     { id: 'gb_keystone_a', name: 'Cloud Shield Technique', path: 'gentle_breeze', type: 'Keystone', tier: 'keystone', pathIndex: 0, pkCost: 2, prereq: 'gb_genesis', icon: '🛡️', size: 65 },
     { id: 'gb_keystone_b', name: 'Catch and Release', path: 'gentle_breeze', type: 'Keystone', tier: 'keystone', pathIndex: 0, pkCost: 2, prereq: 'gb_genesis', icon: '✋', size: 65 },
     { id: 'gb_manifest_a', name: 'Unburdened Form', path: 'gentle_breeze', type: 'Manifestation', tier: 'manifestation', pathIndex: 0, pkCost: 4, prereq: 'gb_keystone_a', icon: '💨', size: 70 },
@@ -42,7 +42,7 @@ const nodeDefinitions: any[] = [
     { id: 'gb_m_5', type: 'Minor', prereq: 'gb_manifest_a', child: 'gb_axiom_a' }, { id: 'gb_m_6', type: 'Minor', prereq: 'gb_manifest_b', child: 'gb_axiom_b' },
 
     // --- Path 1: The Wild Gale ---
-    { id: 'wg_genesis', name: 'The Wild Gale Path', path: 'wild_gale', type: 'Genesis', tier: 'genesis', pathIndex: 1, pkCost: 1, icon: '🌪️', size: 80 },
+    { id: 'wg_genesis', name: 'The Wild Gale Path', path: 'wild_gale', type: 'Genesis', tier: 'genesis', pathIndex: 1, pkCost: 1, icon: '🌪️', size: 160 },
     { id: 'wg_keystone_a', name: 'Air Cannon', path: 'wild_gale', type: 'Keystone', tier: 'keystone', pathIndex: 1, pkCost: 2, prereq: 'wg_genesis', icon: '💥', size: 65 },
     { id: 'wg_keystone_b', name: 'Wind Blades', path: 'wild_gale', type: 'Keystone', tier: 'keystone', pathIndex: 1, pkCost: 2, prereq: 'wg_genesis', icon: '🔪', size: 65 },
     { id: 'wg_manifest_a', name: 'Unstoppable Typhoon', path: 'wild_gale', type: 'Manifestation', tier: 'manifestation', pathIndex: 1, pkCost: 4, prereq: 'wg_keystone_a', icon: '🌊', size: 70 },
@@ -55,7 +55,7 @@ const nodeDefinitions: any[] = [
     { id: 'wg_m_5', type: 'Minor', prereq: 'wg_manifest_a', child: 'wg_axiom_a' }, { id: 'wg_m_6', type: 'Minor', prereq: 'wg_manifest_b', child: 'wg_axiom_b' },
 
     // --- Path 2: The Dancing Wind ---
-    { id: 'dw_genesis', name: 'The Dancing Wind Path', path: 'dancing_wind', type: 'Genesis', tier: 'genesis', pathIndex: 2, pkCost: 1, icon: '🤸', size: 80 },
+    { id: 'dw_genesis', name: 'The Dancing Wind Path', path: 'dancing_wind', type: 'Genesis', tier: 'genesis', pathIndex: 2, pkCost: 1, icon: '🤸', size: 160 },
     { id: 'dw_keystone_a', name: 'Air Scooter', path: 'dancing_wind', type: 'Keystone', tier: 'keystone', pathIndex: 2, pkCost: 2, prereq: 'dw_genesis', icon: '🛴', size: 65 },
     { id: 'dw_keystone_b', name: 'Air Walking', path: 'dancing_wind', type: 'Keystone', tier: 'keystone', pathIndex: 2, pkCost: 2, prereq: 'dw_genesis', icon: '🚶', size: 65 },
     { id: 'dw_manifest_a', name: 'Air Spout', path: 'dancing_wind', type: 'Manifestation', tier: 'manifestation', pathIndex: 2, pkCost: 4, prereq: 'dw_keystone_a', icon: '💨', size: 70 },
@@ -68,7 +68,7 @@ const nodeDefinitions: any[] = [
     { id: 'dw_m_5', type: 'Minor', prereq: 'dw_manifest_a', child: 'dw_axiom_a' }, { id: 'dw_m_6', type: 'Minor', prereq: 'dw_manifest_b', child: 'dw_axiom_b' },
 
     // --- Path 3: The Sacred Breath ---
-    { id: 'sb_genesis', name: 'The Sacred Breath Path', path: 'sacred_breath', type: 'Genesis', tier: 'genesis', pathIndex: 3, pkCost: 1, icon: '🙏', size: 80 },
+    { id: 'sb_genesis', name: 'The Sacred Breath Path', path: 'sacred_breath', type: 'Genesis', tier: 'genesis', pathIndex: 3, pkCost: 1, icon: '🙏', size: 160 },
     { id: 'sb_keystone_a', name: 'Clarity Meditation', path: 'sacred_breath', type: 'Keystone', tier: 'keystone', pathIndex: 3, pkCost: 2, prereq: 'sb_genesis', icon: '🧘', size: 65 },
     { id: 'sb_keystone_b', name: 'Peaceful Presence', path: 'sacred_breath', type: 'Keystone', tier: 'keystone', pathIndex: 3, pkCost: 2, prereq: 'sb_genesis', icon: '🕊️', size: 65 },
     { id: 'sb_manifest_a', name: 'Memory of the Air', path: 'sacred_breath', type: 'Manifestation', tier: 'manifestation', pathIndex: 3, pkCost: 4, prereq: 'sb_keystone_a', icon: '📜', size: 70 },
@@ -173,16 +173,17 @@ allNodesMap.forEach(node => {
     }
 });
 
-// Set prerequisites for Synthesis nodes
-allNodesMap.get('syn_inner_gb_wg')!.prerequisites = ['gb_keystone_b', 'wg_keystone_b'];
-allNodesMap.get('syn_inner_wg_dw')!.prerequisites = ['wg_keystone_a', 'dw_keystone_b'];
-allNodesMap.get('syn_inner_dw_sb')!.prerequisites = ['dw_keystone_a', 'sb_keystone_b'];
-allNodesMap.get('syn_inner_sb_gb')!.prerequisites = ['sb_keystone_a', 'gb_keystone_b'];
+// Set prerequisites for Synthesis nodes - only connect to nodes on the same ring
+// These are for visual continuity, not strict progression requirements
+allNodesMap.get('syn_inner_gb_wg')!.prerequisites = []; // No strict prereqs, just visual arcs
+allNodesMap.get('syn_inner_wg_dw')!.prerequisites = []; // No strict prereqs, just visual arcs
+allNodesMap.get('syn_inner_dw_sb')!.prerequisites = []; // No strict prereqs, just visual arcs
+allNodesMap.get('syn_inner_sb_gb')!.prerequisites = []; // No strict prereqs, just visual arcs
 
-allNodesMap.get('syn_outer_gb_wg')!.prerequisites = ['gb_axiom_a', 'wg_axiom_b'];
-allNodesMap.get('syn_outer_wg_dw')!.prerequisites = ['wg_axiom_a', 'dw_axiom_b'];
-allNodesMap.get('syn_outer_dw_sb')!.prerequisites = ['dw_axiom_a', 'sb_axiom_b'];
-allNodesMap.get('syn_outer_sb_gb')!.prerequisites = ['sb_axiom_a', 'gb_axiom_b'];
+allNodesMap.get('syn_outer_gb_wg')!.prerequisites = []; // No strict prereqs, just visual arcs
+allNodesMap.get('syn_outer_wg_dw')!.prerequisites = []; // No strict prereqs, just visual arcs
+allNodesMap.get('syn_outer_dw_sb')!.prerequisites = []; // No strict prereqs, just visual arcs
+allNodesMap.get('syn_outer_sb_gb')!.prerequisites = []; // No strict prereqs, just visual arcs
 
 // =================================================================================
 // 4. FINAL EXPORT
@@ -199,12 +200,77 @@ export const AIR_CONSTELLATION = {
 
 export function generateAirConnections(): TalentConnection[] {
     const connections: TalentConnection[] = [];
-    AIR_TALENT_NODES.forEach(node => {
+    const nodes = AIR_TALENT_NODES;
+
+    console.log('🔗 Creating clean POE-style connections...');
+
+    // 1. "Tree" connections: Only along the branch (same path)!
+    nodes.forEach(node => {
         node.prerequisites.forEach(prereqId => {
-            if (allNodesMap.has(prereqId)) {
+            // Only allow if prereq and node are on the same path (branch)
+            const prereq = allNodesMap.get(prereqId);
+            if (
+                prereq &&
+                prereq.path === node.path // Only allow if same path!
+            ) {
                 connections.push({ from: prereqId, to: node.id, isActive: false, isLocked: false });
+                console.log(`  🌳 Tree: ${prereq.name} → ${node.name} (same path: ${node.path})`);
+            } else {
+                console.log(`  ❌ Blocked cross-path: ${prereq?.name || prereqId} → ${node.name} (${prereq?.path || 'unknown'} → ${node.path})`);
             }
         });
     });
+
+    // 2. Arc connections (ring neighbors, just between majors) - for visual continuity only
+    const majorTypes = new Set(['Genesis', 'Keystone', 'Manifestation', 'Axiom', 'Capstone', 'Schism', 'Synthesis']);
+    const rings = Object.keys(RADII);
+
+    console.log('🎯 Creating visual ring arcs between major nodes...');
+
+    for (const ringId of rings) {
+        // Get only major nodes for this ring, sorted by angle
+        const majors = nodes.filter(
+            n => n.ringId === ringId && majorTypes.has(n.type) && n.angle !== undefined
+        ).sort((a, b) => (a.angle! - b.angle!));
+
+        if (majors.length > 1) {
+            console.log(`  📍 Ring "${ringId}": ${majors.length} major nodes`);
+            
+            // Connect each major node to its next neighbor (wrap around for full ring)
+            for (let i = 0; i < majors.length; i++) {
+                const a = majors[i];
+                const b = majors[(i + 1) % majors.length];
+                
+                // Don't connect a node to itself if only one major per ring
+                if (a.id !== b.id) {
+                    // Only add if this connection doesn't already exist
+                    const connectionExists = connections.some(conn => 
+                        conn.from === a.id && conn.to === b.id
+                    );
+                    
+                    if (!connectionExists) {
+                        connections.push({ from: a.id, to: b.id, isActive: false, isLocked: false });
+                        console.log(`    ✅ Arc: ${a.name} → ${b.name} (visual only)`);
+                    }
+                }
+            }
+        } else if (majors.length === 1) {
+            console.log(`  📍 Ring "${ringId}": ${majors.length} major node (no arcs needed)`);
+        } else {
+            console.log(`  📍 Ring "${ringId}": no major nodes`);
+        }
+    }
+
+    const treeCount = AIR_TALENT_NODES.reduce((sum, node) => 
+        sum + node.prerequisites.filter(prereqId => {
+            const prereq = allNodesMap.get(prereqId);
+            return prereq && prereq.path === node.path;
+        }).length, 0
+    );
+    const arcCount = connections.length - treeCount;
+    
+    console.log(`🎯 Total connections: ${connections.length} (${treeCount} tree + ${arcCount} visual arcs)`);
+    console.log('✅ Clean POE-style connection generation complete!');
+
     return connections;
 }

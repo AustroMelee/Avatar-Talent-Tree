@@ -18,7 +18,7 @@ class NodeStyler {
     public getSize(node: TalentNode): number {
         switch (node.type) {
             case 'Axiom': return 80;
-            case 'Genesis': return 75;
+            case 'Genesis': return 150;
             case 'Manifestation': return 65;
             case 'Synthesis': return 60;
             case 'Keystone': return 55;

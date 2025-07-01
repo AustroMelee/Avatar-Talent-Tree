@@ -8,11 +8,12 @@ import type {
   TalentNode, 
   Point, 
   RenderConfig,
+  TalentConnection,
 } from './types';
 import { nodeStyler, NodeDrawState } from './rendering/nodeStyler';
 import { connectionStyler } from './rendering/connectionStyler';
 import { iconManager } from './rendering/iconManager';
-import { getCurveControlPoint, drawArcConnection, isLegalArc } from './rendering/canvasUtils';
+import { getCurveControlPoint, drawArcConnection, drawStraightConnection, isLegalArc } from './rendering/canvasUtils';
 import { getPulseFactor } from './rendering/animationUtils';
 
 // A map to associate node icon types with emojis.
@@ -260,7 +261,10 @@ export class TalentTreeRenderer {
   private drawConnections(talentTree: TalentTree, hoveredPath: Set<string>): void {
     const { ctx } = this.config;
 
-    for (const connection of talentTree.connections) {
+    // Get all connections including dynamic ones for allocatable nodes
+    const allConnections = this.getAllConnections(talentTree);
+
+    for (const connection of allConnections) {
       const fromNode = this.allNodes.get(connection.from);
       const toNode = this.allNodes.get(connection.to);
 
@@ -274,11 +278,17 @@ export class TalentTreeRenderer {
       // Check if this is a legal ring connection using ringId and validation
       const isRingConnection = isLegalArc(fromNode, toNode);
       
+      // Check if the target node is allocatable (available for selection)
+      const isToNodeAllocatable = toNode.isAllocatable;
+      
       if (isRingConnection) {
           // Draw arc for true ring connections (same ringId, legal angle difference)
           drawArcConnection(ctx, this.CONSTELLATION_CENTER, fromNode, toNode, style);
+      } else if (isToNodeAllocatable) {
+          // Draw straight line for connections to allocatable nodes
+          drawStraightConnection(ctx, fromNode, toNode, style);
       } else {
-          // Draw curved line for spoke connections (different rings or illegal arcs)
+          // Draw curved line for other connections (different rings or non-allocatable)
           const controlPoint = getCurveControlPoint(fromNode, toNode);
           
           ctx.save();
@@ -313,6 +323,61 @@ export class TalentTreeRenderer {
           ctx.restore();
       }
     }
+  }
+
+  private getAllConnections(talentTree: TalentTree): TalentConnection[] {
+    const connections = [...talentTree.connections];
+    
+    // Add dynamic connections for allocatable nodes
+    talentTree.nodes.forEach(node => {
+      if (node.isAllocatable) {
+        // Find all allocated nodes that could lead to this allocatable node
+        talentTree.nodes.forEach(potentialFrom => {
+          if (potentialFrom.isAllocated && node.prerequisites.includes(potentialFrom.id)) {
+            // Check if this connection doesn't already exist
+            const connectionExists = connections.some(conn => 
+              conn.from === potentialFrom.id && conn.to === node.id
+            );
+            
+            if (!connectionExists) {
+              connections.push({ 
+                from: potentialFrom.id, 
+                to: node.id, 
+                isActive: false, 
+                isLocked: false 
+              });
+            }
+          }
+        });
+      }
+    });
+    
+    // Also preserve connections from allocated nodes to their immediate children
+    // (even if the children are not yet allocatable, to show the progression path)
+    talentTree.nodes.forEach(node => {
+      if (node.isAllocated) {
+        // Find all nodes that have this allocated node as a prerequisite
+        talentTree.nodes.forEach(potentialTo => {
+          if (potentialTo.prerequisites.includes(node.id)) {
+            // Check if this connection doesn't already exist
+            const connectionExists = connections.some(conn => 
+              conn.from === node.id && conn.to === potentialTo.id
+            );
+            
+            if (!connectionExists) {
+              connections.push({ 
+                from: node.id, 
+                to: potentialTo.id, 
+                isActive: false, 
+                isLocked: false 
+              });
+            }
+          }
+        });
+      }
+    });
+    
+    return connections;
   }
   
   private drawNodes(nodes: TalentNode[], hoveredNodeId?: string | null, visualEffects?: Map<string, { type: string; progress: number }>, hoveredPath?: Set<string>): void {

@@ -2,6 +2,48 @@ import type { Point, TalentNode } from '../types';
 import type { ConnectionStyle } from './connectionStyler';
 
 /**
+ * Draws a straight line connection between two nodes.
+ * Used for showing available progression paths.
+ * @param ctx - The canvas rendering context.
+ * @param fromNode - The starting node.
+ * @param toNode - The ending node.
+ * @param style - The style object for the connection.
+ */
+export function drawStraightConnection(ctx: CanvasRenderingContext2D, fromNode: TalentNode, toNode: TalentNode, style: ConnectionStyle): void {
+    ctx.save();
+    
+    // Base line
+    ctx.beginPath();
+    ctx.moveTo(fromNode.position.x, fromNode.position.y);
+    ctx.lineTo(toNode.position.x, toNode.position.y);
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = style.base;
+    ctx.lineWidth = style.baseWidth;
+    ctx.shadowColor = style.shadow;
+    ctx.shadowBlur = style.shadowBlur;
+    ctx.stroke();
+
+    // Highlight line
+    ctx.strokeStyle = style.highlight;
+    ctx.lineWidth = style.highlightWidth;
+    ctx.shadowBlur = 0;
+    ctx.stroke();
+
+    // Animated dashes for active or hovered connections
+    if (style.dash) {
+        ctx.setLineDash(style.dash.pattern);
+        ctx.lineDashOffset = -(Date.now() / style.dash.speed) % (style.dash.pattern[0] + style.dash.pattern[1]);
+        ctx.strokeStyle = style.dash.color;
+        ctx.lineWidth = style.dash.width;
+        ctx.shadowColor = style.dash.shadow;
+        ctx.shadowBlur = style.dash.shadowBlur;
+        ctx.stroke();
+    }
+    
+    ctx.restore();
+}
+
+/**
  * Calculates the control point for a quadratic bezier curve between two nodes.
  * Used for "spoke" connections.
  * @param fromNode - The starting node.
@@ -35,7 +77,7 @@ export function getCurveControlPoint(fromNode: TalentNode, toNode: TalentNode): 
 
 /**
  * Validates whether a connection should use arc rendering.
- * Only allows arcs between nodes on the same ring with adjacent angles.
+ * Only allows arcs between major nodes on the same ring with adjacent angles.
  * @param fromNode - The starting node.
  * @param toNode - The ending node.
  * @returns True if the connection should use arc rendering.
@@ -51,21 +93,20 @@ export function isLegalArc(fromNode: TalentNode, toNode: TalentNode): boolean {
         return false;
     }
     
+    // Only major nodes can form arcs (no minors on rings)
+    const majorTypes = new Set(['Genesis', 'Keystone', 'Manifestation', 'Axiom', 'Capstone', 'Schism', 'Synthesis']);
+    if (!majorTypes.has(fromNode.type) || !majorTypes.has(toNode.type)) {
+        return false;
+    }
+    
     // Only allow short arcs (not crossing the center)
     const angleDiff = Math.abs(fromNode.angle - toNode.angle);
     const normalizedDiff = Math.min(angleDiff, 2 * Math.PI - angleDiff);
     
-    // Allow arcs up to π/2 radians (90 degrees) to prevent crossing
-    if (normalizedDiff > Math.PI / 2) {
+    // Allow arcs up to π radians (180 degrees) for adjacent paths
+    // This allows connections between neighboring paths on the same ring
+    if (normalizedDiff > Math.PI) {
         return false;
-    }
-    
-    // Special rules for synthesis nodes - only connect to adjacent paths
-    if (fromNode.type === 'Synthesis' || toNode.type === 'Synthesis') {
-        // Synthesis nodes should only connect to their defined prerequisites
-        // This is handled by the connection data, so we just need to ensure
-        // they're on the same ring and have reasonable angle difference
-        return true;
     }
     
     return true;
