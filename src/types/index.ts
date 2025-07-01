@@ -10,4 +10,7 @@ export * from './app.types';
 export * from './talent.types';
 export * from './element.types';
 export * from './presetBuild.types';
-export type { PresetBuild } from './presetBuild.types'; 
+export type { PresetBuild } from './presetBuild.types';
+
+// Re-export constants for convenience
+export { ARGENT_CODEX_CONSTANTS } from '../core/constants'; 
