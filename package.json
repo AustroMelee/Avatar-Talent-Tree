@@ -30,7 +30,8 @@
   "main": "index.js",
   "dependencies": {
     "lodash": "^4.17.21",
-    "nanoid": "^3.3.11"
+    "nanoid": "^3.3.11",
+    "puppeteer": "^24.11.1"
   },
   "repository": {
     "type": "git",

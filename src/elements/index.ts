@@ -5,9 +5,11 @@
  */
 
 import type { ConstellationMetadata } from '../types';
-import { EARTH_TALENT_NODES } from './earth/earthTalentData';
+import { AIR_CONSTELLATION } from './air/airTalentData';
+import { WATER_CONSTELLATION } from './water/waterTalentData';
+import { EARTH_CONSTELLATION, EARTH_TALENT_NODES } from './earth/earthTalentData';
 import { FIRE_CONSTELLATION } from './fire/fireTalentData';
-import { STEEL_TALENT_NODES } from './steel/steelTalentData';
+import { STEEL_CONSTELLATION, STEEL_TALENT_NODES } from './steel/steelTalentData';
 
 /**
  * Elemental Constellation Data - The Four Elements of the Argent Codex
@@ -21,20 +23,8 @@ import { STEEL_TALENT_NODES } from './steel/steelTalentData';
 export { 
   AIR_TALENT_NODES, 
   generateAirConnections, 
-  AIR_CONSTELLATION, 
-  ROOT_NODE as AIR_ROOT_NODE 
+  AIR_CONSTELLATION
 } from './air/airTalentData';
-
-/**
- * Fire Constellation - The Eternal Flame
- * Philosophy: The eternal dance between creation and destruction, passion and discipline, life and death
- */
-export { 
-  FIRE_TALENT_NODES, 
-  generateFireConnections, 
-  FIRE_CONSTELLATION, 
-  FIRE_ROOT_NODES 
-} from './fire/fireTalentData';
 
 /**
  * Water Constellation - The Depths Eternal
@@ -43,8 +33,7 @@ export {
 export { 
   WATER_TALENT_NODES, 
   generateWaterConnections, 
-  WATER_CONSTELLATION, 
-  ROOT_NODE as WATER_ROOT_NODE 
+  WATER_CONSTELLATION
 } from './water/waterTalentData';
 
 /**
@@ -53,15 +42,23 @@ export {
  */
 export {
   EARTH_TALENT_NODES,
-  EARTH_CONSTELLATION,
-  generateEarthConnections,
-  generateEarthConnections as generateAllEarthConnections
+  generateEarthConnections as generateAllEarthConnections,
+  EARTH_CONSTELLATION
 } from './earth/earthTalentData';
 
-// Export a function that returns the Earth nodes array
-export function generateAllEarthNodes() {
-  return EARTH_TALENT_NODES;
-}
+export { EARTH_PRESETS } from './earth/earthPresets';
+
+export const generateAllEarthNodes = () => EARTH_TALENT_NODES;
+
+/**
+ * Fire Constellation - The Eternal Flame
+ * Philosophy: The eternal dance between creation and destruction, passion and discipline, life and death
+ */
+export { 
+  FIRE_TALENT_NODES, 
+  generateFireConnections, 
+  FIRE_CONSTELLATION
+} from './fire/fireTalentData';
 
 /**
  * Steel Constellation - The Forged Steel
@@ -69,15 +66,11 @@ export function generateAllEarthNodes() {
  */
 export {
   STEEL_TALENT_NODES,
-  STEEL_CONSTELLATION,
-  generateSteelConnections,
-  generateSteelConnections as generateAllSteelConnections
+  generateSteelConnections as generateAllSteelConnections,
+  STEEL_CONSTELLATION
 } from './steel/steelTalentData';
 
-// Export a function that returns the Steel nodes array
-export function generateAllSteelNodes() {
-  return STEEL_TALENT_NODES;
-}
+export const generateAllSteelNodes = () => STEEL_TALENT_NODES;
 
 /**
  * Air Constellation - The Four Winds
@@ -120,7 +113,38 @@ export const AIR_CONSTELLATION_METADATA: ConstellationMetadata = {
  * Fire Constellation - The Eternal Flame
  * Philosophy: The eternal dance between creation and destruction, passion and discipline, life and death
  */
-export const FIRE_CONSTELLATION_METADATA: ConstellationMetadata = FIRE_CONSTELLATION;
+export const FIRE_CONSTELLATION_METADATA: ConstellationMetadata = {
+  id: 'fire',
+  name: 'The Eternal Flame',
+  description: 'The eternal dance between creation and destruction, passion and discipline, life and death.',
+  color: '#f38ba8',
+  paths: [
+    {
+      id: 'eternal_forge',
+      name: 'The Eternal Forge',
+      description: 'The forge that never cools - mastery of fire\'s creative and destructive potential',
+      flavor: '🔥 Creation and destruction, the blacksmith\'s art'
+    },
+    {
+      id: 'dancing_flame',
+      name: 'The Dancing Flame',
+      description: 'Fire as movement and grace - the art of firebending as dance',
+      flavor: '💃 Grace, mobility, the fire dancer\'s elegance'
+    },
+    {
+      id: 'consuming_inferno',
+      name: 'The Consuming Inferno',
+      description: 'The raw power of fire unleashed - overwhelming force and destruction',
+      flavor: '🔥 Raw power, destruction, the inferno\'s fury'
+    },
+    {
+      id: 'inner_fire',
+      name: 'The Inner Fire',
+      description: 'The spiritual and emotional aspects of fire - passion, will, and inner strength',
+      flavor: '🔥 Spirit, passion, the fire within'
+    }
+  ]
+};
 
 /**
  * Water Constellation - The Depths Eternal
@@ -238,9 +262,9 @@ export const STEEL_CONSTELLATION_METADATA: ConstellationMetadata = {
  */
 export const CONSTELLATIONS = {
   air: AIR_CONSTELLATION_METADATA,
-  fire: FIRE_CONSTELLATION_METADATA,
   water: WATER_CONSTELLATION_METADATA,
   earth: EARTH_CONSTELLATION_METADATA,
+  fire: FIRE_CONSTELLATION_METADATA,
   steel: STEEL_CONSTELLATION_METADATA
 } as const;
 
@@ -248,7 +272,16 @@ export const CONSTELLATIONS = {
  * Get constellation by ID
  */
 export function getConstellation(id: string): ConstellationMetadata | null {
-  return CONSTELLATIONS[id as keyof typeof CONSTELLATIONS] || null;
+  const meta = CONSTELLATIONS[id as keyof typeof CONSTELLATIONS] as any;
+  if (!meta) return null;
+  // This ensures a consistent structure for the main app UI
+  return {
+    id: meta.id || id,
+    name: meta.name,
+    description: meta.description,
+    color: meta.color || '#cdd6f4', // Fallback color
+    paths: meta.paths || []
+  };
 }
 
 /**

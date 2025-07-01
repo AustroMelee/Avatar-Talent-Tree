@@ -1,12 +1,20 @@
-# The Four Winds Constellation - Airbending Mastery System (Canonically Refactored) 🌬️
+# The Four Winds Constellation - Airbending Mastery System (Multi-Path Synthesis) 🌬️
 
 ## System Overview
 
-The Four Winds represents the complete mastery of airbending through a deep, philosophical understanding of the element. You have 17 Points of Knowing (PK) to allocate. Each path is not just a set of skills, but a way of life, reflecting the core tenets taught by the Air Nomads. The power here comes from technique and wisdom, not raw destructive force.
+The Four Winds represents the complete mastery of airbending through a deep, philosophical understanding of the element. You have unlimited Points of Knowing (PK) to allocate across multiple paths, creating unique combinations that reflect your personal journey. The constellation is arranged in a diamond layout with four primary paths branching from a central root, connected by Synthesis nodes that represent the blending of different airbending philosophies.
 
 ## Constellation Philosophy
 
-Airbending is the element of freedom, representing the boundless spirit and the ability to adapt to any situation. The Four Winds constellation embodies the four fundamental approaches to mastering this element: defense through evasion, spiritual connection, decisive action, and ultimate mobility.
+Airbending is the element of freedom, representing the boundless spirit and the ability to adapt to any situation. The Four Winds constellation embodies the four fundamental approaches to mastering this element: defense through evasion, spiritual connection, decisive action, and ultimate mobility. Unlike rigid specialization, this system encourages creative synthesis between paths, allowing airbenders to develop unique hybrid techniques that reflect their individual understanding of the element.
+
+## Constellation Layout
+
+The talent tree is arranged in a diamond pattern with:
+- **Central Root**: The foundation of airbending mastery
+- **Four Primary Paths**: Branching outward in cardinal directions
+- **Synthesis Nodes**: Eight hybrid nodes connecting paths, arranged in inner and outer rings
+- **Multi-Path Investment**: No restrictions on path combination - invest freely across all paths
 
 ## Path Overview
 
@@ -14,6 +22,22 @@ Airbending is the element of freedom, representing the boundless spirit and the 
 2. **The Sacred Breath** - Spiritual connection and chi manipulation  
 3. **The Wild Gale** - Raw power and battlefield control
 4. **The Dancing Wind** - Ultimate mobility and acrobatic grace
+
+## Synthesis Nodes
+
+Synthesis nodes represent the blending of two airbending philosophies, creating unique hybrid techniques. These nodes are positioned between paths and require investment in both connected paths to unlock.
+
+### Inner Ring Synthesis (2 PK each)
+- **Gentle Gale** (Gentle Breeze + Wild Gale): Defensive redirection with offensive counter-strikes
+- **Sacred Dance** (Sacred Breath + Dancing Wind): Spiritual awareness enhancing mobility
+- **Wild Breath** (Wild Gale + Sacred Breath): Channeling spiritual energy into powerful attacks
+- **Dancing Breeze** (Dancing Wind + Gentle Breeze): Evasive acrobatics with defensive applications
+
+### Outer Ring Synthesis (3 PK each)
+- **Serene Storm** (Gentle Breeze + Sacred Breath): Meditative defensive techniques
+- **Gale Force** (Wild Gale + Dancing Wind): High-speed aerial combat mastery
+- **Breath of Freedom** (Sacred Breath + Dancing Wind): Spiritual flight and transcendence
+- **Wind's Wisdom** (Gentle Breeze + Wild Gale): Strategic battlefield control through subtle manipulation
 
 ---
 
@@ -253,27 +277,130 @@ Your balance becomes flawless. You move with a light, acrobatic grace, and your 
 
 ---
 
-## Build Recommendations
+## Advanced Build Strategies
 
-### Defensive Specialist (Gentle Breeze Focus)
-- **Primary Path**: Gentle Breeze (8-10 PK)
-- **Secondary Path**: Sacred Breath (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+### Hybrid Specialists
+The Synthesis nodes enable unique hybrid builds that combine the strengths of multiple paths:
 
-### Spiritual Guide (Sacred Breath Focus)
-- **Primary Path**: Sacred Breath (8-10 PK)
-- **Secondary Path**: Gentle Breeze (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+**Defensive Acrobat** (Gentle Breeze + Dancing Wind)
+- Primary: Gentle Breeze (6-8 PK)
+- Secondary: Dancing Wind (4-6 PK)
+- Synthesis: Dancing Breeze (2 PK)
+- Remaining: Unlimited PK for utility
 
-### Battlefield Controller (Wild Gale Focus)
-- **Primary Path**: Wild Gale (8-10 PK)
-- **Secondary Path**: Dancing Wind (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+**Spiritual Warrior** (Sacred Breath + Wild Gale)
+- Primary: Sacred Breath (6-8 PK)
+- Secondary: Wild Gale (4-6 PK)
+- Synthesis: Wild Breath (2 PK)
+- Remaining: Unlimited PK for utility
 
-### Mobile Scout (Dancing Wind Focus)
-- **Primary Path**: Dancing Wind (8-10 PK)
-- **Secondary Path**: Wild Gale (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+**Battlefield Sage** (Gentle Breeze + Sacred Breath)
+- Primary: Gentle Breeze (6-8 PK)
+- Secondary: Sacred Breath (4-6 PK)
+- Synthesis: Serene Storm (3 PK)
+- Remaining: Unlimited PK for utility
+
+**Aerial Master** (Wild Gale + Dancing Wind)
+- Primary: Wild Gale (6-8 PK)
+- Secondary: Dancing Wind (4-6 PK)
+- Synthesis: Gale Force (3 PK)
+- Remaining: Unlimited PK for utility
+
+### Balanced Approaches
+For those seeking versatility across all paths:
+
+**Wind Sage** (Balanced)
+- Gentle Breeze: 4 PK
+- Sacred Breath: 4 PK
+- Wild Gale: 4 PK
+- Dancing Wind: 4 PK
+- Synthesis: Choose 1-2 nodes (1-6 PK)
+- Remaining: Unlimited PK
+
+**Adaptive Master** (Three-Path Focus)
+- Primary Path: 6-7 PK
+- Secondary Path: 4-5 PK
+- Tertiary Path: 3-4 PK
+- Synthesis: 1-2 nodes (2-6 PK)
+- Remaining: Unlimited PK
+
+---
+
+## Character Preset Builds
+
+> **Recommended PK Limit:** 24 PK. For a balanced and lore-accurate experience, it is recommended to build up to 24 PK in Air. This prevents 'god builds' and encourages meaningful choices.
+
+> **Note:** The PK total for each build is calculated by summing all unique nodes (including all prerequisites and synthesis nodes) required to unlock the preset's endpoints, exactly as in the in-game UI.
+
+### 🦋 Aang - The Reluctant Avatar
+**Total PK:** 24
+
+**Philosophy**: Traditional, evasive airbending focused on mobility, misdirection, and non-violent solutions.
+
+**Signature Abilities**:
+- **Air Scooter**: His signature invention for mobility and playful combat
+- **Eye of Serenity**: The pinnacle of evasive awareness and defensive mastery
+- **Momentum Redirection**: Core defensive philosophy of turning force against itself
+
+**Path Focus**: Dancing Wind + Gentle Breeze
+- **Primary Investment**: Dancing Wind (mobility and acrobatic grace)
+- **Secondary Investment**: Gentle Breeze (defensive redirection and evasion)
+- **Total Investment**: Unlimited PK
+
+**Playstyle**: Aang's build emphasizes evasion, mobility, and non-violent conflict resolution. He excels at avoiding damage through superior movement and redirecting attacks rather than meeting force with force. Perfect for players who prefer defensive, acrobatic combat with a focus on outmaneuvering opponents.
+
+### 🌪️ Zaheer - The Red Lotus Anarchist
+**Total PK:** 26
+
+**Philosophy**: Ruthless spiritualist who weaponized airbending philosophy to pursue ultimate, violent freedom.
+
+**Signature Abilities**:
+- **Flight Mastery**: His ultimate achievement after "letting go his earthly tether"
+- **Suffocation**: His signature lethal technique, representing the dark side of airbending
+
+**Path Focus**: Dancing Wind + Wild Gale
+- **Primary Investment**: Dancing Wind (ultimate freedom through flight)
+- **Secondary Investment**: Wild Gale (lethal force and decisive action)
+- **Total Investment**: Unlimited PK
+
+**Playstyle**: Zaheer's build represents the corruption of airbending philosophy for violent ends. He combines the ultimate expression of freedom (flight) with lethal techniques that go against Air Nomad teachings. This build is for players who want to explore the darker aspects of airbending while maintaining the element's core themes of freedom and transcendence.
+
+### 🧘 Yangchen - The Revered Predecessor
+**Total PK:** 38
+
+**Philosophy**: Pragmatic Avatar who combined deep spiritual connection with decisive, overwhelming force to maintain global balance.
+
+**Signature Abilities**:
+- **Spirit Projection**: Her unparalleled connection to the Spirit World
+- **Eye of the Hurricane**: Her willingness to use immense power to end conflicts
+- **Breath of Kinship**: Her connection to all life and people
+
+**Path Focus**: Sacred Breath + Wild Gale
+- **Primary Investment**: Sacred Breath (spiritual connection and chi manipulation)
+- **Secondary Investment**: Wild Gale (overwhelming force and battlefield control)
+- **Total Investment**: Unlimited PK
+
+**Playstyle**: Yangchen's build represents the Avatar's duty to maintain balance through both spiritual wisdom and decisive action. She can commune with spirits, project her consciousness, and wield overwhelming force when necessary. This build is ideal for players who want to explore the spiritual aspects of airbending while maintaining the ability to end conflicts decisively.
+
+### ⚖️ Tenzin - The Son of Aang
+**Total PK:** 30
+
+**Philosophy**: Master traditionalist dedicated to preserving Air Nomad culture, blending defensive grace with forceful determination.
+
+**Signature Abilities**:
+- **The Unbroken Current**: His mastery of defensive, flowing combat
+- **Eye of the Hurricane**: His ability to create massive cyclones to control the battlefield
+- **Peaceful Presence**: His role as a teacher and leader of the new Air Nation
+
+**Path Focus**: Gentle Breeze + Wild Gale + Sacred Breath
+- **Primary Investment**: Gentle Breeze (defensive mastery and redirection)
+- **Secondary Investment**: Wild Gale (battlefield control and decisive action)
+- **Tertiary Investment**: Sacred Breath (leadership and teaching abilities)
+- **Total Investment**: Unlimited PK
+
+**Playstyle**: Tenzin's build represents the modern Air Nomad's role as both protector and teacher. He combines traditional defensive techniques with the ability to control large areas of the battlefield, while also possessing the spiritual presence to lead and inspire others. This build is perfect for players who want to embody the Air Nomad ideal of peaceful strength and cultural preservation.
+
+---
 
 ## Character Inspirations
 
@@ -281,11 +408,14 @@ Your balance becomes flawless. You move with a light, acrobatic grace, and your 
 - **Sacred Breath**: Jinora's spiritual connection and ability to project her spirit
 - **Wild Gale**: Monk Gyatso's powerful airbending techniques
 - **Dancing Wind**: The Air Nomads' acrobatic and mobile fighting style
+- **Synthesis Builds**: Unique combinations reflecting individual mastery and philosophy
 
-## Notes
+## System Notes
 
-- All paths are designed to be viable and balanced
-- The system encourages specialization while allowing for some cross-path investment
-- Each path represents a different philosophy and approach to airbending
-- The minor nodes provide additional customization and tactical options
-- The system is designed to be lore-accurate and reflect the teachings of the Air Nomads 
+- **Multi-Path Freedom**: No restrictions on path combination - invest freely across all paths
+- **Synthesis Rewards**: Hybrid nodes provide unique abilities that combine path philosophies
+- **Balanced Design**: All paths and combinations are viable and balanced
+- **Philosophical Depth**: Each path represents a different approach to airbending mastery
+- **Creative Expression**: The system encourages unique builds that reflect individual character development
+- **Lore Accuracy**: Maintains fidelity to Air Nomad teachings while allowing for personal interpretation
+- **Strategic Depth**: Synthesis nodes create meaningful choices and build diversity 

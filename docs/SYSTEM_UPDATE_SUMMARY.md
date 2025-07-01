@@ -19,7 +19,7 @@ All five constellations have been completely refactored to reflect authentic phi
 Each constellation has been expanded with 20 additional minor nodes (5 per path), providing:
 - Enhanced customization options
 - Lore-accurate abilities inspired by specific characters
-- Balanced progression within the 17 PK limit
+- Unlimited progression potential
 - Rich flavor text that enhances the narrative experience
 
 **Total New Nodes Added**: 100 minor nodes across all constellations
@@ -179,7 +179,7 @@ Each path draws inspiration from specific characters:
 - Path names and descriptions match established lore
 
 ### Game Balance
-- All paths are viable within the 17 PK limit
+- All paths are viable with unlimited progression potential
 - Minor nodes provide meaningful tactical options
 - Progression is balanced and logical
 - Cross-path investment is encouraged but not required

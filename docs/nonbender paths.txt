@@ -15,10 +15,10 @@ Here is the fully reworked and re-grounded Human Spirit Constellation.
 The Human Spirit - The Non-Bender Constellation 🛠️
 System Overview
 
-The Human Spirit represents mastery over the domains where bending holds no sway: ingenuity, discipline, strategy, and technology. It is the testament that a keen mind, a perfected body, or a well-crafted tool can be just as formidable as any element. You have 17 Points of Knowing (PK) to allocate.
+The Human Spirit represents mastery over the domains where bending holds no sway: ingenuity, discipline, strategy, and technology. It is the testament that a keen mind, a perfected body, or a well-crafted tool can be just as formidable as any element. You have unlimited Points of Knowing (PK) to allocate.
 
 Constellation: The Human Spirit
-Total Points: 17 PK
+Total Points: Unlimited PK
 Theme: Ingenuity, Discipline, Strategy, Innovation
 
 The Four Disciplines

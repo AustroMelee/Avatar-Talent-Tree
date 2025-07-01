@@ -8,6 +8,7 @@ import type {
   TalentNode, 
   AppState, 
   Point,
+  VisualEvent
 } from './types';
 import { ARGENT_CODEX_CONSTANTS } from './types';
 import { 
@@ -17,205 +18,163 @@ import {
   generateAllEarthConnections,
   EARTH_CONSTELLATION
 } from './elements';
+import { NodeStateCalculator } from './core/nodeStateCalculator';
+import { StateFactory } from './core/stateFactory';
 
 /**
- * Visual events for enhanced UI feedback
- */
-export type VisualEvent = {
-  type: 'bridge_allocated' | 'synthesis_revealed' | 'bridge_locked' | 'deallocate_denied';
-  nodeId: string;
-  timestamp: number;
-  data?: any;
-};
-
-/**
- * Manages the talent tree application state and interactions according to the Argent Codex
+ * Manages the talent tree application state. It holds the state and delegates
+ * the complex business logic for state updates to specialized calculators.
  */
 export class TalentTreeManager {
   private state: AppState;
   private subscribers: ((state: AppState) => void)[] = [];
+  private nodeStateCalculator: NodeStateCalculator;
   private visualEvents: VisualEvent[] = [];
 
   constructor(initialCallback?: (state: AppState) => void) {
-    this.state = this.createInitialState();
-    // Initialize node states
-    this.updateAllNodeStates();
-    if(initialCallback) this.subscribe(initialCallback);
+    this.nodeStateCalculator = new NodeStateCalculator();
+    this.state = StateFactory.createInitialState();
+    
+    // Initial calculation of node states
+    this.nodeStateCalculator.updateAllNodeStates(this.state.talentTree);
+    
+    if (initialCallback) this.subscribe(initialCallback);
   }
-  
-  subscribe(callback: (state: AppState) => void): void {
-      this.subscribers.push(callback);
+
+  public subscribe(callback: (state: AppState) => void): void {
+    this.subscribers.push(callback);
   }
 
   private notify(): void {
-      this.subscribers.forEach(cb => cb(this.state));
+    this.subscribers.forEach(cb => cb(this.state));
+  }
+  
+  public getState(): AppState {
+    return this.state;
+  }
+  
+  private addVisualEvent(event: VisualEvent): void {
+      const now = Date.now();
+      // Clear old events before adding a new one
+      this.visualEvents = this.visualEvents.filter(e => now - e.timestamp < 5000);
+      this.visualEvents.push(event);
   }
 
-  /**
-   * Gets recent visual events for UI feedback
-   */
-  getVisualEvents(): VisualEvent[] {
+  public getVisualEvents(): VisualEvent[] {
     return this.visualEvents;
   }
+  
+  // --- STATE MUTATION METHODS ---
 
-  /**
-   * Clears old visual events
-   */
-  clearOldVisualEvents(): void {
-    const now = Date.now();
-    this.visualEvents = this.visualEvents.filter(event => now - event.timestamp < 5000); // Keep events for 5 seconds
-  }
-
-  /**
-   * Adds a visual event for UI feedback
-   */
-  private addVisualEvent(event: VisualEvent): void {
-    this.visualEvents.push(event);
-    this.clearOldVisualEvents();
-  }
-
-  /**
-   * Creates the initial application state
-   */
-  private createInitialState(): AppState {
-    return {
-      talentTree: this.createAirTalentTree(),
-      zoom: 0.8,
-      pan: { x: 0, y: 0 },
-      isDragging: false,
-      selectedNode: null,
-      hoveredNode: null,
-      isLoading: false
-    };
-  }
-
-  /**
-   * Creates the Air constellation talent tree
-   */
-  private createAirTalentTree(): TalentTree {
-    const nodes = AIR_TALENT_NODES.map(node => ({...node}));
-
-    // Use the pre-generated connections from the path modules
-    const connections = generateAirConnections();
-
-    return {
-      nodes,
-      connections,
-      totalPK: ARGENT_CODEX_CONSTANTS.TOTAL_PK,
-      spentPK: 0,
-      chosenPaths: new Map(),
-      allocatedNodes: new Set(),
-      covenant: null,
-      philosophicalWounds: [],
-      metadata: {
-        name: 'The Four Winds',
-        description: 'The constellation of balance, freedom, adaptation, and transcendence',
-        background: 'air'
-      }
-    };
-  }
-
-  /**
-   * Creates the Earth constellation talent tree
-   */
-  private createEarthTalentTree(): TalentTree {
-    const nodes = generateAllEarthNodes().map(node => ({...node}));
-    const connections = generateAllEarthConnections();
-
-    return {
-      nodes,
-      connections,
-      totalPK: ARGENT_CODEX_CONSTANTS.TOTAL_PK,
-      spentPK: 0,
-      chosenPaths: new Map(),
-      allocatedNodes: new Set(),
-      covenant: null,
-      philosophicalWounds: [],
-      metadata: {
-        name: EARTH_CONSTELLATION.name,
-        description: EARTH_CONSTELLATION.description,
-        background: 'earth'
-      }
-    };
-  }
-
-  /**
-   * Updates the state of all nodes (allocated, allocatable, locked)
-   */
-  private updateAllNodeStates(): void {
-    // A set of all allocated nodes that are part of an exclusive choice (Rites and Schisms)
-    const allocatedChoiceNodes = new Set<string>();
-    this.state.talentTree.allocatedNodes.forEach(nodeId => {
-        const node = this.state.talentTree.nodes.find(n => n.id === nodeId);
-        if (node && (node.type === 'GnosticRite' || node.type === 'Schism')) {
-            allocatedChoiceNodes.add(node.id);
-        }
-    });
-
-    this.state.talentTree.nodes.forEach(node => {
-        // Determine if this node is permanently locked by a choice
-        let isPermanentlyLocked = false;
-        if (node.exclusiveWith && node.exclusiveWith.length > 0) {
-            // This node is locked if ANY of the nodes it's exclusive with have been allocated.
-            for (const exclusiveId of node.exclusiveWith) {
-                if (allocatedChoiceNodes.has(exclusiveId)) {
-                    isPermanentlyLocked = true;
-                    break;
-                }
-            }
-        }
-        
-        // Propagate lock status to children (e.g., lock Capstone if its Rite is locked)
-        if (!isPermanentlyLocked && node.prerequisites.length > 0) {
-             const prereq = this.state.talentTree.nodes.find(n => n.id === node.prerequisites[0]);
-             if (prereq && prereq.isPermanentlyLocked) {
-                 isPermanentlyLocked = true;
-             }
-        }
-
-        node.isPermanentlyLocked = isPermanentlyLocked;
-        node.isAllocated = this.state.talentTree.allocatedNodes.has(node.id);
-        node.isLocked = this.isNodeLocked(node) || this.isBridgeLocked(node);
-        node.isAllocatable = this.isNodeAllocatable(node);
-        node.isVisible = true; // All nodes are visible for theorycrafting
-    });
-    
-    this.state.talentTree.connections.forEach(conn => {
-      conn.isActive = this.state.talentTree.allocatedNodes.has(conn.from) && this.state.talentTree.allocatedNodes.has(conn.to);
-      conn.isLocked = !this.state.talentTree.allocatedNodes.has(conn.from);
-    });
-  }
-
-  /**
-   * Resets all allocated points
-   */
-  resetPoints(): void {
-    this.state.talentTree = this.createAirTalentTree();
-    this.updateAllNodeStates();
-    this.notify();
-  }
-
-  /**
-   * Loads a new talent tree with the specified data
-   */
-  loadTalentTree(talentTree: TalentTree): void {
+  public loadTalentTree(talentTree: TalentTree): void {
     this.state.talentTree = talentTree;
-    this.updateAllNodeStates();
+    this.nodeStateCalculator.updateAllNodeStates(this.state.talentTree);
     this.notify();
   }
 
-  /**
-   * Sets the zoom level
-   */
-  setZoom(zoom: number): void {
+  public resetPoints(): void {
+    // We can use the StateFactory to get a clean tree of the current element type
+    // For now, it defaults to 'air' as per original logic.
+    // A more advanced version could pass the current element to the factory.
+    this.state.talentTree = StateFactory.createInitialState().talentTree;
+    this.nodeStateCalculator.updateAllNodeStates(this.state.talentTree);
+    this.notify();
+  }
+
+  public allocatePoint(nodeId: string): void {
+    const node = this.state.talentTree.nodes.find(n => n.id === nodeId);
+    if (!node || !node.isAllocatable) return;
+    
+    // Allocate the point
+    this.state.talentTree.allocatedNodes.add(nodeId);
+    this.state.talentTree.spentPK += node.pkCost;
+    
+    // Handle side effects like philosophical wounds
+    if (node.type === 'Schism') {
+      this.state.talentTree.philosophicalWounds.push(`Wound from ${node.name}`);
+    }
+    
+    this.nodeStateCalculator.updateAllNodeStates(this.state.talentTree);
+    this.notify();
+  }
+
+  public removePoint(nodeId: string): void {
+    const node = this.state.talentTree.nodes.find(n => n.id === nodeId);
+    if (!node || !node.isAllocated) return;
+
+    // Check if any other allocated node requires this one
+    const isPrerequisite = this.state.talentTree.nodes.some(
+      other => other.isAllocated && other.prerequisites.includes(nodeId)
+    );
+
+    if (isPrerequisite) {
+      this.addVisualEvent({ type: 'deallocate_denied', nodeId, timestamp: Date.now() });
+      this.notify(); // Notify to trigger render for flash effect
+      return;
+    }
+    
+    this.state.talentTree.allocatedNodes.delete(nodeId);
+    this.state.talentTree.spentPK -= node.pkCost;
+
+    if (node.type === 'Schism') {
+        this.state.talentTree.philosophicalWounds = this.state.talentTree.philosophicalWounds.filter(w => w !== `Wound from ${node.name}`);
+    }
+    
+    this.nodeStateCalculator.updateAllNodeStates(this.state.talentTree);
+    this.notify();
+  }
+  
+  public applyPresetBuild(endpointNodeIds: string[]): void {
+    // 1. Reset the tree state
+    this.state.talentTree.allocatedNodes.clear();
+    this.state.talentTree.spentPK = 0;
+    this.state.talentTree.philosophicalWounds = [];
+    this.state.talentTree.covenant = null;
+
+    // 2. Build the set of all nodes to allocate
+    const allNodesMap = new Map(this.state.talentTree.nodes.map(n => [n.id, n]));
+    const nodesToAllocate = new Set<string>();
+
+    const findAllPrerequisites = (nodeId: string) => {
+        if (nodesToAllocate.has(nodeId)) return;
+        const node = allNodesMap.get(nodeId);
+        if (node) {
+            nodesToAllocate.add(node.id);
+            node.prerequisites.forEach(findAllPrerequisites);
+        }
+    };
+    endpointNodeIds.forEach(findAllPrerequisites);
+
+    // 3. Apply the new state
+    this.state.talentTree.allocatedNodes = nodesToAllocate;
+    this.state.talentTree.spentPK = Array.from(nodesToAllocate).reduce((total, nodeId) => {
+        const node = allNodesMap.get(nodeId);
+        return total + (node ? node.pkCost : 0);
+    }, 0);
+
+    // 4. Recalculate all states and notify UI
+    this.nodeStateCalculator.updateAllNodeStates(this.state.talentTree);
+    this.notify();
+  }
+  
+  // --- Simple State Setters ---
+
+  public handleNodeClick(nodeId: string): void {
+    const node = this.state.talentTree.nodes.find(n => n.id === nodeId);
+    if (!node) return;
+    if (node.isAllocated) {
+      this.removePoint(nodeId);
+    } else if (node.isAllocatable) {
+      this.allocatePoint(nodeId);
+    }
+  }
+
+  public setZoom(zoom: number): void {
     this.state.zoom = Math.max(0.2, Math.min(2.0, zoom));
     this.notify();
   }
 
-  /**
-   * Sets the zoom level centered on a specific position (mouse cursor)
-   */
-  setZoomAtPosition(newZoom: number, mousePosition: Point): void {
+  public setZoomAtPosition(newZoom: number, mousePosition: Point): void {
     const oldZoom = this.state.zoom;
     newZoom = Math.max(0.2, Math.min(2.0, newZoom));
     if (oldZoom === newZoom) return;
@@ -230,296 +189,21 @@ export class TalentTreeManager {
     this.notify();
   }
 
-  /**
-   * Pans the view by a delta amount
-   */
-  panBy(delta: Point): void {
+  public panBy(delta: Point): void {
     this.state.pan.x += delta.x;
     this.state.pan.y += delta.y;
     this.notify();
   }
 
-  /**
-   * Sets the pan offset
-   */
-  setPan(pan: Point): void {
+  public setPan(pan: Point): void {
     this.state.pan = pan;
     this.notify();
   }
 
-  /**
-   * Sets the dragging state
-   */
-  setDragging(isDragging: boolean): void {
-    this.state.isDragging = isDragging;
-    this.notify();
-  }
-
-  /**
-   * Sets the selected node
-   */
-  setSelectedNode(nodeId: string | null): void {
-    this.state.selectedNode = nodeId;
-    this.notify();
-  }
-
-  /**
-   * Sets the hovered node
-   */
-  setHoveredNode(nodeId: string | null): void {
+  public setHoveredNode(nodeId: string | null): void {
     if (this.state.hoveredNode !== nodeId) {
       this.state.hoveredNode = nodeId;
+      // No need to notify for hover, as it's handled by the render loop
     }
-  }
-
-  /**
-   * Handles clicking on a specific node by ID
-   */
-  handleNodeClick(nodeId: string): void {
-    const node = this.state.talentTree.nodes.find(n => n.id === nodeId);
-    if (!node) return;
-    if (node.isAllocated) {
-      this.removePoint(nodeId);
-    } else if (this.isNodeAllocatable(node)) {
-      this.allocatePoint(nodeId);
-    }
-  }
-
-  /**
-   * Gets a summary of the current build
-   */
-  getBuildSummary(): any {
-    return {
-      spentPK: this.state.talentTree.spentPK,
-      totalPK: this.state.talentTree.totalPK,
-      chosenPaths: [],
-      pathInvestments: [],
-      covenant: null,
-      philosophicalWounds: [],
-    };
-  }
-
-  /**
-   * Gets the current application state
-   */
-  getState(): AppState {
-    return this.state;
-  }
-
-  /**
-   * Calculates the PK cost for a talent node according to the Argent Codex
-   * This now directly uses the cost defined in the node's data.
-   */
-  private calculatePKCost(node: TalentNode): number {
-    return node.pkCost;
-  }
-
-  /**
-   * Checks if a node is locked due to diametric opposition
-   */
-  private isNodeLocked(node: TalentNode): boolean {
-    // Genesis nodes are never locked at the start
-    if (node.type === 'Genesis') return false;
-    
-    // Check if this node belongs to a path that's diametrically opposed to the chosen path
-    const chosenPathForConstellation = this.state.talentTree.chosenPaths.get(node.constellation);
-    if (chosenPathForConstellation && chosenPathForConstellation !== node.path) {
-      return true; // This path is diametrically opposed to the chosen path
-    }
-    
-    // If any prerequisite is not allocated, this node is locked
-    return !node.prerequisites.every(prereqId => this.state.talentTree.allocatedNodes.has(prereqId));
-  }
-
-  /**
-   * Checks if a Schism node should be visible
-   */
-  private isSchismVisible(node: TalentNode): boolean {
-    if (node.type !== 'Schism') return true;
-    
-    // Schism nodes only become visible after 25 PK invested in the path
-    const nodesInPath = Array.from(this.state.talentTree.allocatedNodes).filter(id => {
-      const allocatedNode = this.state.talentTree.nodes.find(n => n.id === id);
-      return allocatedNode && allocatedNode.path === node.path;
-    }).length;
-    
-    return nodesInPath >= 25;
-  }
-
-  /**
-   * Checks if a Bridge node should be visible (only when Capstone is allocated)
-   */
-  private isBridgeVisible(node: TalentNode): boolean {
-    if (node.type !== 'Bridge') return true;
-    
-    // Bridge nodes only become visible after their corresponding Capstone is allocated
-    const capstoneId = this.getCapstoneForBridge(node.id);
-    return this.state.talentTree.allocatedNodes.has(capstoneId);
-  }
-
-  /**
-   * Gets the Capstone node ID that corresponds to a Bridge node
-   */
-  private getCapstoneForBridge(bridgeId: string): string {
-    const bridgeToCapstone: { [key: string]: string } = {
-      'air_leaf_bridge_hurricane': 'air_leaf_capstone',
-      'air_leaf_bridge_sky': 'air_leaf_capstone',
-      'air_hurricane_bridge_leaf': 'air_hurricane_capstone',
-      'air_hurricane_bridge_sky': 'air_hurricane_capstone',
-      'air_sky_bridge_leaf': 'air_sky_capstone',
-      'air_sky_bridge_hurricane': 'air_sky_capstone'
-    };
-    return bridgeToCapstone[bridgeId] || '';
-  }
-
-  /**
-   * Checks if a Bridge node is locked due to another Bridge being allocated
-   */
-  private isBridgeLocked(node: TalentNode): boolean {
-    if (node.type !== 'Bridge') return false;
-    
-    // If any Bridge is allocated, all other Bridges are locked
-    const allocatedBridges = Array.from(this.state.talentTree.allocatedNodes).filter(id => {
-      const allocatedNode = this.state.talentTree.nodes.find(n => n.id === id);
-      return allocatedNode && allocatedNode.type === 'Bridge';
-    });
-    
-    return allocatedBridges.length > 0 && !allocatedBridges.includes(node.id);
-  }
-
-  /**
-   * Checks if a node is allocatable (can be clicked to allocate a point)
-   */
-  private isNodeAllocatable(node: TalentNode): boolean {
-    // Can't allocate if already allocated
-    if (node.isAllocated) return false;
-    
-    // Can't allocate if locked
-    if (node.isLocked) return false;
-    
-    // Can't allocate if permanently locked
-    if (node.isPermanentlyLocked) return false;
-    
-    // Can't allocate if we don't have enough PK
-    const cost = this.calculatePKCost(node);
-    if (this.state.talentTree.spentPK + cost > this.state.talentTree.totalPK) return false;
-    
-    return true;
-  }
-
-  /**
-   * Allocates a point to a specific node
-   */
-  allocatePoint(nodeId: string): void {
-    const node = this.state.talentTree.nodes.find(n => n.id === nodeId);
-    if (!node || !this.isNodeAllocatable(node)) return;
-    
-    const cost = this.calculatePKCost(node);
-    if (this.state.talentTree.spentPK + cost > this.state.talentTree.totalPK) return;
-    
-    // Allocate the point
-    this.state.talentTree.allocatedNodes.add(nodeId);
-    this.state.talentTree.spentPK += cost;
-    
-    // Update chosen paths if this is a Genesis node
-    if (node.type === 'Genesis') {
-      this.state.talentTree.chosenPaths.set(node.constellation, node.path);
-    }
-    
-    // Add philosophical wounds for Schism nodes
-    if (node.type === 'Schism' && node.hasPenalty) {
-      // Add the wound to the list
-      this.state.talentTree.philosophicalWounds.push(`Wound from ${node.name}`);
-    }
-    
-    // Update all node states
-    this.updateAllNodeStates();
-    this.notify();
-  }
-
-  /**
-   * Removes a point from a specific node
-   */
-  removePoint(nodeId: string): void {
-    const node = this.state.talentTree.nodes.find(n => n.id === nodeId);
-    if (!node || !node.isAllocated) return;
-
-    // Check if any other allocated node requires this one.
-    const isPrerequisiteForAllocatedNode = this.state.talentTree.nodes.some(
-      otherNode =>
-        otherNode.isAllocated && otherNode.prerequisites.includes(nodeId)
-    );
-
-    if (isPrerequisiteForAllocatedNode) {
-      // Don't remove the point. Instead, fire a visual event.
-      this.addVisualEvent({
-        type: 'deallocate_denied',
-        nodeId,
-        timestamp: Date.now()
-      } as VisualEvent); // Cast to VisualEvent to include our new type
-      
-      this.notify(); // Notify to trigger the render loop for the flash effect
-      return; // Stop the function here
-    }
-    
-    const cost = this.calculatePKCost(node);
-    
-    // Remove the point
-    this.state.talentTree.allocatedNodes.delete(nodeId);
-    this.state.talentTree.spentPK -= cost;
-    
-    // Update all node states
-    this.updateAllNodeStates();
-    this.notify();
-  }
-
-  /**
-   * Applies a preset build by allocating the specified endpoint nodes
-   * and all of their prerequisites.
-   * @param endpointNodeIds An array of the final node IDs for the build.
-   */
-  public applyPresetBuild(endpointNodeIds: string[]): void {
-    // 1. Reset the tree's STATE to a clean state, without changing the element.
-    this.state.talentTree.allocatedNodes.clear();
-    this.state.talentTree.spentPK = 0;
-    this.state.talentTree.chosenPaths.clear();
-    this.state.talentTree.philosophicalWounds = [];
-    this.state.talentTree.covenant = null;
-
-    // 2. Create a map for quick node lookups using the CURRENT tree's nodes
-    const allNodesMap = new Map(this.state.talentTree.nodes.map(n => [n.id, n]));
-
-    // 3. Create a set to hold all nodes that need to be allocated
-    const nodesToAllocate = new Set<string>();
-
-    // 4. Recursive helper function to find all prerequisites for a node
-    const findAllPrerequisites = (nodeId: string) => {
-      // If we've already processed this node, stop.
-      if (nodesToAllocate.has(nodeId)) {
-        return;
-      }
-
-      const node = allNodesMap.get(nodeId);
-      if (node) {
-        // Add the current node to the set
-        nodesToAllocate.add(node.id);
-        // Recursively find prerequisites for this node's prerequisites
-        node.prerequisites.forEach(prereqId => {
-          findAllPrerequisites(prereqId);
-        });
-      }
-    };
-
-    // 5. For each endpoint in the preset, trace back and collect all required nodes
-    endpointNodeIds.forEach(nodeId => {
-      findAllPrerequisites(nodeId);
-    });
-
-    // 6. Apply the final set of allocated nodes
-    this.state.talentTree.allocatedNodes = nodesToAllocate;
-
-    // 7. Update all node states and notify the UI to re-render
-    this.updateAllNodeStates();
-    this.notify();
   }
 } 

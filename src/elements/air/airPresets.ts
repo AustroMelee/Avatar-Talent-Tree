@@ -1,44 +1,57 @@
 /**
- * Preset Builds for the Air Constellation
- * These define the KEY endpoint nodes for iconic characters.
+ * Preset Builds for the Air Constellation (CHARACTER UPDATE)
+ * These define the KEY endpoint nodes for iconic characters: Aang, Yangchen, Zaheer, and Tenzin.
  * The logic will automatically fill in all prerequisites.
  */
 
-export interface PresetBuild {
-  id: string;
-  name: string;
-  description: string;
-  nodeIds: string[];
-}
+import type { PresetBuild } from '../../types';
 
 export const AIR_PRESETS: PresetBuild[] = [
   {
     id: 'aang',
     name: 'Aang',
-    description: 'A traditional, playful, and evasive style focusing on mobility and non-violent defense.',
+    icon: '🦋',
+    description: 'The Reluctant Avatar. A master of traditional, evasive airbending, focusing on mobility, misdirection, and non-violent solutions.',
+    pinnacleSkills: ['Air Scooter', 'Eye of Serenity', 'Momentum Redirection'],
     nodeIds: [
-      'enhanced_agility', // pinnacle of evasive movement
-      'air_scooter', // his signature invention
-      'air_swipe', // key defensive move against projectiles
+      'dw_a1_air_scooter',     // His signature invention for mobility.
+      'gb_a3_eye_of_serenity', // The pinnacle of evasive awareness.
+      'gb_b2_momentum_redir',  // His core defensive philosophy.
     ],
   },
   {
     id: 'zaheer',
     name: 'Zaheer',
-    description: 'A ruthless and pragmatic style combining lethal force with the ultimate expression of freedom: flight.',
+    icon: '🌪️',
+    description: 'The Red Lotus Anarchist. A ruthless spiritualist who weaponized airbending philosophy to pursue ultimate, violent freedom.',
+    pinnacleSkills: ['Flight Mastery', 'Suffocation'],
     nodeIds: [
-      'suffocation', // his signature lethal technique
-      'flight', // his ultimate achievement
+      'wg_b3_suffocation',   // His signature lethal technique.
+      'dw_a3_flight_mastery',// His ultimate achievement after "letting go his earthly tether".
     ],
   },
   {
     id: 'yangchen',
     name: 'Yangchen',
-    description: 'A style defined by immense spiritual connection and overwhelming, decisive force to maintain balance.',
+    icon: '🧘',
+    description: 'The Revered Predecessor. A pragmatic Avatar who combined deep spiritual connection with decisive, overwhelming force to maintain global balance.',
+    pinnacleSkills: ['Spirit Projection', 'Eye of the Hurricane', 'Breath of Kinship'],
     nodeIds: [
-      'spiritual_projection', // representing her deep spiritual connection
-      'minor_suff_1', // Vacuum: her unique, non-lethal application of a deadly technique
-      'minor_sa_1', // Deafening Shout: her unique sound-based attack
+      'sb_a3_spirit_projection', // Her unparalleled connection to the Spirit World.
+      'wg_a3_eye_of_hurricane',  // Her willingness to use immense power to end conflicts.
+      'sb_b3_breath_of_kinship', // Her connection to all life and people.
+    ],
+  },
+  {
+    id: 'tenzin',
+    name: 'Tenzin',
+    icon: '⚖️',
+    description: 'The Son of Aang. A master traditionalist dedicated to preserving Air Nomad culture, blending defensive grace with forceful determination.',
+    pinnacleSkills: ['The Unbroken Current', 'Eye of the Hurricane', 'Peaceful Presence'],
+    nodeIds: [
+      'gb_b3_unbroken_current',   // His mastery of defensive, flowing combat.
+      'wg_a3_eye_of_hurricane',   // His ability to create massive cyclones to control the battlefield.
+      'sb_b1_peaceful_presence',  // His role as a teacher and leader of the new Air Nation.
     ],
   },
 ]; 

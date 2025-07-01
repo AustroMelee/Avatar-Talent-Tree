@@ -2,7 +2,7 @@
 
 ## System Overview
 
-The Eternal Flow represents mastery over water's three aspects: its adaptability, its life-giving nature, and its unyielding power. You have 17 Points of Knowing (PK) to allocate. Each current is a distinct philosophy, teaching a different truth about the element that flows through all life.
+The Eternal Flow represents mastery over water's three aspects: its adaptability, its life-giving nature, and its unyielding power. You have unlimited Points of Knowing (PK) to allocate. Each current is a distinct philosophy, teaching a different truth about the element that flows through all life.
 
 ## Constellation Philosophy
 
@@ -23,15 +23,12 @@ Waterbending is the element of change, representing adaptability, healing, and t
 
 **Focus**: Versatility, mimicry of natural forms, reactive combat, environmental control.
 
-### Genesis: Endless Mirror Path (1 PK)
+### Genesis: The Flowing Form Path (1 PK)
 You instinctively sense the flow of water in the environment and the "flow" of combat, making it easier to anticipate and react to an opponent's rhythm.
 
 ### Minor Nodes After Genesis:
 - **Flowing Grace** (1 PK): Your waterbending movements are more fluid and graceful, improving your overall technique.
 - **Water's Touch** (1 PK): You can sense water sources nearby and feel their purity and strength.
-- **Reflective Surface** (1 PK): You can create smooth, reflective surfaces of water that can be used for communication or observation.
-- **Mirror's Edge** (1 PK): Your water constructs have sharper, more defined edges, making them more effective as weapons.
-- **Liquid Harmony** (1 PK): You can synchronize your movements with the natural flow of water, making your bending more efficient.
 
 ### Sub-Path A - Adaptive Combat
 
@@ -39,7 +36,6 @@ You instinctively sense the flow of water in the environment and the "flow" of c
 
 **Minor Nodes**:
 - **Grasping Tentacles** (1 PK): Your tentacles can securely grab onto opponents, objects, or surfaces to pull or throw them.
-- **Barbed Tendrils** (1 PK): The tips of your tentacles can be frozen into sharp barbs for piercing damage.
 - **Extended Reach** (1 PK): You can extend your tentacles to a much greater length, controlling the space around you.
 
 **Manifestation A2: Reactive Defense** (4 PK): When an opponent attacks, you can instantly pull water from a source to create a shield, parry with a whip, or even form a watery duplicate of yourself.
@@ -61,7 +57,6 @@ You instinctively sense the flow of water in the environment and the "flow" of c
 **Minor Nodes**:
 - **Vine Lash** (1 PK): You can command vines to whip, ensnare, and constrict your opponents.
 - **Verdant Shield** (1 PK): You can rapidly grow a thick barrier of roots and leaves from the ground to block attacks.
-- **Toxin Extraction** (1 PK): You can use plantbending to draw natural poisons or toxins out of venomous plants for use.
 
 **Manifestation B2: State Shifting** (4 PK): You have mastered the rapid transition between water's three states. You can flash-freeze a wave into a wall, instantly melt that wall into a rushing torrent, and turn that torrent into a concealing cloud of steam.
 
@@ -83,15 +78,12 @@ You instinctively sense the flow of water in the environment and the "flow" of c
 
 **Focus**: Healing, purification, chi manipulation, restoration, and the forbidden perversion of these arts.
 
-### Genesis: Crimson Tide Path (1 PK)
+### Genesis: The Spring of Life Path (1 PK)
 You can perceive the flow of chi within living beings, allowing you to see injuries, blockages, or imbalances as disruptions in their energy.
 
 ### Minor Nodes After Genesis:
 - **Healing Touch** (1 PK): Your touch has a calming effect, easing pain and reducing swelling even without active bending.
 - **Life's Flow** (1 PK): You can sense the life force in all living things, making you more attuned to their needs.
-- **Vital Waters** (1 PK): Water you bend has enhanced healing properties, making it more effective for treating wounds.
-- **Restorative Mist** (1 PK): You can create a gentle mist that promotes healing and restores vitality to those who breathe it in.
-- **Renewing Rain** (1 PK): You can create a light rain that washes away fatigue and minor ailments.
 
 ### Sub-Path A - Focused Healing
 
@@ -142,15 +134,12 @@ You can perceive the flow of chi within living beings, allowing you to see injur
 
 **Focus**: Ice-based offense and defense, structural creation, precision, and overwhelming force through solid mass.
 
-### Genesis: Eternal Prison Path (1 PK)
+### Genesis: The Patient Glacier Path (1 PK)
 The water you bend is naturally colder. Your touch can leave a layer of frost on surfaces, and your water attacks carry a numbing chill.
 
 ### Minor Nodes After Genesis:
 - **Frost's Embrace** (1 PK): You can create a layer of frost on any surface, making it slippery and dangerous.
 - **Ice's Heart** (1 PK): Your connection to ice makes you more resistant to cold and allows you to create stronger ice structures.
-- **Frozen Time** (1 PK): You can slow down the movement of water, making it easier to freeze and control.
-- **Crystal Clarity** (1 PK): Your ice structures are more transparent and beautiful, reflecting light in dazzling patterns.
-- **Winter's Touch** (1 PK): Your presence brings a chill to the air, making the environment colder around you.
 
 ### Sub-Path A - Ice Offense
 
@@ -159,7 +148,6 @@ The water you bend is naturally colder. Your touch can leave a layer of frost on
 **Minor Nodes**:
 - **Shard Volley** (1 PK): You launch a rapid-fire volley of smaller, faster ice shards instead of a single large one.
 - **Ice Discs** (1 PK): You form your projectiles into spinning discs that can be guided to curve around obstacles or bounce off surfaces.
-- **Cryo-Core** (1 PK): Your projectiles explode on impact, covering the target and surrounding area in a layer of slippery, numbing ice.
 
 **Manifestation A2: Glacial Armor** (4 PK): You encase parts of your body in thick, articulated plates of incredibly dense ice, granting you immense physical protection and turning your strikes into bludgeoning attacks.
 
@@ -201,91 +189,414 @@ The water you bend is naturally colder. Your touch can leave a layer of frost on
 
 **Focus**: High-pressure techniques, overwhelming force, battlefield control through massive water manipulation.
 
-### Genesis: Crushing Abyss Path (1 PK)
-You feel the weight and pressure of water, allowing you to exert more force with your bending than others. Your water whips strike with the force of a physical blow.
+### Genesis: The Crushing Abyss Path (1 PK)
+You feel the weight and pressure of water, allowing you to exert more force with your bending and create more powerful currents.
 
 ### Minor Nodes After Genesis:
-- **Deep Pressure** (1 PK): You can create water with immense pressure, making your attacks more devastating.
-- **Abyssal Sight** (1 PK): You can see clearly underwater and sense the depths of any body of water.
-- **Crushing Force** (1 PK): Your waterbending attacks have greater impact and can break through solid defenses.
-- **Dark Waters** (1 PK): You can create areas of darkness underwater, concealing your movements and confusing enemies.
-- **Ocean's Heart** (1 PK): You have a deep connection to the ocean, allowing you to draw power from its vast depths.
+- **Pressure Sense** (1 PK): You can feel the pressure of water around you, making you more aware of underwater currents and depths.
+- **Deep Currents** (1 PK): You can create powerful underwater currents that can carry you or others through water at high speeds.
 
-### Sub-Path A - High-Pressure Bending
+### Sub-Path A - High Pressure Techniques
 
-**Keystone A1: High-Pressure Jet** (2 PK): You create a thin, highly-pressurized stream of water capable of slicing through wood, rock, and even thin metal with sustained focus.
+**Keystone A1: High-Pressure Jet** (2 PK): You create a thin, highly-pressurized stream of water capable of slicing through wood and rock, or punching through armor.
 
 **Minor Nodes**:
-- **Sweeping Blade** (1 PK): You can widen the jet into a flat, blade-like sheet of water for wider, sweeping cuts.
-- **Riptide Burst** (1 PK): You can release the pressure in a concussive, shotgun-like blast of water for a close-range knockout blow.
+- **Pressure Cutter** (1 PK): Your jet can be focused into an even thinner stream that can cut through metal and stone with ease.
+- **Abyssal Drill** (1 PK): You can spin your jet into a drilling motion, allowing you to bore through solid rock and earth.
 
-**Manifestation A2: Water Sphere** (4 PK): You can trap an opponent inside a sphere of water, lifting them off the ground and rendering them helpless. This is a powerful non-lethal incapacitation technique.
-
-**Minor Nodes**:
-- **Compressing Sphere** (1 PK): You can slowly increase the pressure inside the sphere, creating a crushing force to force a surrender or render an opponent unconscious.
-- **Drowning Sphere** (1 PK): You can force the water from the sphere into an opponent's lungs. This is a lethal application and a dark path to walk.
-
-**Axiom A3: Depth Charge** (5 PK): You form a sphere of water and use your bending to create an area of immense pressure within it. When launched, the sphere implodes with catastrophic force.
+**Manifestation A2: Water Sphere** (4 PK): You can trap an opponent inside a sphere of water, lifting them off the ground and rendering them helpless while you maintain concentration.
 
 **Minor Nodes**:
-- **Underwater Detonation** (1 PK): When used underwater, the effect is magnified, creating a truly devastating concussive blast.
-- **Vacuum Implosion** (1 PK): The implosion briefly creates a vacuum, violently pulling all nearby objects and enemies toward the center.
+- **Crushing Sphere** (1 PK): You can increase the pressure within the sphere, causing intense pain and potentially crushing internal organs.
+- **Abyssal Prison** (1 PK): The sphere becomes nearly impenetrable, making it impossible for the trapped person to escape without external help.
 
-### Sub-Path B - Tidal Mastery
-
-**Keystone B1: Whirlpool** (2 PK): In a body of water, you can create a powerful vortex to trap and disorient opponents or small boats.
+**Axiom A3: The Abyssal Maw** (5 PK): You can create a massive vortex of water that acts like a whirlpool, pulling in enemies and crushing them with immense pressure.
 
 **Minor Nodes**:
-- **Sinking Core** (1 PK): The center of your whirlpool pulls objects and people downward with much greater force.
-- **Tidal Surge** (1 PK): You can create massive waves that can sweep away enemies and reshape the battlefield.
+- **Oceanic Vortex** (1 PK): Your vortex can be made large enough to affect entire groups of enemies at once.
+- **Crushing Depths** (1 PK): The pressure within your vortex increases with depth, creating a deadly environment for those caught within.
 
-**Manifestation B2: The Abyss Calls** (4 PK): You can create a massive whirlpool that can swallow entire ships and large groups of enemies, pulling them into the depths.
+### Sub-Path B - Massive Force
 
-**Minor Nodes**:
-- **Abyssal Maw** (1 PK): Your whirlpool can be made to appear as a massive mouth, creating a terrifying display of power.
-- **Depth's Embrace** (1 PK): Those caught in your whirlpool are pulled deeper and deeper, making escape nearly impossible.
-
-**Axiom B3: The Ocean's Wrath** (5 PK): You can call upon the full power of the ocean, creating massive tidal waves, whirlpools, and storms that can devastate entire coastlines.
+**Keystone B1: Wave** (2 PK): Create a massive wave of water to ride on or crash into your enemies, demonstrating large-scale power and control.
 
 **Minor Nodes**:
-- **Storm Caller** (1 PK): Your ocean mastery can create storms and hurricanes, bringing rain, wind, and lightning to your aid.
-- **Tsunami Master** (1 PK): You can create massive waves that can reach far inland, reshaping the landscape and destroying everything in their path.
+- **Tsunami Force** (1 PK): Your waves carry immense force, capable of destroying buildings and sweeping away entire groups of enemies.
+- **Wave Riding** (1 PK): You can ride your own waves with perfect balance, using them for transportation and tactical positioning.
+
+**Manifestation B2: Ocean's Wrath** (4 PK): You can create multiple massive waves simultaneously, creating a devastating attack that can overwhelm even the strongest defenses.
+
+**Minor Nodes**:
+- **Tidal Surge** (1 PK): Your waves can be directed with incredible precision, allowing you to target specific areas or enemies.
+- **Abyssal Tide** (1 PK): Your waves carry the weight and pressure of the deep ocean, making them more destructive and harder to resist.
+
+**Axiom B3: The Hungry Deep** (5 PK): You can create a massive area of effect that simulates the crushing pressure of the ocean's depths, affecting all enemies within range.
+
+**Minor Nodes**:
+- **Oceanic Dominion** (1 PK): Your control over water becomes absolute within your area of effect, making it nearly impossible for others to bend water nearby.
+- **Abyssal Consumption** (1 PK): Enemies within your area of effect feel the crushing weight of the abyss, making them slower and weaker.
 
 ---
 
-## Build Recommendations
+## Synthesis Nodes - The Eternal Flow's Unity 🌊
 
-### Healer (Crimson Tide Focus)
+The Water constellation features eight unique synthesis nodes that combine the powers of different paths, creating powerful hybrid abilities inspired by Avatar lore:
+
+### Inner Ring (Genesis Synergies)
+- **Riptide Counter** 🌊: Combine adaptive flow with raw force. After dodging an attack, your next water whip is infused with high pressure, staggering your opponent.
+- **Moon's Reflection** 🌙: Under moonlight, your healing abilities are enhanced and your waterbending gains an ethereal quality that can soothe spirits and calm troubled waters.
+- **Healing Frost** ❄️: Your ice constructs slowly emanate a healing aura, mending the minor wounds of allies who stand near them.
+- **Ice Coffin** 🧊: Encase enemies in a shell of ice so dense and cold it temporarily paralyzes them, inspired by the legendary ice prisons of the Northern Water Tribe.
+
+### Outer Ring (Keystone/Manifestation Synergies)
+- **Constrictor's Squeeze** 🐙: Your Octopus Form tentacles can now apply crushing water pressure, making them capable of restraining stronger foes or crushing objects.
+- **Sap Healing** 🌿: Draw life-giving water directly from plants to perform minor healing on yourself or allies without needing an external water source.
+- **Blood Moon Stasis** 🩸: Use a micro-application of bloodbending to momentarily halt a target's circulation, making them far more susceptible to being flash-frozen.
+- **Northern Bastion** 🛡️: Your Glacial Armor can be temporarily liquefied into a sphere of high-pressure water to absorb a heavy blow, before instantly re-freezing.
+
+---
+
+## Character Presets - Iconic Waterbenders 💧
+
+The Water constellation includes 11 comprehensive character presets, each representing a distinct approach to waterbending:
+
+### Legendary Masters
+- **Katara** 💖: Compassionate master skilled in healing, combat, and the forbidden arts
+- **Pakku** ❄️: Disciplined Northern master with razor-sharp ice and water techniques
+- **Hama** 🩸: The original bloodbender who discovered the forbidden art
+
+### Modern Era
+- **Korra** 🌊: The Avatar with natural talent for aggressive, direct combat
+- **Ming-Hua** 🌊: Armless prodigy who developed incredible water tentacle techniques
+- **Unalaq** 🌙: Dark master with advanced ice and spirit techniques
+
+### Bloodbending Lineage
+- **Tarrlok** 🩸: Political bloodbender who used his abilities for control
+- **Yakone** 🩸: Criminal mastermind capable of controlling entire courtrooms
+- **Amon/Noatak** 🩸: Revolutionary leader who could permanently remove bending
+
+### Northern Warriors
+- **Desna & Eska** ❄️: Twin masters with synchronized ice techniques
+- **Tonraq** 🛡️: Northern warrior skilled in defensive waterbending and large-scale ice manipulation
+
+---
+
+## Character Preset Builds
+
+> **Recommended PK Limit:** 16 PK. For a balanced and lore-accurate experience, it is recommended to build up to 16 PK in Water. This prevents 'god builds' and encourages meaningful choices.
+
+> **Note:** The PK total for each build is calculated by summing all unique nodes (including all prerequisites and synthesis nodes) required to unlock the preset's endpoints, exactly as in the in-game UI.
+
+#### 💖 Katara - The Compassionate Master
+**Total PK:** 11
+
+#### ❄️ Pakku - The Northern Master
+**Total PK:** 15
+
+#### 🩸 Hama - The Original Bloodbender
+**Total PK:** 10
+
+#### 🌊 Korra - The Avatar
+**Total PK:** 15
+
+#### 🩸 Tarrlok - The Politician
+**Total PK:** 15
+
+#### 🩸 Yakone - The Criminal Mastermind
+**Total PK:** 15
+
+#### 🩸 Amon/Noatak - The Revolutionary
+**Total PK:** 15
+
+#### 🌊 Ming-Hua - The Tentacle Prodigy
+**Total PK:** 15
+
+#### 🌙 Unalaq - The Dark Master
+**Total PK:** 23
+
+#### ❄️ Desna & Eska - The Twins
+**Total PK:** 13
+
+#### 🛡️ Tonraq - The Warrior
+**Total PK:** 14
+
+---
+
+## Advanced Build Strategies
+
+### Character Preset Builds - Iconic Waterbenders 💧
+
+The following builds represent the signature abilities and fighting styles of legendary waterbenders from the Avatar universe:
+
+#### **Katara** 💖 - The Compassionate Master (Total: 15 PK)
+**Philosophy**: "Water is the element of change. It can be gentle and healing, or powerful and destructive."
+- **Primary Focus**: Healing and adaptive combat
+- **Complete Build**:
+  - **Endless Mirror Path** (6 PK):
+    - `em_genesis` (1 PK) - The Flowing Form Path
+    - `em_flowing_grace` (1 PK) - Flowing Grace
+    - `em_octopus_form` (2 PK) - Her adaptive combat and mobility
+    - `em_grasping_tentacles` (1 PK) - Grasping Tentacles
+    - `em_extended_reach` (1 PK) - Extended Reach
+  - **Crimson Tide Path** (9 PK):
+    - `ct_genesis` (1 PK) - The Spring of Life Path
+    - `ct_healing_touch` (1 PK) - Healing Touch
+    - `ct_chi_restoration` (2 PK) - Her core identity as a master healer
+    - `ct_accelerated_mending` (1 PK) - Accelerated Mending
+    - `ct_deep_cleanse` (1 PK) - Deep Cleanse
+    - `ct_lifes_flow` (1 PK) - Life's Flow
+    - `ct_bloodbending` (2 PK) - Her reluctant but potent dark power
+- **Build Strategy**: Balanced approach combining healing mastery with versatile combat techniques
+- **Synergy Nodes**: Moon's Reflection, Sap Healing, Ice Coffin
+
+#### **Pakku** ❄️ - The Northern Master (Total: 12 PK)
+**Philosophy**: "Discipline and precision are the hallmarks of true waterbending mastery."
+- **Primary Focus**: Ice offense and traditional techniques
+- **Complete Build**:
+  - **Endless Mirror Path** (6 PK):
+    - `em_genesis` (1 PK) - The Flowing Form Path
+    - `em_flowing_grace` (1 PK) - Flowing Grace
+    - `em_octopus_form` (2 PK) - A signature move for Northern Tribe masters
+    - `em_grasping_tentacles` (1 PK) - Grasping Tentacles
+    - `em_extended_reach` (1 PK) - Extended Reach
+  - **Eternal Prison Path** (6 PK):
+    - `ep_genesis` (1 PK) - The Patient Glacier Path
+    - `ep_frosts_embrace` (1 PK) - Frost's Embrace
+    - `ep_ice_projectiles` (2 PK) - His primary offensive technique
+    - `ep_shard_volley` (1 PK) - Shard Volley
+    - `ep_ice_discs` (1 PK) - Ice Discs
+- **Build Strategy**: Offensive ice mastery with traditional waterbending forms
+- **Synergy Nodes**: Ice Coffin, Northern Bastion
+
+#### **Hama** 🩸 - The Original Bloodbender (Total: 12 PK)
+**Philosophy**: "The moon's power reveals the truth: all life is water, and water can be controlled."
+- **Primary Focus**: Bloodbending mastery and revenge
+- **Complete Build**:
+  - **Crimson Tide Path** (12 PK):
+    - `ct_genesis` (1 PK) - The Spring of Life Path
+    - `ct_lifes_flow` (1 PK) - Life's Flow
+    - `ct_bloodbending` (2 PK) - The forbidden art she discovered
+    - `ct_subtle_puppetry` (1 PK) - Fine control over victims
+    - `ct_crushing_grip` (1 PK) - Causing pain and paralysis
+    - `ct_psychic_bloodbending` (4 PK) - Her ability to bloodbend without the full moon
+    - `ct_blood_sense` (1 PK) - Blood-Sense
+    - `ct_severing_the_flow` (1 PK) - Severing the Flow
+- **Build Strategy**: Complete dedication to the dark art of bloodbending
+- **Synergy Nodes**: Blood Moon Stasis
+- **Warning**: This path represents the darkest aspects of waterbending
+
+#### **Korra** 🌊 - The Modern Avatar (Total: 15 PK)
+**Philosophy**: "Direct action and overwhelming force solve problems quickly and decisively."
+- **Primary Focus**: Aggressive combat and large-scale manipulation
+- **Complete Build**:
+  - **Endless Mirror Path** (6 PK):
+    - `em_genesis` (1 PK) - The Flowing Form Path
+    - `em_flowing_grace` (1 PK) - Flowing Grace
+    - `em_octopus_form` (2 PK) - Her adaptive combat style
+    - `em_grasping_tentacles` (1 PK) - Grasping Tentacles
+    - `em_extended_reach` (1 PK) - Extended Reach
+  - **Crushing Abyss Path** (6 PK):
+    - `hd_genesis` (1 PK) - The Crushing Abyss Path
+    - `hd_deep_currents` (1 PK) - Deep Currents
+    - `hd_wave` (2 PK) - Her signature large-scale water manipulation
+    - `hd_tsunami_force` (1 PK) - Tsunami Force
+    - `hd_wave_riding` (1 PK) - Wave Riding
+  - **Eternal Prison Path** (3 PK):
+    - `ep_genesis` (1 PK) - The Patient Glacier Path
+    - `ep_frosts_embrace` (1 PK) - Frost's Embrace
+    - `ep_ice_projectiles` (2 PK) - Her ice combat techniques
+- **Build Strategy**: Aggressive, direct approach with emphasis on power and versatility
+- **Synergy Nodes**: Riptide Counter, Constrictor's Squeeze
+
+#### **Ming-Hua** 🌊 - The Armless Prodigy (Total: 18 PK)
+**Philosophy**: "Adaptation is the key to survival. Turn your limitations into strengths."
+- **Primary Focus**: Water tentacle mastery and fluidic motion
+- **Complete Build**:
+  - **Endless Mirror Path** (18 PK):
+    - `em_genesis` (1 PK) - The Flowing Form Path
+    - `em_flowing_grace` (1 PK) - Flowing Grace
+    - `em_octopus_form` (2 PK) - Her signature water tentacles replacing her arms
+    - `em_grasping_tentacles` (1 PK) - Her precise control over her water appendages
+    - `em_extended_reach` (1 PK) - Her ability to extend her tentacles great distances
+    - `em_reactive_defense` (4 PK) - Reactive Defense
+    - `em_counter_current` (1 PK) - Counter-Current
+    - `em_vapor_decoy` (1 PK) - Vapor Decoy
+    - `em_fluidic_motion` (5 PK) - Her seamless integration of movement and bending
+    - `em_unbalancing_flow` (1 PK) - Unbalancing Flow
+    - `em_one_with_the_water` (1 PK) - One with the Water
+- **Build Strategy**: Complete mastery of water tentacles as natural extensions of the body
+- **Synergy Nodes**: Constrictor's Squeeze
+
+#### **Unalaq** 🌙 - The Dark Spirit Master (Total: 15 PK)
+**Philosophy**: "The spirit world and human world must be united, even if it requires darkness."
+- **Primary Focus**: Advanced ice techniques and spirit manipulation
+- **Complete Build**:
+  - **Eternal Prison Path** (9 PK):
+    - `ep_genesis` (1 PK) - The Patient Glacier Path
+    - `ep_ices_heart` (1 PK) - Ice's Heart
+    - `ep_ice_wall` (2 PK) - Ice Wall
+    - `ep_wave_wall` (1 PK) - Wave Wall
+    - `ep_dome_of_frost` (1 PK) - Dome of Frost
+    - `ep_flash_freeze` (4 PK) - His ability to instantly freeze large areas
+  - **Endless Mirror Path** (6 PK):
+    - `em_genesis` (1 PK) - The Flowing Form Path
+    - `em_waters_touch` (1 PK) - Water's Touch
+    - `em_plantbending` (2 PK) - Plantbending
+    - `em_vine_lash` (1 PK) - Vine Lash
+    - `em_verdant_shield` (1 PK) - Verdant Shield
+- **Build Strategy**: Dark ice mastery with environmental control
+- **Synergy Nodes**: Northern Bastion, Ice Coffin
+
+#### **Tarrlok** 🩸 - The Political Bloodbender (Total: 15 PK)
+**Philosophy**: "Power is the ultimate tool for achieving political goals and maintaining control."
+- **Primary Focus**: Bloodbending for control and manipulation
+- **Complete Build**:
+  - **Crimson Tide Path** (15 PK):
+    - `ct_genesis` (1 PK) - The Spring of Life Path
+    - `ct_lifes_flow` (1 PK) - Life's Flow
+    - `ct_bloodbending` (2 PK) - Bloodbending (Full Moon)
+    - `ct_subtle_puppetry` (1 PK) - Subtle Puppetry
+    - `ct_crushing_grip` (1 PK) - Crushing Grip
+    - `ct_psychic_bloodbending` (4 PK) - His ability to bloodbend without the full moon
+    - `ct_blood_sense` (1 PK) - His awareness of living beings around him
+    - `ct_severing_the_flow` (1 PK) - Severing the Flow
+    - `ct_the_dark_tide` (5 PK) - His mastery of the forbidden art
+    - `ct_mass_control` (1 PK) - His ability to control multiple targets
+    - `ct_blood_storm` (1 PK) - Blood Storm
+- **Build Strategy**: Bloodbending as a tool for political power and control
+- **Synergy Nodes**: Blood Moon Stasis
+
+#### **Yakone** 🩸 - The Criminal Mastermind (Total: 15 PK)
+**Philosophy**: "Fear and control are the foundations of true power in the criminal underworld."
+- **Primary Focus**: Mass bloodbending and criminal operations
+- **Complete Build**:
+  - **Crimson Tide Path** (15 PK):
+    - `ct_genesis` (1 PK) - The Spring of Life Path
+    - `ct_lifes_flow` (1 PK) - Life's Flow
+    - `ct_bloodbending` (2 PK) - Bloodbending (Full Moon)
+    - `ct_subtle_puppetry` (1 PK) - Subtle Puppetry
+    - `ct_crushing_grip` (1 PK) - Crushing Grip
+    - `ct_psychic_bloodbending` (4 PK) - His terrifying ability to bloodbend without the moon
+    - `ct_blood_sense` (1 PK) - Blood-Sense
+    - `ct_severing_the_flow` (1 PK) - His ability to block bending
+    - `ct_the_dark_tide` (5 PK) - His mastery of multiple target control
+    - `ct_mass_control` (1 PK) - His ability to control large groups
+    - `ct_blood_storm` (1 PK) - Blood Storm
+- **Build Strategy**: Overwhelming bloodbending power for criminal dominance
+- **Synergy Nodes**: Blood Moon Stasis
+
+#### **Amon/Noatak** 🩸 - The Revolutionary Leader (Total: 15 PK)
+**Philosophy**: "The bending elite must be brought down. Their power must be taken away permanently."
+- **Primary Focus**: Bloodbending for revolution and permanent bending removal
+- **Complete Build**:
+  - **Crimson Tide Path** (15 PK):
+    - `ct_genesis` (1 PK) - The Spring of Life Path
+    - `ct_lifes_flow` (1 PK) - Life's Flow
+    - `ct_bloodbending` (2 PK) - Bloodbending (Full Moon)
+    - `ct_subtle_puppetry` (1 PK) - Subtle Puppetry
+    - `ct_crushing_grip` (1 PK) - Crushing Grip
+    - `ct_psychic_bloodbending` (4 PK) - His ability to bloodbend without the full moon
+    - `ct_blood_sense` (1 PK) - His awareness of all living beings
+    - `ct_severing_the_flow` (1 PK) - His unique ability to permanently remove bending
+    - `ct_the_dark_tide` (5 PK) - His mastery of the forbidden art
+    - `ct_mass_control` (1 PK) - Mass Control
+    - `ct_blood_storm` (1 PK) - Blood Storm
+- **Build Strategy**: Bloodbending as a revolutionary tool for equality
+- **Synergy Nodes**: Blood Moon Stasis
+- **Warning**: This path represents the most dangerous application of bloodbending
+
+#### **Desna & Eska** ❄️ - The Twin Masters (Total: 9 PK)
+**Philosophy**: "Synchronized techniques create perfect harmony and overwhelming force."
+- **Primary Focus**: Coordinated ice attacks and synchronized combat
+- **Complete Build**:
+  - **Eternal Prison Path** (9 PK):
+    - `ep_genesis` (1 PK) - The Patient Glacier Path
+    - `ep_frosts_embrace` (1 PK) - Frost's Embrace
+    - `ep_ice_projectiles` (2 PK) - Their coordinated ice attacks
+    - `ep_shard_volley` (1 PK) - Their rapid-fire ice techniques
+    - `ep_ice_discs` (1 PK) - Their curved, guided ice projectiles
+    - `ep_ices_heart` (1 PK) - Ice's Heart
+    - `ep_ice_wall` (2 PK) - Ice Wall
+- **Build Strategy**: Perfect synchronization of ice-based offensive techniques
+- **Synergy Nodes**: Ice Coffin, Northern Bastion
+
+#### **Tonraq** 🛡️ - The Northern Warrior (Total: 12 PK)
+**Philosophy**: "Defense of the Northern Water Tribe requires both strength and wisdom."
+- **Primary Focus**: Defensive waterbending and large-scale ice manipulation
+- **Complete Build**:
+  - **Crushing Abyss Path** (6 PK):
+    - `hd_genesis` (1 PK) - The Crushing Abyss Path
+    - `hd_deep_currents` (1 PK) - Deep Currents
+    - `hd_wave` (2 PK) - His large-scale water manipulation
+    - `hd_tsunami_force` (1 PK) - His powerful wave attacks
+    - `hd_wave_riding` (1 PK) - Wave Riding
+  - **Eternal Prison Path** (6 PK):
+    - `ep_genesis` (1 PK) - The Patient Glacier Path
+    - `ep_frosts_embrace` (1 PK) - Frost's Embrace
+    - `ep_ice_projectiles` (2 PK) - Ice Projectiles
+    - `ep_glacial_armor` (4 PK) - His defensive ice techniques
+- **Build Strategy**: Defensive mastery with overwhelming force when needed
+- **Synergy Nodes**: Northern Bastion, Riptide Counter
+
+### Hybrid Build Strategies
+
+For players who want to create their own unique combinations:
+
+#### **Healing Controller** (Crimson Tide + Endless Mirror)
 - **Primary Path**: Crimson Tide (8-10 PK)
 - **Secondary Path**: Endless Mirror (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+- **Key Synergy**: Moon's Reflection, Sap Healing
+- **Focus**: Versatile healing with environmental control
 
-### Precision Controller (Endless Mirror Focus)
+#### **Precision Healer** (Endless Mirror + Crushing Abyss)
 - **Primary Path**: Endless Mirror (8-10 PK)
 - **Secondary Path**: Crushing Abyss (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+- **Key Synergy**: Riptide Counter, Constrictor's Squeeze
+- **Focus**: Adaptive combat with overwhelming force
 
-### Ice Master (Eternal Prison Focus)
+#### **Ice Controller** (Eternal Prison + Endless Mirror)
 - **Primary Path**: Eternal Prison (8-10 PK)
 - **Secondary Path**: Endless Mirror (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+- **Key Synergy**: Ice Coffin, Northern Bastion
+- **Focus**: Defensive ice mastery with environmental adaptation
 
-### Deep Water Specialist (Crushing Abyss Focus)
+#### **Deep Water Healer** (Crushing Abyss + Eternal Prison)
 - **Primary Path**: Crushing Abyss (8-10 PK)
 - **Secondary Path**: Eternal Prison (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+- **Key Synergy**: Healing Frost, Blood Moon Stasis
+- **Focus**: Pressure control with ice-based healing
 
-## Character Inspirations
+---
 
-- **Endless Mirror**: Katara's adaptability and environmental control
-- **Crimson Tide**: Katara's healing abilities and the spiritual aspects of waterbending
-- **Eternal Prison**: Ming-Hua's ice mastery and defensive techniques
-- **Crushing Abyss**: Unalaq's deep water manipulation and pressure control
+## Technical Notes
 
-## Notes
+### Node Layout
+- All paths use local (0,0) origins for clean, organized layouts
+- Paths radiate outward from the constellation center in four directions
+- Node spacing uses consistent radius steps (220 units) for visual clarity
+- Synthesis nodes form inner and outer rings around the constellation center
 
+### Visual Design
+- Each path has distinct color coding and icon themes
+- Synthesis nodes use unique icons that reflect their lore connections
+- Node sizes and visual effects enhance readability and thematic consistency
+
+### Balance Considerations
 - All paths are designed to be viable and balanced
-- The system encourages specialization while allowing for some cross-path investment
-- Each path represents a different philosophy and approach to waterbending
-- The minor nodes provide additional customization and tactical options
-- The system is designed to be lore-accurate and reflect the teachings of waterbending masters 
+- Synthesis nodes require significant investment in multiple paths
+- Character presets demonstrate effective build strategies
+- The system encourages specialization while allowing for cross-path investment
+
+---
+
+## Lore Integration
+
+The Water constellation is deeply integrated with Avatar: The Last Airbender and The Legend of Korra lore:
+
+- **Path Names**: All paths use authentic Chinese characters and philosophical concepts
+- **Node Abilities**: Every ability is inspired by canonical waterbending techniques
+- **Character Presets**: All presets reflect the actual abilities and fighting styles of series characters
+- **Synergy Nodes**: Each synthesis node references specific lore concepts (moon's influence, Northern Tribe techniques, etc.)
+- **Philosophy**: Each path embodies different aspects of waterbending philosophy as taught in the series
+
+The constellation captures the full spectrum of waterbending mastery, from the gentle healing of the Southern Water Tribe to the dark arts of bloodbending, while maintaining perfect balance and lore accuracy. 

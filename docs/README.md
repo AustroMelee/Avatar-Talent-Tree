@@ -7,7 +7,7 @@ Welcome to the comprehensive documentation for the Avatar Talent Tree System. Th
 ## Quick Start
 
 - **Total Constellations**: 5 (Air, Water, Earth, Fire, Steel)
-- **Points Available**: 17 Points of Knowing (PK) per character
+- **Points Available**: Unlimited Points of Knowing (PK) per character
 - **Node Types**: Genesis, Keystone, Manifestation, Axiom, Capstone, Minor
 - **Total Nodes**: 100+ nodes per constellation (including 20 new minor nodes each)
 
@@ -74,7 +74,7 @@ Welcome to the comprehensive documentation for the Avatar Talent Tree System. Th
 All constellations have been expanded with 20 additional minor nodes (5 per path), providing:
 - Enhanced customization options
 - Lore-accurate abilities inspired by specific characters
-- Balanced progression within the 17 PK limit
+- Unlimited progression potential
 - Rich flavor text that enhances the narrative experience
 
 **Total New Nodes Added**: 100 minor nodes across all constellations
@@ -173,7 +173,7 @@ The talent tree renderer supports:
 - Path names and descriptions match established lore
 
 ### Game Balance
-- All paths are viable within the 17 PK limit
+- All paths are viable with unlimited progression potential
 - Minor nodes provide meaningful tactical options
 - Progression is balanced and logical
 - Cross-path investment is encouraged but not required
@@ -188,7 +188,7 @@ The talent tree renderer supports:
 
 1. **Choose Your Constellation**: Select from Air, Water, Earth, Fire, or Steel
 2. **Plan Your Build**: Review the path options and build recommendations
-3. **Allocate Points**: Use your 17 PK to create your character build
+3. **Allocate Points**: Use unlimited PK to create your character build
 4. **Explore Minor Nodes**: Customize your build with the new minor nodes
 5. **Test Your Build**: Use the talent tree renderer to visualize your choices
 

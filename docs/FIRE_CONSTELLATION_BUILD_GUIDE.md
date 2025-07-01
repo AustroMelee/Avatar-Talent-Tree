@@ -2,7 +2,7 @@
 
 ## System Overview
 
-The Eternal Flame represents mastery over fire, the element of power. It is a constant battle between passion and discipline, breath and fury. You have 17 Points of Knowing (PK) to allocate. True mastery comes not just from power, but from understanding the source of that power within yourself.
+The Eternal Flame represents mastery over fire, the element of power. It is a constant battle between passion and discipline, breath and fury. You have unlimited Points of Knowing (PK) to allocate. True mastery comes not just from power, but from understanding the source of that power within yourself.
 
 ## Constellation Philosophy
 
@@ -252,27 +252,30 @@ You learn the first step of lightning generation: separating your internal energ
 
 ---
 
-## Build Recommendations
+## Advanced Build Strategies
 
-### Destructive Force (Raging Inferno Focus)
+### Hybrid Specialists
+The Synthesis nodes enable unique hybrid builds that combine the strengths of multiple paths:
+
+**Destructive Life Giver** (Raging Inferno + Inner Sun)
 - **Primary Path**: Raging Inferno (8-10 PK)
-- **Secondary Path**: Focused Flame (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+- **Secondary Path**: Inner Sun (4-6 PK)
+- **Remaining**: Unlimited PK for utility
 
-### Life Giver (Inner Sun Focus)
+**Disciplined Healer** (Inner Sun + Focused Flame)
 - **Primary Path**: Inner Sun (8-10 PK)
 - **Secondary Path**: Focused Flame (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+- **Remaining**: Unlimited PK for utility
 
-### Disciplined Warrior (Focused Flame Focus)
+**Precise Destroyer** (Focused Flame + Raging Inferno)
 - **Primary Path**: Focused Flame (8-10 PK)
-- **Secondary Path**: Inner Sun (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+- **Secondary Path**: Raging Inferno (4-6 PK)
+- **Remaining**: Unlimited PK for utility
 
-### Lightning Master (Cold Tempest Focus)
+**Lightning Healer** (Cold Tempest + Inner Sun)
 - **Primary Path**: Cold Tempest (8-10 PK)
-- **Secondary Path**: Focused Flame (4-6 PK)
-- **Remaining**: 1-5 PK for utility
+- **Secondary Path**: Inner Sun (4-6 PK)
+- **Remaining**: Unlimited PK for utility
 
 ## Character Inspirations
 

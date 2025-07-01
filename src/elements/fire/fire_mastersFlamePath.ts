@@ -1,159 +1,120 @@
 /**
- * Path 3: The Focused Flame - "The Smith's Precision" (Canonically Refactored)
- * 
- * Path Philosophy: "A wildfire destroys, but a focused flame forges. Control your fire, and you can shape the world."
- * Essence: Precise attacks, sustained streams, heat control, and defensive maneuvers.
+ * Path 3: The Focused Flame (Precision/Control) - "The Master's Discipline"
+ *
+ * Philosophy: "A focused flame forges. Firebending as a tool of precision and control."
+ * Essence: Precise attacks, sustained streams, heat control.
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
 
 // --- Layout Configuration ---
-const CENTER_X = 1000;
-const CENTER_Y = 480;
-const BRANCHES = 1;
-const PATH_MAIN_ANGLE = 0; // To the right
-const ANGLE_SPREAD = Math.PI / 2.2;
-const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
-const BASE_RADIUS = 160;
-const RADIUS_STEP = 120;
-const MIN_DIST = 90;
+const CENTER_X = 0;
+const CENTER_Y = 0;
+const PATH_MAIN_ANGLE = Math.PI / 2; // CORRECTED: Downwards
+const RADIUS_STEP = 320; // MATCHED: Same as Earth constellation
+const DEFAULT_SPREAD_ANGLE = Math.PI / 3;
+const WIDE_SPREAD_ANGLE = Math.PI / 1.2;
 
-// --- Node Definitions (from Design Doc) ---
+// --- Node Definitions ---
 const nodeDataList = [
     // Genesis
-    { id: 'genesis', name: 'The Focused Flame Path', type: 'Genesis', cost: 1, branch: 1, depth: 0, description: "Your firebending is an extension of your discipline. You stress self-restraint and breath control to direct and contain the fire you manifest.", flavor: "Poor breath control means dangerously poor control of any fire generated." },
+    { id: 'genesis', name: 'The Focused Flame Path', type: 'Genesis', cost: 1, description: "Your firebending is an extension of your discipline. You stress self-restraint and breath control to direct and contain the fire you manifest.", flavor: "Poor breath control means dangerously poor control of any fire generated." },
     
-    // Minors after Genesis
-    { id: 'minor_genesis_1', name: 'Breath Control', type: 'Minor', cost: 1, branch: 0.8, depth: 0.5, prerequisite: 'genesis', description: "Your breathing is perfectly controlled, allowing you to maintain steady flames and precise control.", flavor: "Breath is the foundation of all firebending." },
-    { id: 'minor_genesis_2', name: 'Disciplined Mind', type: 'Minor', cost: 1, branch: 1.2, depth: 0.5, prerequisite: 'genesis', description: "Your mental discipline allows you to focus your fire with surgical precision, never wasting energy.", flavor: "A focused mind creates a focused flame." },
+    // Minor nodes after Genesis
+    { id: 'breath_control', name: 'Breath Control', type: 'Minor', cost: 1, prerequisite: 'genesis', description: "Your breathing is perfectly controlled, allowing you to maintain steady flames and precise control.", flavor: "Breath is the foundation of all firebending." },
+    { id: 'discipline_mind', name: 'Discipline Mind', type: 'Minor', cost: 1, prerequisite: 'genesis', description: "Your mental discipline allows you to maintain focus even in chaotic situations, preventing your fire from becoming uncontrolled.", flavor: "The mind controls the flame." },
+    { id: 'heat_sensitivity', name: 'Heat Sensitivity', type: 'Minor', cost: 1, prerequisite: 'genesis', description: "You can sense and control the exact temperature of your flames, from gentle warmth to searing heat.", flavor: "Precision in temperature is precision in power." },
+    { id: 'flame_shaping', name: 'Flame Shaping', type: 'Minor', cost: 1, prerequisite: 'genesis', description: "You can shape your flames into specific forms and maintain them, creating tools and weapons of fire.", flavor: "The flame becomes an extension of your will." },
+    { id: 'energy_efficiency', name: 'Energy Efficiency', type: 'Minor', cost: 1, prerequisite: 'genesis', description: "Your firebending is highly efficient, requiring less energy to maintain the same level of power.", flavor: "Waste not, want not." },
     
-    // --- Sub-Path A: Precision Weapons ---
-    { id: 'fire_blades', name: 'Fire Blades', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "Narrow and condense your flame projections to create thin blades of fire that can slice through objects without completely destroying them.", flavor: "Used by Zuko to free Azula from Katara's water whips." },
-    { id: 'minor_fb_1', name: 'Fire Daggers', type: 'Minor', cost: 1, branch: -0.2, depth: 1.5, prerequisite: 'fire_blades', description: "Create solid, dagger-like constructs of fire that can be held for melee combat or thrown.", flavor: "A blade of fire is a blade of pure will." },
-    { id: 'minor_fb_2', name: 'Razor Edge', type: 'Minor', cost: 1, branch: 0.2, depth: 1.5, prerequisite: 'fire_blades', description: "Your fire blades become so sharp and focused they can cut through metal and stone.", flavor: "The finest edge is the edge of flame." },
+    // Sub-Path A - Fire Blades
+    { id: 'fire_blades', name: 'Fire Blades', type: 'Keystone', cost: 2, prerequisite: 'breath_control', description: "Narrow and condense your flame projections to create thin blades of fire that can slice through objects.", flavor: "Used by Zuko to free Azula from Katara's water whips." },
+    { id: 'blade_precision', name: 'Blade Precision', type: 'Minor', cost: 1, prerequisite: 'fire_blades', description: "Your fire blades can be controlled with surgical precision, allowing for delicate cutting and carving.", flavor: "The blade that cuts paper without touching it." },
+    { id: 'dual_blades', name: 'Dual Blades', type: 'Minor', cost: 1, prerequisite: 'fire_blades', description: "You can create and control two fire blades simultaneously, one in each hand.", flavor: "Two blades are better than one." },
+    { id: 'blade_extension', name: 'Blade Extension', type: 'Minor', cost: 1, prerequisite: 'fire_blades', description: "Your fire blades can extend and retract at will, allowing for variable reach in combat.", flavor: "The blade that reaches where others cannot." },
     
-    { id: 'wall_of_flames', name: 'Wall of Flames', type: 'Manifestation', cost: 4, branch: 0, depth: 2, prerequisite: 'fire_blades', description: "One of firebending's few defensive techniques. Create a barrier of concentrated flames to block incoming attacks or push aggressors back.", flavor: "Jeong Jeong used this to stop an entire fleet of Fire Navy patrol boats." },
-    { id: 'minor_wf_1', name: 'Impenetrable Barrier', type: 'Minor', cost: 1, branch: -0.2, depth: 2.5, prerequisite: 'wall_of_flames', description: "Your wall of flames becomes so dense that nothing can pass through it, not even water or earth.", flavor: "The wall stands unbroken." },
+    { id: 'wall_of_flames', name: 'Wall of Flames', type: 'Keystone', cost: 2, prerequisite: 'breath_control', description: "Create a barrier of concentrated flames to block incoming attacks or push aggressors back.", flavor: "Jeong Jeong used this to stop an entire fleet of Fire Navy patrol boats." },
+    { id: 'wall_control', name: 'Wall Control', type: 'Minor', cost: 1, prerequisite: 'wall_of_flames', description: "You can shape and move your wall of flames, creating defensive formations or offensive barriers.", flavor: "The wall becomes a weapon." },
+    { id: 'heat_barrier', name: 'Heat Barrier', type: 'Minor', cost: 1, prerequisite: 'wall_of_flames', description: "Your wall of flames creates an intense heat barrier that can deter or damage enemies who get too close.", flavor: "The heat itself becomes a weapon." },
     
-    { id: 'blue_fire', name: 'Blue Fire', type: 'Axiom', cost: 5, branch: 0, depth: 3, prerequisite: 'wall_of_flames', description: "A sign of prodigious skill and perfect combustion. Your flames turn blue, burning far hotter and with greater destructive potential than normal fire.", flavor: "This technique is most famously demonstrated by Princess Azula." },
-    { id: 'minor_bf_1', name: 'Perfect Combustion', type: 'Minor', cost: 1, branch: -0.2, depth: 3.5, prerequisite: 'blue_fire', description: "Your blue fire burns with perfect efficiency, leaving no smoke or waste, only pure destructive force.", flavor: "The perfect flame leaves no trace." },
+    { id: 'blue_fire', name: 'Blue Fire', type: 'Axiom', cost: 5, prerequisite: 'wall_of_flames', description: "A sign of prodigious skill and perfect combustion. Your flames turn blue, burning far hotter and with greater destructive potential than normal fire.", flavor: "This technique is most famously demonstrated by Princess Azula." },
+    { id: 'blue_control', name: 'Blue Control', type: 'Minor', cost: 1, prerequisite: 'blue_fire', description: "You can control the intensity of your blue fire, switching between normal and blue flames at will.", flavor: "The master controls the flame's color." },
+    { id: 'blue_efficiency', name: 'Blue Efficiency', type: 'Minor', cost: 1, prerequisite: 'blue_fire', description: "Your blue fire is more energy efficient than normal fire, requiring less chi to maintain the same destructive power.", flavor: "Efficiency in destruction." },
     
-    // --- Sub-Path B: Controlled Power ---
-    { id: 'fire_rings', name: 'Fire Rings', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "Create rings of fire that can be used for defense, offense, or as tools for manipulation.", flavor: "A ring of fire is a circle of control." },
-    { id: 'minor_fr_1', name: 'Cutting Rings', type: 'Minor', cost: 1, branch: 0.8, depth: 1.5, prerequisite: 'fire_rings', description: "Your fire rings can be used to cut through obstacles or enemies with surgical precision.", flavor: "The ring cuts like a blade." },
+    // Sub-Path B - Precision Control
+    { id: 'flame_weaving', name: 'Flame Weaving', type: 'Keystone', cost: 2, prerequisite: 'flame_shaping', description: "You can weave complex patterns of fire, creating intricate designs that serve both aesthetic and practical purposes.", flavor: "Fire becomes an art form." },
+    { id: 'pattern_mastery', name: 'Pattern Mastery', type: 'Minor', cost: 1, prerequisite: 'flame_weaving', description: "You can create and maintain complex fire patterns that can trap, confuse, or dazzle opponents.", flavor: "The pattern becomes the trap." },
+    { id: 'flame_sculpting', name: 'Flame Sculpting', type: 'Minor', cost: 1, prerequisite: 'flame_weaving', description: "You can sculpt fire into three-dimensional objects and maintain them for extended periods.", flavor: "Fire becomes solid in your hands." },
     
-    { id: 'master_forge', name: 'Master Forge', type: 'Capstone', cost: 10, branch: 1, depth: 4, prerequisite: 'blue_fire', description: "You can control fire with such precision that you can forge metal, create glass, or perform any task requiring perfect heat control.", flavor: "The master smith shapes metal with fire." },
-    { id: 'minor_mf_1', name: 'Artisan\'s Touch', type: 'Minor', cost: 1, branch: 0.8, depth: 4.5, prerequisite: 'master_forge', description: "Your control is so fine that you can create intricate works of art with fire, from delicate glass sculptures to perfect metalwork.", flavor: "Fire becomes your brush, the world your canvas." },
+    { id: 'heat_manipulation', name: 'Heat Manipulation', type: 'Manifestation', cost: 4, prerequisite: 'flame_weaving', description: "You can manipulate heat without creating visible flame, allowing for stealthy and precise temperature control.", flavor: "The invisible fire is the most dangerous." },
+    { id: 'thermal_sight', name: 'Thermal Sight', type: 'Minor', cost: 1, prerequisite: 'heat_manipulation', description: "You can see heat signatures and temperature variations, allowing you to track living beings and detect hidden sources of heat.", flavor: "The master sees what others cannot." },
+    { id: 'heat_absorption', name: 'Heat Absorption', type: 'Minor', cost: 1, prerequisite: 'heat_manipulation', description: "You can absorb heat from your surroundings, cooling areas and storing the energy for later use.", flavor: "Take what is given, use what is taken." },
     
-    // Additional Minor Nodes
-    { id: 'ff_minor_1', name: 'Controlled Burn', type: 'Minor', cost: 1, branch: 0.8, depth: 0.5, prerequisite: 'genesis', description: "You can create small, controlled fires that burn exactly as long as you intend, no more, no less.", flavor: "The flame obeys the master's will." },
-    { id: 'ff_minor_2', name: 'Heat Sensing', type: 'Minor', cost: 1, branch: -0.2, depth: 1.5, prerequisite: 'fire_blades', description: "You can sense heat sources around you, allowing you to detect hidden enemies or navigate in darkness.", flavor: "The flame reveals what the eye cannot see." },
-    { id: 'ff_minor_3', name: 'Flame Sculpting', type: 'Minor', cost: 1, branch: 0.2, depth: 2.5, prerequisite: 'wall_of_flames', description: "You can shape your flames into complex forms, creating barriers, bridges, or even simple tools.", flavor: "The flame takes the shape of your imagination." },
-    { id: 'ff_minor_4', name: 'Precision Strike', type: 'Minor', cost: 1, branch: 0, depth: 3.5, prerequisite: 'blue_fire', description: "Your fire attacks can be focused to hit specific targets without damaging surrounding areas.", flavor: "The surgeon's blade, not the butcher's axe." },
-    { id: 'ff_minor_5', name: 'Sustained Focus', type: 'Minor', cost: 1, branch: 1.2, depth: 0.5, prerequisite: 'genesis', description: "You can maintain complex firebending techniques for extended periods without losing concentration.", flavor: "The master's focus is unbreakable." },
+    { id: 'perfect_combustion', name: 'Perfect Combustion', type: 'Axiom', cost: 5, prerequisite: 'heat_manipulation', description: "You achieve perfect control over the combustion process, allowing you to create fire with maximum efficiency and minimal waste.", flavor: "The perfect flame burns clean and true." },
+    { id: 'combustion_mastery', name: 'Combustion Mastery', type: 'Minor', cost: 1, prerequisite: 'perfect_combustion', description: "You can control the exact timing and intensity of explosions, creating precise detonations when needed.", flavor: "The master controls the explosion." },
+    { id: 'energy_conservation', name: 'Energy Conservation', type: 'Minor', cost: 1, prerequisite: 'perfect_combustion', description: "Your perfect combustion allows you to maintain powerful flames for extended periods without fatigue.", flavor: "Efficiency is the mark of mastery." },
 ];
 
-// --- Generation Code ---
 const nodes: TalentNode[] = [];
 const connections: TalentConnection[] = [];
 const nodeMap: Record<string, TalentNode> = {};
-
-nodeDataList.forEach(nodeData => {
-    const { id, branch, depth, prerequisite, type } = nodeData;
-    const prerequisites = Array.isArray(prerequisite) ? prerequisite : (prerequisite ? [prerequisite] : []);
-    const baseAngle = ANGLE_START + (branch * ANGLE_SPREAD) / (BRANCHES);
-    const r = BASE_RADIUS + RADIUS_STEP * depth;
-    const x = type === 'Genesis' ? CENTER_X : Math.round(CENTER_X + r * Math.cos(baseAngle));
-    const y = type === 'Genesis' ? CENTER_Y : Math.round(CENTER_Y + r * Math.sin(baseAngle));
-    
-    const node: TalentNode = {
-        id,
-        name: nodeData.name,
-        description: nodeData.description,
-        flavor: nodeData.flavor,
-        type: nodeData.type as NodeType,
-        path: 'focused_flame',
-        constellation: 'fire',
-        position: { x, y },
-        prerequisites,
-        visual: {
-            color: '#f9e2af',
-            size: 50,
-            icon: getFocusedFlameNodeIcon(type)
-        },
-        effects: [],
-        isVisible: true,
-        isAllocatable: prerequisites.length === 0,
-        isAllocated: false,
-        isLocked: prerequisites.length > 0,
-        isPermanentlyLocked: false,
-        pkCost: nodeData.cost
-    };
-    
-    nodes.push(node);
-    nodeMap[id] = node;
-    
-    prerequisites.forEach(prereqId => {
-        connections.push({
-            from: prereqId,
-            to: id,
-            isActive: false,
-            isLocked: false
-        });
-    });
-});
-
-// Collision resolution
-for (let iter = 0; iter < 100; iter++) {
-    for (let i = 0; i < nodes.length; i++) {
-        if (nodes[i].type === 'Genesis') continue;
-        for (let j = i + 1; j < nodes.length; j++) {
-            const a = nodes[i];
-            const b = nodes[j];
-            const dx = a.position.x - b.position.x;
-            const dy = a.position.y - b.position.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < MIN_DIST && dist > 0) {
-                const moveFactor = (MIN_DIST - dist) / dist * 0.5;
-                const moveX = dx * moveFactor;
-                const moveY = dy * moveFactor;
-                a.position.x += moveX;
-                a.position.y += moveY;
-                if (b.type !== 'Genesis') {
-                    b.position.x -= moveX;
-                    b.position.y -= moveY;
-                }
-            }
-        }
-    }
-}
-
-// --- Exports ---
-export const FOCUSED_FLAME_NODES = nodes;
-export const FOCUSED_FLAME_GENESIS = nodes.find(n => n.type === 'Genesis')!;
-export function generateFocusedFlameConnections(): TalentConnection[] {
-    return connections;
-}
-export const FOCUSED_FLAME_METADATA = {
-    name: 'The Focused Flame',
-    philosophy: "A wildfire destroys, but a focused flame forges. Control your fire, and you can shape the world.",
-    essence: "Precise attacks, sustained streams, heat control, and defensive maneuvers.",
-    focus: "Firebending as a tool of precision and control, not just raw power, like Jeong Jeong's disciplined style.",
-    sacredAnimal: "The Phoenix",
-    emoji: '🔥',
-    color: '#f9e2af',
-    position: { x: 1000, y: 480 }
-};
 
 function getFocusedFlameNodeIcon(type: string): string {
     switch (type) {
         case 'Genesis': return '🔥';
         case 'Keystone': return '⚔️';
-        case 'Manifestation': return '🛡️';
-        case 'Axiom': return '💎';
-        case 'Capstone': return '👑';
-        case 'GnosticRite': return '🙏';
-        case 'Schism': return '☠️';
+        case 'Axiom': return '🔵';
+        case 'Manifestation': return '🎯';
         case 'Minor': return '🔥';
         default: return '🔥';
     }
 }
+
+nodeDataList.forEach(d => {
+    const prerequisites = d.prerequisite ? [d.prerequisite] : [];
+    const node: TalentNode = {
+        ...d, id: d.id, path: 'focused_flame', constellation: 'fire', position: { x: 0, y: 0 }, prerequisites,
+        visual: { color: '#f9e2af', size: 50, icon: getFocusedFlameNodeIcon(d.type) }, effects: [], isVisible: true, isAllocatable: !prerequisites.length,
+        isAllocated: false, isLocked: !!prerequisites.length, isPermanentlyLocked: false, pkCost: d.cost, type: d.type as NodeType
+    };
+    nodes.push(node);
+    nodeMap[node.id] = node;
+});
+
+const placeChildren = (parentId: string, parentAngle: number) => {
+    const children = nodes.filter(n => n.prerequisites.includes(parentId));
+    const parentNode = nodeMap[parentId];
+    if (!parentNode || children.length === 0) return;
+
+    // Custom spread for major sub-branches
+    let spread = DEFAULT_SPREAD_ANGLE;
+    if (parentId === 'fire_blades' || parentId === 'wall_of_flames' || parentId === 'flame_weaving') spread = WIDE_SPREAD_ANGLE;
+    const angleStep = spread / (children.length > 1 ? children.length - 1 : 1);
+    // For Manifestation/Axiom, fan outward from the main path
+    const startAngle = parentAngle - spread / 2;
+    children.forEach((child, index) => {
+        const angle = children.length > 1 ? startAngle + index * angleStep : parentAngle;
+        child.position = {
+            x: parentNode.position.x + RADIUS_STEP * Math.cos(angle),
+            y: parentNode.position.y + RADIUS_STEP * Math.sin(angle)
+        };
+        placeChildren(child.id, angle);
+    });
+};
+placeChildren('genesis', PATH_MAIN_ANGLE);
+
+nodes.forEach(node => node.prerequisites.forEach(prereqId => {
+    connections.push({ from: prereqId, to: node.id, isActive: false, isLocked: false });
+}));
+
+export const FOCUSED_FLAME_NODES = nodes;
+export function generateFocusedFlameConnections(): TalentConnection[] { return connections; }
+export const FOCUSED_FLAME_METADATA = {
+    name: 'The Focused Flame',
+    philosophy: "A focused flame forges.",
+    essence: "Precise attacks, sustained streams, heat control.",
+    focus: "Firebending as a tool of precision and control.",
+    sacredAnimal: "The Phoenix",
+    emoji: '🦅',
+    color: '#f9e2af',
+    position: { x: 1200, y: 2300 }
+};

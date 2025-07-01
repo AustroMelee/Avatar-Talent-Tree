@@ -1,34 +1,92 @@
 /**
- * Path 3: The Wild Gale - 狂風 (Kuáng Fēng) (Canonically Refactored)
- * 
- * Path Philosophy: "Sometimes, the mountain must be moved. This is not anger, but decisive, overwhelming action."
+ * Path 3: The Wild Gale - 狂風 (Kuáng Fēng)
+ * Philosophy: "Sometimes, the mountain must be moved. This is not anger, but decisive, overwhelming action."
  * Essence: Large-scale, powerful airbending techniques meant to control the battlefield and shatter obstacles.
  */
 import type { TalentNode, TalentConnection, NodeType } from '../../types';
-import { getAirNodeIcon } from './airNodeIcons';
-
-const CENTER_X = 0, CENTER_Y = 0, BRANCHES = 2;
-const PATH_MAIN_ANGLE = Math.PI; // Pointing LEFT (Previously 0)
-const ANGLE_SPREAD = Math.PI / 2.2;
-const ANGLE_START = PATH_MAIN_ANGLE - (ANGLE_SPREAD / 2);
-const BASE_RADIUS = 250, RADIUS_STEP = 180, MIN_DIST = 120;
 
 const nodeDataList = [
-    { id: 'genesis', name: 'The Wild Gale', type: 'Genesis', cost: 1, branch: 0, depth: 0, description: "Path of overwhelming force.", flavor: "Sometimes, the mountain must be moved." },
-    { id: 'air_blast', name: 'Air Blast', type: 'Keystone', cost: 2, branch: 0, depth: 1, prerequisite: 'genesis', description: "A direct pulse of compressed air.", flavor: "A basic, powerful offensive move." },
-    { id: 'air_cannon', name: 'Air Cannon', type: 'Manifestation', cost: 4, branch: 0, depth: 2, prerequisite: 'air_blast', description: "Fire a sphere of air that explodes on impact.", flavor: "A true test of raw power." },
-    { id: 'suffocation', name: 'Suffocation', type: 'Axiom', cost: 5, branch: 0, depth: 3, prerequisite: 'air_cannon', description: "A sinister technique to extract air from lungs.", flavor: "First used lethally by Zaheer." },
-    { id: 'air_blades', name: 'Wind Blades', type: 'Keystone', cost: 2, branch: 1, depth: 1, prerequisite: 'genesis', description: "Create crescent-shaped blades of cutting air.", flavor: "The wind is a blade in the right hands." },
-    { id: 'sound_bending', name: 'Sound Bending', type: 'Manifestation', cost: 4, branch: 1, depth: 2, prerequisite: 'air_blades', description: "Create a deafening sonic boom.", flavor: "The silence before the storm is the loudest sound." },
+    { id: 'genesis', name: 'The Wild Gale Path', type: 'Genesis', cost: 1, description: "Your airbending attacks carry more concussive force. A simple air jab can now stagger an opponent.", flavor: "The focused fury of a hurricane." },
+    
+    // Minors after Genesis
+    { id: 'minor_gen_1', name: 'Concussive Force', type: 'Minor', cost: 1, prerequisite: 'genesis', description: "Your air attacks have a greater chance to stagger opponents.", flavor: "Hit like a stone wall." },
+    { id: 'minor_gen_2', name: 'Shattering Gust', type: 'Minor', cost: 1, prerequisite: 'genesis', description: "Your air blasts are more effective at breaking brittle objects.", flavor: "The wind that shatters." },
+    { id: 'minor_gen_3', name: 'Razor\'s Edge', type: 'Minor', cost: 1, prerequisite: 'genesis', description: "You can sharpen your air currents into cutting edges that can slice through materials.", flavor: "A razor-sharp wind." },
+    { id: 'minor_gen_4', name: 'Storm\'s Heart', type: 'Minor', cost: 1, prerequisite: 'genesis', description: "Your stamina recovers faster in windy or stormy conditions.", flavor: "The storm invigorates you." },
+    { id: 'minor_gen_5', name: 'Sinister Whisper', type: 'Minor', cost: 1, prerequisite: 'genesis', description: "You can create unsettling sounds with air manipulation, disorienting enemies.", flavor: "The wind screams." },
+
+    // Sub-Path A - Aspect of Raw Power
+    { id: 'a1_air_cannon', name: 'Air Cannon', type: 'Keystone', cost: 2, prerequisite: 'minor_gen_1', description: "Fire a compressed sphere of air that explodes on impact, creating a powerful shockwave.", flavor: "A direct approach." },
+    { id: 'a1_minor_1', name: 'Piercing Shot', type: 'Minor', cost: 1, prerequisite: 'a1_air_cannon', description: "Narrow the sphere into a lance-like shape, increasing its range but reducing its area of effect.", flavor: "A needle, not a hammer." },
+    { id: 'a1_minor_2', name: 'Vacuum Burst', type: 'Minor', cost: 1, prerequisite: 'a1_air_cannon', description: "Upon impact, the cannon's explosion briefly creates a vacuum, pulling nearby enemies toward the point of impact.", flavor: "The void calls." },
+    { id: 'a1_minor_3', name: 'Rapid Fire', type: 'Minor', cost: 1, prerequisite: 'a1_air_cannon', description: "You learn to form and fire smaller, less powerful versions of the Air Cannon in quick succession.", flavor: "A storm of blows." },
+    
+    { id: 'a2_unstoppable_typhoon', name: 'Unstoppable Typhoon', type: 'Manifestation', cost: 4, prerequisite: 'a1_air_cannon', description: "Channel a moving wall of wind that can sweep soldiers off their feet and deflect arrow volleys.", flavor: "A storm on the move." },
+    { id: 'a2_minor_1', name: 'Rending Edge', type: 'Minor', cost: 1, prerequisite: 'a2_unstoppable_typhoon', description: "The leading edge of the typhoon is laced with sharp, shearing currents that can shred earth and metal defenses.", flavor: "The wind tears all asunder." },
+    { id: 'a2_minor_2', name: 'Extended Front', type: 'Minor', cost: 1, prerequisite: 'a2_unstoppable_typhoon', description: "You can widen the wall of wind to cover a larger area, sacrificing some of its forward momentum.", flavor: "A broader path of destruction." },
+
+    { id: 'a3_eye_of_hurricane', name: 'Eye of the Hurricane', type: 'Axiom', cost: 5, prerequisite: 'a2_unstoppable_typhoon', description: "Create a massive, stationary cyclone on the battlefield, trapping those inside and repelling those outside.", flavor: "All things bend to the storm's will." },
+    { id: 'a3_minor_1', name: 'Lightning Rod', type: 'Minor', cost: 1, prerequisite: 'a3_eye_of_hurricane', description: "If natural storm clouds are present, you can guide lightning strikes from the sky into your hurricane.", flavor: "Command the heavens' fury." },
+    { id: 'a3_minor_2', name: 'Spinning Vortex', type: 'Minor', cost: 1, prerequisite: 'a3_eye_of_hurricane', description: "You can collapse the hurricane inward with immense force, throwing everything caught inside toward the center.", flavor: "The crushing embrace." },
+
+    // Sub-Path B - Aspect of Decisive Action
+    { id: 'b1_wind_blades', name: 'Wind Blades', type: 'Keystone', cost: 2, prerequisite: 'minor_gen_2', description: "Create crescent-shaped blades of air that can cut through wood, rope, and unarmored targets.", flavor: "The wind's sharp edge." },
+    { id: 'b1_minor_1', name: 'Arcing Blades', type: 'Minor', cost: 1, prerequisite: 'b1_wind_blades', description: "Launch blades that curve in mid-air, allowing you to strike targets behind cover.", flavor: "No escape." },
+    { id: 'b1_minor_2', name: 'Blade Vortex', type: 'Minor', cost: 1, prerequisite: 'b1_wind_blades', description: "You can create a small, defensive whirlwind of wind blades that orbits your body.", flavor: "A shield of knives." },
+    { id: 'b1_minor_3', name: 'Ricochet Shot', type: 'Minor', cost: 1, prerequisite: 'b1_wind_blades', description: "Your blades are solid enough to bounce off one hard surface to strike a secondary target.", flavor: "The unpredictable path." },
+    
+    { id: 'b2_sound_bending', name: 'Sound Bending', type: 'Manifestation', cost: 4, prerequisite: 'b1_wind_blades', description: "Create a perfect vacuum and then collapse it, creating a deafening sonic boom.", flavor: "The thunder before the lightning." },
+    { id: 'b2_minor_1', name: 'Amplifying Cone', type: 'Minor', cost: 1, prerequisite: 'b2_sound_bending', description: "You can focus the sonic boom into a cone, increasing its intensity and range in one direction.", flavor: "A focused shout." },
+    { id: 'b2_minor_2', name: 'Silent Zone', type: 'Minor', cost: 1, prerequisite: 'b2_sound_bending', description: "Create a sphere of sound-dampening air, allowing for completely silent infiltration or conversation.", flavor: "The sound of silence." },
+
+    { id: 'b3_suffocation', name: 'Suffocation', type: 'Axiom', cost: 5, prerequisite: 'b2_sound_bending', description: "Pull the air directly from an opponent's lungs and create a vacuum around their head. A forbidden technique.", flavor: "The last breath." },
 ];
-const nodes: TalentNode[] = [], connections: TalentConnection[] = [], nodeMap: Record<string, TalentNode> = {};
-nodeDataList.forEach(d => {
-  const p = Array.isArray(d.prerequisite) ? d.prerequisite : (d.prerequisite ? [d.prerequisite] : []);
-  const a = ANGLE_START + (d.branch * ANGLE_SPREAD) / BRANCHES, r = BASE_RADIUS + RADIUS_STEP * d.depth;
-  const x = d.type==='Genesis'?CENTER_X:Math.round(CENTER_X+r*Math.cos(a)), y = d.type==='Genesis'?CENTER_Y:Math.round(CENTER_Y+r*Math.sin(a));
-  const n:TalentNode={...d,id:d.id,path:'wild_gale',constellation:'air',position:{x,y},prerequisites:p,visual:{color:'#FFE4E1',size:50,icon:getAirNodeIcon(d.id)},effects:[],isVisible:true,isAllocatable:!p.length,isAllocated:false,isLocked:!!p.length,isPermanentlyLocked:false,pkCost:d.cost,type:d.type as NodeType};
-  nodes.push(n); nodeMap[n.id]=n; p.forEach(prereqId=>connections.push({from:prereqId,to:n.id,isActive:false,isLocked:false}));
+
+const nodes: TalentNode[] = nodeDataList.map(d => {
+    const prerequisites = d.prerequisite ? [d.prerequisite] : [];
+    const getIcon = (name: string): string => {
+        if (name.includes('Hurricane')) return '🌀';
+        if (name.includes('Suffocation')) return '💀';
+        if (name.includes('Typhoon')) return '🌊';
+        if (name.includes('Cannon')) return '💥';
+        if (name.includes('Blades')) return '🔪';
+        if (name.includes('Sound')) return '🔊';
+        if (d.type === 'Genesis') return '🌪️';
+        return '💨';
+    };
+    return {
+        ...d,
+        id: d.id,
+        path: 'wild_gale',
+        constellation: 'air',
+        position: { x: 0, y: 0 },
+        prerequisites,
+        visual: { color: '#FFE4E1', size: 50, icon: getIcon(d.name) },
+        effects: [],
+        isVisible: true,
+        isAllocatable: !prerequisites.length,
+        isAllocated: false,
+        isLocked: !!prerequisites.length,
+        isPermanentlyLocked: false,
+        pkCost: d.cost,
+        type: d.type as NodeType
+    };
 });
+
+const connections: TalentConnection[] = [];
+nodes.forEach(node => node.prerequisites.forEach(prereqId => {
+    connections.push({ from: prereqId, to: node.id, isActive: false, isLocked: false });
+}));
+
 export const WILD_GALE_NODES = nodes;
 export function generateWildGaleConnections(): TalentConnection[] { return connections; }
-export const WILD_GALE_METADATA = { name: 'The Wild Gale', philosophy: 'Sometimes, the mountain must be moved. This is not anger, but decisive, overwhelming action.', essence: 'Large-scale, powerful airbending techniques meant to control the battlefield and shatter obstacles.', focus: 'Aggressive, overwhelming force and lethal techniques, inspired by Zaheer.', sacredAnimal: 'The Dragon', emoji: '🐉', color: '#ffe4e1', position: { x: 700, y: 550 } }; 
+export const WILD_GALE_METADATA = {
+    name: 'The Wild Gale',
+    philosophy: 'Sometimes, the mountain must be moved. This is not anger, but decisive, overwhelming action.',
+    essence: 'Large-scale, powerful airbending techniques meant to control the battlefield and shatter obstacles.',
+    focus: 'Aggressive, overwhelming force and lethal techniques, inspired by Zaheer.',
+    sacredAnimal: 'The Dragon',
+    emoji: '🐉',
+    color: '#ffe4e1',
+    position: { x: 700, y: 550 }
+}; 

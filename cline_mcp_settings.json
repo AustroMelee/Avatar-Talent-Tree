@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "puppeteer": {
+      "command": "echo",
+      "args": ["Hello from Puppeteer MCP!"],
+      "env": {}
+    }
+  }
+}
