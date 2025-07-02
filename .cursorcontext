@@ -1,142 +1,304 @@
-# AI-AGENTIC CURSOR CONTEXT
-# This project is maintained and edited primarily by LLMs.
-# All code must be optimized for LLM readability, editability, and refactorability.
+AI-Agentic Cursor & SRP Guide
 
-terminalShell = "powershell.exe"
-shellExecution = "windows"
+1. AI-Agentic Cursor Context
 
-platform = "win32"
-pathStyle = "windows"
+A codebase optimized for LLMs, with clear separation of concerns, self-healing, and step-wise refactoring.
 
-# Optional: enforce script path normalization
-normalizePaths = true
+A. Environment
 
-# PROACTIVE AUTONOMY
-# Cursor must never expect the user to fix or intervene in any problem.
-# If an error, bug, or misconfiguration is detected, Cursor must:
-# 1. Proactively diagnose the root cause.
-# 2. Provide and apply the fix automatically.
-# 3. Clearly explain the fix and its intent.
-# 4. Never defer or delegate troubleshooting to the user.
-# 5. Always self-heal and iterate until the problem is resolved or a clear external blocker is found.
+Shell: powershell.exe on Win32 (Windows path style)
 
-### GENERAL PRINCIPLES
+normalizePaths: true
 
-- AI assistants must always proactively scan the codebase and relevant files for information before asking the user clarifying questions, unless the user has explicitly restricted scanning or file access.
-- All troubleshooting, suggestions, and clarifications must be based on the actual, current state of the codebase as determined by a scan, not on assumptions or user prompts alone.
-- Treat the LLM as the primary developer, not a human.
-- Code must be immediately parseable without external context.
-- Redundancy is good. Cleverness is bad. Semantic clarity is king.
-- Favor structural explicitness over aesthetic conciseness.
+B. Proactive Autonomy
 
-DO NOT RUN THE DEV SERVER UNLESS ASKED BY THE USER!
+Self-Diagnose & Fix: On any error or misconfiguration, Cursor must:
 
----
+Detect root cause
 
-### FILE STRUCTURE
+Apply the fix automatically
 
-- No file should exceed 500 lines or ~6,000 characters.
-- Each file should represent **one clear concept or domain unit**.
-- Do not create monolithic "utils" or "index" hubs unless absolutely necessary.
-- Group related files into domain-based folders, not generic categories.
+Explain the change and its intent
 
----
+Iterate until resolved or a true external blocker emerges
 
-### TYPESCRIPT PRACTICES
+No User Delegation: Never ask the user to troubleshoot.
 
-- Prefer `type` aliases over `interface` unless extending external libs.
-- **Convert interfaces to types wherever appropriate.**
-- Avoid deeply nested generics, conditional types, or infer statements.
-- Types should reflect **semantic meaning**, not implementation structure.
-- Don't try to outsmart the LLM with complex type gymnastics.
+C. General Principles
 
----
+Scan First: Always read the codebase before asking questions.
 
-### FUNCTION DESIGN
+Code for AI: Prioritize clarity, redundancy, and explicitness; avoid clever or implicit tricks.
 
-- Functions must be named in `verbNoun` form: `loadUser`, `fetchReport`, `sendEmail`.
-- **Rename all functions to follow verbNoun conventions.**
-- Do not use acronyms, abbreviations, or vague terms in function names.
-- Functions should accept at most 3–4 parameters—prefer object destructuring for clarity.
-- Always declare return shapes explicitly with named types.
-- Default to pure functions. If side effects occur, name should indicate it (`logAndSend()`).
+No Dev Server: Don't run unless the user asks.
 
----
+D. File Structure Rules
 
-### NAMING & SEMANTICS
+Single Concept: Max 500 lines or 6K chars per file.
 
-- Names must be human-readable and semantically rich for AI interpretation.
-- Type names should clearly indicate domain and context: `UserPayload`, `CartItemConfig`.
-- Avoid single-letter variables or generic names like `data`, `item`, `result` unless context is tight.
-- **Extract all "magic values" into named constants.**
+One Domain Unit: No catch-all utils or index hubs.
 
----
+Domain Folders: Organize by feature or domain, not generic categories.
 
-### COMMENTS & DOCBLOCKS
+E. TypeScript Practices
 
-- **Add comprehensive doc comments to all exports.**
-- Every exported function or type must be preceded by a **purpose-first** doc comment.
-- Comments should emphasize **intent**, not implementation steps.
-- Use comments to **anchor meaning** near complex conditionals or transformations.
-- AI must be able to reconstruct the "why" behind code from surrounding comments.
+Use type over interface unless extending libraries.
 
----
+Keep Types Simple: Avoid deeply nested generics or conditional types.
 
-### MODULES & DEPENDENCIES
+Names Reflect Meaning: Types express domain context, not implementation.
 
-- Never use circular imports.
-- Avoid star imports (`import * as X`) unless you're re-exporting a well-defined module surface.
-- Side-effect imports are forbidden—everything must be explicit.
-- Code must respect strict dependency layering: higher-level modules must not import from lower layers.
+F. Function Design
 
----
+VerbNoun Names: loadUser, fetchReport.
 
-### ERROR HANDLING
+Max 3–4 Parameters: Prefer object destructuring.
 
-- **Improve error handling with contextual messages.**
-- Do not use empty `catch` blocks—always log or rethrow with context.
-- Errors must be actionable or explainable. AI must know why the code failed.
-- Use error boundaries where applicable in UI contexts.
+Explicit Returns: Always annotate return shapes with named types.
 
----
+Pure by Default: Side effects only if clearly named (e.g., logAndSend).
 
-### LLM EDITABILITY GUARANTEES
+G. Naming & Semantics
 
-- Code must be self-sufficient and semantically chunkable by the LLM.
-- Break complex tasks into small named functions with doc comments.
-- Avoid magic values—declare them with names so LLMs can reason about them.
-- Always tag hacks, shortcuts, or temporary solutions with `// FIXME:` or `// TEMP:` and a reason.
-- Never inline deeply abstract logic—break it into its own function even if it feels verbose.
+Human-Readable: No single letters or vague names.
 
----
+Extract Constants: Move all magic values into named constants.
 
-### MCPS INTEGRATION (MENTAL CONTEXT PROMPTING STRATEGIES)
+H. Comments & Docblocks
 
-- Limit active context to **no more than 7 distinct files or conceptual domains** (Context7).
-- LLMs should **explicitly state what context they are using** when responding to user prompts.
-- Use inline prompts or tags to narrow AI attention: `// CONTEXT: UserAuth`, `// FOCUS: Token validation`
-- If the task spans more than 7 domains, segment it and ask the user to confirm prioritization.
+Doc Comments on Exports: Purpose-first, explaining "why."
 
----
+Anchor Complex Logic: Use comments to capture intent.
 
-### SEQUENTIAL PROMPT FLOW
+I. Modules & Dependencies
 
-- AI operations must follow a **step-by-step chain of thought** when problem-solving.
-- Always start with: "Step 1: Understand intent", "Step 2: Locate mechanism", "Step 3: Rewrite or suggest".
-- Avoid monolithic "do everything" prompts; prefer decomposed guidance and checkpointed revisions.
-- Provide optional user commands like:
-  - `@plan`: Summarize the task as steps.
-  - `@explain`: Describe current behavior before editing.
-  - `@rewrite`: Refactor based on steps above.
-- LLMs should default to **Sequential Thinking Mode** unless instructed otherwise.
+No Circular Imports.
 
----
+Explicit Imports Only: No star or side-effect imports.
 
-### GOAL
+Layering: High-level modules never import from lower layers.
 
-Every code file should act as a **self-contained, intention-labeled semantic block** that an LLM can:
-1. Understand at a glance,
-2. Modify without context leaks,
-3. Refactor without introducing regressions.
+J. Error Handling
 
-If it's not explainable in a single pass by an AI, rewrite it until it is.
+Contextual Messages: Never empty catch blocks.
+
+Actionable Errors: Explain what failed and why.
+
+K. LLM Editability Guarantees
+
+Small Chunks: Break complex logic into named functions.
+
+Tag Temporary Code: Use // FIXME: or // TEMP: with reason.
+
+No Hidden Logic: Everything in its own function.
+
+L. MCPs & Context7
+
+Limit to 7 Domains: If more needed, segment and confirm priorities.
+
+Inline Tags: // CONTEXT: Auth, // FOCUS: TokenValidation.
+
+M. Sequential Prompt Flow
+
+Step 1: Understand Intent
+
+Step 2: Locate Mechanism
+
+Step 3: Rewrite or Suggest
+
+Use commands:
+
+@plan → outline steps
+
+@explain → describe current behavior
+
+@rewrite → apply refactor steps
+
+2. Single Responsibility Principle (SRP) for LLM Projects
+
+Each file or module has exactly one reason to change.
+
+A. Core Module Types
+
+Prompts: Raw templates and system messages (prompts/*.ts).
+
+Validation: Input sanitization and schemas (validation/*.js).
+
+LLM Client: API wrapper with retries and auth (services/llmClient.py).
+
+Parsing: Turn completions into structured data (parsers/*.rb).
+
+Orchestration: Business logic tying prompts → client → parser (controllers/*.go).
+
+UI: Rendering outputs and interactivity (components/*.jsx).
+
+Errors/Logging: Centralized error handling (middleware/*.ts).
+
+Tests/Mocks: Unit tests with LLM response mocks (tests/*.ts).
+
+B. Example Folder Structure
+
+src/
+├── prompts/
+├── validation/
+├── services/
+├── parsers/
+├── controllers/
+├── components/
+├── middleware/
+└── tests/
+
+C. SRP Checklist
+
+One Reason to Change: Can you summarize responsibility in one sentence?
+
+No Unrelated Imports: Only depend on modules within your responsibility.
+
+Meaningful Name: File name matches its sole purpose.
+
+Easy to Test: Dependencies can be stubbed or mocked.
+
+D. Refactoring Best Practices
+
+Preserve Behavior: No change to outputs or public interfaces.
+
+Extract, Don't Re-engineer: Cut existing code into focused files, then aggregate.
+
+Small Steps: Refactor one module at a time, verifying before proceeding.
+
+Separate Hats: Don't mix refactoring with feature or bug-fix commits.
+
+3. Additional Operational Practices
+
+3.1 Prompt Versioning & Change Tracking
+
+Tag prompt files with metadata: version, author, date, summary.
+
+Store changelogs alongside templates for auditability.
+
+3.2 Metrics, Monitoring & Cost Awareness
+
+Instrument LLM client to emit token usage, latency, and error metrics.
+
+Integrate cost dashboards or alerts for spending thresholds.
+
+Add profiling hooks to identify slow or expensive calls.
+
+3.3 Security & Privacy
+
+Sanitize inputs/outputs to redact PII or sensitive data.
+
+Enforce a pre-send "sanitizer" module to strip secrets.
+
+Audit dependencies; forbid unmaintained or vulnerable SDKs.
+
+3.4 CI/CD & Automation
+
+Lint and format prompt templates (e.g., placeholder consistency).
+
+Automated contract tests: stub LLM calls to verify workflows.
+
+CI pipeline validating prompt → API → parser → UI end-to-end.
+
+3.5 Collaboration & Review Process
+
+Require PRs for prompt or parser changes with peer review.
+
+Enforce changelog-style commit messages: docs(prompts): bump to v1.2.
+
+3.6 Observability & Alerting
+
+Centralize logs of model errors and unexpected outputs.
+
+Define SLIs/SLOs for response time and output quality (e.g. parse-error rate).
+
+3.7 Testing Standards
+
+Use "golden-prompt" integration tests: verify critical fields in completions.
+
+Validate parsed outputs against JSON Schema or equivalent.
+
+3.8 UI & CSS Debugging Best Practices
+
+Consistent Naming: Ensure CSS selectors exactly match component class names (talent-tooltip vs .tooltip).
+
+Cache Busting: Instruct developers to hard-refresh or disable cache when updating styles; include a note in project README.
+
+DevTools Inspection: Regularly inspect elements to verify which rules apply and identify specificity conflicts or overrides.
+
+CSS Variables: Centralize colors, spacing, and accent values in a shared variables file to avoid duplication and simplify theme changes.
+
+Responsive Flipping: Implement tooltip auto-flip logic (above → below → right → left) to prevent obscuring target elements.
+
+Automated Linting: Add CSS linters (e.g., stylelint) to CI to catch unused selectors, duplicate rules, or typos.
+
+$1
+
+4. CSS Styles Conflict: Root Cause & Future Prevention
+
+4.1 Issue Summary
+
+A recent tooltip styling update failed to apply due to:
+
+Conflicting Definitions: Legacy tooltip rules in nodes.css targeting .tooltip and .talent-tooltip overrode new styles in tooltip.css.
+
+Missing Dependencies: tooltip.css relied on undefined CSS variables (--tier-accent) from variables.css, which wasn't being loaded.
+
+Load Order: nodes.css was imported after tooltip.css, causing cascade overrides.
+
+4.2 Prevention Strategies
+
+Strict File Responsibility:
+
+variables.css → only CSS custom properties.
+
+tooltip.css   → only tooltip styles.
+
+nodes.css     → only node/grid styles.
+
+Clear Import Order:
+
+<link rel="stylesheet" href="/styles/variables.css">
+<link rel="stylesheet" href="/styles/grid.css">
+<link rel="stylesheet" href="/styles/nodes.css">
+<link rel="stylesheet" href="/styles/tooltip.css">
+
+Namespacing Classes:
+
+Use talent-tooltip instead of generic tooltip to avoid collisions.
+
+Prefix variables with --tt- for tooltip-specific tokens.
+
+Dependency Validation:
+
+Add a CI check to ensure all var(--*) usages have corresponding definitions in variables.css.
+
+Conflict Detection:
+
+Use a build step or linter (e.g., stylelint) to detect duplicate selectors across CSS files.
+
+Documentation & Onboarding:
+
+Update README with CSS file roles and import guidelines.
+
+Include a "CSS Debugging" quick reference in project docs.
+
+By codifying these steps in our Cursor context, future style updates will apply reliably, and conflicts will be caught early in development.
+
+4.9 Visual Pathfinding & UI Logic
+
+- Visual pathfinding (e.g., for SVG edge/connector rendering) must always traverse the actual node graph as defined in the data, regardless of progression or allocation rules.
+- Do NOT filter out node types (e.g., minors) in visual pathfinding unless the data structure guarantees direct connections between major nodes.
+- Allocation/progression logic may be stricter, but visual/UX logic must always reflect the real graph structure to avoid invisible or broken UI elements.
+- When updating progression rules, always review and test visual pathfinding to ensure connector paths remain visible and correct.
+- Add regression tests or debug logging to catch cases where no path is found due to overly strict filters.
+
+4.10 Implementation Directness
+
+- When a user requests a feature or fix, implement the simplest and most effective method immediately.
+- Do NOT present multiple options or ask for clarification unless the request is genuinely ambiguous or requires user input that cannot be inferred.
+- Prioritize direct implementation over discussion of alternatives.
+- If multiple approaches exist, choose the most straightforward and reliable method.
+- Only ask questions when the user's intent cannot be determined from context or when user input is required (e.g., API keys, configuration values).
+- Focus on delivering working solutions rather than explaining trade-offs unless specifically requested.
+

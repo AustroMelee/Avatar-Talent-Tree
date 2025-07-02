@@ -1,0 +1,48 @@
+Preserve External Behavior:
+The output of the code must remain identical after refactoring. This includes:
+
+All visible or external results (UI, data, API responses, etc.) must remain unchanged.
+
+All public interfaces (IDs, method names, exports) must not change unless absolutely necessary.
+
+Extract, Don’t Reinvent:
+
+Move (cut and paste) existing, working code or data into new, focused modules or files.
+
+The original, central file should become a simple aggregator, reassembling the extracted parts without introducing new logic.
+
+Do not rewrite or “clean up” logic during extraction—keep changes mechanical and incremental.
+
+Work in Small, Verifiable Steps:
+
+Refactor one part/module at a time.
+
+After each step, run tests or manually verify that the system works exactly as before.
+
+Only proceed to the next step after confirming correctness.
+
+Separate Refactoring from Feature Work (“Two Hats” Rule):
+
+When refactoring, make no changes to behavior, features, or logic—focus solely on code structure and organization.
+
+After the refactor is complete and verified, only then add features, fix bugs, or enhance functionality.
+
+Test Frequently:
+
+At every stage, verify that the system behaves identically to before the refactor.
+
+Use automated tests where possible, or detailed manual checks when necessary.
+
+Avoid Hidden Changes:
+
+Don’t “sneak in” logic changes, optimizations, or fixes while refactoring.
+
+Any behavioral change should be a separate commit/step, clearly identified as a feature or bugfix.
+
+Maintain Data Contracts:
+
+Ensure that any other modules, APIs, or consumers relying on the code’s output, naming, or structure continue to function without modification.
+
+Summary:
+
+Refactor in small, testable increments, always preserving current behavior and public contracts. Extract code to new files without rewriting. Never mix refactoring with bug fixes or feature work—wear only one “hat” at a time.

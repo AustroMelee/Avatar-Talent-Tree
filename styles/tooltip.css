@@ -1,0 +1,552 @@
+/* /styles/tooltip.css */
+/* Polished Tooltip Styling with Glassmorphism Effects */
+
+/* ============================================= */
+/* === SVG EDGE SYSTEM - FLOWING GLOW EFFECTS === */
+/* ============================================= */
+
+/* Base edge styling */
+.edge {
+  stroke: #555;
+  stroke-width: 3;
+  fill: none;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+/* Active edge styling */
+.edge--active {
+  stroke: var(--accent-tertiary);
+  stroke-width: 4;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 4px var(--accent-tertiary));
+}
+
+/* Locked edge styling */
+.edge--locked {
+  stroke: var(--accent-secondary);
+  stroke-width: 3;
+  opacity: 0.4;
+}
+
+/* Glowing, flowing edge effect for prerequisite chains */
+.glow-edge {
+  stroke: var(--tier-accent);
+  stroke-width: 4;
+  opacity: 1;
+  filter: drop-shadow(0 0 8px var(--tier-accent));
+  
+  /* Dash pattern and flow animation */
+  stroke-dasharray: 8 8;
+  animation: dashflow 1s linear infinite;
+}
+
+/* Flowing dash animation */
+@keyframes dashflow {
+  to { 
+    stroke-dashoffset: -16; 
+  }
+}
+
+/* SVG container positioning */
+.talent-edges {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.talent-node {
+  position: relative;
+  z-index: 20;
+}
+
+/* ============================================= */
+/* === TOOLTIP CONTAINER                     === */
+/* ============================================= */
+.talent-tooltip {
+  position: fixed;
+  display: grid;
+  grid-template:
+    "icon   title"      auto
+    "icon   body"       auto
+    ".      flavor"     auto
+    "tags   tags"       auto / 32px 1fr;
+  grid-gap: 8px;
+  padding: 16px 16px;
+  border-radius: 10px;
+  max-width: 280px;
+  background: rgba(30,30,30,0.75);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    inset 0 1px 3px rgba(0,0,0,0.5),
+    0 6px 16px rgba(0,0,0,0.6);
+  transform: scale(0.85);
+  opacity: 0;
+  transition: opacity 150ms ease, transform 150ms ease;
+  color: #fff;
+  overflow: visible;
+}
+
+.talent-tooltip.visible {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.talent-tooltip::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 6px;
+  background: linear-gradient(90deg, var(--tier-accent), var(--tier-accent-light));
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.talent-tooltip.arrow-top::after {
+  content:""; position:absolute; bottom:100%; left:50%;
+  transform:translateX(-50%);
+  border:8px solid transparent;
+  border-bottom-color: rgba(30,30,30,0.75);
+}
+
+.talent-tooltip .tt-icon {
+  grid-area: icon;
+  width: 1.5em;
+  height: 1.5em;
+  align-self: start;
+  padding: 2px;
+}
+
+.talent-tooltip .tt-title {
+  grid-area: title;
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-transform: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+}
+
+.talent-tooltip .tt-body {
+  grid-area: body;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #eee;
+}
+
+.talent-tooltip .tt-flavor {
+  grid-area: flavor;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.1);
+  border-left: 3px solid var(--tier-accent);
+  padding: 6px 10px;
+  margin-bottom: 16px;
+}
+
+.talent-tooltip .tt-meta {
+  grid-area: tags;
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  font-size: 0.75rem;
+}
+
+.talent-tooltip .tt-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 120ms ease, transform 120ms ease;
+}
+
+.talent-tooltip .tt-cost {
+  background: rgba(111,207,151,0.2);
+  color: #6fcf97;
+}
+
+.talent-tooltip .tt-missing {
+  background: rgba(235,87,87,0.2);
+  color: #eb5757;
+}
+
+.talent-tooltip .tt-tag:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+
+/* ============================================= */
+/* === TOOLTIP CONTENT STRUCTURE             === */
+/* ============================================= */
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(186, 250, 255, 0.2);
+}
+
+.tooltip-icon {
+  font-size: 2rem;
+  line-height: 1;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(186, 250, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(186, 250, 255, 0.2);
+}
+
+.tooltip-title {
+  flex: 1;
+}
+
+.tooltip-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e0f6ff;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.tooltip-type {
+  font-size: 0.8rem;
+  color: #a6adc8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+/* ============================================= */
+/* === TOOLTIP BODY CONTENT                  === */
+/* ============================================= */
+.tooltip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tooltip-description {
+  color: #a6adc8;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.tooltip-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tooltip-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.tooltip-stat-label {
+  color: #a6adc8;
+  font-size: 0.85rem;
+}
+
+.tooltip-stat-value {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* ============================================= */
+/* === COLOR-CODED TEXT ELEMENTS             === */
+/* ============================================= */
+.tooltip-cost {
+  color: #ffe87c !important;
+  font-weight: 700;
+}
+
+.tooltip-allocated {
+  color: #a6e3a1 !important;
+  font-weight: 600;
+}
+
+.tooltip-locked {
+  color: #e57c7c !important;
+  font-weight: 500;
+}
+
+.tooltip-allocatable {
+  color: #f9e2af !important;
+  font-weight: 600;
+}
+
+.tooltip-effect {
+  color: #89b4fa !important;
+  font-weight: 500;
+}
+
+.tooltip-prerequisite {
+  color: #f38ba8 !important;
+  font-weight: 500;
+}
+
+/* ============================================= */
+/* === TOOLTIP FOOTER                        === */
+/* ============================================= */
+.tooltip-footer {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(186, 250, 255, 0.2);
+  font-size: 0.8rem;
+  color: #6c7086;
+}
+
+.tooltip-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.tooltip-status-icon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tooltip-status-icon.allocated {
+  background: #a6e3a1;
+  box-shadow: 0 0 8px rgba(166, 227, 161, 0.5);
+}
+
+.tooltip-status-icon.allocatable {
+  background: #f9e2af;
+  box-shadow: 0 0 8px rgba(249, 226, 175, 0.5);
+}
+
+.tooltip-status-icon.locked {
+  background: #e57c7c;
+  box-shadow: 0 0 8px rgba(229, 124, 124, 0.5);
+}
+
+.tooltip-status-icon.permanently-locked {
+  background: #e64553;
+  box-shadow: 0 0 8px rgba(230, 69, 83, 0.5);
+}
+
+/* ============================================= */
+/* === ELEMENTAL THEME VARIABLES             === */
+/* ============================================= */
+.tooltip[data-element="air"] {
+  border-color: rgba(186, 250, 255, 0.3);
+  box-shadow: 
+    0 8px 36px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(186, 250, 255, 0.15),
+    0 0 20px rgba(186, 250, 255, 0.1);
+}
+
+.tooltip[data-element="earth"] {
+  border-color: rgba(255, 210, 122, 0.3);
+  box-shadow: 
+    0 8px 36px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 210, 122, 0.15),
+    0 0 20px rgba(255, 210, 122, 0.1);
+}
+
+.tooltip[data-element="fire"] {
+  border-color: rgba(243, 139, 168, 0.3);
+  box-shadow: 
+    0 8px 36px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(243, 139, 168, 0.15),
+    0 0 20px rgba(243, 139, 168, 0.1);
+}
+
+.tooltip[data-element="water"] {
+  border-color: rgba(137, 180, 250, 0.3);
+  box-shadow: 
+    0 8px 36px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(137, 180, 250, 0.15),
+    0 0 20px rgba(137, 180, 250, 0.1);
+}
+
+.tooltip[data-element="steel"] {
+  border-color: rgba(166, 173, 200, 0.3);
+  box-shadow: 
+    0 8px 36px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(166, 173, 200, 0.15),
+    0 0 20px rgba(166, 173, 200, 0.1);
+}
+
+/* ============================================= */
+/* === RESPONSIVE ADJUSTMENTS                === */
+/* ============================================= */
+@media (max-width: 768px) {
+  .talent-tooltip {
+    min-width: 280px;
+    max-width: 320px;
+    padding: 1em 1.25em;
+    font-size: 13px;
+  }
+  
+  .tooltip-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  
+  .tooltip-name {
+    font-size: 1.1rem;
+  }
+}
+
+/* ============================================= */
+/* === ANIMATION KEYFRAMES                   === */
+/* ============================================= */
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes tooltipFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+  }
+}
+
+/* ============================================= */
+/* === ACCESSIBILITY                         === */
+/* ============================================= */
+.talent-tooltip[aria-hidden="true"] {
+  display: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .talent-tooltip {
+    border-width: 2px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+  }
+  
+  .tooltip-cost {
+    color: #ffff00 !important;
+  }
+  
+  .tooltip-allocated {
+    color: #00ff00 !important;
+  }
+  
+  .tooltip-locked {
+    color: #ff0000 !important;
+  }
+}
+
+/* ============================================= */
+/* === FINAL POLISH & ACCESSIBILITY          === */
+/* ============================================= */
+
+/* Ensure proper contrast for accessibility */
+.talent-tooltip .tt-title {
+  color: #ffffff; /* Ensure maximum contrast */
+}
+
+.talent-tooltip .tt-body {
+  color: #e0e0e0; /* Slightly softer but still high contrast */
+}
+
+/* Focus states for keyboard navigation */
+.talent-tooltip:focus-within {
+  outline: 2px solid var(--tier-accent);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for all interactive elements */
+.talent-tooltip * {
+  transition: all 120ms ease;
+}
+
+/* Ensure tooltip doesn't interfere with other elements */
+.talent-tooltip {
+  pointer-events: none;
+}
+
+.talent-tooltip .tt-tag {
+  pointer-events: auto;
+}
+
+/* High contrast mode enhancements */
+@media (prefers-contrast: high) {
+  .talent-tooltip {
+    border: 2px solid #ffffff;
+    background: #000000;
+  }
+  
+  .talent-tooltip .tt-cost {
+    background: #006600;
+    color: #00ff00;
+  }
+  
+  .talent-tooltip .tt-missing {
+    background: #660000;
+    color: #ff0000;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .talent-tooltip,
+  .talent-tooltip * {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* === FINAL OVERRIDES FOR NODE/SVG STACKING AND TEST VISIBILITY === */
+.talent-node {
+  position: relative !important;
+  z-index: 20 !important;
+}
+.glow-edge {
+  stroke: #ff00ff !important;
+  stroke-width: 8 !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+.talent-tooltip__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+.talent-tooltip__title {
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #fff;
+}
+.talent-tooltip__type {
+  display: inline-block;
+  margin-top: 2px;
+  padding: 2px 8px;
+  font-size: 0.85em;
+  font-weight: 600;
+  border-radius: 8px;
+  background: #23232b;
+  color: #a6adc8;
+  letter-spacing: 0.03em;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+} 

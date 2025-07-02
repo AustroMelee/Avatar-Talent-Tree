@@ -1,0 +1,120 @@
+/* Grid-based Talent Tree Styles */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #0a0a0a;
+  color: #fff;
+  overflow: hidden;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+#controls-container {
+  background: #1a1a1a;
+  padding: 10px;
+  border-bottom: 1px solid #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#talent-tree-container {
+  flex: 1;
+  overflow: auto;
+  background: #0a0a0a;
+  padding: 20px;
+}
+
+/* Talent node styles */
+.talent-node {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.talent-node:hover {
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.talent-node:active {
+  transform: scale(0.95);
+}
+
+/* Node tooltip styles */
+.node-tooltip {
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+/* Button styles */
+button {
+  background: #4a4a4a;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #5a5a5a;
+}
+
+button:active {
+  background: #3a3a3a;
+}
+
+/* Input styles */
+input[type="range"] {
+  background: #2a2a2a;
+  border-radius: 4px;
+  height: 6px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background: #87CEEB;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: #87CEEB;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  border: none;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+} 

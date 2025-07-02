@@ -14,14 +14,33 @@ import { EARTH_PRESETS } from '../elements/earth/earthPresets';
 import { FIRE_PRESETS } from '../elements/fire/firePresets';
 import { STEEL_PRESETS } from '../elements/steel/steelPresets';
 
-export interface ElementalData {
+/**
+ * Complete data structure for an elemental constellation including nodes, connections, presets, and metadata.
+ * Used by the data manager to provide unified access to all element-specific talent tree data.
+ */
+export type ElementalData = {
+    /** All talent nodes for this element */
     nodes: TalentNode[];
+    /** All connections between talent nodes */
     connections: TalentConnection[];
+    /** Pre-built talent tree configurations */
     presets: PresetBuild[];
+    /** Static metadata describing the constellation */
     constellation: ConstellationMetadata;
-}
+};
 
+/**
+ * Manages loading and providing access to elemental talent tree data.
+ * Centralizes data access patterns and provides error handling for missing elements.
+ */
 export class DataManager {
+    /**
+     * Loads complete talent tree data for a specific element.
+     * Returns null if the element is not supported or data is missing.
+     * 
+     * @param elementId - The elemental constellation identifier (e.g., 'air', 'fire')
+     * @returns Complete elemental data or null if not found
+     */
     public loadElementalData(elementId: string): ElementalData | null {
         let talentNodes: TalentNode[] = [];
         let connections: TalentConnection[] = [];

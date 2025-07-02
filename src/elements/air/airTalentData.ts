@@ -29,67 +29,67 @@ const RADII = {
 // pathIndex: 0=GentleBreeze, 1=WildGale, 2=DancingWind, 3=SacredBreath
 const nodeDefinitions: any[] = [
     // --- Path 0: The Gentle Breeze ---
-    { id: 'gb_genesis', name: 'The Gentle Breeze Path', path: 'gentle_breeze', type: 'Genesis', tier: 'genesis', pathIndex: 0, pkCost: 1, icon: '🍃', size: 160 },
-    { id: 'gb_keystone_a', name: 'Cloud Shield Technique', path: 'gentle_breeze', type: 'Keystone', tier: 'keystone', pathIndex: 0, pkCost: 2, prereq: 'gb_genesis', icon: '🛡️', size: 65 },
-    { id: 'gb_keystone_b', name: 'Catch and Release', path: 'gentle_breeze', type: 'Keystone', tier: 'keystone', pathIndex: 0, pkCost: 2, prereq: 'gb_genesis', icon: '✋', size: 65 },
-    { id: 'gb_manifest_a', name: 'Unburdened Form', path: 'gentle_breeze', type: 'Manifestation', tier: 'manifestation', pathIndex: 0, pkCost: 4, prereq: 'gb_keystone_a', icon: '💨', size: 70 },
-    { id: 'gb_manifest_b', name: 'Momentum Redirection', path: 'gentle_breeze', type: 'Manifestation', tier: 'manifestation', pathIndex: 0, pkCost: 4, prereq: 'gb_keystone_b', icon: '↪️', size: 70 },
-    { id: 'gb_axiom_a', name: 'Eye of Serenity', path: 'gentle_breeze', type: 'Axiom', tier: 'axiom', pathIndex: 0, pkCost: 5, prereq: 'gb_manifest_a', icon: '👁️', size: 75 },
-    { id: 'gb_axiom_b', name: 'The Unbroken Current', path: 'gentle_breeze', type: 'Axiom', tier: 'axiom', pathIndex: 0, pkCost: 5, prereq: 'gb_manifest_b', icon: '🌊', size: 75 },
+    { id: 'gb_genesis', name: 'The Gentle Breeze Path', path: 'gentle_breeze', type: 'Genesis', pkCost: 1, icon: '🍃', size: 160 },
+    { id: 'gb_keystone_a', name: 'Cloud Shield Technique', path: 'gentle_breeze', type: 'Keystone', pkCost: 2, prereq: 'gb_genesis', icon: '🛡️', size: 65 },
+    { id: 'gb_keystone_b', name: 'Catch and Release', path: 'gentle_breeze', type: 'Keystone', pkCost: 2, prereq: 'gb_genesis', icon: '✋', size: 65 },
+    { id: 'gb_manifest_a', name: 'Unburdened Form', path: 'gentle_breeze', type: 'Manifestation', pkCost: 4, prereq: 'gb_keystone_a', icon: '💨', size: 70 },
+    { id: 'gb_manifest_b', name: 'Momentum Redirection', path: 'gentle_breeze', type: 'Manifestation', pkCost: 4, prereq: 'gb_keystone_b', icon: '↪️', size: 70 },
+    { id: 'gb_axiom_a', name: 'Eye of Serenity', path: 'gentle_breeze', type: 'Axiom', pkCost: 5, prereq: 'gb_manifest_a', icon: '👁️', size: 75 },
+    { id: 'gb_axiom_b', name: 'The Unbroken Current', path: 'gentle_breeze', type: 'Axiom', pkCost: 5, prereq: 'gb_manifest_b', icon: '🌊', size: 75 },
     // Gentle Breeze Minors
     { id: 'gb_m_1', type: 'Minor', prereq: 'gb_genesis', child: 'gb_keystone_a' }, { id: 'gb_m_2', type: 'Minor', prereq: 'gb_genesis', child: 'gb_keystone_b' },
     { id: 'gb_m_3', type: 'Minor', prereq: 'gb_keystone_a', child: 'gb_manifest_a' }, { id: 'gb_m_4', type: 'Minor', prereq: 'gb_keystone_b', child: 'gb_manifest_b' },
     { id: 'gb_m_5', type: 'Minor', prereq: 'gb_manifest_a', child: 'gb_axiom_a' }, { id: 'gb_m_6', type: 'Minor', prereq: 'gb_manifest_b', child: 'gb_axiom_b' },
 
     // --- Path 1: The Wild Gale ---
-    { id: 'wg_genesis', name: 'The Wild Gale Path', path: 'wild_gale', type: 'Genesis', tier: 'genesis', pathIndex: 1, pkCost: 1, icon: '🌪️', size: 160 },
-    { id: 'wg_keystone_a', name: 'Air Cannon', path: 'wild_gale', type: 'Keystone', tier: 'keystone', pathIndex: 1, pkCost: 2, prereq: 'wg_genesis', icon: '💥', size: 65 },
-    { id: 'wg_keystone_b', name: 'Wind Blades', path: 'wild_gale', type: 'Keystone', tier: 'keystone', pathIndex: 1, pkCost: 2, prereq: 'wg_genesis', icon: '🔪', size: 65 },
-    { id: 'wg_manifest_a', name: 'Unstoppable Typhoon', path: 'wild_gale', type: 'Manifestation', tier: 'manifestation', pathIndex: 1, pkCost: 4, prereq: 'wg_keystone_a', icon: '🌊', size: 70 },
-    { id: 'wg_manifest_b', name: 'Sound Bending', path: 'wild_gale', type: 'Manifestation', tier: 'manifestation', pathIndex: 1, pkCost: 4, prereq: 'wg_keystone_b', icon: '🔊', size: 70 },
-    { id: 'wg_axiom_a', name: 'Eye of the Hurricane', path: 'wild_gale', type: 'Axiom', tier: 'axiom', pathIndex: 1, pkCost: 5, prereq: 'wg_manifest_a', icon: '🌀', size: 75 },
-    { id: 'wg_axiom_b', name: 'Suffocation', path: 'wild_gale', type: 'Axiom', tier: 'axiom', pathIndex: 1, pkCost: 5, prereq: 'wg_manifest_b', icon: '💀', size: 75 },
+    { id: 'wg_genesis', name: 'The Wild Gale Path', path: 'wild_gale', type: 'Genesis', pkCost: 1, icon: '🌪️', size: 160 },
+    { id: 'wg_keystone_a', name: 'Air Cannon', path: 'wild_gale', type: 'Keystone', pkCost: 2, prereq: 'wg_genesis', icon: '💥', size: 65 },
+    { id: 'wg_keystone_b', name: 'Wind Blades', path: 'wild_gale', type: 'Keystone', pkCost: 2, prereq: 'wg_genesis', icon: '🔪', size: 65 },
+    { id: 'wg_manifest_a', name: 'Unstoppable Typhoon', path: 'wild_gale', type: 'Manifestation', pkCost: 4, prereq: 'wg_keystone_a', icon: '🌊', size: 70 },
+    { id: 'wg_manifest_b', name: 'Sound Bending', path: 'wild_gale', type: 'Manifestation', pkCost: 4, prereq: 'wg_keystone_b', icon: '🔊', size: 70 },
+    { id: 'wg_axiom_a', name: 'Eye of the Hurricane', path: 'wild_gale', type: 'Axiom', pkCost: 5, prereq: 'wg_manifest_a', icon: '🌀', size: 75 },
+    { id: 'wg_axiom_b', name: 'Suffocation', path: 'wild_gale', type: 'Axiom', pkCost: 5, prereq: 'wg_manifest_b', icon: '💀', size: 75 },
     // Wild Gale Minors
     { id: 'wg_m_1', type: 'Minor', prereq: 'wg_genesis', child: 'wg_keystone_a' }, { id: 'wg_m_2', type: 'Minor', prereq: 'wg_genesis', child: 'wg_keystone_b' },
     { id: 'wg_m_3', type: 'Minor', prereq: 'wg_keystone_a', child: 'wg_manifest_a' }, { id: 'wg_m_4', type: 'Minor', prereq: 'wg_keystone_b', child: 'wg_manifest_b' },
     { id: 'wg_m_5', type: 'Minor', prereq: 'wg_manifest_a', child: 'wg_axiom_a' }, { id: 'wg_m_6', type: 'Minor', prereq: 'wg_manifest_b', child: 'wg_axiom_b' },
 
     // --- Path 2: The Dancing Wind ---
-    { id: 'dw_genesis', name: 'The Dancing Wind Path', path: 'dancing_wind', type: 'Genesis', tier: 'genesis', pathIndex: 2, pkCost: 1, icon: '🤸', size: 160 },
-    { id: 'dw_keystone_a', name: 'Air Scooter', path: 'dancing_wind', type: 'Keystone', tier: 'keystone', pathIndex: 2, pkCost: 2, prereq: 'dw_genesis', icon: '🛴', size: 65 },
-    { id: 'dw_keystone_b', name: 'Air Walking', path: 'dancing_wind', type: 'Keystone', tier: 'keystone', pathIndex: 2, pkCost: 2, prereq: 'dw_genesis', icon: '🚶', size: 65 },
-    { id: 'dw_manifest_a', name: 'Air Spout', path: 'dancing_wind', type: 'Manifestation', tier: 'manifestation', pathIndex: 2, pkCost: 4, prereq: 'dw_keystone_a', icon: '💨', size: 70 },
-    { id: 'dw_manifest_b', name: 'Wind Dancing', path: 'dancing_wind', type: 'Manifestation', tier: 'manifestation', pathIndex: 2, pkCost: 4, prereq: 'dw_keystone_b', icon: '💃', size: 70 },
-    { id: 'dw_axiom_a', name: 'Flight Mastery', path: 'dancing_wind', type: 'Axiom', tier: 'axiom', pathIndex: 2, pkCost: 5, prereq: 'dw_manifest_a', icon: '🕊️', size: 75 },
-    { id: 'dw_axiom_b', name: 'The Sky\'s Embrace', path: 'dancing_wind', type: 'Axiom', tier: 'axiom', pathIndex: 2, pkCost: 5, prereq: 'dw_manifest_b', icon: '🫂', size: 75 },
+    { id: 'dw_genesis', name: 'The Dancing Wind Path', path: 'dancing_wind', type: 'Genesis', pkCost: 1, icon: '🤸', size: 160 },
+    { id: 'dw_keystone_a', name: 'Air Scooter', path: 'dancing_wind', type: 'Keystone', pkCost: 2, prereq: 'dw_genesis', icon: '🛴', size: 65 },
+    { id: 'dw_keystone_b', name: 'Air Walking', path: 'dancing_wind', type: 'Keystone', pkCost: 2, prereq: 'dw_genesis', icon: '🚶', size: 65 },
+    { id: 'dw_manifest_a', name: 'Air Spout', path: 'dancing_wind', type: 'Manifestation', pkCost: 4, prereq: 'dw_keystone_a', icon: '💨', size: 70 },
+    { id: 'dw_manifest_b', name: 'Wind Dancing', path: 'dancing_wind', type: 'Manifestation', pkCost: 4, prereq: 'dw_keystone_b', icon: '💃', size: 70 },
+    { id: 'dw_axiom_a', name: 'Flight Mastery', path: 'dancing_wind', type: 'Axiom', pkCost: 5, prereq: 'dw_manifest_a', icon: '🕊️', size: 75 },
+    { id: 'dw_axiom_b', name: 'The Sky\'s Embrace', path: 'dancing_wind', type: 'Axiom', pkCost: 5, prereq: 'dw_manifest_b', icon: '🫂', size: 75 },
     // Dancing Wind Minors
     { id: 'dw_m_1', type: 'Minor', prereq: 'dw_genesis', child: 'dw_keystone_a' }, { id: 'dw_m_2', type: 'Minor', prereq: 'dw_genesis', child: 'dw_keystone_b' },
     { id: 'dw_m_3', type: 'Minor', prereq: 'dw_keystone_a', child: 'dw_manifest_a' }, { id: 'dw_m_4', type: 'Minor', prereq: 'dw_keystone_b', child: 'dw_manifest_b' },
     { id: 'dw_m_5', type: 'Minor', prereq: 'dw_manifest_a', child: 'dw_axiom_a' }, { id: 'dw_m_6', type: 'Minor', prereq: 'dw_manifest_b', child: 'dw_axiom_b' },
 
     // --- Path 3: The Sacred Breath ---
-    { id: 'sb_genesis', name: 'The Sacred Breath Path', path: 'sacred_breath', type: 'Genesis', tier: 'genesis', pathIndex: 3, pkCost: 1, icon: '🙏', size: 160 },
-    { id: 'sb_keystone_a', name: 'Clarity Meditation', path: 'sacred_breath', type: 'Keystone', tier: 'keystone', pathIndex: 3, pkCost: 2, prereq: 'sb_genesis', icon: '🧘', size: 65 },
-    { id: 'sb_keystone_b', name: 'Peaceful Presence', path: 'sacred_breath', type: 'Keystone', tier: 'keystone', pathIndex: 3, pkCost: 2, prereq: 'sb_genesis', icon: '🕊️', size: 65 },
-    { id: 'sb_manifest_a', name: 'Memory of the Air', path: 'sacred_breath', type: 'Manifestation', tier: 'manifestation', pathIndex: 3, pkCost: 4, prereq: 'sb_keystone_a', icon: '📜', size: 70 },
-    { id: 'sb_manifest_b', name: 'Guiding Light', path: 'sacred_breath', type: 'Manifestation', tier: 'manifestation', pathIndex: 3, pkCost: 4, prereq: 'sb_keystone_b', icon: '💡', size: 70 },
-    { id: 'sb_axiom_a', name: 'Spirit Projection', path: 'sacred_breath', type: 'Axiom', tier: 'axiom', pathIndex: 3, pkCost: 5, prereq: 'sb_manifest_a', icon: '👻', size: 75 },
-    { id: 'sb_axiom_b', name: 'Breath of Kinship', path: 'sacred_breath', type: 'Axiom', tier: 'axiom', pathIndex: 3, pkCost: 5, prereq: 'sb_manifest_b', icon: '🤝', size: 75 },
+    { id: 'sb_genesis', name: 'The Sacred Breath Path', path: 'sacred_breath', type: 'Genesis', pkCost: 1, icon: '🙏', size: 160 },
+    { id: 'sb_keystone_a', name: 'Clarity Meditation', path: 'sacred_breath', type: 'Keystone', pkCost: 2, prereq: 'sb_genesis', icon: '🧘', size: 65 },
+    { id: 'sb_keystone_b', name: 'Peaceful Presence', path: 'sacred_breath', type: 'Keystone', pkCost: 2, prereq: 'sb_genesis', icon: '🕊️', size: 65 },
+    { id: 'sb_manifest_a', name: 'Memory of the Air', path: 'sacred_breath', type: 'Manifestation', pkCost: 4, prereq: 'sb_keystone_a', icon: '📜', size: 70 },
+    { id: 'sb_manifest_b', name: 'Guiding Light', path: 'sacred_breath', type: 'Manifestation', pkCost: 4, prereq: 'sb_keystone_b', icon: '💡', size: 70 },
+    { id: 'sb_axiom_a', name: 'Spirit Projection', path: 'sacred_breath', type: 'Axiom', pkCost: 5, prereq: 'sb_manifest_a', icon: '👻', size: 75 },
+    { id: 'sb_axiom_b', name: 'Breath of Kinship', path: 'sacred_breath', type: 'Axiom', pkCost: 5, prereq: 'sb_manifest_b', icon: '🤝', size: 75 },
     // Sacred Breath Minors
     { id: 'sb_m_1', type: 'Minor', prereq: 'sb_genesis', child: 'sb_keystone_a' }, { id: 'sb_m_2', type: 'Minor', prereq: 'sb_genesis', child: 'sb_keystone_b' },
     { id: 'sb_m_3', type: 'Minor', prereq: 'sb_keystone_a', child: 'sb_manifest_a' }, { id: 'sb_m_4', type: 'Minor', prereq: 'sb_keystone_b', child: 'sb_manifest_b' },
     { id: 'sb_m_5', type: 'Minor', prereq: 'sb_manifest_a', child: 'sb_axiom_a' }, { id: 'sb_m_6', type: 'Minor', prereq: 'sb_manifest_b', child: 'sb_axiom_b' },
     
     // --- Synthesis Nodes ---
-    { id: 'syn_inner_gb_wg', name: "Gentle Gale", type: 'Synthesis', tier: 'inner_synthesis', pkCost: 2, icon: '🌬️', size: 60, pathIndex: [0, 1] },
-    { id: 'syn_inner_wg_dw', name: "Dancing Breeze", type: 'Synthesis', tier: 'inner_synthesis', pkCost: 2, icon: '🎭', size: 60, pathIndex: [1, 2] },
-    { id: 'syn_inner_dw_sb', name: "Sacred Dance", type: 'Synthesis', tier: 'inner_synthesis', pkCost: 2, icon: '💃', size: 60, pathIndex: [2, 3] },
-    { id: 'syn_inner_sb_gb', name: "Wild Breath", type: 'Synthesis', tier: 'inner_synthesis', pkCost: 2, icon: '😤', size: 60, pathIndex: [3, 0] },
+    { id: 'syn_inner_gb_wg', name: "Gentle Gale", type: 'Synthesis', pkCost: 2, icon: '🌬️', size: 60 },
+    { id: 'syn_inner_wg_dw', name: "Dancing Breeze", type: 'Synthesis', pkCost: 2, icon: '🎭', size: 60 },
+    { id: 'syn_inner_dw_sb', name: "Sacred Dance", type: 'Synthesis', pkCost: 2, icon: '💃', size: 60 },
+    { id: 'syn_inner_sb_gb', name: "Wild Breath", type: 'Synthesis', pkCost: 2, icon: '😤', size: 60 },
     
-    { id: 'syn_outer_gb_wg', name: "Wind's Wisdom", type: 'Synthesis', tier: 'outer_synthesis', pkCost: 3, icon: '🦉', size: 60, pathIndex: [0, 1] },
-    { id: 'syn_outer_wg_dw', name: "Gale Force", type: 'Synthesis', tier: 'outer_synthesis', pkCost: 3, icon: '✈️', size: 60, pathIndex: [1, 2] },
-    { id: 'syn_outer_dw_sb', name: "Breath of Freedom", type: 'Synthesis', tier: 'outer_synthesis', pkCost: 3, icon: '🕊️', size: 60, pathIndex: [2, 3] },
-    { id: 'syn_outer_sb_gb', name: "Serene Storm", type: 'Synthesis', tier: 'outer_synthesis', pkCost: 3, icon: '🧘‍♀️', size: 60, pathIndex: [3, 0] },
+    { id: 'syn_outer_gb_wg', name: "Wind's Wisdom", type: 'Synthesis', pkCost: 3, icon: '🦉', size: 60 },
+    { id: 'syn_outer_wg_dw', name: "Gale Force", type: 'Synthesis', pkCost: 3, icon: '✈️', size: 60 },
+    { id: 'syn_outer_dw_sb', name: "Breath of Freedom", type: 'Synthesis', pkCost: 3, icon: '🕊️', size: 60 },
+    { id: 'syn_outer_sb_gb', name: "Serene Storm", type: 'Synthesis', pkCost: 3, icon: '🧘‍♀️', size: 60 },
 ];
 
 // =================================================================================
@@ -137,21 +137,39 @@ nodeDefinitions.forEach(def => {
         effects: [], isVisible: true, isAllocatable: false, isAllocated: false, isLocked: true, isPermanentlyLocked: false,
     };
 
-    // Set ringId based on tier
-    if (def.tier) {
-        node.ringId = def.tier;
+    // Set ringId based on node type
+    if (def.type === 'Genesis') node.ringId = 'genesis';
+    else if (def.type === 'Keystone') node.ringId = 'keystone';
+    else if (def.type === 'Manifestation') node.ringId = 'manifestation';
+    else if (def.type === 'Axiom') node.ringId = 'axiom';
+    else if (def.type === 'Synthesis') {
+        if (def.id.includes('inner')) node.ringId = 'inner_synthesis';
+        else if (def.id.includes('outer')) node.ringId = 'outer_synthesis';
     }
 
     if (def.type === 'Synthesis') {
-        const [indexA, indexB] = def.pathIndex;
-        const midAngle = getMidAngle(BRANCH_ANGLES[indexA], BRANCH_ANGLES[indexB]);
-        const radius = RADII[def.tier as keyof typeof RADII];
-        node.position = { x: CENTER.x + radius * Math.cos(midAngle), y: CENTER.y + radius * Math.sin(midAngle) };
-        node.angle = midAngle;
+        // Position synthesis nodes between their connected paths
+        let pathA, pathB;
+        if (def.id.includes('gb_wg')) { pathA = 'gentle_breeze'; pathB = 'wild_gale'; }
+        else if (def.id.includes('wg_dw')) { pathA = 'wild_gale'; pathB = 'dancing_wind'; }
+        else if (def.id.includes('dw_sb')) { pathA = 'dancing_wind'; pathB = 'sacred_breath'; }
+        else if (def.id.includes('sb_gb')) { pathA = 'sacred_breath'; pathB = 'gentle_breeze'; }
+        
+        const radius = def.id.includes('inner') ? RADII.inner_synthesis : RADII.outer_synthesis;
+        const angle = (BRANCH_ANGLES[0] + BRANCH_ANGLES[1]) / 2; // Simplified positioning
+        node.position = { x: CENTER.x + radius * Math.cos(angle), y: CENTER.y + radius * Math.sin(angle) };
+        node.angle = angle;
         node.radius = radius;
     } else if (def.type !== 'Minor') {
+        // Position major nodes based on their path
+        const pathIndex = def.path === 'gentle_breeze' ? 0 : 
+                         def.path === 'wild_gale' ? 1 : 
+                         def.path === 'dancing_wind' ? 2 : 3;
         const subBranch = def.id.includes('_b') ? 1 : 0;
-        const layout = getNodePosition(def.pathIndex, def.tier as keyof typeof RADII, subBranch);
+        const tier = def.type === 'Genesis' ? 'genesis' :
+                    def.type === 'Keystone' ? 'keystone' :
+                    def.type === 'Manifestation' ? 'manifestation' : 'axiom';
+        const layout = getNodePosition(pathIndex, tier, subBranch);
         node.position = layout.pos;
         node.angle = layout.angle;
         node.radius = layout.radius;
@@ -167,9 +185,14 @@ allNodesMap.forEach(node => {
         const childNode = allNodesMap.get(def.child)!;
         node.position = { x: (parentNode.position.x + childNode.position.x) / 2, y: (parentNode.position.y + childNode.position.y) / 2 };
         node.prerequisites = [def.prereq];
-        // Re-wire child to depend on minor, and remove its dependency on the parent
-        childNode.prerequisites = childNode.prerequisites.filter(p => p !== def.prereq);
-        childNode.prerequisites.push(node.id);
+        // Add the minor as an additional prerequisite for the child, but do NOT remove the Genesis prerequisite if present
+        if (!childNode.prerequisites.includes(node.id)) {
+            childNode.prerequisites.push(node.id);
+        }
+        // Ensure Genesis prerequisite is always present for Keystones
+        if (childNode.type === 'Keystone' && !childNode.prerequisites.includes(def.prereq)) {
+            childNode.prerequisites.push(def.prereq);
+        }
     }
 });
 
@@ -184,6 +207,19 @@ allNodesMap.get('syn_outer_gb_wg')!.prerequisites = []; // No strict prereqs, ju
 allNodesMap.get('syn_outer_wg_dw')!.prerequisites = []; // No strict prereqs, just visual arcs
 allNodesMap.get('syn_outer_dw_sb')!.prerequisites = []; // No strict prereqs, just visual arcs
 allNodesMap.get('syn_outer_sb_gb')!.prerequisites = []; // No strict prereqs, just visual arcs
+
+// Ensure every Keystone's prerequisites always include its Genesis node
+allNodesMap.forEach(node => {
+    if (node.type === 'Keystone') {
+        // Find the Genesis node for this path
+        const genesisNode = Array.from(allNodesMap.values()).find(n => n.type === 'Genesis' && n.path === node.path);
+        if (genesisNode && !node.prerequisites.includes(genesisNode.id)) {
+            node.prerequisites.push(genesisNode.id);
+        }
+        // Debug log for verification
+        console.log(`[DEBUG] Keystone ${node.id} prerequisites:`, node.prerequisites);
+    }
+});
 
 // =================================================================================
 // 4. FINAL EXPORT

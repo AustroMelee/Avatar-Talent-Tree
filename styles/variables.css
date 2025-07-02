@@ -70,4 +70,8 @@
 
   /* Gauge Progress */
   --pk-progress: 0;
+  
+  /* Tooltip Tier Colors */
+  --tier-accent: #89b4fa;
+  --tier-accent-light: #b4befe;
 }

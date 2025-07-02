@@ -1,0 +1,110 @@
+/* /styles/canvas.css */
+/* Canvas-specific styling and cursor states */
+
+/* ============================================= */
+/* === CANVAS CONTAINER                      === */
+/* ============================================= */
+.talent-tree-container {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  cursor: default;
+}
+
+.talent-tree-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* ============================================= */
+/* === CURSOR STATES                         === */
+/* ============================================= */
+.talent-tree-canvas[data-cursor="default"] {
+  cursor: default;
+}
+
+.talent-tree-canvas[data-cursor="pointer"] {
+  cursor: pointer;
+}
+
+.talent-tree-canvas[data-cursor="not-allowed"] {
+  cursor: not-allowed;
+}
+
+.talent-tree-canvas[data-cursor="grab"] {
+  cursor: grab;
+}
+
+.talent-tree-canvas[data-cursor="grabbing"] {
+  cursor: grabbing;
+}
+
+/* ============================================= */
+/* === INTERACTION STATES                    === */
+/* ============================================= */
+.talent-tree-canvas.dragging {
+  cursor: grabbing !important;
+}
+
+.talent-tree-canvas.zooming {
+  cursor: zoom-in;
+}
+
+/* ============================================= */
+/* === PERFORMANCE OPTIMIZATIONS             === */
+/* ============================================= */
+.talent-tree-canvas {
+  /* Optimize for animations and transforms */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* ============================================= */
+/* === ACCESSIBILITY                         === */
+/* ============================================= */
+.talent-tree-canvas:focus {
+  outline: 2px solid rgba(186, 250, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.talent-tree-canvas:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================= */
+/* === RESPONSIVE ADJUSTMENTS                === */
+/* ============================================= */
+@media (max-width: 768px) {
+  .talent-tree-container {
+    /* Ensure touch-friendly interactions on mobile */
+    touch-action: pan-x pan-y pinch-zoom;
+  }
+}
+
+/* ============================================= */
+/* === HIGH CONTRAST MODE                    === */
+/* ============================================= */
+@media (prefers-contrast: high) {
+  .talent-tree-canvas:focus {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+}
+
+/* ============================================= */
+/* === REDUCED MOTION                        === */
+/* ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  .talent-tree-canvas {
+    will-change: auto;
+  }
+} 
